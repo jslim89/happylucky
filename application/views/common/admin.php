@@ -30,7 +30,7 @@ $list = array(
 );
 $topmenu = array();
 $topmenu['list'] = $list;
-$this->load->view('common/admin-topmenu', $topmenu);
+$this->load->view('common/topmenu', $topmenu);
 ?>
 </div>
 <!-- End Top Menu -->
