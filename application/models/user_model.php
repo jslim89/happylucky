@@ -35,4 +35,28 @@ class User_Model extends MY_Active_Record {
      * @access protected
      */
     var $_table = 'user';
+
+    private function _encrypt_password() {
+        // Generate a random salt if empty
+        if(empty($this->salt)) {
+            $this->salt = md5(uniqid(rand(), true));
+        }
+        $this->password = sha1($this->salt . $this->password);
+    }
+
+    public function login($user_type = 'MEMBER') {
+        $u = new User_Model();
+        $u->load_by_email($this->email);
+        if($u->is_exist()) {
+            // Must assign a salt value before encrypt
+            $this->salt = $u->salt;
+            $this->_encrypt_password();
+
+            if($u->password == $this->password) {
+                $this->re_assign($u);
+                return true;
+            }
+        }
+        return false;
+    }
 }

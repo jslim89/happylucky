@@ -58,7 +58,7 @@ class Welcome extends MY_Controller {
                 redirect('admin/dashboard');
             }
             else {
-                $this->session->set_flashdata('login_error', $user->error->login);
+                $this->session->set_flashdata('login_error', lang('user_invalid_username_or_password'));
                 redirect('admin');
             }
         }
