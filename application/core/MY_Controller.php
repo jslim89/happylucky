@@ -35,9 +35,9 @@ class MY_Controller extends CI_Controller {
         $this->vars = array_merge($vars, $this->vars);
 		$this->load->view ('common/header', $vars, $rendered);
         if(!$this->_is_admin_template())
-            $this->load->view('common/user-body', $vars, $rendered);
+            $this->load->view('common/user', $vars, $rendered);
         else
-            $this->load->view('common/admin-body', $vars, $rendered);
+            $this->load->view('common/admin', $vars, $rendered);
 		$this->load->view ($view, $vars, $rendered);			
 		$this->load->view ('common/footer', $vars, $rendered);
 	}

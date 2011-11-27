@@ -1,0 +1,79 @@
+::selection{ background-color: #E13300; color: white; }
+::moz-selection{ background-color: #E13300; color: white; }
+::webkit-selection{ background-color: #E13300; color: white; }
+
+body, label, input, button, a, table, p, link, h1, h2, h3
+, h4, h5, h6, ol, ul, address, menu, blockquote, center, del
+, div, span, noscript, pre, abbr, em, strong, b, i, big, small
+, tt, fieldset, param {
+    font: 13px/20px normal Helvetica, Arial, sans-serif;
+    color: #4F5155;
+}
+
+:-moz-any-link :focus {
+	outline: none;
+}
+
+:focus {
+	-moz-outline-style: none;
+	outline: none;
+}
+
+.button:hover {
+}
+
+.center {
+    text-align: center;
+}
+
+.right {
+    text-align: right;
+}
+
+.left {
+    text-align: left;
+}
+
+input.error {
+	border: 2px solid red;
+}
+
+.admin-login-box {
+    border: 1px solid #7F7F7F;
+    margin-top: 100px;
+    padding: 7px;
+    background-color: #FFFFFF;
+}
+
+a:link, a:visited {
+	color:#27b;
+	text-decoration:none;
+}
+
+a {
+    color: #003399;
+    background-color: transparent;
+    font-weight: normal;
+}
+
+a:hover {
+	text-decoration:underline;
+}
+
+a img {
+	border-width:0;
+}
+
+.legal {
+    margin: 0;
+    margin-top: 20px;
+    font-size: 0.6em;
+    text-align: center;
+}
+
+.ui-autocomplete {
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 20px;
+}
