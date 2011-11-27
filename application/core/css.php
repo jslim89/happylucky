@@ -9,6 +9,7 @@ $styles = array(
     'jqueryui/jquery-ui-1.8.16.custom.css',
     'tipsy/tipsy.css',
     'login/front.css',
+    'topmenu/style.css',
     'validationEngine.jquery.css',
     'main.css',
 );

@@ -8,6 +8,16 @@
 
 <?php echo clear_div();?>
 
+<!-- Top Menu -->
+<div class="grid_16">
+<?php 
+$this->load->view('common/topmenu');
+?>
+</div>
+<!-- End Top Menu -->
+
+<?php echo clear_div();?>
+
 <!-- Title -->
 <div class="grid_16">
     <h1 title="<?php echo isset($title) ? $title : '';?>" class="title">
