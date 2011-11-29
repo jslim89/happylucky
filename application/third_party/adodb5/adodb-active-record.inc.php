@@ -73,7 +73,7 @@ function ADODB_SetDatabaseAdapter(&$db, $index=false)
 
 
 class ADODB_Active_Record {
-	static $_changeNames = false; // dynamically pluralize table names
+	static $_changeNames = true; // dynamically pluralize table names
 	static $_quoteNames = false;
 	
 	static $_foreignSuffix = '_id'; // 

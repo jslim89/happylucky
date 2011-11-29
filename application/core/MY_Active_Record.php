@@ -1,13 +1,10 @@
 <?php
-/**
- * To enable back the auto-pluralize table name
- * Go to application/third_party/adodb5/adodb-active-record.inc.php
- * static $_changeNames = false; // dynamically pluralize table names
- * set to true
- */
 
 // Use default values of table definition when creating new active record
 $ADODB_ACTIVE_DEFVALS = true;
+
+// Disabled auto-pluralize table name
+ADOdb_Active_Record::$_changeNames = false;
 
 /**
  * MY_Active_Record 
@@ -29,8 +26,9 @@ class MY_Active_Record extends ADOdb_Active_Record {
      * @param mixed $db 
      * @return void
      */
-    public function __construct($table = false, $pk = false, $db = false) {
-        parent::__construct($table, $pk, $db);
+    public function __construct($id = false) {
+        parent::__construct();
+        if($id) $this->load_by_id($id);
     }
 
     /**
@@ -62,13 +60,79 @@ class MY_Active_Record extends ADOdb_Active_Record {
      * @return array
      */
     public function columns_name($noncasesensitive = true) {
-        $ci =& get_instance();
-        $columns = $ci->adodb->MetaColumns($this->_table, $noncasesensitive);
+        $columns = $this->get_ci()->adodb->MetaColumns($this->_table, $noncasesensitive);
         $result = array();
         foreach($columns as $col) {
             $result[] = $col->name;
         }
         return $result;
+    }
+
+    /**
+     * For pagination used 
+     * 
+     * @param int $page_limit default is 10
+     * @param int $offset default is 1
+     * @return array
+     */
+    public function get_paged($page_limit = 10, $offset = 1) {
+        $result_set = $this->search("", array(), $page_limit, $offset);
+        return $result_set;
+    }
+
+    /**
+     * get_pagination 
+     * 
+     * @return mixed
+     */
+    public function get_pagination($total_rows, $page_limit) {
+        $this->get_ci()->load->library('pagination');
+        $conf = array(
+            'total_rows' => $total_rows,
+            'base_url' => $this->_get_curr_url,
+            'per_page' => $page_limit,
+        );
+        $pagination = new CI_Pagination();
+        $pagination->initialize($conf);
+        return $pagination;
+    }
+
+    protected function _get_curr_url() {
+        return base_url().$this->get_ci()->router->directory.
+            $this->get_ci()->router->class.'/'.$this->get_ci()->router->method;
+    }
+
+    /**
+     * Searching based on criteria passing in.
+     *
+     * @param string $criteria_string i.e. "name = ? AND age > ?"
+     * This is to allow user key in certain criteria such as <, >
+     * @param array $criteria i.e. array('Foo', 20)
+     * @param mixed $page_limit
+     * @param mixed $offset
+     */
+    public function search($criteria_string = "", 
+                            $criteria = array(), 
+                            $page_limit = false,
+                            $offset = false) {
+        // Dummy criteria
+        if(!empty($criteria_string)) $criteria_string .= " 1=1 ";
+
+        // temporary store in an array
+        $temp_set = $this->find($criteria_string, $criteria);
+
+        if($page_limit && $offset) {
+            $result_set = array();
+            $limit = (sizeof($temp_set) < $page_limit) ? sizeof($temp_set) : $page_limit;
+            for($i = 0; $i < $limit; $i++) {
+                $index = $offset + $i;
+                if(element($index, $temp_set, false)) $result_set[] = $temp_set[$limit];
+            }
+        }
+        else {
+            $result_set = $temp_set;
+        }
+        return $result_set;
     }
 
     /**
@@ -135,4 +199,9 @@ class MY_Active_Record extends ADOdb_Active_Record {
 		// show an error, for debugging's sake.
 		throw new Exception("Unable to call the method \"$method\" on the class " . get_class($this));
 	}
+
+    private function get_ci() {
+        $ci =& get_instance();
+        return $ci;
+    }
 }
