@@ -33,5 +33,5 @@ class Monk_Model extends MY_Active_Record {
      * @var string
      * @access protected
      */
-    var $_table = 'monk_model';
+    var $_table = 'monk';
 }
