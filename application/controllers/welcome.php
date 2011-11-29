@@ -19,6 +19,10 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
+        $this->load->model('user_model');
+        $u = new User_Model(1);
+        $result = $u->get_paged();
+        xxx($result);
 		$this->load->view('welcome_message');
 	}
 }
