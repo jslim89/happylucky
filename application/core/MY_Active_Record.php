@@ -72,11 +72,11 @@ class MY_Active_Record extends ADOdb_Active_Record {
      * For pagination used 
      * 
      * @param int $page_limit default is 10
-     * @param int $offset default is 1
+     * @param int $offset default is 0
      * @return array
      */
-    public function get_paged($page_limit = 10, $offset = 1) {
-        $result_set = $this->search("", array(), $page_limit, $offset);
+    public function get_paged($page_limit = 10, $offset = 0) {
+        $result_set = $this->search("", array(), $page_limit, $offset, true);
         return $result_set;
     }
 
@@ -89,8 +89,10 @@ class MY_Active_Record extends ADOdb_Active_Record {
         $this->get_ci()->load->library('pagination');
         $conf = array(
             'total_rows' => $total_rows,
-            'base_url' => $this->_get_curr_url,
+            'base_url' => $this->_get_curr_url(),
             'per_page' => $page_limit,
+            'use_page_numbers' => FALSE,
+            'uri_segment' => 4,
         );
         $pagination = new CI_Pagination();
         $pagination->initialize($conf);
@@ -108,31 +110,30 @@ class MY_Active_Record extends ADOdb_Active_Record {
      * @param string $criteria_string i.e. "name = ? AND age > ?"
      * This is to allow user key in certain criteria such as <, >
      * @param array $criteria i.e. array('Foo', 20)
-     * @param mixed $page_limit
-     * @param mixed $offset
+     * @param int $page_limit
+     * @param int $offset start from 0
+     * @param int $total_rows Whether return the total rows
      */
     public function search($criteria_string = "", 
                             $criteria = array(), 
                             $page_limit = false,
-                            $offset = false) {
+                            $offset = false,
+                            $total_rows = false) {
         // Dummy criteria
         if(!empty($criteria_string)) $criteria_string .= " 1=1 ";
 
         // temporary store in an array
         $temp_set = $this->find($criteria_string, $criteria);
 
-        if($page_limit && $offset) {
+        if($page_limit !== FALSE && $offset !== FALSE) {
             $result_set = array();
             $limit = (sizeof($temp_set) < $page_limit) ? sizeof($temp_set) : $page_limit;
-            for($i = 0; $i < $limit; $i++) {
-                $index = $offset + $i;
-                if(element($index, $temp_set, false)) $result_set[] = $temp_set[$limit];
-            }
+            $result_set = array_slice($temp_set, $offset, $limit);
         }
         else {
             $result_set = $temp_set;
         }
-        return $result_set;
+        return $total_rows ? array($result_set, sizeof($temp_set)) : $result_set;
     }
 
     /**

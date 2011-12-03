@@ -2,7 +2,7 @@
 
 <!-- Pagination -->
 <div class="grid_10">
-    <?php echo $pagination->create_links() ? $pagination->create_links() : nbs(1);?>
+    <?php echo $pagination->create_links().nbs(1);?>
 </div>
 <!-- End Pagination -->
 

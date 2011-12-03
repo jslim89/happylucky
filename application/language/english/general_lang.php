@@ -18,7 +18,8 @@ $lang['last']          = 'Last';
 $lang['more']          = 'More';
 $lang['error']         = 'Error';
 
-$lang['general']  = 'General';
+$lang['general'] = 'General';
+$lang['images']  = 'Images';
 
 // Top menu variable
 $lang['home']                  = 'Home';

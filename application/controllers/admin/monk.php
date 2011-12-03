@@ -23,10 +23,10 @@ class Monk extends MY_Controller {
         $this->load->Model('monk_model');
     }
 
-    public function index($page = 1) {
+    public function index($page = 0) {
         $monk = new Monk_Model();
-        $monks = $monk->get_paged($page);
-        $this->vars['pagination'] = $monks->get_pagination();
+        list($monks, $total_rows) = $monk->get_paged(10, $page);
+        $this->vars['pagination'] = $monk->get_pagination($total_rows, 10);
         $this->vars['title'] = lang('monk_management');
         $this->vars['monks'] = $monks;
         $this->load_view('admin/monk/list', $this->vars);
@@ -36,14 +36,14 @@ class Monk extends MY_Controller {
         // Set an empty object as the monk variable is required
         $this->vars['title'] = lang('monk_edit_monk');
         $this->vars['monk'] = new Monk_Model();
-        $this->load->view('admin/monk/add_edit', $this->vars);
+        $this->load_view('admin/monk/add_edit', $this->vars);
     }
 
     public function edit($id) {
         $this->vars['title'] = lang('monk_add_new_monk');
         $monk = new Monk_Model($id);
         $this->vars['monk'] = $monk;
-        $this->load->view('admin/monk/add_edit', $this->vars);
+        $this->load_view('admin/monk/add_edit', $this->vars);
     }
 
     public function save($id = null) {
