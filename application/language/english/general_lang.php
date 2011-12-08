@@ -5,8 +5,6 @@ $lang['add_new']       = 'Add New';
 $lang['delete']        = 'Delete';
 $lang['add_files']     = 'Add Files';
 $lang['delete_files']  = 'Delete Files';
-$lang['start_upload']  = 'Start Upload';
-$lang['cancel_upload'] = 'Cancel Upload';
 $lang['save']          = 'Save';
 $lang['done']          = 'Done';
 $lang['cancel']        = 'Cancel';
@@ -18,8 +16,13 @@ $lang['last']          = 'Last';
 $lang['more']          = 'More';
 $lang['error']         = 'Error';
 
-$lang['general'] = 'General';
-$lang['images']  = 'Images';
+$lang['general']     = 'General';
+$lang['primary']     = 'Primary';
+$lang['image']       = 'Image';
+$lang['images']      = 'Images';
+$lang['upload']      = 'Upload';
+$lang['description'] = 'Description';
+$lang['default']     = 'Default';
 
 // Top menu variable
 $lang['home']                  = 'Home';

@@ -17,6 +17,7 @@
 	padding: 0 0 8px;
 	float: left;
 	position: relative;
+    z-index: 1;
 	list-style: none;
 }
 

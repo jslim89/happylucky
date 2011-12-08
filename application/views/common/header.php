@@ -4,6 +4,10 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title><?php echo isset($page_title) ? $page_title : 'Happy Lucky'; ?></title>
+    <?php
+    require_once "application/core/css.php";
+    require_once "application/core/js.php";
+    ?>
 </head>
 <body>
 <!-- container_16 -->

@@ -43,6 +43,7 @@ class Monk extends MY_Controller {
         $this->vars['title'] = lang('monk_add_new_monk');
         $monk = new Monk_Model($id);
         $this->vars['monk'] = $monk;
+        $this->vars['images'] = $monk->monk_image;
         $this->load_view('admin/monk/add_edit', $this->vars);
     }
 
@@ -67,5 +68,9 @@ class Monk extends MY_Controller {
         $q = get_post('term');
         $monk = $this->monk_model->ajax_search($q);
         echo json_encode($monk);
+    }
+
+    public function upload($id = null) {
+        xxx($_FILES,1);
     }
 }

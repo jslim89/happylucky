@@ -34,4 +34,15 @@ class Monk_Model extends MY_Active_Record {
      * @access protected
      */
     var $_table = 'monk';
+
+    /**
+     * Return the upload path for this particular monk 
+     * 
+     * @return mixed
+     */
+    public function get_upload_path() {
+        return $this->is_exist() ? 
+            base_url()."images/monks/".$this->id."/"
+            : false;
+    }
 }

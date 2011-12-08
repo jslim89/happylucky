@@ -21,9 +21,5 @@
 <?php echo clear_div();?>
 </div>
 <!-- End container_16 -->
-<?php
-require_once "application/core/css.php";
-require_once "application/core/js.php";
-?>
 </body>
 </html>

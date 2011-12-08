@@ -5,6 +5,24 @@ function redirect (url, open_window) {
 		window.location.href = url;
 }
 
+/*
+ * offset is start from 0. Default is 1
+ * i.e. element_1, offset[0] = element, offset[1] = 1
+ *
+ * split_by by default is underscore (_)
+ * i.e. element_1 = arr[0] = element
+ *                  arr[1] = 1
+ */
+function get_element_index(obj, offset, split_by) {
+    var obj_id = $(obj).attr('id');
+    if(offset == null) offset = 1;
+    if(split_by == null) split_by = '_';
+    var token = obj_id.split(split_by);
+    var index = token[token.length - offset];
+
+    return index;
+}
+
 function ui_alert(title, message) {
     var content = '<p>'+message+'</p>';
     $('#message-dialog').attr({title: title});
@@ -18,30 +36,6 @@ function ui_alert(title, message) {
                                        $(this).dialog('close');
                                     }
                             }
-                        });
-}
-
-function ui_editor(id, title) {
-    $('#ckeditor-dialog').attr({title: title});
-    $('#ckeditor-dialog').dialog({
-                            resizable: false,
-                            height: 440,
-                            width: 900,
-                            modal: true,
-                            buttons: {
-                                Done: function() {
-                                               $('#'+id).val(
-                                                   $('#ckeditor-dialog-done').text()
-                                               );
-                                               $(this).dialog('close');
-                                           },
-                                Cancel: function() {
-                                                 $(this).dialog('close');
-                                             }
-                            },
-                            close: function() {
-                                       $('#'+id).focus();
-                                   }
                         });
 }
 
