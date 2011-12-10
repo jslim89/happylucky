@@ -21,3 +21,9 @@ if(!function_exists('get_files_recursive')) {
         return $ret;
     }
 }
+
+if(!function_exists('absolute_path')) {
+    function absolute_path() {
+        return substr(BASEPATH, 0, -7);
+    }
+}
