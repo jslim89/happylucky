@@ -136,22 +136,23 @@ if (!function_exists ('get_post_date')) {
 }
 
 /**
- * get_session 
+ * Get the file name that specified in form element
+ * i.e.
+ * In form
+ * <input type="file" value="" name="xxx">
+ * <input type="file" value="" name="yyy">
+ *
+ * will return array('xxx', 'yyy')
  * 
- * @param mixed $key 
- * @param mixed $default 
  * @access public
- * @return mixed 
+ * @return array
  */
-if (!function_exists ('get_session')) {
-	function get_session ($key, $default = null) {
-		$CI = & get_instance ();
-		$CI->load->library ('session');
-		$value = $CI->session->userdata ($key);
-        if ( $value === FALSE ) return $default;
-        return $value;
-	}
+if(!function_exists('get_upload_files_request')) {
+    function get_upload_files_request() {
+        $files = array();
+        foreach($_FILES as $key => $file) {
+            $files[] = $key;
+        }
+        return $files;
+    }
 }
-// 
-// if (!function_exists('firelog')) {
-// }
