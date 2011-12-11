@@ -41,8 +41,19 @@ class Monk_Model extends MY_Active_Record {
      * @return mixed
      */
     public function get_upload_path() {
-        return $this->is_exist() ? 
-            base_url()."images/monks/".$this->id."/"
-            : false;
+        if(!$this->is_exist()) return false;
+
+        $path_to_monk_img = "images/monks/".$this->id."/";
+        $abs_path = absolute_path().$path_to_monk_img;
+
+        if(!file_exists($abs_path)) {
+            // umask is to revoke permission
+            // i.e. chmod('file', 0777)
+            //      umask(0022)
+            //      file permission will be 0755
+            umask(0000);
+            mkdir($abs_path, 0777);
+        }
+        return base_url().$path_to_monk_img;
     }
 }
