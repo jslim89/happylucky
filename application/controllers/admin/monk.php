@@ -70,7 +70,29 @@ class Monk extends MY_Controller {
         echo json_encode($monk);
     }
 
-    public function upload($id = null) {
-        xxx($_FILES,1);
+    /**
+     * Must be an existing monk, if $id is null
+     * it is not possible to upload 
+     * 
+     * @param mixed $id 
+     * @return void
+     */
+    public function upload($id) {
+        $monk = new Monk_Model($id);
+        $conf = array(
+            'upload_path' => $monk->get_upload_path(),
+            'allowed_types' => 'jpg|png',
+            'encrypt_name' => true,
+        );
+
+        $this->load->library('my_upload', $conf);
+
+        $ret = $this->my_upload->multi_upload(get_upload_files_request());
+
+        if(is_array($ret)) {
+            list($errors, $successes) = $ret;
+            xxx($errors);
+            xxx($successes,1);
+        }
     }
 }

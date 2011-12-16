@@ -60,7 +60,8 @@ $(document).ready(function() {
                     clone.attr('id', 'tr_image_' + next_idx);
                     clone.find('#image_' + last_idx)
                         .attr('id', 'image_' + next_idx)
-                        .attr('name', 'image['+next_idx+']');
+                        .attr('value', '')
+                        .attr('name', 'image_'+next_idx);
                     clone.show().insertAfter(last);
                 });
             });
@@ -72,7 +73,7 @@ $(document).ready(function() {
                     <td colspan="2">
                     <?php 
                         echo form_upload(array(
-                            'name' => 'image[0]',
+                            'name' => 'image_0',
                             'id' => 'image_0',
                         )); 
                     ?>

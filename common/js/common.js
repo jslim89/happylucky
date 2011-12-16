@@ -9,15 +9,15 @@ function redirect (url, open_window) {
  * offset is start from 0. Default is 1
  * i.e. element_1, offset[0] = element, offset[1] = 1
  *
- * split_by by default is underscore (_)
+ * delimiter by default is underscore (_)
  * i.e. element_1 = arr[0] = element
  *                  arr[1] = 1
  */
-function get_element_index(obj, offset, split_by) {
+function get_element_index(obj, offset, delimiter) {
     var obj_id = $(obj).attr('id');
     if(offset == null) offset = 1;
-    if(split_by == null) split_by = '_';
-    var token = obj_id.split(split_by);
+    if(delimiter == null) delimiter = '_';
+    var token = obj_id.split(delimiter);
     var index = token[token.length - offset];
 
     return index;

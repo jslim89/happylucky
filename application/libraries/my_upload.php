@@ -25,9 +25,9 @@ class MY_Upload extends CI_Upload {
 
         $errors = $successes = array();
 
-        foreach($files as $file) {
+        foreach($files as $key => $file) {
             if( ! $this->do_upload($file)) {
-                $errors[$file] = $this->display_errors();
+                $errors[$file] = $this->error_msg[$key];
             }
             else {
                 $successes[$file] = $this->data();
