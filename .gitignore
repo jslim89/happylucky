@@ -10,3 +10,6 @@
 # REFERENCE: http://book.git-scm.com/4_ignoring_files.html
 
 tags
+images/amulet_types/*
+images/monks/*
+images/products/*
