@@ -21,6 +21,7 @@ class Monk extends MY_Controller {
         parent::__construct();
         $this->lang->load('monk');
         $this->load->Model('monk_model');
+        $this->load->Model('monk_image_model');
     }
 
     public function index($page = 0) {
@@ -91,8 +92,12 @@ class Monk extends MY_Controller {
 
         if(is_array($ret)) {
             list($errors, $successes) = $ret;
-            xxx($errors);
-            xxx($successes,1);
+
+            $monk->monk_image = $this->monk_image_model->insert_multiple($monk, $successes);
+            foreach($monk->monk_image as $monk_img) {
+                $monk_img->save();
+            }
         }
+        redirect('admin/monk/edit/'.$monk->id);
     }
 }

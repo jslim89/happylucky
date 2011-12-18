@@ -54,6 +54,19 @@ class Monk_Model extends MY_Active_Record {
             umask(0000);
             mkdir($abs_path, 0777);
         }
-        return base_url().$path_to_monk_img;
+        return $abs_path;
+    }
+
+    /**
+     * Get the path for download image base on a particular monk object 
+     * 
+     * @return string
+     */
+    public function get_download_path() {
+        if(!$this->is_exist()) return false;
+
+        $path_to_monk_img = "images/monks/".$this->id."/";
+        $relative_path = base_url().$path_to_monk_img;
+        return $relative_path;
     }
 }

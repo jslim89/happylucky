@@ -41,8 +41,8 @@ class Welcome extends MY_Controller {
 
     public function login() {
         if(count($_POST)) {
-            $this->load->model('admin_model', 'user');
-            $user = new Admin_Model();
+            $this->load->model('user_model', 'user');
+            $user = new User_Model();
 
             $user->email    = get_post('email');
             $user->password = get_post('password');
@@ -52,7 +52,7 @@ class Welcome extends MY_Controller {
                 $session = array(
                     'user_id'   => $user->id,
                     'password'  => $user->password,
-                    'user_type' => 'ADMIN'
+                    'user_type' => User_Model::ADMIN
                 );
                 $this->session->set_userdata($session);
                 redirect('admin/dashboard');

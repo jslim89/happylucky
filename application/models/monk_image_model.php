@@ -28,4 +28,18 @@ class Monk_Image_Model extends MY_Active_Record {
      * @access protected
      */
     var $_table = 'monk_image';
+
+    public function insert_multiple($monk, $attribs) {
+        $monk_image = array();
+        foreach($attribs as $key => $img) {
+            $monk_image[$key] = new Monk_Image_Model();
+            $monk_image[$key]->image_name = $img['client_name'];
+            $monk_image[$key]->url        = $monk->get_download_path().$img['file_name'];
+            $monk_image[$key]->extension  = $img['file_ext'];
+            $monk_image[$key]->alt        = $img['client_name'];
+            $monk_image[$key]->image_desc = $img['client_name'];
+            $monk_image[$key]->monk_id    = $monk->id;
+        }
+        return $monk_image;
+    }
 }

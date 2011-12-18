@@ -21,6 +21,8 @@ class User_Model extends MY_Active_Record {
      */
     var $_table = 'user';
 
+    const ADMIN = 'ADMIN';
+
     private function _encrypt_password() {
         // Generate a random salt if empty
         if(empty($this->salt)) {

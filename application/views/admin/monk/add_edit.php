@@ -112,50 +112,58 @@ $(document).ready(function() {
                     <?php echo lang('images'); ?>
                     </th>
                     <th>
-                    <?php echo lang('primary'); ?>
-                    </th>
-                    <th>
                     <?php echo lang('description'); ?>
                     </th>
                 </tr>
             </thead>
             <tbody>
-<?php if(sizeof($images) == 0) { 
-echo "<tr>";
-echo "<td colspan='2'>";
-echo img(array(
-    'src'    => base_url().'images/default.jpg',
-    'alt'    => lang('default').' '.lang('image'),
-    'width'  => '100',
-    'height' => '100',
-));
-echo "</td>";
-echo "<td valign='center' align='center'>";
-echo form_radio(array(
-    'name'    => 'primary',
-    'checked' => true,
-    'id'      => 'default_image',
-));
-echo "</td>";
-echo "</tr>";
-}
-else {
-    foreach($images as $image) {
-        echo "<tr>";
-        echo "<td>";
+<?php if(sizeof($images) == 0) { ?>
+<tr>
+    <td><?php
         echo form_checkbox(array(
-            'name'  => 'check_'.$image->id,
-            'id'    => 'check_'.$image->id,
-            'value' => $image->id,
+            'name'  => 'check_'.$monk->id,
+            'id'    => 'check_'.$monk->id,
+            'value' => $monk->id,
             'class' => 'delete_check',
         ));
-        echo "</td>";
-        echo "<td>";
-        echo "</td>";
-        echo "<td>";
-        echo "</td>";
-        echo "</tr>";
-    }
+    ?></td>
+    <td colspan='2'><?php
+        echo img(array(
+            'src'    => base_url().'images/default.jpg',
+            'alt'    => lang('default').' '.lang('image'),
+            'width'  => '100',
+            'height' => '100',
+        ));
+    ?></td>
+</tr>
+<?php }
+else {
+    foreach($images as $image): ?>
+        <tr>
+            <td><?php
+            echo form_checkbox(array(
+                'name'  => 'check_'.$image->id,
+                'id'    => 'check_'.$image->id,
+                'value' => $image->id,
+                'class' => 'delete_check',
+            ));?></td>
+            <td><?php
+            echo img(array(
+                'src'    => $image->url,
+                'alt'    => $image->alt,
+                'width'  => '100',
+                'height' => '100',
+            ));
+            ?></td>
+            <td><?php
+            echo form_textarea(array(
+                'name' => 'image_desc['.$image->id.']',
+                'id' => 'image_desc_'.$image->id,
+                'readonly' => true,
+            ));
+            ?></td>
+        </tr>
+<?php endforeach;
 }
 ?>
             </tbody>

@@ -26,8 +26,8 @@ class MY_Active_Record extends ADOdb_Active_Record {
      * @param mixed $db 
      * @return void
      */
-    public function __construct($id = false) {
-        parent::__construct();
+    public function __construct($id = false, $table = false, $pkeyarr = false, $db = false) {
+        parent::__construct($table, $pkeyarr, $db);
         if($id) $this->load_by_id($id);
     }
 
