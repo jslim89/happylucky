@@ -21,14 +21,15 @@ $lang['updated']             = 'Updated';
 $lang['update_failed']       = 'Update Failed';
 $lang['nothing_has_changed'] = 'Nothing Has Changed';
 
-$lang['general']     = 'General';
-$lang['primary']     = 'Primary';
-$lang['image']       = 'Image';
-$lang['image_name']  = 'Image Name';
-$lang['images']      = 'Images';
-$lang['upload']      = 'Upload';
-$lang['description'] = 'Description';
-$lang['default']     = 'Default';
+$lang['general']       = 'General';
+$lang['primary']       = 'Primary';
+$lang['image']         = 'Image';
+$lang['primary_image'] = 'Primary Image';
+$lang['image_name']    = 'Image Name';
+$lang['images']        = 'Images';
+$lang['upload']        = 'Upload';
+$lang['description']   = 'Description';
+$lang['default']       = 'Default';
 
 // Top menu variable
 $lang['home']                  = 'Home';

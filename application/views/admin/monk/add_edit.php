@@ -28,7 +28,9 @@ $(document).ready(function() {
                         ?>
                     </td>
                 </tr>
-                <tr><td colspan="2" class="txt-label"><?php echo lang('monk_story');?></td></tr>
+                <tr>
+                    <td colspan="2" class="txt-label"><?php echo lang('monk_story');?></td>
+                </tr>
                 <tr>
                     <td colspan="2">
                         <?php 
@@ -49,6 +51,48 @@ $(document).ready(function() {
         </form>
     </div>
     <div id="images">
+        <table class="primary_image">
+            <tr>
+                <td class="label"><?php echo lang('primary_image');?></td>
+            </tr>
+            <?php if($monk->primary_image_url): ?>
+            <tr>
+                <td rowspan="2"><?php
+                    echo img(array(
+                        'src'    => $monk->primary_image_url,
+                        'alt'    => $monk->monk_name,
+                        'width'  => '200',
+                        'height' => '200',
+                    ));
+                ?></td>
+            </tr>
+            <?php else: ?>
+            <tr>
+                <td rowspan="2"><?php
+                    echo img(array(
+                        'src'    => base_url().'images/default.jpg',
+                        'alt'    => lang('default').' '.lang('image'),
+                        'width'  => '200',
+                        'height' => '200',
+                    ));
+                ?></td>
+            </tr>
+            <tr>
+                <td>
+                    <form id="monk_upload_primary" method="POST" enctype="multipart/form-data"
+                          action="<?php echo site_url("admin/monk/upload_primary/".$monk->id);?>">
+                        <?php 
+                            echo form_upload(array(
+                                'name' => 'primary_image',
+                                'id' => 'primary_image',
+                            )); 
+                            echo form_submit('upload_primary', lang('upload'), 'class="button"');
+                        ?>
+                    </form>
+                </td>
+            </tr>
+            <?php endif; ?>
+        </table>
         <script type="text/javascript">
             $(document).ready(function() {
                 $('#add_more').click(function() {
