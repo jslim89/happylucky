@@ -70,6 +70,11 @@ $(document).ready(function() {
         }
     });
 
+    // Jquery UI icons for mouse hover
+    $('ul#icons li').hover(
+        function() { $(this).addClass('ui-state-hover'); },
+        function() { $(this).removeClass('ui-state-hover'); }
+    );
 });
 
 function format_country(country) {

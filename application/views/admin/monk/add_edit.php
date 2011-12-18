@@ -112,7 +112,13 @@ $(document).ready(function() {
                     <?php echo lang('images'); ?>
                     </th>
                     <th>
+                    <?php echo lang('image_name'); ?>
+                    </th>
+                    <th>
                     <?php echo lang('description'); ?>
+                    </th>
+                    <th>
+                    <?php echo lang('edit'); ?>
                     </th>
                 </tr>
             </thead>
@@ -156,12 +162,35 @@ else {
             ));
             ?></td>
             <td><?php
-            echo form_textarea(array(
-                'name' => 'image_desc['.$image->id.']',
-                'id' => 'image_desc_'.$image->id,
+            echo form_input(array(
+                'name'     => 'image_name['.$image->id.']',
+                'id'       => 'image_name_'.$image->id,
+                'value'    => $image->image_name,
                 'readonly' => true,
             ));
             ?></td>
+            <td><?php
+            echo form_textarea(array(
+                'name'     => 'image_desc['.$image->id.']',
+                'id'       => 'image_desc_'.$image->id,
+                'value'    => $image->image_desc,
+                'rows'     => '4',
+                'columns'  => '10',
+                'readonly' => true,
+            ));
+            ?></td>
+            <td>
+        <ul id="icons" class="ui-widget ui-helper-clearfix" style="">
+            <li class="ui-state-default ui-corner-all">
+                <span id="edit_<?php echo $image->id; ?>" class="ui-icon ui-icon-pencil"
+                    title="<?php echo lang('edit');?>"></span>
+            </li>
+            <li class="ui-state-default ui-corner-all">
+                <span id="delete_<?php echo $image->id; ?>" class="ui-icon ui-icon-trash"
+                    title="<?php echo lang('delete');?>"></span>
+            </li>
+        </ul>
+            </td>
         </tr>
 <?php endforeach;
 }
