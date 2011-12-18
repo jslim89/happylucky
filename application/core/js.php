@@ -3,6 +3,7 @@
 var base_url = '<?php echo base_url(); ?>';
 
 // language variable
+lang_confirmation                     = '<?php echo lang('confirmation'); ?>';
 lang_confirm_delete                   = '<?php echo lang('confirm_delete'); ?>';
 lang_error                            = '<?php echo lang('error'); ?>';
 lang_done                             = '<?php echo lang('done'); ?>';

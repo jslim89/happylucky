@@ -64,6 +64,63 @@ $(document).ready(function() {
                         .attr('name', 'image_'+next_idx);
                     clone.show().insertAfter(last);
                 });
+
+                $('span[id^=edit_]').each(function() {
+                    $(this).click(function() {
+                        var id = get_element_index($(this));
+                        $('input#image_name_'+id).attr('readonly', false);
+                        $('textarea#image_desc_'+id).attr('readonly', false);
+                    });
+                });
+
+                $('span[id^=delete_]').each(function() {
+                    $(this).click(function() {
+                        var id = get_element_index($(this));
+                        var delete_url = base_url + 'admin/monk/del_monk_image/' + id;
+                        delete_row_confirmation(delete_url, 'existing_image_'+id);
+                    });
+                });
+
+                $('span[id^=save_]').each(function() {
+                    $(this).click(function() {
+                        var id = get_element_index($(this));
+                        var img_name = $('input#image_name_'+id).val();
+                        var img_desc = $('textarea#image_desc_'+id).val();
+                        $.ajax({
+                            url: base_url + 'admin/monk/save_img_info/' + id,
+                            data: 'image_name='+img_name+'&image_desc='+img_desc,
+                            type: 'POST',
+                            success: function(ret) {
+                                var item = $.parseJSON(ret);
+                                if(item.status == 1) { // update successful
+                                    $('#upd_msg_'+id)
+                                        .text('<?php echo lang('updated'); ?>')
+                                        .show()
+                                        .fadeOut(3000);
+                                }
+                                else if(item.status == 0) { // update failed
+                                    $('#upd_msg_'+id)
+                                        .text('<?php echo lang('update_failed'); ?>')
+                                        .show()
+                                        .fadeOut(3000);
+                                }
+                                else if(item.status == -1) { // Nothing has changed
+                                    $('#upd_msg_'+id)
+                                        .text('<?php echo lang('nothing_has_changed'); ?>')
+                                        .show()
+                                        .fadeOut(3000);
+                                }
+                                $('input#image_name_'+id).attr('readonly', true);
+                                $('textarea#image_desc_'+id).attr('readonly', true);
+                            },
+                            error: function(jqXHR, textStatus, errorThrown) {
+                                alert(textStatus);
+                            }
+                        });
+                        $('input#image_name_'+id).attr('readonly', false);
+                        $('textarea#image_desc_'+id).attr('readonly', false);
+                    });
+                });
             });
         </script>
         <form id="monk_upload_image" method="POST" enctype="multipart/form-data"
@@ -145,7 +202,7 @@ $(document).ready(function() {
 <?php }
 else {
     foreach($images as $image): ?>
-        <tr>
+        <tr id="existing_image_<?php echo $image->id;?>">
             <td><?php
             echo form_checkbox(array(
                 'name'  => 'check_'.$image->id,
@@ -180,16 +237,21 @@ else {
             ));
             ?></td>
             <td>
-        <ul id="icons" class="ui-widget ui-helper-clearfix" style="">
-            <li class="ui-state-default ui-corner-all">
-                <span id="edit_<?php echo $image->id; ?>" class="ui-icon ui-icon-pencil"
-                    title="<?php echo lang('edit');?>"></span>
-            </li>
-            <li class="ui-state-default ui-corner-all">
-                <span id="delete_<?php echo $image->id; ?>" class="ui-icon ui-icon-trash"
-                    title="<?php echo lang('delete');?>"></span>
-            </li>
-        </ul>
+                <ul id="icons" class="ui-widget ui-helper-clearfix" style="">
+                    <li class="ui-state-default ui-corner-all">
+                        <span id="edit_<?php echo $image->id; ?>" class="ui-icon ui-icon-pencil"
+                            title="<?php echo lang('edit');?>"></span>
+                    </li>
+                    <li class="ui-state-default ui-corner-all">
+                        <span id="delete_<?php echo $image->id; ?>" class="ui-icon ui-icon-trash"
+                            title="<?php echo lang('delete');?>"></span>
+                    </li>
+                    <li class="ui-state-default ui-corner-all">
+                        <span id="save_<?php echo $image->id; ?>" class="ui-icon ui-icon-check"
+                            title="<?php echo lang('save');?>"></span>
+                    </li>
+                </ul>
+                <span id="upd_msg_<?php echo $image->id; ?>"></span>
             </td>
         </tr>
 <?php endforeach;

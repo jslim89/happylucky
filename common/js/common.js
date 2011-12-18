@@ -39,7 +39,34 @@ function ui_alert(title, message) {
                         });
 }
 
+function ui_confirm(title, message) {
+    var is_confirmed = false;
+    var content = '<p>'+message+'</p>';
+    $('#confirm-dialog').attr({title: title});
+    $('#confirm-dialog').html(content);
+    $('#confirm-dialog').dialog({
+                            buttons: {
+                                Ok: function() {
+                                       is_confirmed = true;
+                                       $(this).dialog('close');
+                                    },
+                                Cancel: function() {
+                                       $(this).dialog('close');
+                                    }
+                            }
+                        });
+    alert(is_confirmed);
+    return is_confirmed;
+}
+
 $(document).ready(function() {
+    $('#confirm-dialog').dialog({
+        autoOpen: false,
+        resizable: false,
+        height: 140,
+        modal: true
+    });
+
     $('.positive-integer').numeric({decimal: false, negative: false}, function() {
         ui_alert(lang_invalid_input, lang_positive_integer_warning_message);
         this.value = '';
@@ -86,4 +113,42 @@ function format_country(country) {
     else if(country.iso_code_3)
         value = country.iso_code_3;
     return value;
+}
+
+function delete_row_confirmation(delete_url, row_id) {
+    var content = '<p>'+lang_confirm_delete+'</p>';
+    $('#confirm-dialog').attr({title: lang_confirmation});
+    $('#confirm-dialog').html(content);
+    $('#confirm-dialog').dialog({
+                            buttons: {
+                                Ok: function() {
+                                        delete_row(delete_url, row_id);
+                                       $(this).dialog('close');
+                                    },
+                                Cancel: function() {
+                                       $(this).dialog('close');
+                                    }
+                            }
+                        });
+    $('#confirm-dialog').dialog('open');
+}
+
+/*
+ * @delete_url URL correspond to the object that want to delete
+ * @row_id refer to the table row, after successfully 
+ *         deleted, the row will be faded out
+ */
+function delete_row(delete_url, row_id) {
+    $.ajax({
+        url: delete_url,
+        success: function(data) {
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert(textStatus);
+        }
+    });
+    $('#'+row_id).fadeOut(3000);
+    setTimeout(function() {
+        $('#'+row_id).remove();
+    }, 3100);
 }

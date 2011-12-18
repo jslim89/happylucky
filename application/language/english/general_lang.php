@@ -1,21 +1,25 @@
 <?php
 $lang['happy_lucky'] = 'Happy Lucky';
 
-$lang['add_new']      = 'Add New';
-$lang['edit']         = 'Edit';
-$lang['delete']       = 'Delete';
-$lang['add_files']    = 'Add Files';
-$lang['delete_files'] = 'Delete Files';
-$lang['save']         = 'Save';
-$lang['done']         = 'Done';
-$lang['cancel']       = 'Cancel';
-$lang['back']         = 'Back';
-$lang['next']         = 'Next';
-$lang['previous']     = 'Previous';
-$lang['first']        = 'First';
-$lang['last']         = 'Last';
-$lang['more']         = 'More';
-$lang['error']        = 'Error';
+$lang['add_new']       = 'Add New';
+$lang['edit']          = 'Edit';
+$lang['delete']        = 'Delete';
+$lang['add_files']     = 'Add Files';
+$lang['delete_files']  = 'Delete Files';
+$lang['save']          = 'Save';
+$lang['done']          = 'Done';
+$lang['cancel']        = 'Cancel';
+$lang['back']          = 'Back';
+$lang['next']          = 'Next';
+$lang['previous']      = 'Previous';
+$lang['first']         = 'First';
+$lang['last']          = 'Last';
+$lang['more']          = 'More';
+$lang['error']         = 'Error';
+
+$lang['updated']             = 'Updated';
+$lang['update_failed']       = 'Update Failed';
+$lang['nothing_has_changed'] = 'Nothing Has Changed';
 
 $lang['general']     = 'General';
 $lang['primary']     = 'Primary';

@@ -100,4 +100,22 @@ class Monk extends MY_Controller {
         }
         redirect('admin/monk/edit/'.$monk->id);
     }
+
+    public function save_img_info($image_id) {
+        $monk_image = new Monk_Image_Model($image_id);
+        $monk_image->image_name = get_post('image_name');
+        $monk_image->image_desc = get_post('image_desc');
+        $status = $monk_image->save();
+        echo json_encode(array(
+            'status' => $status
+        ));
+    }
+
+    public function del_monk_image($image_id) {
+        $monk_image = new Monk_Image_Model($image_id);
+        $status = $monk_image->delete();
+        echo json_encode(array(
+            'status' => $status
+        ));
+    }
 }
