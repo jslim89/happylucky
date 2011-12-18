@@ -136,6 +136,15 @@ class MY_Active_Record extends ADOdb_Active_Record {
         return $total_rows ? array($result_set, sizeof($temp_set)) : $result_set;
     }
 
+    public function delete() {
+        $this->get_ci()->adodb->StartTrans();
+        $sql = "DELETE FROM ".$this->_table
+             . " WHERE id=?";
+        $this->get_ci()->adodb->Execute($sql, array($this->id));
+        $committed = $this->get_ci()->adodb->CompleteTrans();
+        return $committed;
+    }
+
     /**
      * _find_by 
      * 
