@@ -27,8 +27,10 @@
                     'value' => 'CHECK_ALL',
                 ));
             ?></th>
+            <th width="20%"><?php echo lang('image');?></th>
             <th width="20%"><?php echo lang('monk_name');?></th>
             <th width="75%"><?php echo lang('monk_story');?></th>
+            <th width="75%"><?php echo lang('edit');?></th>
         </tr>
         <?php foreach($monks as $monk):?>
         <tr>
@@ -39,6 +41,20 @@
                     'value' => $monk->id,
                     'class' => 'delete_check',
                 ));
+            ?></td>
+            <td><?php 
+                $image_src = $monk->primary_image_url
+                    ? $monk->primary_image_url
+                    : default_image_path();
+                echo anchor(
+                    site_url('admin/monk/edit/'.$monk->id),
+                    img(array(
+                        'src'    => $image_src,
+                        'alt'    => $monk->monk_name,
+                        'width'  => '100',
+                        'height' => '100',
+                    ))
+                );
             ?></td>
             <td><?php 
                 echo anchor(

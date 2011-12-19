@@ -17,7 +17,7 @@
     <tr>
         <td rowspan="2"><?php
             echo img(array(
-                'src'    => base_url().'images/default.jpg',
+                'src'    => default_image_path(),
                 'alt'    => lang('default').' '.lang('image'),
                 'width'  => '200',
                 'height' => '200',
