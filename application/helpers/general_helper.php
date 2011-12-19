@@ -156,3 +156,15 @@ if(!function_exists('get_upload_files_request')) {
         return $files;
     }
 }
+
+/**
+ * default_image_path 
+ * 
+ * @access public
+ * @return string
+ */
+if(!function_exists('default_image_path')) {
+    function default_image_path() {
+        return base_url().'images/default.jpg';
+    }
+}
