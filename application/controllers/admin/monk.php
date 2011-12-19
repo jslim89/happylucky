@@ -45,6 +45,14 @@ class Monk extends MY_Controller {
         $monk = new Monk_Model($id);
         $this->vars['monk'] = $monk;
         $this->vars['images'] = $monk->monk_image;
+        $this->vars['image_upload'] = array(
+            'upload_url' => site_url('admin/monk/upload/'.$monk->id),
+            'primary_upload_url' => site_url('admin/monk/upload_primary/'.$monk->id),
+            'primary_image_url' => $monk->primary_image_url,
+            'primary_image_alt' => $monk->monk_name,
+            'delete_image_url' => base_url().'admin/monk/del_monk_image/'.$id,
+            'save_image_url' => base_url().'admin/monk/save_img_info/'.$id,
+        );
         $this->load_view('admin/monk/add_edit', $this->vars);
     }
 
