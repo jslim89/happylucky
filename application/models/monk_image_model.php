@@ -42,4 +42,20 @@ class Monk_Image_Model extends MY_Active_Record {
         }
         return $monk_image;
     }
+
+    /**
+     * override the parent method, delete from database at the same time
+     * delete the physical file 
+     * 
+     * @return boolean
+     */
+    public function delete() {
+        // NOTE: $this->monk->get_upload_path() doesn't work, thus
+        //       I add one more addtional step
+        $monk = new Monk_Model($this->monk->id);
+        if(unlink($monk->get_upload_path().basename($this->url))) {
+            return parent::delete();
+        }
+        return false;
+    }
 }
