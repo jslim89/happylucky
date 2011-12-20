@@ -5,10 +5,17 @@ function redirect (url, open_window) {
 		window.location.href = url;
 }
 
-function query_string(variable) {
+/*
+ * Get the query string
+ *
+ * @param query string's variable
+ * return string (if param doesn't exist, return null)
+ */
+function query_string(param) {
     var href = location.search; 
     var url = $.query.load (href);
-    return url.get (variable);
+    var qs =  url.get (param);
+    return (qs == '') ? null : qs;
 }
 
 /*
