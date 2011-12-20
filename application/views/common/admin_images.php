@@ -56,6 +56,17 @@
             clone.show().insertAfter(last);
         });
 
+        $('#btn_delete').click(function() {
+            var delete_urls = [];
+            var row_ids     = [];
+            $.each($('.delete_check:checked'), function(i) {
+                var id = $(this).val();
+                row_ids[id]     = 'existing_image_'+id;
+                delete_urls[id] = '<?php echo $delete_image_url;?>' + id;
+            });
+            delete_row_confirmation(delete_urls, row_ids);
+        });
+
         $('span[id^=edit_]').each(function() {
             $(this).click(function() {
                 var id = get_element_index($(this));
@@ -67,7 +78,7 @@
         $('span[id^=delete_]').each(function() {
             $(this).click(function() {
                 var id = get_element_index($(this));
-                var delete_url = '<?php echo $delete_image_url;?>';
+                var delete_url = '<?php echo $delete_image_url;?>'+id;
                 delete_row_confirmation(delete_url, 'existing_image_'+id);
             });
         });
@@ -78,7 +89,7 @@
                 var img_name = $('input#image_name_'+id).val();
                 var img_desc = $('textarea#image_desc_'+id).val();
                 $.ajax({
-                    url: '<?php echo $save_image_url;?>',
+                    url: '<?php echo $save_image_url;?>'+id,
                     data: 'image_name='+img_name+'&image_desc='+img_desc,
                     type: 'POST',
                     success: function(ret) {
@@ -143,6 +154,16 @@
                 ));
             ?>
             </td>
+        </tr>
+        <tr><td colspan="2">&nbsp;</td></tr>
+        <tr>
+            <td colspan="2"><?php
+                echo form_button(array(
+                    'name'  => 'btn_delete',
+                    'id'    => 'btn_delete',
+                    'content' => lang('delete'),
+                ));
+            ?></td>
         </tr>
     </table>
 </form>
