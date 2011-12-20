@@ -1,4 +1,32 @@
 <?php  if (!defined('BASEPATH')) exit('No direct script access allowed');?>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('span[id^=edit_]').each(function() {
+        $(this).click(function() {
+            var id = get_element_index($(this));
+            redirect('monk/edit/'+id);
+        });
+    });
+    $('span[id^=delete_]').each(function() {
+        $(this).click(function() {
+            var id = get_element_index($(this));
+            var delete_url = base_url + 'admin/monk/delete/' + id;
+            delete_row_confirmation(delete_url, 'monk_row_'+id);
+        });
+    });
+
+    $('#btn_delete').click(function() {
+        var delete_urls = [];
+        var row_ids     = [];
+        $.each($('.delete_check:checked'), function(i) {
+            var id = $(this).val();
+            row_ids[id]     = 'monk_row_'+id;
+            delete_urls[id] = base_url + 'admin/monk/delete/' + id;
+        });
+        delete_row_confirmation(delete_urls, row_ids);
+    });
+});
+</script>
 
 <!-- Pagination -->
 <div class="grid_10">
@@ -33,7 +61,7 @@
             <th width="75%"><?php echo lang('edit');?></th>
         </tr>
         <?php foreach($monks as $monk):?>
-        <tr>
+        <tr id="monk_row_<?php echo $monk->id; ?>">
             <td><?php
                 echo form_checkbox(array(
                     'name'  => 'check_'.$monk->id,
@@ -63,6 +91,18 @@
                 );
             ?></td>
             <td><?php echo $monk->monk_story;?></td>
+            <td>
+                <ul id="icons" class="ui-widget ui-helper-clearfix" style="">
+                    <li class="ui-state-default ui-corner-all">
+                        <span id="edit_<?php echo $monk->id; ?>" class="ui-icon ui-icon-pencil"
+                            title="<?php echo lang('edit');?>"></span>
+                    </li>
+                    <li class="ui-state-default ui-corner-all">
+                        <span id="delete_<?php echo $monk->id; ?>" class="ui-icon ui-icon-trash"
+                            title="<?php echo lang('delete');?>"></span>
+                    </li>
+                </ul>
+            </td>
         </tr>
         <?php endforeach;?>
     </table>

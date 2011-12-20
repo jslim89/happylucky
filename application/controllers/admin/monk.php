@@ -50,8 +50,8 @@ class Monk extends MY_Controller {
             'primary_upload_url' => site_url('admin/monk/upload_primary/'.$monk->id),
             'primary_image_url' => $monk->primary_image_url,
             'primary_image_alt' => $monk->monk_name,
-            'delete_image_url' => base_url().'admin/monk/del_monk_image/'.$id,
-            'save_image_url' => base_url().'admin/monk/save_img_info/'.$id,
+            'delete_image_url' => base_url().'admin/monk/del_monk_image/',
+            'save_image_url' => base_url().'admin/monk/save_img_info/',
         );
         $this->load_view('admin/monk/add_edit', $this->vars);
     }
@@ -70,7 +70,10 @@ class Monk extends MY_Controller {
 
     public function delete($id) {
         $monk = new Monk_Model($id);
-        $monk->delete();
+        $status = $monk->delete();
+        echo json_encode(array(
+            'status' => $status
+        ));
     }
 
     public function search() {

@@ -115,6 +115,12 @@ function format_country(country) {
     return value;
 }
 
+/*
+ * Prompt confirmation when tend to delete something
+ *
+ * @delete_url refer to the URL that process the deletion
+ * @row_id refer to a specific row in a table
+ */
 function delete_row_confirmation(delete_url, row_id) {
     var content = '<p>'+lang_confirm_delete+'</p>';
     $('#confirm-dialog').attr({title: lang_confirmation});
@@ -122,8 +128,18 @@ function delete_row_confirmation(delete_url, row_id) {
     $('#confirm-dialog').dialog({
                             buttons: {
                                 Ok: function() {
-                                        delete_row(delete_url, row_id);
-                                       $(this).dialog('close');
+                                        if($.isArray(row_id)) { // delete multiple rows
+                                            // each delete_url is map to each row_id
+                                            // the key must be the same
+                                            // i.e. delete_url[3] map to row_id[3]
+                                            $.each(row_id, function(key, value) {
+                                                delete_row(delete_url[key], value);
+                                            });
+                                        }
+                                        else {
+                                            delete_row(delete_url, row_id);
+                                        }
+                                        $(this).dialog('close');
                                     },
                                 Cancel: function() {
                                        $(this).dialog('close');
@@ -144,7 +160,7 @@ function delete_row(delete_url, row_id) {
         success: function(data) {
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            alert(textStatus);
+            alert(errorThrown);
         }
     });
     $('#'+row_id).fadeOut(3000);
