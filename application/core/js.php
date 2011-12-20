@@ -25,6 +25,7 @@ $scripts = array(
     'jquery.validationEngine-en.js',
     'jquery.validationEngine.js',
     'jquery.numeric.js',
+    'jquery.query-2.1.7.js',
     'login/jquery.pop.js',
     'login/jquery.tipsy.js',
     'login.js',
