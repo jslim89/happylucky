@@ -5,6 +5,12 @@ function redirect (url, open_window) {
 		window.location.href = url;
 }
 
+function query_string(variable) {
+    var href = location.search; 
+    var url = $.query.load (href);
+    return url.get (variable);
+}
+
 /*
  * offset is start from 0. Default is 1
  * i.e. element_1, offset[0] = element, offset[1] = 1
