@@ -41,7 +41,7 @@ class Amulet_Type extends MY_Controller {
 
     public function add() {
         // Set an empty object as the amulet_type variable is required
-        $this->vars['title'] = lang('amulet_type_edit_amulet_type');
+        $this->vars['title'] = lang('amulet_type_add_new_amulet_type');
         $amulet_type = new Amulet_Type_Model();
         $this->vars['amulet_type'] = $amulet_type;
         $this->vars['image_upload'] = $amulet_type->get_image_upload_config();
@@ -49,7 +49,7 @@ class Amulet_Type extends MY_Controller {
     }
 
     public function edit($id) {
-        $this->vars['title'] = lang('amulet_type_add_new_amulet_type');
+        $this->vars['title'] = lang('amulet_type_edit_amulet_type');
         $amulet_type = new Amulet_Type_Model($id);
         $this->vars['amulet_type'] = $amulet_type;
         $this->vars['images'] = $amulet_type->amulet_type_image;
@@ -59,8 +59,7 @@ class Amulet_Type extends MY_Controller {
 
     public function save($id = null) {
         $amulet_type = new Amulet_Type_Model($id);
-        $amulet_type->amulet_type_name = get_post('amulet_type_name');
-        $amulet_type->amulet_desc      = get_post('amulet_type_desc');
+        $amulet_type->populate_from_request($_POST);
 
         if($amulet_type->save()) {
             redirect('admin/amulet_type/edit/'.$amulet_type->id);
@@ -151,5 +150,11 @@ class Amulet_Type extends MY_Controller {
         echo json_encode(array(
             'status' => $status
         ));
+    }
+
+    public function ajax_search() {
+        $q = get_post('term');
+        $amulet_type_set = $this->amulet_type_model->search_related($q, false, false, false);
+        echo json_encode($amulet_type_set);
     }
 }

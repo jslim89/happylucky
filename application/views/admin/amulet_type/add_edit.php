@@ -41,8 +41,8 @@ $(document).ready(function() {
                     <td colspan="2">
                         <?php 
                             echo form_textarea(array(
-                                'name'  => 'amulet_type_desc',
-                                'id'    => 'amulet_type_desc',
+                                'name'  => 'amulet_desc',
+                                'id'    => 'amulet_desc',
                                 'value' => $amulet_type->amulet_desc,
                                 'row'   => '7',
                                 'class' => 'validate[required] wysiwyg'

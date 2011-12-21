@@ -41,7 +41,7 @@ class Monk extends MY_Controller {
 
     public function add() {
         // Set an empty object as the monk variable is required
-        $this->vars['title'] = lang('monk_edit_monk');
+        $this->vars['title'] = lang('monk_add_new_monk');
         $monk = new Monk_Model();
         $this->vars['monk'] = $monk;
         $this->vars['image_upload'] = $monk->get_image_upload_config();
@@ -49,7 +49,7 @@ class Monk extends MY_Controller {
     }
 
     public function edit($id) {
-        $this->vars['title'] = lang('monk_add_new_monk');
+        $this->vars['title'] = lang('monk_edit_monk');
         $monk = new Monk_Model($id);
         $this->vars['monk'] = $monk;
         $this->vars['images'] = $monk->monk_image;
@@ -59,8 +59,7 @@ class Monk extends MY_Controller {
 
     public function save($id = null) {
         $monk = new Monk_Model($id);
-        $monk->monk_name  = get_post('monk_name');
-        $monk->monk_story = get_post('monk_story');
+        $monk->populate_from_request($_POST);
 
         if($monk->save()) {
             redirect('admin/monk/edit/'.$monk->id);
@@ -151,5 +150,11 @@ class Monk extends MY_Controller {
         echo json_encode(array(
             'status' => $status
         ));
+    }
+
+    public function ajax_search() {
+        $q = get_post('term');
+        $monk_set = $this->monk_model->search_related($q, false, false, false);
+        echo json_encode($monk_set);
     }
 }
