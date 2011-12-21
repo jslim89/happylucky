@@ -30,20 +30,7 @@ $(document).ready(function() {
 
 <!-- Search box -->
 <div class="grid_16 search">
-    <form id="search_form" method="GET" 
-          action="<?php echo site_url("admin/monk/search");?>">
-        <?php 
-        echo form_input(array(
-            'id'    => 'q',
-            'name'  => 'q',
-        ));
-        echo form_submit(array(
-            'id'    => 'search',
-            'name'  => 'search',
-            'value' => lang('search'),
-        ));
-        ?>
-    </form>
+    <?php $this->load->view('common/search_form', $search_form_info);?>
 </div>
 <!-- End Search box -->
 

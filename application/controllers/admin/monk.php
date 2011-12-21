@@ -30,6 +30,9 @@ class Monk extends MY_Controller {
         $this->vars['pagination'] = $monk->get_pagination($total_rows, 10);
         $this->vars['title'] = lang('monk_management');
         $this->vars['monks'] = $monks;
+        $this->vars['search_form_info'] = array(
+            'search_url' => site_url('admin/monk/search'),
+        );
         $this->load_view('admin/monk/list', $this->vars);
     }
 
@@ -77,6 +80,9 @@ class Monk extends MY_Controller {
         $this->vars['pagination'] = $this->monk_model->get_pagination($total_rows, 10);
         $this->vars['title'] = lang('monk_management');
         $this->vars['monks'] = $monks;
+        $this->vars['search_form_info'] = array(
+            'search_url' => site_url('admin/monk/search'),
+        );
         $this->load_view('admin/monk/list', $this->vars);
     }
 
