@@ -47,7 +47,7 @@
             var last_idx = parseInt(get_element_index(last));
             var next_idx = last_idx + 1;
 
-            var clone = $('#tr_image_0').clone(true);
+            var clone = last.clone(true);
             clone.attr('id', 'tr_image_' + next_idx);
             clone.find('#image_' + last_idx)
                 .attr('id', 'image_' + next_idx)
@@ -129,7 +129,11 @@
       action="<?php echo $upload_url;?>">
     <table class="image_upload">
         <tr>
-            <td colspan="2"><div class="error"><?php echo $this->session->flashdata ('login_error');?>&nbsp;</div></td>
+            <td colspan="2">
+                <div class="error">
+                <?php echo $this->session->flashdata ('login_error');?>&nbsp;
+                </div>
+            </td>
         </tr>
         <tr id="tr_image_0">
             <td colspan="2">
