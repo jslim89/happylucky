@@ -37,6 +37,7 @@ class Monk extends MY_Controller {
         // Set an empty object as the monk variable is required
         $this->vars['title'] = lang('monk_edit_monk');
         $this->vars['monk'] = new Monk_Model();
+        $this->vars['image_upload'] = $monk->get_image_upload_config();
         $this->load_view('admin/monk/add_edit', $this->vars);
     }
 
@@ -45,14 +46,7 @@ class Monk extends MY_Controller {
         $monk = new Monk_Model($id);
         $this->vars['monk'] = $monk;
         $this->vars['images'] = $monk->monk_image;
-        $this->vars['image_upload'] = array(
-            'upload_url' => site_url('admin/monk/upload/'.$monk->id),
-            'primary_upload_url' => site_url('admin/monk/upload_primary/'.$monk->id),
-            'primary_image_url' => $monk->primary_image_url,
-            'primary_image_alt' => $monk->monk_name,
-            'delete_image_url' => base_url().'admin/monk/del_monk_image/',
-            'save_image_url' => base_url().'admin/monk/save_img_info/',
-        );
+        $this->vars['image_upload'] = $monk->get_image_upload_config();
         $this->load_view('admin/monk/add_edit', $this->vars);
     }
 
@@ -103,13 +97,14 @@ class Monk extends MY_Controller {
 
         if(is_array($ret)) {
             list($errors, $successes) = $ret;
+            $this->session->set_flashdata('upload_error', $errors);
 
             $monk->monk_image = $this->monk_image_model->insert_multiple($monk, $successes);
             foreach($monk->monk_image as $monk_img) {
                 $monk_img->save();
             }
         }
-        redirect('admin/monk/edit/'.$monk->id);
+        redirect(site_url('admin/monk/edit/'.$monk->id)."?tab=1");
     }
 
     public function upload_primary($id) {

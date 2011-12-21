@@ -128,6 +128,9 @@
 <form id="upload_image" method="POST" enctype="multipart/form-data"
       action="<?php echo $upload_url;?>">
     <table class="image_upload">
+        <tr>
+            <td colspan="2"><div class="error"><?php echo $this->session->flashdata ('login_error');?>&nbsp;</div></td>
+        </tr>
         <tr id="tr_image_0">
             <td colspan="2">
             <?php 

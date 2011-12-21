@@ -2,7 +2,13 @@
 <script>
 $(document).ready(function() {
     $('#monk_add_edit').validationEngine('attach');
-    $('#tabs').tabs();
+    var is_add_new = <?php echo empty($monk->id) ? 'true' : 'false'; ?>;
+    var tabs_disable = (is_add_new) ? [1] : [];
+    var tabs_selected = (query_string('tab') == null) ? 0 : query_string('tab');
+    $('#tabs').tabs({
+        disabled: tabs_disable,
+        selected: tabs_selected
+    });
 });
 </script>
 

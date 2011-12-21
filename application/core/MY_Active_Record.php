@@ -60,12 +60,66 @@ class MY_Active_Record extends ADOdb_Active_Record {
      * @return array
      */
     public function columns_name($noncasesensitive = true) {
-        $columns = $this->get_ci()->adodb->MetaColumns($this->_table, $noncasesensitive);
+        $columns = $this->columns($noncasesensitive);
         $result = array();
         foreach($columns as $col) {
             $result[] = $col->name;
         }
         return $result;
+    }
+
+    /**
+     * The columns with metadata 
+     * 
+     * @param mixed $noncasesensitive 
+     * @return array
+     */
+    public function columns($noncasesensitive = true) {
+        return $this->get_ci()->adodb->MetaColumns($this->_table, $noncasesensitive);
+    }
+
+    /**
+     * search_related 
+     * 
+     * @param mixed $q 
+     * @return array
+     */
+    public function search_related($q, $page_limit = 10, $offset = 0) {
+        list($criteria_str, $criteria_val) = $this->_get_criteria_set_by_q($q);
+        $result_set = $this->search($criteria_str, $criteria_val, $page_limit, $offset, true);
+        return $result_set;
+    }
+
+    /**
+     * Obtain an input from user,
+     * i.e. $q = 'foo bar';
+     *      $criteria_string = attr_1 LIKE ? OR attr_1 LIKE ? OR
+     *                              attr_2 LIKE ? OR attr_2 LIKE ? OR
+     *                              attr_n LIKE ? OR attr_n LIKE ? OR
+     *      $criteria_value = array(
+     *                          'foo', 'bar',
+     *                          'foo', 'bar',
+     *                          'foo', 'bar'
+     *                        );
+     * 
+     * @param mixed $q refer to the query given by user
+     * @return array
+     */
+    private function _get_criteria_set_by_q($q) {
+        // i.e. $q = 'foo bar'; $separated_q = array('foo', 'bar');
+        $separated_q = explode(' ', $q);
+        $criteria_set = array();
+        $criteria_value = array();
+        foreach($this->columns() as $col_name => $col) {
+            if($col->type == 'varchar' || $col->type == 'char' || $col->type == 'text') {
+                foreach($separated_q as $temp_q) {
+                    $criteria_set[] = "LOWER(".strtolower($col_name).")"." LIKE ?";
+                    $criteria_value[] = "%".$temp_q."%";
+                }
+            }
+        }
+        $criteria_string = implode(' OR ', $criteria_set);
+        return array($criteria_string, $criteria_value);
     }
 
     /**
@@ -120,7 +174,7 @@ class MY_Active_Record extends ADOdb_Active_Record {
                             $offset = false,
                             $total_rows = false) {
         // Dummy criteria
-        if(!empty($criteria_string)) $criteria_string .= " 1=1 ";
+        if(empty($criteria_string)) $criteria_string .= " 1=1 ";
 
         // temporary store in an array
         $temp_set = $this->find($criteria_string, $criteria);
@@ -133,7 +187,9 @@ class MY_Active_Record extends ADOdb_Active_Record {
         else {
             $result_set = $temp_set;
         }
-        return $total_rows ? array($result_set, sizeof($temp_set)) : $result_set;
+        return $total_rows 
+            ? array('result_set' => $result_set, 'total_row' => sizeof($temp_set)) 
+            : $result_set;
     }
 
     public function delete() {

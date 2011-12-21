@@ -69,4 +69,33 @@ class Monk_Model extends MY_Active_Record {
         $relative_path = base_url().$path_to_monk_img;
         return $relative_path;
     }
+
+    /**
+     * All the configuration about uploading images
+     * 
+     * @return array
+     */
+    public function get_image_upload_config() {
+        if($this->is_exist()) {
+            $conf = array(
+                'upload_url'         => site_url('admin/monk/upload/'.$this->id),
+                'primary_upload_url' => site_url('admin/monk/upload_primary/'.$this->id),
+                'primary_image_url'  => $this->primary_image_url,
+                'primary_image_alt'  => $this->monk_name,
+                'delete_image_url'   => base_url().'admin/monk/del_monk_image/',
+                'save_image_url'     => base_url().'admin/monk/save_img_info/',
+            );
+        }
+        else {
+            $conf = array(
+                'upload_url'         => '',
+                'primary_upload_url' => '',
+                'primary_image_url'  => '',
+                'primary_image_alt'  => '',
+                'delete_image_url'   => '',
+                'save_image_url'     => '',
+            );
+        }
+        return $conf;
+    }
 }
