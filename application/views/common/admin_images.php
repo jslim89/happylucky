@@ -67,6 +67,8 @@
             delete_row_confirmation(delete_urls, row_ids);
         });
 
+        $('a.lightbox').lightBox();
+
         $('span[id^=edit_]').each(function() {
             $(this).click(function() {
                 var id = get_element_index($(this));
@@ -222,12 +224,16 @@ foreach($images as $image): ?>
         'class' => 'delete_check',
     ));?></td>
     <td><?php
-    echo img(array(
+    echo anchor(
+        $image->url,
+        img(array(
         'src'    => $image->url,
         'alt'    => $image->alt,
         'width'  => '100',
         'height' => '100',
-    ));
+        )),
+        array('class' => 'lightbox')
+    );
     ?></td>
     <td><?php
     echo form_input(array(

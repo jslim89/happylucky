@@ -10,6 +10,7 @@ $styles = array(
     'tipsy/tipsy.css',
     'login/front.css',
     'topmenu/style.css',
+    'lightbox/jquery.lightbox-0.5.css',
     'validationEngine.jquery.css',
     'main.css',
 );
