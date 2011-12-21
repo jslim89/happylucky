@@ -24,6 +24,7 @@
             ));
         ?></td>
     </tr>
+    <?php endif; ?>
     <tr>
         <td>
             <form id="upload_primary" method="POST" enctype="multipart/form-data"
@@ -38,7 +39,6 @@
             </form>
         </td>
     </tr>
-    <?php endif; ?>
 </table>
 <script type="text/javascript">
     $(document).ready(function() {

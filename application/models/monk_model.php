@@ -98,4 +98,18 @@ class Monk_Model extends MY_Active_Record {
         }
         return $conf;
     }
+
+    /**
+     * Delete the primary image both from file and also database 
+     * 
+     * @return mixed
+     */
+    public function delete_primary_image() {
+        if( ! $this->is_exist() || empty($this->primary_image_url)) return false;
+        if(unlink($this->get_upload_path().basename($this->primary_image_url))) {
+            $this->primary_image_url = null;
+            return $this->save();
+        }
+        return false;
+    }
 }

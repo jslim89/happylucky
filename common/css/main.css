@@ -103,3 +103,7 @@ ul#icons span.ui-icon {
     float: left;
     margin: 0 4px;
 }
+
+.hand-cursor {
+    cursor: pointer;
+}

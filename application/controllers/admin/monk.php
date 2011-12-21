@@ -111,17 +111,19 @@ class Monk extends MY_Controller {
     public function upload_primary($id) {
         $monk = new Monk_Model($id);
         $conf = array(
-            'upload_path' => $monk->get_upload_path(),
+            'upload_path'   => $monk->get_upload_path(),
             'allowed_types' => 'jpg|png',
-            'encrypt_name' => true,
+            'file_name'     => 'primary',
         );
 
         $this->load->library('my_upload', $conf);
         if( ! $this->my_upload->do_upload('primary_image')) {
             $error = $this->my_upload->error_msg['primary_image'];
+            $this->session->set_flashdata('upload_error', $error);
         }
         else {
             $success = $this->my_upload->data();
+            $monk->delete_primary_image();
             $monk->primary_image_url = $monk->get_download_path().$success['file_name'];
             $monk->save();
         }

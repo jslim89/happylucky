@@ -25,6 +25,11 @@ $(document).ready(function() {
         });
         delete_row_confirmation(delete_urls, row_ids);
     });
+
+    /*
+    $('span#advanced_search').click(function() {
+    });
+     */
 });
 </script>
 
