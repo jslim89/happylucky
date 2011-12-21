@@ -1,6 +1,7 @@
 <script>
 // global javascript variable
 var base_url = '<?php echo base_url(); ?>';
+var default_image_path = '<?php echo default_image_path(); ?>';
 
 // language variable
 lang_confirmation                     = '<?php echo lang('confirmation'); ?>';
