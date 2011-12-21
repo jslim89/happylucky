@@ -188,7 +188,7 @@ class MY_Active_Record extends ADOdb_Active_Record {
             $result_set = $temp_set;
         }
         return $total_rows 
-            ? array('result_set' => $result_set, 'total_row' => sizeof($temp_set)) 
+            ? array($result_set, sizeof($temp_set)) 
             : $result_set;
     }
 
