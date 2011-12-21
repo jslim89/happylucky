@@ -98,7 +98,12 @@ class Monk extends MY_Controller {
 
         if(is_array($ret)) {
             list($errors, $successes) = $ret;
-            $this->session->set_flashdata('upload_error', $errors);
+            $error_set = array();
+            foreach($errors as $k => $err) {
+                $error_set[] = $k . " -> " . $err;
+            }
+            $error_msg = implode(br(1), $error_set);
+            $this->session->set_flashdata('upload_error', $error_msg);
 
             $monk->monk_image = $this->monk_image_model->insert_multiple($monk, $successes);
             foreach($monk->monk_image as $monk_img) {
@@ -118,7 +123,7 @@ class Monk extends MY_Controller {
 
         $this->load->library('my_upload', $conf);
         if( ! $this->my_upload->do_upload('primary_image')) {
-            $error = $this->my_upload->error_msg['primary_image'];
+            $error = "Primary Image -> ".$this->my_upload->error_msg[0];
             $this->session->set_flashdata('upload_error', $error);
         }
         else {
@@ -127,7 +132,7 @@ class Monk extends MY_Controller {
             $monk->primary_image_url = $monk->get_download_path().$success['file_name'];
             $monk->save();
         }
-        redirect('admin/monk/edit/'.$monk->id);
+        redirect(site_url('admin/monk/edit/'.$monk->id)."?tab=1");
     }
 
     public function save_img_info($image_id) {

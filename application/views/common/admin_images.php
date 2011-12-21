@@ -133,7 +133,13 @@
         <tr>
             <td colspan="2">
                 <div class="error">
-                <?php echo $this->session->flashdata ('login_error');?>&nbsp;
+                <?php
+                    $error_msg = $this->session->flashdata ('upload_error');
+                    if( ! empty($error_msg)) {
+                        echo lang('error').br(1);
+                        echo $error_msg;
+                    }
+                ?>&nbsp;
                 </div>
             </td>
         </tr>

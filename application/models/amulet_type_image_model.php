@@ -28,4 +28,34 @@ class Amulet_Type_Image_Model extends MY_Active_Record {
      * @access protected
      */
     var $_table = 'amulet_type_image';
+
+    public function insert_multiple($amulet_type, $attribs) {
+        $amulet_type_image = array();
+        foreach($attribs as $key => $img) {
+            $amulet_type_image[$key] = new Amulet_Type_Image_Model();
+            $amulet_type_image[$key]->image_name = $img['client_name'];
+            $amulet_type_image[$key]->url        = $amulet_type->get_download_path().$img['file_name'];
+            $amulet_type_image[$key]->extension  = $img['file_ext'];
+            $amulet_type_image[$key]->alt        = $img['client_name'];
+            $amulet_type_image[$key]->image_desc = $img['client_name'];
+            $amulet_type_image[$key]->amulet_type_id    = $amulet_type->id;
+        }
+        return $amulet_type_image;
+    }
+
+    /**
+     * override the parent method, delete from database at the same time
+     * delete the physical file 
+     * 
+     * @return boolean
+     */
+    public function delete() {
+        // NOTE: $this->amulet_type->get_upload_path() doesn't work, thus
+        //       I add one more addtional step
+        $amulet_type = new Amulet_Type_Model($this->amulet_type->id);
+        if(unlink($amulet_type->get_upload_path().basename($this->url))) {
+            return parent::delete();
+        }
+        return false;
+    }
 }
