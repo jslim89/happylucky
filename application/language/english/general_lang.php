@@ -55,8 +55,9 @@ $lang['wholesale']             = 'Wholesale';
 $lang['report']                = 'Report';
 
 $lang['search']             = 'Search';
+$lang['advanced_search']    = 'Advanced Search';
 $lang['save']               = 'Save';
-$lang['reset']               = 'Reset';
+$lang['reset']              = 'Reset';
 $lang['all_right_reserved'] = 'All Right Reserved';
 $lang['banner_img_alt']     = 'Happy Lucky';
 

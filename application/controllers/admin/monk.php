@@ -25,13 +25,16 @@ class Monk extends MY_Controller {
     }
 
     public function index($page = 0) {
+        $q = get_post('q');
         $monk = new Monk_Model();
-        list($monks, $total_rows) = $monk->get_paged(10, $page);
+        list($monks, $total_rows) = (empty($q)) 
+            ? $monk->get_paged(10, $page)
+            : $monk->search_related($q, 10, $page);
         $this->vars['pagination'] = $monk->get_pagination($total_rows, 10);
         $this->vars['title'] = lang('monk_management');
         $this->vars['monks'] = $monks;
         $this->vars['search_form_info'] = array(
-            'search_url' => site_url('admin/monk/search'),
+            'search_url' => site_url('admin/monk/index'),
         );
         $this->load_view('admin/monk/list', $this->vars);
     }
@@ -72,18 +75,6 @@ class Monk extends MY_Controller {
         echo json_encode(array(
             'status' => $status
         ));
-    }
-
-    public function search() {
-        $q = get_post('q');
-        list($monks, $total_rows) = $this->monk_model->search_related($q);
-        $this->vars['pagination'] = $this->monk_model->get_pagination($total_rows, 10);
-        $this->vars['title'] = lang('monk_management');
-        $this->vars['monks'] = $monks;
-        $this->vars['search_form_info'] = array(
-            'search_url' => site_url('admin/monk/search'),
-        );
-        $this->load_view('admin/monk/list', $this->vars);
     }
 
     /**
