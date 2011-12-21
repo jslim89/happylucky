@@ -2,6 +2,7 @@
 <?php $this->lang->load('general'); ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<link rel="icon" type="image/ico" href="<?php echo base_url('images/favicon.ico');?>" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title><?php echo isset($page_title) ? $page_title : 'Happy Lucky'; ?></title>
     <?php
