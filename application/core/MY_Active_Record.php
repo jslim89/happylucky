@@ -99,9 +99,9 @@ class MY_Active_Record extends ADOdb_Active_Record {
      * @param mixed $q 
      * @return array
      */
-    public function search_related($q, $page_limit = 10, $offset = 0) {
+    public function search_related($q, $page_limit = 10, $offset = 0, $total_rows = true) {
         list($criteria_str, $criteria_val) = $this->_get_criteria_set_by_q($q);
-        $result_set = $this->search($criteria_str, $criteria_val, $page_limit, $offset, true);
+        $result_set = $this->search($criteria_str, $criteria_val, $page_limit, $offset, $total_rows);
         return $result_set;
     }
 
