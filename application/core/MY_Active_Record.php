@@ -79,6 +79,21 @@ class MY_Active_Record extends ADOdb_Active_Record {
     }
 
     /**
+     * This function is get the request from FORM and populate to object.
+     * i.e. $this->foo = $_REQUEST['foo'] ...etc.
+     * 
+     * @param mixed $request 
+     * @return void
+     */
+    public function populate_from_request($request) {
+        foreach($this->columns_name() as $col) {
+            if($col !== 'id') { // id doesn't need to populate
+                $this->{$col} = element($col, $request);
+            }
+        }
+    }
+
+    /**
      * search_related 
      * 
      * @param mixed $q 
