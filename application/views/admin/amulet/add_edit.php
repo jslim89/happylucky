@@ -136,7 +136,7 @@ function format_amulet_type(amulet_type) {
                 <td class="label"><?php echo lang('amulet_monk');?></td>
                 <td>
                     <?php 
-                        $monk = isset($amulet->monk) ? new Monk_Model() : $amulet->monk;
+                        $monk = (sizeof($amulet->monk) < 1) ? new Monk_Model() : $amulet->monk;
                         echo form_input(array(
                             'name'  => 'amulet_monk',
                             'id'    => 'amulet_monk',
@@ -149,7 +149,7 @@ function format_amulet_type(amulet_type) {
                 <td class="label"><?php echo lang('amulet_amulet_type');?></td>
                 <td>
                     <?php 
-                        $amulet_type = isset($amulet->amulet_type) 
+                        $amulet_type = (sizeof($amulet->amulet_type) < 1)
                             ? new Amulet_Type_Model() 
                             : $amulet->amulet_type;
                         echo form_input(array(
