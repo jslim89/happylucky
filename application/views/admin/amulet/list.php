@@ -84,8 +84,8 @@ $(document).ready(function() {
                 ));
             ?></td>
             <td><?php 
-                $image_src = $amulet->amulet_type->primary_image_url
-                    ? $amulet->amulet_type->primary_image_url
+                $image_src = $amulet->primary_image_url
+                    ? $amulet->primary_image_url
                     : default_image_path();
                 echo anchor(
                     site_url('admin/amulet/edit/'.$amulet->id),

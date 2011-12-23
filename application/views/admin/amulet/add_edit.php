@@ -2,6 +2,15 @@
 <script>
 $(document).ready(function() {
     $('#amulet_add_edit').validationEngine('attach');
+
+    var is_add_new = <?php echo empty($amulet->id) ? 'true' : 'false'; ?>;
+    var tabs_disable = (is_add_new) ? [1] : [];
+    var tabs_selected = (query_string('tab') == null) ? 0 : query_string('tab');
+    $('#tabs').tabs({
+        disabled: tabs_disable,
+        selected: tabs_selected
+    });
+
     $('input#amulet_type').autocomplete({
         highlight: true,
         minLength: 1,
@@ -80,107 +89,116 @@ function format_amulet_type(amulet_type) {
 }
 </script>
 
-<div id="general">
-    <form id="amulet_add_edit" method="POST" 
-          action="<?php echo site_url("admin/amulet/save/".$amulet->id);?>">
-        <table>
-            <tr>
-                <td class="label"><?php echo lang('amulet_name');?></td>
-                <td>
-                    <?php 
-                        echo form_input(array(
-                            'name'  => 'amulet_name',
-                            'id'    => 'amulet_name',
-                            'value' => $amulet->amulet_name,
-                            'class' => 'validate[required] text'
-                        ));
-                    ?>
-                </td>
-                <td class="label"><?php echo lang('amulet_code');?></td>
-                <td>
-                    <?php 
-                        echo form_input(array(
-                            'name'  => 'amulet_code',
-                            'id'    => 'amulet_code',
-                            'value' => $amulet->amulet_code,
-                            'class' => 'validate[required] text'
-                        ));
-                    ?>
-                </td>
-            </tr>
-            <tr>
-                <td class="label"><?php echo lang('amulet_produced_date');?></td>
-                <td>
-                    <?php 
-                        echo form_input(array(
-                            'name'  => 'produced_date',
-                            'id'    => 'produced_date',
-                            'value' => $amulet->produced_date,
-                            'class' => 'validate[required] text'
-                        ));
-                    ?>
-                </td>
-                <td class="label"><?php echo lang('amulet_produced_place');?></td>
-                <td>
-                    <?php 
-                        echo form_input(array(
-                            'name'  => 'produced_place',
-                            'id'    => 'produced_place',
-                            'value' => $amulet->produced_place,
-                            'class' => 'validate[required] text'
-                        ));
-                    ?>
-                </td>
-            </tr>
-            <tr>
-                <td class="label"><?php echo lang('amulet_monk');?></td>
-                <td>
-                    <?php 
-                        $monk = (sizeof($amulet->monk) < 1) ? new Monk_Model() : $amulet->monk;
-                        echo form_input(array(
-                            'name'  => 'amulet_monk',
-                            'id'    => 'amulet_monk',
-                            'value' => $monk->monk_name,
-                            'class' => 'validate[required] text'
-                        ));
-                        echo form_hidden('monk_id', $amulet->monk_id);
-                    ?>
-                </td>
-                <td class="label"><?php echo lang('amulet_amulet_type');?></td>
-                <td>
-                    <?php 
-                        $amulet_type = (sizeof($amulet->amulet_type) < 1)
-                            ? new Amulet_Type_Model() 
-                            : $amulet->amulet_type;
-                        echo form_input(array(
-                            'name'  => 'amulet_type',
-                            'id'    => 'amulet_type',
-                            'value' => $amulet_type->amulet_type_name,
-                            'class' => 'validate[required] text'
-                        ));
-                        echo form_hidden('amulet_type_id', $amulet->amulet_type_id);
-                    ?>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="4" class="txt-label"><?php echo lang('amulet_description');?></td>
-            </tr>
-            <tr>
-                <td colspan="4">
-                    <?php 
-                        echo form_textarea(array(
-                            'name'  => 'amulet_desc',
-                            'id'    => 'amulet_desc',
-                            'value' => $amulet->amulet_desc,
-                            'row'   => '7',
-                            'class' => 'validate[required] wysiwyg'
-                        ));
-                    ?>
-                </td>
-            </tr>
-        </table>
-        <div class="right">
-            <?php echo form_submit('save_amulet', lang('save'), 'class="button"');?>
-        </div>
-    </form>
+<div id="tabs">
+    <ul>
+        <li><a href="#general"><?php echo lang('general'); ?></a></li>
+        <li><a href="#images"><?php echo lang('images'); ?></a></li>
+    </ul>
+    <div id="general">
+        <form id="amulet_add_edit" method="POST" 
+              action="<?php echo site_url("admin/amulet/save/".$amulet->id);?>">
+            <table>
+                <tr>
+                    <td class="label"><?php echo lang('amulet_name');?></td>
+                    <td>
+                        <?php 
+                            echo form_input(array(
+                                'name'  => 'amulet_name',
+                                'id'    => 'amulet_name',
+                                'value' => $amulet->amulet_name,
+                                'class' => 'validate[required] text'
+                            ));
+                        ?>
+                    </td>
+                    <td class="label"><?php echo lang('amulet_code');?></td>
+                    <td>
+                        <?php 
+                            echo form_input(array(
+                                'name'  => 'amulet_code',
+                                'id'    => 'amulet_code',
+                                'value' => $amulet->amulet_code,
+                                'class' => 'validate[required] text'
+                            ));
+                        ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label"><?php echo lang('amulet_produced_date');?></td>
+                    <td>
+                        <?php 
+                            echo form_input(array(
+                                'name'  => 'produced_date',
+                                'id'    => 'produced_date',
+                                'value' => $amulet->produced_date,
+                                'class' => 'validate[required] text'
+                            ));
+                        ?>
+                    </td>
+                    <td class="label"><?php echo lang('amulet_produced_place');?></td>
+                    <td>
+                        <?php 
+                            echo form_input(array(
+                                'name'  => 'produced_place',
+                                'id'    => 'produced_place',
+                                'value' => $amulet->produced_place,
+                                'class' => 'validate[required] text'
+                            ));
+                        ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label"><?php echo lang('amulet_monk');?></td>
+                    <td>
+                        <?php 
+                            $monk = (sizeof($amulet->monk) < 1) ? new Monk_Model() : $amulet->monk;
+                            echo form_input(array(
+                                'name'  => 'amulet_monk',
+                                'id'    => 'amulet_monk',
+                                'value' => $monk->monk_name,
+                                'class' => 'validate[required] text'
+                            ));
+                            echo form_hidden('monk_id', $amulet->monk_id);
+                        ?>
+                    </td>
+                    <td class="label"><?php echo lang('amulet_amulet_type');?></td>
+                    <td>
+                        <?php 
+                            $amulet_type = (sizeof($amulet->amulet_type) < 1)
+                                ? new Amulet_Type_Model() 
+                                : $amulet->amulet_type;
+                            echo form_input(array(
+                                'name'  => 'amulet_type',
+                                'id'    => 'amulet_type',
+                                'value' => $amulet_type->amulet_type_name,
+                                'class' => 'validate[required] text'
+                            ));
+                            echo form_hidden('amulet_type_id', $amulet->amulet_type_id);
+                        ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="txt-label"><?php echo lang('amulet_description');?></td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <?php 
+                            echo form_textarea(array(
+                                'name'  => 'amulet_desc',
+                                'id'    => 'amulet_desc',
+                                'value' => $amulet->amulet_desc,
+                                'row'   => '7',
+                                'class' => 'validate[required] wysiwyg'
+                            ));
+                        ?>
+                    </td>
+                </tr>
+            </table>
+            <div class="right">
+                <?php echo form_submit('save_amulet', lang('save'), 'class="button"');?>
+            </div>
+        </form>
+    </div>
+    <div id="images">
+        <?php $this->load->view('common/admin_images', $image_upload);?>
+    </div>
 </div>
