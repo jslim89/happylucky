@@ -56,7 +56,7 @@ $(document).ready(function() {
 });
 
 function check_is_amulet() {
-    var is_amulet = <?php echo empty($product->amulet_type_id) ? 'false' : 'true'; ?>;
+    var is_amulet = <?php echo empty($product->amulet_product_id) ? 'false' : 'true'; ?>;
     if(is_amulet) {
         $('.amulet_info').show();
         add_amulet_info_validation();
@@ -146,17 +146,6 @@ function format_amulet(amulet) {
                                 'class' => 'validate[required] text positive'
                             ));
                     ?></td>
-                    <td class="label"><?php echo lang('product_total_number_sold');?></td>
-                    <td><?php 
-                            echo form_input(array(
-                                'name'  => 'total_num_sold',
-                                'id'    => 'total_num_sold',
-                                'value' => $product->total_num_sold,
-                                'class' => 'validate[required] text positive-integer'
-                            ));
-                    ?></td>
-                </tr>
-                <tr>
                     <td class="label"><?php echo lang('product_type');?></td>
                     <td><?php 
                             if($product->is_exist()) {
@@ -184,8 +173,10 @@ function format_amulet(amulet) {
                             ));
                             echo lang('product_wholesale');
                     ?></td>
+                </tr>
+                <tr>
                     <td class="txt-label"><?php echo lang('product_description');?></td>
-                    <td><?php 
+                    <td colspan="3"><?php 
                             echo form_textarea(array(
                                 'name'  => 'product_desc',
                                 'id'    => 'product_desc',
