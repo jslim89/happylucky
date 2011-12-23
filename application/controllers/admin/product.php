@@ -80,8 +80,6 @@ class Product extends MY_Controller {
                 $amulet_product->save();
                 $product->amulet_product_id = $amulet_product->id;
                 $product->save();
-                xxx($amulet_product);
-                xxx($product,1);
             }
             redirect('admin/product/edit/'.$product->id);
         }
