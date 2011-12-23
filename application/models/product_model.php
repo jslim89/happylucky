@@ -42,4 +42,89 @@ class Product_Model extends MY_Active_Record {
      * @access protected
      */
     var $_table = 'product';
+
+    const RETAIL    = 'RETAIL';
+    const WHOLESALE = 'WHOLESALE';
+
+    /**
+     * Return the upload path for this particular product 
+     * 
+     * @return mixed
+     */
+    public function get_upload_path() {
+        if(!$this->is_exist()) return false;
+
+        $path_to_product_img = "images/products/".$this->id."/";
+        $abs_path = absolute_path().$path_to_product_img;
+
+        if(!file_exists($abs_path)) {
+            // umask is to revoke permission
+            // i.e. chmod('file', 0777)
+            //      umask(0022)
+            //      file permission will be 0755
+            umask(0000);
+            mkdir($abs_path, 0777);
+        }
+        return $abs_path;
+    }
+
+    /**
+     * Get the path for download image base on a particular product object 
+     * 
+     * @return string
+     */
+    public function get_download_path() {
+        if(!$this->is_exist()) return false;
+
+        $path_to_product_img = "images/products/".$this->id."/";
+        $relative_path = base_url().$path_to_product_img;
+        return $relative_path;
+    }
+
+    /**
+     * All the configuration about uploading images
+     * 
+     * @return array
+     */
+    public function get_image_upload_config() {
+        if($this->is_exist()) {
+            $conf = array(
+                'upload_url'         => site_url('admin/product/upload/'.$this->id),
+                'primary_upload_url' => site_url('admin/product/upload_primary/'.$this->id),
+                'primary_image_url'  => $this->primary_image_url,
+                'primary_image_alt'  => $this->product_name,
+                'delete_image_url'   => base_url().'admin/product/del_product_image/',
+                'save_image_url'     => base_url().'admin/product/save_img_info/',
+            );
+        }
+        else {
+            $conf = array(
+                'upload_url'         => '',
+                'primary_upload_url' => '',
+                'primary_image_url'  => '',
+                'primary_image_alt'  => '',
+                'delete_image_url'   => '',
+                'save_image_url'     => '',
+            );
+        }
+        return $conf;
+    }
+
+    /**
+     * Delete the primary image both from file and also database 
+     * 
+     * @return mixed
+     */
+    public function delete_primary_image() {
+        if( ! $this->is_exist() || empty($this->primary_image_url)) return false;
+        if(unlink($this->get_upload_path().basename($this->primary_image_url))) {
+            $this->primary_image_url = null;
+            return $this->save();
+        }
+        return false;
+    }
+
+    public function is_amulet() {
+        return sizeof($this->amulet_product) > 0;
+    }
 }
