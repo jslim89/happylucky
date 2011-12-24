@@ -5,22 +5,22 @@ ALTER DATABASE happylucky DEFAULT CHARACTER SET = utf8;
 ALTER DATABASE happylucky COLLATE = utf8_general_ci;
 ALTER DATABASE happylucky DEFAULT COLLATE = utf8_general_ci;
 
-ALTER TABLE `amulet` ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
-ALTER TABLE `amulet_product` ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
-ALTER TABLE `amulet_type` ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+ALTER TABLE `amulet` ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2;
+ALTER TABLE `amulet_image` ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+ALTER TABLE `amulet_product` ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2;
+ALTER TABLE `amulet_type` ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3;
 ALTER TABLE `amulet_type_image` ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 ALTER TABLE `country` ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=243;
 ALTER TABLE `customer_order` ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 ALTER TABLE `monk` ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12;
 ALTER TABLE `monk_image` ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 ALTER TABLE `order_detail` ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
-ALTER TABLE `product` ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+ALTER TABLE `product` ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2;
 ALTER TABLE `product_image` ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
-ALTER TABLE `supplier` ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
-ALTER TABLE `supplier_order` ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
-ALTER TABLE `supplier_order_detail` ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+ALTER TABLE `supplier` ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2;
 ALTER TABLE `customer` ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 ALTER TABLE `user` ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2;
+ALTER TABLE `session` ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 INSERT INTO `country` (`id`, `country_name`, `iso_code_2`, `iso_code_3`, `postcode_required`) VALUES
 (1, 'Afghanistan', 'AF', 'AFG', 1),
@@ -281,3 +281,26 @@ INSERT INTO `monk` (`id`, `monk_name`, `monk_story`) VALUES
 (9, 'Chao Kun Onn (招昆安)', 'Description'),
 (10, 'Ah Chan Deng (阿参廷)', 'Description'),
 (11, 'Ah Chan Kao (阿参叩)', 'Description');
+
+INSERT INTO `amulet_type` (`id`, `amulet_type_name`, `amulet_desc`) VALUES 
+(1, 'Long Phor Thuad (龙泡托)', '保平安的佛牌'),
+(2, 'Kun Peng (坤平)', '会增加女人缘');
+
+INSERT INTO `amulet` (`id`, `amulet_code`, `amulet_name`, `amulet_desc`,
+`produced_date`, `produced_place`, `monk_id`, `amulet_type_id`) VALUES 
+(1, 'A001', 'Rang tao lek', '制作于佛历2505年,出自于Ah Chan Tim (阿参添)之手',
+    '2505', 'Wat Chang Hai', 1, 1);
+
+INSERT INTO `amulet_product` (`id`, `size`, `ingredient`, `amulet_id`) VALUES 
+(1, 'Pin Yai (小模)', 'Nawa (九宝铜)', 1);
+
+INSERT INTO `supplier` (`id`, `supplier_name`, `address`, `town`,
+`postcode`, `city`, `state`, `country_id`, `contact_no`, `email`) VALUES 
+(1, '佛宝行', 'Jalan Kota Baru', 'Kota Baru', 12000, 'Kota Baru',
+'Kelantan', 129, '010-23432423', 'solid@sampo.com');
+
+INSERT INTO `product` (`id`, `product_code`, `product_name`, `product_desc`,
+`cost`, `standard_price`, `quantity_available`, `min_quantity`, `min_qty_alert`
+, `created_date`, `product_type`, `amulet_product_id`, `supplier_id`) VALUES 
+(1, 'P001', 'Rang tao lek 2505', '制作于佛历2505年,出自于Ah Chan Tim (阿参添)之手',
+    '15000.00', '30000.00', 2, 1, 1, 1324746582, 'RETAIL', 1, 1);

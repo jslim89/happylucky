@@ -5,7 +5,7 @@
 # Project name:                                                          #
 # Author:                                                                #
 # Script type:           Database creation script                        #
-# Created on:            2011-12-23 12:43                                #
+# Created on:            2011-12-25 00:38                                #
 # ---------------------------------------------------------------------- #
 
 
@@ -100,23 +100,6 @@ CREATE TABLE `supplier` (
 );
 
 # ---------------------------------------------------------------------- #
-# Add table "supplier_order"                                             #
-# ---------------------------------------------------------------------- #
-
-CREATE TABLE `supplier_order` (
-    `id` BIGINT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
-    `supply_date` BIGINT(8) UNSIGNED NOT NULL,
-    `supply_subtotal` DECIMAL(15,2) NOT NULL DEFAULT 0,
-    `supply_grand_total` DECIMAL(15,2) NOT NULL DEFAULT 0,
-    `received_date` BIGINT(8) UNSIGNED,
-    `shipping_cost` DECIMAL(15,2) NOT NULL DEFAULT 0,
-    `supplier_id` BIGINT(8) UNSIGNED,
-    `invoice_no` VARCHAR(50) COLLATE utf8_general_ci,
-    `supplier_order_status` VARCHAR(50) COLLATE utf8_general_ci NOT NULL,
-    CONSTRAINT `PK_supplier_order` PRIMARY KEY (`id`)
-);
-
-# ---------------------------------------------------------------------- #
 # Add table "user"                                                       #
 # ---------------------------------------------------------------------- #
 
@@ -131,6 +114,21 @@ CREATE TABLE `user` (
     `security_answer` VARCHAR(100) COLLATE utf8_general_ci NOT NULL,
     CONSTRAINT `PK_user` PRIMARY KEY (`id`)
 );
+
+# ---------------------------------------------------------------------- #
+# Add table "session"                                                    #
+# ---------------------------------------------------------------------- #
+
+CREATE TABLE `session` (
+    `session_id` VARCHAR(40) NOT NULL DEFAULT '0',
+    `ip_address` VARCHAR(16) NOT NULL DEFAULT '0',
+    `user_agent` VARCHAR(120) NOT NULL,
+    `last_activity` INTEGER(10) UNSIGNED NOT NULL DEFAULT 0,
+    `user_data` TEXT NOT NULL,
+    CONSTRAINT `PK_session` PRIMARY KEY (`session_id`)
+);
+
+CREATE INDEX `IDX_session_1` ON `session` (`last_activity`);
 
 # ---------------------------------------------------------------------- #
 # Add table "customer"                                                   #
@@ -243,14 +241,17 @@ CREATE TABLE `product` (
     `product_code` VARCHAR(30) COLLATE utf8_general_ci NOT NULL,
     `product_name` VARCHAR(50) COLLATE utf8_general_ci NOT NULL,
     `product_desc` TEXT COLLATE utf8_general_ci NOT NULL,
+    `cost` DECIMAL(15,2) DEFAULT 0.00,
     `standard_price` DECIMAL(15,2) NOT NULL DEFAULT 0.00,
     `quantity_available` INTEGER(5) UNSIGNED NOT NULL DEFAULT 0,
     `min_quantity` INTEGER(5) UNSIGNED NOT NULL DEFAULT 0,
+    `min_qty_alert` INTEGER(5) UNSIGNED COMMENT 'When the quantity left few unit, it will alert. Example: quantity_available <= min_qty_alert, it will inform to re-stock',
     `total_num_sold` INTEGER(9) UNSIGNED NOT NULL DEFAULT 0,
     `created_date` BIGINT(8) UNSIGNED NOT NULL,
     `primary_image_url` VARCHAR(100) COLLATE utf8_general_ci,
     `product_type` VARCHAR(50) COLLATE utf8_general_ci NOT NULL,
     `amulet_product_id` BIGINT(8) UNSIGNED,
+    `supplier_id` BIGINT(8) UNSIGNED,
     CONSTRAINT `PK_product` PRIMARY KEY (`id`)
 );
 
@@ -270,20 +271,6 @@ CREATE TABLE `product_image` (
 );
 
 # ---------------------------------------------------------------------- #
-# Add table "supplier_order_detail"                                      #
-# ---------------------------------------------------------------------- #
-
-CREATE TABLE `supplier_order_detail` (
-    `id` BIGINT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
-    `quantity` INTEGER(5) UNSIGNED NOT NULL DEFAULT 0,
-    `price` DECIMAL(15,2) NOT NULL DEFAULT 0,
-    `subtotal` DECIMAL(15,2) NOT NULL DEFAULT 0,
-    `product_id` BIGINT(8) UNSIGNED,
-    `supplier_order_id` BIGINT(8) UNSIGNED,
-    CONSTRAINT `PK_supplier_order_detail` PRIMARY KEY (`id`)
-);
-
-# ---------------------------------------------------------------------- #
 # Add table "order_detail"                                               #
 # ---------------------------------------------------------------------- #
 
@@ -291,7 +278,7 @@ CREATE TABLE `order_detail` (
     `id` BIGINT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
     `product_id` BIGINT(8) UNSIGNED,
     `quantity` INTEGER(5) UNSIGNED NOT NULL DEFAULT 0,
-    `selling_price` DECIMAL(15,2) NOT NULL DEFAULT 0.00,
+    `unit_sell_price` DECIMAL(15,2) NOT NULL DEFAULT 0.00,
     `subtotal` DECIMAL(15,2) NOT NULL DEFAULT 0.00,
     `order_id` BIGINT(8) UNSIGNED,
     CONSTRAINT `PK_order_detail` PRIMARY KEY (`id`)
@@ -319,6 +306,9 @@ ALTER TABLE `order_detail` ADD CONSTRAINT `product_order_detail`
 ALTER TABLE `product` ADD CONSTRAINT `amulet_product_product` 
     FOREIGN KEY (`amulet_product_id`) REFERENCES `amulet_product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
+ALTER TABLE `product` ADD CONSTRAINT `supplier_product` 
+    FOREIGN KEY (`supplier_id`) REFERENCES `supplier` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
 ALTER TABLE `product_image` ADD CONSTRAINT `product_product_image` 
     FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
@@ -339,15 +329,6 @@ ALTER TABLE `monk_image` ADD CONSTRAINT `monk_monk_image`
 
 ALTER TABLE `supplier` ADD CONSTRAINT `country_supplier` 
     FOREIGN KEY (`country_id`) REFERENCES `country` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
-
-ALTER TABLE `supplier_order` ADD CONSTRAINT `supplier_supplier_order` 
-    FOREIGN KEY (`supplier_id`) REFERENCES `supplier` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
-
-ALTER TABLE `supplier_order_detail` ADD CONSTRAINT `supplier_order_supplier_order_detail` 
-    FOREIGN KEY (`supplier_order_id`) REFERENCES `supplier_order` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
-ALTER TABLE `supplier_order_detail` ADD CONSTRAINT `product_supplier_order_detail` 
-    FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 ALTER TABLE `amulet_image` ADD CONSTRAINT `amulet_amulet_image` 
     FOREIGN KEY (`id`) REFERENCES `amulet` (`id`);
