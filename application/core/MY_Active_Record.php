@@ -152,16 +152,19 @@ class MY_Active_Record extends ADOdb_Active_Record {
     /**
      * get_pagination 
      * 
+     * @param mixed $total_rows 
+     * @param mixed $page_limit 
+     * @param int $uri_segment 
      * @return mixed
      */
-    public function get_pagination($total_rows, $page_limit) {
+    public function get_pagination($total_rows, $page_limit, $uri_segment = 4) {
         $this->get_ci()->load->library('pagination');
         $conf = array(
             'total_rows' => $total_rows,
             'base_url' => $this->_get_curr_url(),
             'per_page' => $page_limit,
             'use_page_numbers' => FALSE,
-            'uri_segment' => 4,
+            'uri_segment' => $uri_segment,
         );
         $pagination = new CI_Pagination();
         $pagination->initialize($conf);
