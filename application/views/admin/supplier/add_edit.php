@@ -1,6 +1,10 @@
 <?php  if (!defined('BASEPATH')) exit('No direct script access allowed');?>
 <script>
 $(document).ready(function() {
+    $('button#back').click(function() {
+        redirect(base_url+'admin/supplier');
+    });
+
     $('#supplier_add_edit').validationEngine('attach');
 
     $('input#country').autocomplete({
@@ -154,7 +158,13 @@ $(document).ready(function() {
             </tr>
         </table>
         <div class="right">
-            <?php echo form_submit('save_supplier', lang('save'), 'class="button"');?>
+            <?php
+                echo form_button(array(
+                    'id'      => 'back',
+                    'content' => lang('back'),
+                ));
+                echo form_submit('save_supplier', lang('save'), 'class="button"');
+            ?>
         </div>
     </form>
 </div>

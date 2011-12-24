@@ -1,6 +1,10 @@
 <?php  if (!defined('BASEPATH')) exit('No direct script access allowed');?>
 <script type="text/javascript">
 $(document).ready(function() {
+    $('button#back').click(function() {
+        redirect(base_url+'admin/product');
+    });
+
     $('#product_add_edit').validationEngine('attach');
     var is_add_new = <?php echo empty($product->id) ? 'true' : 'false'; ?>;
     var tabs_disable = (is_add_new) ? [1] : [];
@@ -238,7 +242,13 @@ function format_amulet(amulet) {
                 </tr>
             </table>
             <div class="right">
-                <?php echo form_submit('save_product', lang('save'), 'class="button"');?>
+                <?php
+                    echo form_button(array(
+                        'id'      => 'back',
+                        'content' => lang('back'),
+                    ));
+                    echo form_submit('save_product', lang('save'), 'class="button"');
+                ?>
             </div>
         </form>
     </div>
