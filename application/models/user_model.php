@@ -23,6 +23,11 @@ class User_Model extends MY_Active_Record {
 
     const ADMIN = 'ADMIN';
 
+    /**
+     * Password encryption 
+     * 
+     * @return string
+     */
     private function _encrypt_password() {
         // Generate a random salt if empty
         if(empty($this->salt)) {
@@ -31,6 +36,22 @@ class User_Model extends MY_Active_Record {
         $this->password = sha1($this->salt . $this->password);
     }
 
+    /**
+     * Override parent function (Password has to encrypt) 
+     * 
+     * @param mixed $post 
+     * @return void
+     */
+    public function populate_from_request($post) {
+        parent::populate_from_request($post);
+        $this->_encrypt_password();
+    }
+
+    /**
+     * login 
+     * 
+     * @return boolean
+     */
     public function login() {
         $u = new User_Model();
         $u->load_by_email($this->email);
@@ -45,5 +66,18 @@ class User_Model extends MY_Active_Record {
             }
         }
         return false;
+    }
+
+    /**
+     * Check for email unique 
+     * 
+     * @param mixed $email 
+     * @return boolean
+     */
+    public static function is_email_unique($email) {
+        $user = new User_Model();
+        $user->load_by_email($email);
+        // exist => Not unique
+        return ( ! $user->is_exist());
     }
 }
