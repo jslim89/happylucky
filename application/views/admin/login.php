@@ -91,6 +91,9 @@ $this->lang->load ('general', get_cookie ('language'));
 </div>
 <!-- End Container 16 -->
 
+    <script>
+        var base_url = '<?php echo base_url();?>';
+    </script>
     <?php 
         echo link_tag('common/css/960/960.css')."\n"; 
         echo link_tag('common/css/main.css')."\n"; 
