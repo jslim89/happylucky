@@ -200,6 +200,8 @@ $(document).ready(function() {
         </form>
     </div>
     <div id="ordered_products">
+    <!-- Display only if the action is EDIT -->
+    <?php if($supplier->is_exist()): ?>
         <!-- Pagination -->
         <div class="inner_paging">
             <?php echo $pagination->create_links().nbs(1);?>
@@ -279,5 +281,6 @@ $(document).ready(function() {
             </tr>
             <?php endforeach;?>
         </table>
+    <?php endif; ?>
     </div>
 </div>

@@ -107,3 +107,9 @@ ul#icons span.ui-icon {
 .hand-cursor {
     cursor: pointer;
 }
+
+#cart {
+    float: left;
+    position: relative;
+    cursor: pointer;
+}

@@ -202,3 +202,15 @@ function delete_row(delete_url, row_id) {
         $('#'+row_id).remove();
     }, 3100);
 }
+
+function add_to_cart(product_id) {
+    $.ajax({
+        url: base_url + 'cart/add/' + product_id,
+        success: function(data) {
+            // TODO: update cart content
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert(errorThrown);
+        }
+    });
+}

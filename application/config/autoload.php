@@ -56,7 +56,8 @@ $autoload['libraries'] = array(
     'adodb_loader',
     'firephp',
     'session',
-    'upload'
+    'upload',
+    'cart'
 );
 
 

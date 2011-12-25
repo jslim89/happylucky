@@ -78,3 +78,5 @@ $lang['personal_information'] = 'Personal Information';
 
 $lang['email']  = 'Email';
 
+$lang['cart']       = 'Cart';
+$lang['go_to_cart'] = 'Go To Cart';

@@ -1,10 +1,29 @@
-<!-- Login Bar -->
-<div id="logout-topnav" class="topnav grid_6">
-    <a href="<?php echo site_url('admin/welcome/logout');?>" class="signout">
-        <span><?php echo lang('user_signout');?></span>
+<script type="text/javascript">
+$(document).ready(function() {
+});
+</script>
+
+<div class="grid_6">
+    <div id="cart">
+        <div class="heading">
+        <?php 
+            echo heading(lang('cart'), 4);
+        ?>
+        <span id="cart-total">
+        </span>
+        </div>
+    </div>
+    <!-- Login Bar -->
+    <div id="logout-topnav" class="topnav">
+        <a href="<?php echo site_url('admin/welcome/logout');?>" class="signout">
+            <span><?php echo lang('user_signout');?></span>
+        </a>
+    </div>
+    <!-- End Login Bar -->
+    <a href="<?php echo site_url('cart/index');?>" id="cart-nav">
+        <span><?php echo lang('go_to_cart');?></span>
     </a>
 </div>
-<!-- End Login Bar -->
 
 <?php echo clear_div();?>
 
