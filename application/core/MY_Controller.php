@@ -43,6 +43,8 @@ class MY_Controller extends CI_Controller {
 	}
 
     private function _is_admin_template() {
-        return $this->router->directory == 'admin/';
+        // return $this->router->directory == 'admin/';
+        $this->load->model('user_model');
+        return get_session('user_type', false) == User_Model::ADMIN;
     }
 }	
