@@ -17,6 +17,7 @@ if (!function_exists('to_unix_time')) {
 
 /**
  * Convert the unix timestamp to human readable Date format
+ * if the date is empty, then it will take current date
  * 
  * @param mixed $time 
  * @param string $format 
@@ -25,6 +26,7 @@ if (!function_exists('to_unix_time')) {
  */
 if (!function_exists('to_human_time')) {
     function to_human_date($date, $format = '%j %F %Y') {
+        if(empty($date)) $date = time();
         return (is_int($date)) ? mdate($format, $date) : mdate($format, (int)$date);
     }
 }
