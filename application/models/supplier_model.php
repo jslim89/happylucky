@@ -4,7 +4,7 @@ require_once(APPPATH.'core/MY_Active_Record.php');
 ADOdb_Active_Record::TableKeyHasMany(
     'supplier', // parent table name
     'id', // parent primary key
-    'supplier_order', // child table name
+    'product', // child table name
     'supplier_id' // child foreign key
 );
 

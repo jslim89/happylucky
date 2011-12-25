@@ -23,6 +23,14 @@ ADOdb_Active_Record::TableKeyBelongsTo(
     'id' // parent primary key
 );
 
+ADOdb_Active_Record::TableKeyBelongsTo(
+    'product', // child table name
+    'id', // child primary key
+    'supplier', // parent table name
+    'supplier_id', // child foreign key
+    'id' // parent primary key
+);
+
 /**
  * Product_Model 
  * 
@@ -126,5 +134,17 @@ class Product_Model extends MY_Active_Record {
 
     public function is_amulet() {
         return sizeof($this->amulet_product) > 0;
+    }
+
+    /**
+     * I'm using CodeIgniter built-in Cart class.
+     * There are several attributes are compulsory, this
+     * function is convert the product object to cart item
+     * in array form. 
+     * 
+     * @return array
+     */
+    public function to_cart_item() {
+        return array();
     }
 }
