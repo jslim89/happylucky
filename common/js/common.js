@@ -115,7 +115,28 @@ $(document).ready(function() {
         function() { $(this).addClass('ui-state-hover'); },
         function() { $(this).removeClass('ui-state-hover'); }
     );
+
+    $('input.date').each(function() {
+        var id = $(this).attr('id');
+        $(this).attr('readonly', true)
+        .datepicker({
+            showOn: 'button',
+            buttonImage: base_url+'images/icons/calendar.png',
+            buttonImageOnly: true,
+            dateFormat: 'd MM yy',
+            showAnim: 'slideDown',
+            changeMonth: true,
+            changeYear: true,
+            showOtherMonths: true,
+            selectOtherMonths: true
+        });
+        $(this).after ('<img src="'+base_url+'images/icons/eraser.png" class="hand-cursor" onclick="empty_input (\''+$(this).attr('id')+'\')">');
+    });
 });
+
+function empty_input(id) {
+    $('#'+id).val('');
+}
 
 function format_country(country) {
     var value = '';
