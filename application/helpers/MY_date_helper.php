@@ -93,3 +93,17 @@ if (!function_exists('month_difference')) {
         return floor($diff/(60*60*24*12));
     }
 }
+
+/**
+ * Convert number of days to number of seconds 
+ * 
+ * @param mixed $days 
+ * @access public
+ * @return int
+ */
+if (!function_exists('days_to_seconds')) {
+    function days_to_seconds($days) {
+        // days x hours x minutes x seconds
+        return $days * 24 * 60 * 60;
+    }
+}
