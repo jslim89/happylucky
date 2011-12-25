@@ -121,7 +121,7 @@ function format_amulet_type(amulet_type) {
                                 'name'  => 'amulet_code',
                                 'id'    => 'amulet_code',
                                 'value' => $amulet->amulet_code,
-                                'class' => 'validate[required] text'
+                                'class' => 'validate[required,ajax[ajaxAmuletCode]] text'
                             ));
                         ?>
                     </td>

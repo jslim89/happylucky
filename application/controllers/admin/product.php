@@ -47,9 +47,11 @@ class Product extends MY_Controller {
 
         $product        = new Product_Model();
         $amulet_product = new Amulet_Product_Model();
+        $supplier       = new Supplier_Model();
 
         $this->vars['product']        = $product;
         $this->vars['amulet_product'] = $amulet_product;
+        $this->vars['supplier']       = $supplier;
         $this->vars['image_upload']   = $product->get_image_upload_config();
         $this->load_view('admin/product/add_edit', $this->vars);
     }
@@ -177,5 +179,15 @@ class Product extends MY_Controller {
         $q = get_post('term');
         $product_set = $this->product_model->search_related($q, false, false, false);
         echo json_encode($product_set);
+    }
+
+    public function check_product_code() {
+        $code = get_post('fieldValue');
+        $is_unique = Product_Model::is_product_code_unique($code);
+        $to_js = array(
+            get_post('fieldId'),
+            $is_unique,
+        );
+        echo json_encode($to_js);
     }
 }

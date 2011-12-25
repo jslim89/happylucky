@@ -120,11 +120,35 @@
                     // speaks by itself
                     "alertTextLoad": "* Validating, please wait"
                 },
-				 "ajaxNameCallPhp": {
+				 "ajaxUserEmail": {
 	                    // remote json service location
-	                    "url": "phpajax/ajaxValidateFieldName.php",
+	                    "url": base_url+"admin/user/check_email",
 	                    // error
-	                    "alertText": "* This name is already taken",
+	                    "alertText": "* This email is already taken",
+	                    // speaks by itself
+	                    "alertTextLoad": "* Validating, please wait"
+	                },
+				 "ajaxCustomerEmail": {
+	                    // remote json service location
+	                    "url": base_url+"admin/customer/check_email",
+	                    // error
+	                    "alertText": "* This email is already taken",
+	                    // speaks by itself
+	                    "alertTextLoad": "* Validating, please wait"
+	                },
+				 "ajaxProductCode": {
+	                    // remote json service location
+	                    "url": base_url+"admin/product/check_product_code",
+	                    // error
+	                    "alertText": "* This product code is already taken",
+	                    // speaks by itself
+	                    "alertTextLoad": "* Validating, please wait"
+	                },
+				 "ajaxAmuletCode": {
+	                    // remote json service location
+	                    "url": base_url+"admin/amulet/check_amulet_code",
+	                    // error
+	                    "alertText": "* This amulet code is already taken",
 	                    // speaks by itself
 	                    "alertTextLoad": "* Validating, please wait"
 	                },

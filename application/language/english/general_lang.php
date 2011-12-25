@@ -21,6 +21,8 @@ $lang['updated']             = 'Updated';
 $lang['update_failed']       = 'Update Failed';
 $lang['nothing_has_changed'] = 'Nothing Has Changed';
 
+$lang['this_email_already_been_used'] = 'This email already been used.';
+
 $lang['general']       = 'General';
 $lang['primary']       = 'Primary';
 $lang['image']         = 'Image';

@@ -5,22 +5,9 @@ $(document).ready(function() {
         redirect(base_url+'admin/user');
     });
 
-    $('#user_add_edit').validationEngine({
-        ajaxSubmit: true,
-        ajaxSubmitFile: base_url+"admin/user/check_email/",
-        success: false,
-        failure: function() { }
-    });
+    $('#user_add_edit').validationEngine('attach');
 });
-/*
-"check_email_unique": {
-    "url": base_url+"admin/user/check_email/",
-    "extraDataDynamic": ['#email'],
-    "alertText": 'This email already been used.',
-    "alertTextOk": '',
-    "alertTextLoad": 'Validating...',
-}
-*/
+
 </script>
 
 <div id="general">
@@ -65,7 +52,7 @@ $(document).ready(function() {
                                 'name'  => 'email',
                                 'id'    => 'email',
                                 'value' => $user->email,
-                                'class' => 'validate[required,custom[email,ajax[check_email_unique]]]'
+                                'class' => 'validate[required,custom[email,ajax[ajaxUserEmail]]]'
                             ));
                         }
                     ?>

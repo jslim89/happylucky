@@ -136,7 +136,7 @@ function format_amulet(amulet) {
                                 'name'  => 'product_code',
                                 'id'    => 'product_code',
                                 'value' => $product->product_code,
-                                'class' => 'validate[required] text'
+                                'class' => 'validate[required,ajax[ajaxProductCode]] text'
                             ));
                     ?></td>
                     <td class="label"><?php echo lang('product_name');?></td>

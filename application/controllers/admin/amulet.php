@@ -159,4 +159,14 @@ class Amulet extends MY_Controller {
         $amulet_set = $this->amulet_model->search_related($q, false, false, false);
         echo json_encode($amulet_set);
     }
+
+    public function check_amulet_code() {
+        $code = get_post('fieldValue');
+        $is_unique = Amulet_Model::is_amulet_code_unique($code);
+        $to_js = array(
+            get_post('fieldId'),
+            $is_unique,
+        );
+        echo json_encode($to_js);
+    }
 }

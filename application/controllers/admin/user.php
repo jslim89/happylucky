@@ -96,6 +96,7 @@ class User extends MY_Controller {
         $to_js = array(
             get_post('fieldId'),
             $is_unique,
+            lang('email_already_been_used')
         );
         echo json_encode($to_js);
     }
