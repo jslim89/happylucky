@@ -74,6 +74,9 @@ class Product extends MY_Controller {
     public function save($id = null) {
         $product = new Product_Model($id);
         $product->populate_from_request($_POST);
+        if($id === null) {
+            $product->created_date = time();
+        }
 
         if($product->save()) {
             if(get_post('amulet_id', false)) {

@@ -198,10 +198,11 @@ function format_amulet(amulet) {
                 <tr>
                     <td class="label"><?php echo lang('product_min_quantity');?></td>
                     <td><?php 
+                            // By default the minimum quantity to order is 1
                             echo form_input(array(
                                 'name'  => 'min_quantity',
                                 'id'    => 'min_quantity',
-                                'value' => $product->min_quantity,
+                                'value' => $product->min_quantity ? $product->min_quantity : 1,
                                 'class' => 'validate[required] text positive'
                             ));
                     ?></td>
@@ -235,15 +236,17 @@ function format_amulet(amulet) {
                 </tr>
                 <tr>
                     <td class="txt-label"><?php echo lang('product_from_supplier');?></td>
-                    <td colspan="3"><?php 
+                    <td><?php 
                             echo form_input(array(
                                 'name'  => 'supplier',
                                 'id'    => 'supplier',
                                 'value' => $supplier->supplier_name,
-                                'class' => 'validate[required] wysiwyg'
+                                'class' => 'validate[required]'
                             ));
                             echo form_hidden('supplier_id', $product->supplier_id);
                     ?></td>
+                    <td class="txt-label"><?php echo lang('product_created_date');?></td>
+                    <td><?php echo to_human_date($product->created_date); ?></td>
                 </tr>
                 <tr>
                     <td class="txt-label"><?php echo lang('product_description');?></td>

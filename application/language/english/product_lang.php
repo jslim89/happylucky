@@ -22,6 +22,7 @@ $lang['product_min_qty_alert_desc']     = "Whenever quantity left is less than t
 $lang['product_quantity_left']          = "Quantity Left";
 $lang['product_quantity_available']     = "Quantity Available";
 $lang['product_suppliers_available']    = "Supplier(s) Available";
+$lang['product_created_date']           = "Created Date";
 $lang['product_from_supplier']          = "From Supplier";
                                       
 $lang['product_add_new_product'] = "Add New Product";
