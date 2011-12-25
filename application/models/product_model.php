@@ -147,4 +147,17 @@ class Product_Model extends MY_Active_Record {
     public function to_cart_item() {
         return array();
     }
+
+    /**
+     * is_product_code_unique 
+     * 
+     * @param mixed $code 
+     * @return boolean
+     */
+    public static function is_product_code_unique($code) {
+        $product = new Product_Model();
+        $product->load_by_product_code($code);
+        // exist => Not unique
+        return ( ! $product->is_exist());
+    }
 }

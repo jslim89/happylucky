@@ -59,4 +59,17 @@ class Customer_Model extends MY_Active_Record {
         }
         return false;
     }
+
+    /**
+     * Check for email unique 
+     * 
+     * @param mixed $email 
+     * @return boolean
+     */
+    public static function is_email_unique($email) {
+        $customer = new Customer_Model();
+        $customer->load_by_email($email);
+        // exist => Not unique
+        return ( ! $customer->is_exist());
+    }
 }

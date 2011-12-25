@@ -128,4 +128,17 @@ class Amulet_Model extends MY_Active_Record {
         }
         return false;
     }
+
+    /**
+     * is_amulet_code_unique 
+     * 
+     * @param mixed $code 
+     * @return boolean
+     */
+    public static function is_amulet_code_unique($code) {
+        $amulet = new Amulet_Model();
+        $amulet->load_by_amulet_code($code);
+        // exist => Not unique
+        return ( ! $amulet->is_exist());
+    }
 }
