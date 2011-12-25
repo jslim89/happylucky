@@ -74,8 +74,10 @@ $(document).ready(function() {
             <th><?php echo lang('product_code');?></th>
             <th><?php echo lang('product_name');?></th>
             <th><?php echo lang('product_quantity_available');?></th>
+            <th><?php echo lang('product_cost');?></th>
             <th><?php echo lang('product_standard_price');?></th>
             <th><?php echo lang('product_type');?></th>
+            <th><?php echo lang('product_from_supplier');?></th>
             <th><?php echo lang('edit');?></th>
         </tr>
         <?php foreach($products as $product):?>
@@ -115,8 +117,15 @@ $(document).ready(function() {
                 );
             ?></td>
             <td><?php echo $product->quantity_available;?></td>
+            <td><?php echo $product->cost;?></td>
             <td><?php echo $product->standard_price;?></td>
             <td><?php echo $product->product_type;?></td>
+            <td><?php 
+                echo (empty($product->supplier_id)) ? nbs(1) : anchor(
+                    site_url('admin/supplier/edit/'.$product->supplier_id),
+                    $product->supplier->supplier_name
+                );
+            ?></td>
             <td>
                 <ul id="icons" class="ui-widget ui-helper-clearfix" style="">
                     <li class="ui-state-default ui-corner-all">

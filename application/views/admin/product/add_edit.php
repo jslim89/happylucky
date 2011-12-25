@@ -57,6 +57,35 @@ $(document).ready(function() {
                 .append('<a>' + format_amulet(item) + '</a>')
                 .appendTo(ul);
     };
+
+    $('input#supplier').autocomplete({
+        highlight: true,
+        minLength: 1,
+        scroll: true,
+        dataType: 'json',
+        source: base_url + 'admin/supplier/ajax_search',
+        focus: function(event, ui) {
+            $(this).val(ui.item.supplier_name);
+            return false;
+        },
+        select: function(event, ui) {
+            $(this).val(ui.item.supplier_name);
+            $('input[name=supplier_id]').val(ui.item.id);
+            return false;
+        },
+        open: function() {
+            $(this).removeClass('ui-corner-all').addClass('ui-corner-top');
+        },
+        close: function() {
+            $(this).removeClass('ui-corner-top').addClass('ui-corner-all');
+        }
+    })
+    .data('autocomplete')._renderItem = function(ul, item){
+        return $('<li></li>')
+                .data('item.autocomplete', item)
+                .append('<a>' + item.supplier_name + '</a>')
+                .appendTo(ul);
+    };
 });
 
 function check_is_amulet() {
@@ -121,6 +150,15 @@ function format_amulet(amulet) {
                     ?></td>
                 </tr>
                 <tr>
+                    <td class="label"><?php echo lang('product_cost');?></td>
+                    <td><?php 
+                            echo form_input(array(
+                                'name'  => 'cost',
+                                'id'    => 'cost',
+                                'value' => $product->cost,
+                                'class' => 'validate[required] text positive'
+                            ));
+                    ?></td>
                     <td class="label"><?php echo lang('product_standard_price');?></td>
                     <td><?php 
                             echo form_input(array(
@@ -130,6 +168,8 @@ function format_amulet(amulet) {
                                 'class' => 'validate[required] text positive'
                             ));
                     ?></td>
+                </tr>
+                <tr>
                     <td class="label"><?php echo lang('product_quantity_available');?></td>
                     <td><?php 
                             echo form_input(array(
@@ -139,6 +179,21 @@ function format_amulet(amulet) {
                                 'class' => 'validate[required] text positive-integer'
                             ));
                     ?></td>
+                    <td class="label"><?php echo lang('product_minimum_quantity_alert');?></td>
+                    <td><?php 
+                            echo form_input(array(
+                                'name'  => 'min_qty_alert',
+                                'id'    => 'min_qty_alert',
+                                'value' => $product->min_qty_alert,
+                                'class' => 'validate[required] text positive-integer',
+                                'title' => lang('product_min_qty_alert_desc')
+                            ));
+                            echo br(1);
+                    ?>
+                        <span class="attr-desc">
+                        <?php echo lang('product_min_qty_alert_desc');?>
+                        </span>
+                    </td>
                 </tr>
                 <tr>
                     <td class="label"><?php echo lang('product_min_quantity');?></td>
@@ -176,6 +231,18 @@ function format_amulet(amulet) {
                                 'class'   => 'radio'
                             ));
                             echo lang('product_wholesale');
+                    ?></td>
+                </tr>
+                <tr>
+                    <td class="txt-label"><?php echo lang('product_from_supplier');?></td>
+                    <td colspan="3"><?php 
+                            echo form_input(array(
+                                'name'  => 'supplier',
+                                'id'    => 'supplier',
+                                'value' => $supplier->supplier_name,
+                                'class' => 'validate[required] wysiwyg'
+                            ));
+                            echo form_hidden('supplier_id', $product->supplier_id);
                     ?></td>
                 </tr>
                 <tr>

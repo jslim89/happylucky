@@ -8,17 +8,21 @@ $lang['product_both']      = "Both";
 
 $lang['product_accessories']      = "Accessories";
 
-$lang['product_code']                = "Code";
-$lang['product_name']                = "Name";
-$lang['product_price']               = "Price";
-$lang['product_standard_price']      = "Standard Price";
-$lang['product_type']                = "Type";
-$lang['product_description']         = "Description";
-$lang['product_total_number_sold']   = "Total Number Sold";
-$lang['product_min_quantity']        = "Minimum Quantity";
-$lang['product_quantity_left']       = "Quantity Left";
-$lang['product_quantity_available']  = "Quantity Available";
-$lang['product_suppliers_available'] = "Supplier(s) Available";
+$lang['product_code']                   = "Code";
+$lang['product_name']                   = "Name";
+$lang['product_price']                  = "Price";
+$lang['product_cost']                   = "Cost";
+$lang['product_standard_price']         = "Standard Price";
+$lang['product_type']                   = "Type";
+$lang['product_description']            = "Description";
+$lang['product_total_number_sold']      = "Total Number Sold";
+$lang['product_min_quantity']           = "Minimum Quantity";
+$lang['product_minimum_quantity_alert'] = "Minimum Quantity Alert";
+$lang['product_min_qty_alert_desc']     = "Whenever quantity left is less than this amount, you will be alerted";
+$lang['product_quantity_left']          = "Quantity Left";
+$lang['product_quantity_available']     = "Quantity Available";
+$lang['product_suppliers_available']    = "Supplier(s) Available";
+$lang['product_from_supplier']          = "From Supplier";
                                       
 $lang['product_add_new_product'] = "Add New Product";
 $lang['product_edit_product']    = "Edit Product";
