@@ -155,16 +155,28 @@ class MY_Active_Record extends ADOdb_Active_Record {
      * @param mixed $total_rows 
      * @param mixed $page_limit 
      * @param int $uri_segment 
+     * @param boolean $is_ajax_paging 
+     * @param string $paging_function 
+     * @param string $base_url 
      * @return mixed
      */
-    public function get_pagination($total_rows, $page_limit, $uri_segment = 4) {
+    public function get_pagination(
+        $total_rows
+        , $page_limit
+        , $uri_segment = 4
+        , $is_ajax_paging = FALSE
+        , $paging_function = 'ajax_paging'
+        , $base_url = false
+    ) {
         $this->get_ci()->load->library('pagination');
         $conf = array(
-            'total_rows' => $total_rows,
-            'base_url' => $this->_get_curr_url(),
-            'per_page' => $page_limit,
+            'total_rows'       => $total_rows,
+            'base_url'         => $base_url ? $base_url : $this->_get_curr_url(),
+            'per_page'         => $page_limit,
             'use_page_numbers' => FALSE,
-            'uri_segment' => $uri_segment,
+            'uri_segment'      => $uri_segment,
+            'is_ajax_paging'   => $is_ajax_paging,
+            'paging_function'  => $paging_function,
         );
         $pagination = new CI_Pagination();
         $pagination->initialize($conf);
