@@ -80,6 +80,7 @@ $autoload['helper'] = array(
     'general',
     'date',
     'number',
+    'breadcrumb',
     'html'
 );
 
