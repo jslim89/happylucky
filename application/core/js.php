@@ -16,6 +16,8 @@ lang_positive_warning_message         = '<?php echo lang('positive_warning_messa
 lang_positive_tooltip                 = '<?php echo lang('positive_tooltip');?>';
 lang_integer_warning_message          = '<?php echo lang('integer_warning_message'); ?>';
 lang_integer_tooltip                  = '<?php echo lang('integer_tooltip');?>';
+lang_more                             = '<?php echo lang('more');?>';
+lang_less                             = '<?php echo lang('less');?>';
 
 </script>
 <?php 
@@ -29,6 +31,7 @@ $scripts = array(
     'jquery.lightbox-0.5.js',
     'jquery.query-2.1.7.js',
     'jquery.cookie.js',
+    'jquery.expander.min.js',
     'login/jquery.pop.js',
     'login/jquery.tipsy.js',
     'login.js',

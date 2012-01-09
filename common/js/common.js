@@ -132,6 +132,11 @@ $(document).ready(function() {
         });
         $(this).after ('<img src="'+base_url+'images/icons/eraser.png" class="hand-cursor" onclick="empty_input (\''+$(this).attr('id')+'\')">');
     });
+
+    $('span.expander').expander({
+        userCollapseText: lang_less,
+        expandText: lang_more
+    });
 });
 
 function empty_input(id) {
