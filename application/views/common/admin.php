@@ -1,30 +1,26 @@
-<script type="text/javascript">
-$(document).ready(function() {
-});
-</script>
-
-<div class="grid_6">
-    <div id="cart">
-        <div class="heading">
-        <?php 
-            echo heading(lang('cart'), 4);
-        ?>
-        <span id="cart-total">
-        </span>
+    <div class="grid_6">
+        <div id="cart">
+            <div class="heading">
+            <?php 
+                echo heading(lang('cart'), 4);
+            ?>
+            <span id="cart-total">
+            </span>
+            </div>
         </div>
-    </div>
-    <!-- Login Bar -->
-    <div id="logout-topnav" class="topnav">
-        <a href="<?php echo site_url('admin/welcome/logout');?>" class="signout">
-            <span><?php echo lang('user_signout');?></span>
+        <!-- Login Bar -->
+        <div id="logout-topnav" class="topnav">
+            <a href="<?php echo site_url('admin/welcome/logout');?>" class="signout">
+                <span><?php echo lang('user_signout');?></span>
+            </a>
+        </div>
+        <!-- End Login Bar -->
+        <a href="<?php echo site_url('cart/index');?>" id="cart-nav">
+            <span><?php echo lang('go_to_cart');?></span>
         </a>
     </div>
-    <!-- End Login Bar -->
-    <a href="<?php echo site_url('cart/index');?>" id="cart-nav">
-        <span><?php echo lang('go_to_cart');?></span>
-    </a>
 </div>
-
+<!-- End Header -->
 <?php echo clear_div();?>
 
 <!-- Top Menu -->
@@ -61,12 +57,11 @@ $this->load->view('common/topmenu', $topmenu);
     <h1 title="<?php echo isset($title) ? $title : '';?>" class="title">
         <?php echo isset($title) ? $title : '';?>
     </h1>
+    <div class="breadcrumb">
+        <?php echo set_breadcrumb();?>
+    </div>
 </div>
 <!-- End Title -->
-<?php echo clear_div();?>
-
-</div>
-<!-- End Header -->
 <?php echo clear_div();?>
 
 <!-- Content DIV -->

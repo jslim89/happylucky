@@ -1,30 +1,56 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Welcome extends CI_Controller {
+/**
+ * Welcome 
+ * 
+ * @uses MY_Controller
+ * @package 
+ * @version $Id$
+ * @copyright Copyright (C) 2011-2012 Jeong-Sheng, Lim, TARC. All rights reserved.
+ * @author Jeong-Sheng, Lim <jslim89@gmail.com> 
+ * @license GPL Version 3 {@link http://www.gnu.org/licenses/gpl.html}
+ */
+class Welcome extends MY_Controller {
 
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -  
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in 
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see http://codeigniter.com/user_guide/general/urls.html
-	 */
+    function __construct() {
+        parent::__construct();
+    }
+
 	public function index()
 	{
-        $this->load->model('user_model');
-        $u = new User_Model(1);
-        $result = $u->get_paged();
-        xxx($result);
-		$this->load->view('welcome_message');
+        $this->load->model('customer_model');
+		$this->load_view('home');
 	}
+
+    public function login() {
+        if(count($_POST)) {
+            $customer = new Customer_Model();
+
+            $customer->email    = get_post('email');
+            $customer->password = get_post('password');
+
+            $success = $customer->login();
+            if($success) {
+                $session = array(
+                    'customer_id' => $customer->id,
+                    'password'    => $customer->password,
+                    'username'    => $customer->first_name.', '.$customer->last_name,
+                );
+                $this->session->set_customerdata($session);
+                redirect('admin/dashboard');
+            }
+            else {
+                $this->session->set_flashdata('login_error', lang('customer_invalid_customername_or_password'));
+                redirect('home');
+            }
+        }
+        redirect('home');
+    }
+
+    public function logout() {
+        $this->session->sess_destroy();
+        redirect('home');
+    }
 }
 
 /* End of file welcome.php */

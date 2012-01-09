@@ -1,24 +1,59 @@
-<!-- Login Bar -->
-<div class="grid_6">
-<?php if(!get_session('user_id') || get_session('user_type') == 'ADMIN') {
-        // Login
-        $this->load->view('common/login');
-        // End Login
-      }
-      else {
-          // Logout
-?>
-    <div id="logout-topnav" class="topnav">
-        <a href="<?php echo site_url('welcome/logout');?>" class="signout">
-            <span><?php echo lang('user_signout');?></span>
-        </a>
+    <div class="grid_6">
+    <?php 
+    $username = get_session('user_id') 
+        ? anchor(base_url('user/profile'), get_session('username')) 
+        : lang('guest');
+    echo lang('welcome').', '.$username;
+    ?>
+    <!-- Login Bar -->
+    <?php if(!get_session('user_id') || get_session('user_type') == 'ADMIN') {
+            // Login
+            $this->load->view('common/login');
+            // End Login
+          }
+          else {
+              // Logout
+    ?>
+        <div id="logout-topnav" class="topnav">
+            <a href="<?php echo site_url('welcome/logout');?>" class="signout">
+                <span><?php echo lang('user_signout');?></span>
+            </a>
+        </div>
+    <?php
+              // End Logout
+          }
+    ?>
+    <!-- End Login Bar -->
     </div>
-<?php
-          // End Logout
-      }
+</div>
+<!-- End Header -->
+
+<?php echo clear_div();?>
+
+<!-- Top Menu -->
+<div class="grid_16">
+<?php 
+$list = array(
+    anchor(site_url('home'), lang('home')),
+    '<a href="#">'.lang('product').'</a>' => array(
+        anchor(site_url('product').'?category=amulet', lang('amulet')) => array(
+            anchor(site_url('product').'?category=amulet&type=retail', lang('retail')),
+            anchor(site_url('product').'?category=amulet&type=wholesale', lang('wholesale')),
+        ),
+        anchor(site_url('product').'?category=accessories', lang('accessories')) => array(
+            anchor(site_url('product').'?category=accessories&type=retail', lang('retail')),
+            anchor(site_url('product').'?category=accessories&type=wholesale', lang('wholesale')),
+        ),
+    ),
+    anchor(site_url('monk'), lang('monk')),
+    anchor(site_url('order'), lang('orders')),
+);
+$topmenu = array();
+$topmenu['list'] = $list;
+$this->load->view('common/topmenu', $topmenu);
 ?>
 </div>
-<!-- End Login Bar -->
+<!-- End Top Menu -->
 
 <?php echo clear_div();?>
 
@@ -27,12 +62,13 @@
     <h1 title="<?php echo isset($title) ? $title : '';?>" class="title">
         <?php echo isset($title) ? $title : '';?>
     </h1>
+    <div class="breadcrumb">
+        <?php echo set_breadcrumb();?>
+    </div>
 </div>
 <!-- End Title -->
 <?php echo clear_div();?>
 
-</div>
-<!-- End Header -->
 
 <!-- Content DIV (For normal user is grid_16) -->
 <div class="grid_16">
