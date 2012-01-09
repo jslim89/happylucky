@@ -54,6 +54,9 @@ class Product_Model extends MY_Active_Record {
     const RETAIL    = 'RETAIL';
     const WHOLESALE = 'WHOLESALE';
 
+    const AMULET      = 'AMULET';
+    const ACCESSORIES = 'ACCESSORIES';
+
     /**
      * Return the upload path for this particular product 
      * 

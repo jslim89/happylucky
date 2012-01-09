@@ -35,3 +35,5 @@ $lang['product_is_it_an_amulet']   = "Is this product is an amulet";
 // Amulet Product
 $lang['product_size']       = "Size";
 $lang['product_ingredient'] = "Ingredient";
+
+$lang['product_no_product'] = "No Product";

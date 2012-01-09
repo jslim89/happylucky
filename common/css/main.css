@@ -108,6 +108,12 @@ ul#icons span.ui-icon {
     cursor: pointer;
 }
 
+ul.no-bullet {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
 #cart {
     float: left;
     position: relative;

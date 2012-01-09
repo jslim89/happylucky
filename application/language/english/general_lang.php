@@ -15,6 +15,7 @@ $lang['previous']      = 'Previous';
 $lang['first']         = 'First';
 $lang['last']          = 'Last';
 $lang['more']          = 'More';
+$lang['less']          = 'Less';
 $lang['error']         = 'Error';
 
 $lang['updated']             = 'Updated';
@@ -35,6 +36,7 @@ $lang['default']       = 'Default';
 
 // Top menu variable
 $lang['home']                  = 'Home';
+$lang['orders']                  = 'Orders';
 $lang['product']               = 'Product';
 $lang['amulet']                = 'Amulet';
 $lang['accessories']           = 'Accessories';
@@ -78,5 +80,9 @@ $lang['personal_information'] = 'Personal Information';
 
 $lang['email']  = 'Email';
 
-$lang['cart']       = 'Cart';
-$lang['go_to_cart'] = 'Go To Cart';
+$lang['cart']        = 'Cart';
+$lang['go_to_cart']  = 'Go To Cart';
+$lang['add_to_cart'] = 'Add To Cart';
+
+$lang['welcome']       = 'Welcome';
+$lang['guest']       = 'Guest';
