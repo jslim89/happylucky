@@ -94,14 +94,45 @@ class MY_Active_Record extends ADOdb_Active_Record {
     }
 
     /**
-     * search_related 
+     * By given a general keyword, search by all the related STRING
+     * i.e. by name, code, etc.
      * 
      * @param mixed $q 
+     * @param int $page_limit 
+     * @param int $offset 
+     * @param mixed $total_rows 
      * @return array
      */
     public function search_related($q, $page_limit = 10, $offset = 0, $total_rows = true) {
         list($criteria_str, $criteria_val) = $this->_get_criteria_set_by_q($q);
         $result_set = $this->search($criteria_str, $criteria_val, $page_limit, $offset, $total_rows);
+        return $result_set;
+    }
+
+    /**
+     * By given a general keyword, search by all the related STRING
+     * i.e. by name, code, etc. with some specific condition
+     * 
+     * @param mixed $extra_str 
+     * @param mixed $extra_val 
+     * @param mixed $q 
+     * @param int $page_limit 
+     * @param int $offset 
+     * @param mixed $total_rows 
+     * @return array
+     */
+    public function search_q_with_extra_condition(
+        $extra_str, // extra specific condition
+        $extra_val, // value for the extra condition
+        $q, 
+        $page_limit = 10,
+        $offset = 0,
+        $total_rows = true
+    ) {
+        list($criteria_str, $criteria_val) = $this->_get_criteria_set_by_q($q);
+        $criteria_str .= ' AND ' .$extra_str;
+        $criteria_set = array_merge($criteria_val, $extra_val);
+        $result_set = $this->search($criteria_set, $criteria_val, $page_limit, $offset, $total_rows);
         return $result_set;
     }
 
