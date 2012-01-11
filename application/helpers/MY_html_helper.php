@@ -118,7 +118,7 @@ if ( ! function_exists('icon_delete')) {
 }
 
 /**
- * label 
+ * Label the text (formatting the lable) 
  * 
  * @param string $text 
  * @param array $attr 
@@ -138,3 +138,29 @@ if ( ! function_exists('label')) {
         return $label;
     }
 }
+
+/**
+ * Share the page to social network
+ * Reference: http://www.addthis.com/ 
+ * 
+ * @access public
+ * @return string
+ */
+if ( ! function_exists('sharable')) {
+    function sharable() {
+        $text = "<!-- AddThis Button BEGIN -->"
+            . "\n<div class='addthis_toolbox addthis_default_style '>"
+            . "\n<a class='addthis_button_preferred_1'></a>"
+            . "\n<a class='addthis_button_preferred_2'></a>"
+            . "\n<a class='addthis_button_preferred_3'></a>"
+            . "\n<a class='addthis_button_preferred_4'></a>"
+            . "\n<a class='addthis_button_compact'></a>"
+            . "\n<a class='addthis_counter addthis_bubble_style'></a>"
+            . "\n</div>"
+            . "\n<script type='text/javascript' src='http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4f0d3ef949edb751'></script>"
+            . "\n<!-- AddThis Button END -->";
+        return $text;
+    }
+}
+
+
