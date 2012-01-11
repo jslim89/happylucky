@@ -49,6 +49,14 @@ class Product extends MY_Controller {
         );
         $this->load_view('product/list', $this->vars);
 	}
+
+    public function view($id) {
+        $product = new Product_Model($id);
+        $this->vars['product'] = $product;
+        $this->vars['title'] = lang('product');
+
+        $this->load_view('product/view', $this->vars);
+    }
 }
 
 /* End of file product.php */
