@@ -20,6 +20,7 @@ $lang['product_total_number_sold']      = "Total Number Sold";
 $lang['product_min_quantity']           = "Minimum Quantity";
 $lang['product_minimum_quantity_alert'] = "Minimum Quantity Alert";
 $lang['product_min_qty_alert_desc']     = "Whenever quantity left is less than this amount, you will be alerted";
+$lang['product_quantity']               = "Quantity";
 $lang['product_quantity_left']          = "Quantity Left";
 $lang['product_quantity_available']     = "Quantity Available";
 $lang['product_suppliers_available']    = "Supplier(s) Available";
@@ -37,4 +38,5 @@ $lang['product_is_it_an_amulet']   = "Is this product is an amulet";
 $lang['product_size']       = "Size";
 $lang['product_ingredient'] = "Ingredient";
 
-$lang['product_no_product'] = "No Product";
+$lang['product_no_product']   = "No Product";
+$lang['product_availability'] = "Availability";

@@ -85,5 +85,8 @@ $lang['cart']        = 'Cart';
 $lang['go_to_cart']  = 'Go To Cart';
 $lang['add_to_cart'] = 'Add To Cart';
 
-$lang['welcome']       = 'Welcome';
-$lang['guest']       = 'Guest';
+$lang['welcome'] = 'Welcome';
+$lang['guest']   = 'Guest';
+
+$lang['hot']    = 'HOT';
+$lang['latest'] = 'Latest';

@@ -69,8 +69,7 @@ $this->load->view('common/topmenu', $topmenu);
 <!-- End Title -->
 <?php echo clear_div();?>
 
-
-<!-- Content DIV (For normal user is grid_16) -->
-<div class="grid_16">
-    <!-- Content -->
-    <div class="content">
+<!-- Content -->
+<div class="content">
+    <!-- Content DIV (For normal user is grid_16) -->
+    <div class="grid_16">
