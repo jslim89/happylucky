@@ -14,6 +14,7 @@ $lang['product_price']                  = "Price";
 $lang['product_cost']                   = "Cost";
 $lang['product_standard_price']         = "Standard Price";
 $lang['product_type']                   = "Type";
+$lang['product_category']               = "Category";
 $lang['product_description']            = "Description";
 $lang['product_total_number_sold']      = "Total Number Sold";
 $lang['product_min_quantity']           = "Minimum Quantity";

@@ -51,6 +51,14 @@ class Product_Model extends MY_Active_Record {
      */
     var $_table = 'product';
 
+    const BOTH    = 'BOTH';
+
+    const GREATER_EQUAL = 2;
+    const GREATER       = 1;
+    const EQUAL         = 0;
+    const LESS          = -1;
+    const LESS_EQUAL    = -2;
+
     const RETAIL    = 'RETAIL';
     const WHOLESALE = 'WHOLESALE';
 

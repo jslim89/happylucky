@@ -59,6 +59,7 @@ $lang['wholesale']             = 'Wholesale';
 $lang['report']                = 'Report';
 
 $lang['search']             = 'Search';
+$lang['close']              = 'Close';
 $lang['advanced_search']    = 'Advanced Search';
 $lang['save']               = 'Save';
 $lang['reset']              = 'Reset';
