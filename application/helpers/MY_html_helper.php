@@ -116,3 +116,25 @@ if ( ! function_exists('icon_delete')) {
         return img($icon);
     }
 }
+
+/**
+ * label 
+ * 
+ * @param string $text 
+ * @param array $attr 
+ * @access public
+ * @return string
+ */
+if ( ! function_exists('label')) {
+    function label($text, $attr = array()) {
+        $attributes[] = 'class="label '.element('class', $attr, '').'"';
+        if(array_key_exists('class', $attr)) unset($attr['class']);
+        foreach($attr as $key => $val) {
+            $attributes[] = $key.'="'.$val.'"';
+        }
+        $label = '<span '.implode(' ', $attributes).'>'
+               . $text
+               . '</span>';
+        return $label;
+    }
+}
