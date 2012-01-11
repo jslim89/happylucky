@@ -6,6 +6,16 @@ $(document).ready(function() {
 
 <?php echo clear_div();?>
 
+<!-- Search box -->
+<div class="grid_16 search">
+    <?php
+    $this->load->view('common/search_form', $search_form_info);
+    ?>
+</div>
+<!-- End Search box -->
+
+<?php echo clear_div();?>
+
 <!-- Pagination -->
 <div class="grid_16">
     <?php echo $pagination->create_links().nbs(1);?>

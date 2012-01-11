@@ -25,12 +25,13 @@ class Product extends MY_Controller {
 
 	public function index($page = 0)
 	{
+        $q = get_post('q');
         // either AMULET or ACCESSORIES
         $category = strtoupper(get_post('category', Product_Model::AMULET));
         // either RETAIL or WHOLESALE
         $type     = strtoupper(get_post('type', Product_Model::RETAIL));
 
-        $sql = 'UPPER(product_type) = ? AND ';
+        $sql = 'quantity_available > 0 AND UPPER(product_type) = ? AND ';
         $sql .= ($category === Product_Model::AMULET)
             ? ' amulet_product_id > 0'
             : ' amulet_product_id = 0';
@@ -43,6 +44,9 @@ class Product extends MY_Controller {
         $this->vars['pagination'] = $this->product_model->get_pagination($total_rows, 10, 3);
         $this->vars['title'] = lang('product');
         $this->vars['products'] = $products;
+        $this->vars['search_form_info'] = array(
+            'search_url' => site_url('product/index'),
+        );
         $this->load_view('product/list', $this->vars);
 	}
 }
