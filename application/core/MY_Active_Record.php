@@ -130,9 +130,9 @@ class MY_Active_Record extends ADOdb_Active_Record {
         $total_rows = true
     ) {
         list($criteria_str, $criteria_val) = $this->_get_criteria_set_by_q($q);
-        $criteria_str .= ' AND ' .$extra_str;
+        $sql = '('.$criteria_str . ') AND ' .$extra_str;
         $criteria_set = array_merge($criteria_val, $extra_val);
-        $result_set = $this->search($criteria_set, $criteria_val, $page_limit, $offset, $total_rows);
+        $result_set = $this->search($sql, $criteria_set, $page_limit, $offset, $total_rows);
         return $result_set;
     }
 
