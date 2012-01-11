@@ -75,7 +75,7 @@ class MY_Active_Record extends ADOdb_Active_Record {
      * @return array
      */
     public function columns($noncasesensitive = true) {
-        return $this->get_ci()->adodb->MetaColumns($this->_table, $noncasesensitive);
+        return $this->_get_ci()->adodb->MetaColumns($this->_table, $noncasesensitive);
     }
 
     /**
@@ -199,7 +199,7 @@ class MY_Active_Record extends ADOdb_Active_Record {
         , $is_ajax_paging = FALSE
         , $paging_function = 'ajax_paging'
     ) {
-        $this->get_ci()->load->library('pagination');
+        $this->_get_ci()->load->library('pagination');
         $conf = array(
             'total_rows'       => $total_rows,
             'base_url'         => $base_url ? $base_url : $this->_get_curr_url(),
@@ -215,8 +215,8 @@ class MY_Active_Record extends ADOdb_Active_Record {
     }
 
     protected function _get_curr_url() {
-        return base_url().$this->get_ci()->router->directory.
-            $this->get_ci()->router->class.'/'.$this->get_ci()->router->method;
+        return base_url().$this->_get_ci()->router->directory.
+            $this->_get_ci()->router->class.'/'.$this->_get_ci()->router->method;
     }
 
     /**
@@ -254,11 +254,11 @@ class MY_Active_Record extends ADOdb_Active_Record {
     }
 
     public function delete() {
-        $this->get_ci()->adodb->StartTrans();
+        $this->_get_ci()->adodb->StartTrans();
         $sql = "DELETE FROM ".$this->_table
              . " WHERE id=?";
-        $this->get_ci()->adodb->Execute($sql, array($this->id));
-        $committed = $this->get_ci()->adodb->CompleteTrans();
+        $this->_get_ci()->adodb->Execute($sql, array($this->id));
+        $committed = $this->_get_ci()->adodb->CompleteTrans();
         return $committed;
     }
 
@@ -327,7 +327,7 @@ class MY_Active_Record extends ADOdb_Active_Record {
 		throw new Exception("Unable to call the method \"$method\" on the class " . get_class($this));
 	}
 
-    private function get_ci() {
+    protected function _get_ci() {
         $ci =& get_instance();
         return $ci;
     }
