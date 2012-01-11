@@ -67,7 +67,7 @@
             delete_row_confirmation(delete_urls, row_ids);
         });
 
-        $('a.lightbox').lightBox();
+        $('a[rel=lightbox]').lightBox();
 
         $('span[id^=edit_]').each(function() {
             $(this).click(function() {
@@ -238,7 +238,7 @@ foreach($images as $image): ?>
         'width'  => '100',
         'height' => '100',
         )),
-        array('class' => 'lightbox')
+        array('rel' => 'lightbox')
     );
     ?></td>
     <td><?php
