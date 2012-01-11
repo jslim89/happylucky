@@ -32,6 +32,7 @@ $scripts = array(
     'jquery.query-2.1.7.js',
     'jquery.cookie.js',
     'jquery.expander.min.js',
+    'jquery.nivo.slider.pack.js',
     'login/jquery.pop.js',
     'login/jquery.tipsy.js',
     'login.js',

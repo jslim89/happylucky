@@ -12,7 +12,12 @@ $styles = array(
     'topmenu/style.css',
     'menu/menu.css',
     'lightbox/jquery.lightbox-0.5.css',
+    'nivo-slider/nivo-slider.css',
+    'nivo-slider/themes/default/default.css',
+    'nivo-slider/themes/orman/orman.css',
+    'nivo-slider/themes/pascal/pascal.css',
     'validationEngine.jquery.css',
+    'view.css',
     'main.css',
 );
 
