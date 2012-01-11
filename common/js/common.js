@@ -210,9 +210,12 @@ function delete_row(delete_url, row_id) {
     }, 3100);
 }
 
-function add_to_cart(product_id) {
+function add_to_cart(product_id, quantity) {
+    if(quantity == null) quantity = 1;
     $.ajax({
-        url: base_url + 'cart/add/' + product_id,
+        url: base_url + 'cart/add/' + product_id + '/' + quantity,
+        type: 'POST',
+        // data: 'quantity='+quantity,
         success: function(data) {
             // TODO: update cart content
         },
