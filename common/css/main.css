@@ -10,6 +10,10 @@ body, label, input, button, a, table, p, link, h1, h2, h3
     color: #4F5155;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+}
+
 :-moz-any-link :focus {
 	outline: none;
 }
@@ -238,4 +242,41 @@ ul.no-bullet li {
 }
 .box-category > ul > li ul > li > a.active {
     font-weight: bold;
+}
+
+/* footer */ 
+#footer {
+	clear: both;
+	overflow: auto;
+	min-height: 100px;
+	padding: 20px;
+	border-top: 1px solid #DBDEE1;
+	border-bottom: 1px solid #DBDEE1;
+	background: #F8F8F8;
+}
+#footer h3 {
+	color: #000000;
+	font-size: 14px;
+	margin-top: 0px;
+	margin-bottom: 8px;
+}
+#footer .column {
+	float: left;
+	width: 25%;
+	min-height: 100px;
+}
+#footer .column ul {
+	margin-top: 0px;
+	margin-left: 0px;
+	padding-left: 12px;
+}
+#footer .column ul li {
+	margin-bottom: 3px;
+}
+#footer .column a {
+	text-decoration: none;
+	color: #000;
+}
+#footer .column a:hover {
+	text-decoration: underline;
 }

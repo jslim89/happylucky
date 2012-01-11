@@ -90,3 +90,17 @@ $lang['guest']   = 'Guest';
 
 $lang['hot']    = 'HOT';
 $lang['latest'] = 'Latest';
+
+// Footer
+$lang['information']            = 'Information';
+$lang['about_us']               = 'About Us';
+$lang['delivery_infomation']    = 'Delivery Information';
+$lang['privacy_policy']         = 'Privacy Policy';
+$lang['terms_and_conditions']   = 'Terms &amp; Conditions';
+                                                                                                                              
+$lang['customer_service']       = 'Customer Service';
+$lang['contact_us']             = 'Contact Us';
+$lang['ordering']               = 'Ordering';
+                                                                                                                              
+$lang['my_account']             = 'My Account';
+$lang['order_history']          = 'Order History';
