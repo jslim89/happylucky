@@ -67,8 +67,6 @@
             delete_row_confirmation(delete_urls, row_ids);
         });
 
-        $('a[rel=lightbox]').lightBox();
-
         $('span[id^=edit_]').each(function() {
             $(this).click(function() {
                 var id = get_element_index($(this));

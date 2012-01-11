@@ -73,6 +73,8 @@ function ui_confirm(title, message) {
 }
 
 $(document).ready(function() {
+    $('a[rel=lightbox]').lightBox();
+
     $('#confirm-dialog').dialog({
         autoOpen: false,
         resizable: false,
