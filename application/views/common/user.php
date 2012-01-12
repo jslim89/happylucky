@@ -34,7 +34,7 @@
 <div class="grid_16">
 <?php 
 $list = array(
-    anchor(site_url('home'), lang('home')),
+    anchor(site_url(''), lang('home')),
     '<a href="#">'.lang('product').'</a>' => array(
         anchor(site_url('product').'?category=amulet', lang('amulet')) => array(
             anchor(site_url('product').'?category=amulet&type=retail', lang('retail')),
