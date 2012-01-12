@@ -1,29 +1,41 @@
     <div class="grid_6">
-    <?php 
-    $username = get_session('user_id') 
-        ? anchor(base_url('user/profile'), get_session('username')) 
-        : lang('guest');
-    echo lang('welcome').', '.$username;
-    ?>
-    <!-- Login Bar -->
-    <?php if(!get_session('user_id') || get_session('user_type') == 'ADMIN') {
-            // Login
-            $this->load->view('common/login');
-            // End Login
-          }
-          else {
-              // Logout
-    ?>
-        <div id="logout-topnav" class="topnav">
-            <a href="<?php echo site_url('welcome/logout');?>" class="signout">
-                <span><?php echo lang('user_signout');?></span>
-            </a>
+        <div id="header-login">
+            <div id="header-welcome"><?php 
+                $username = get_session('user_id') 
+                    ? anchor(base_url('user/profile'), get_session('username')) 
+                    : lang('guest');
+                echo lang('welcome').', '.$username;
+            ?></div>
+            <!-- Login Bar -->
+            <?php if(!get_session('user_id') || get_session('user_type') == 'ADMIN') {
+                    // Login
+                    $this->load->view('common/login');
+                    // End Login
+                  }
+                  else {
+                      // Logout
+            ?>
+                <div id="logout-topnav" class="topnav">
+                    <a href="<?php echo site_url('welcome/logout');?>" class="signout">
+                        <span><?php echo lang('user_signout');?></span>
+                    </a>
+                </div>
+            <?php
+                      // End Logout
+                  }
+            ?>
+            <!-- End Login Bar -->
         </div>
-    <?php
-              // End Logout
-          }
-    ?>
-    <!-- End Login Bar -->
+        <div id="header-links"><?php 
+            echo anchor(
+                site_url('cart'),
+                lang('shopping_cart')
+            );
+            echo anchor(
+                site_url('account'),
+                lang('user_account')
+            );
+        ?></div>
     </div>
 </div>
 <!-- End Header -->

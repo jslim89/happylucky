@@ -5,10 +5,10 @@
 
 #login-content {
 	width:520px;
-	min-height:500px;
+	min-height:300px;
 }
 #login-topnav {
-	padding:10px 0px 12px;
+	padding:10px 0px 15px 10px;
 	font-size:11px;
 	line-height:23px;
 	text-align:right;
