@@ -41,4 +41,19 @@ class Country_Model extends MY_Active_Record {
      * @access protected
      */
     var $_table = 'country';
+
+    /**
+     * Get all the countries 
+     * 
+     * @return array
+     */
+    public static function get_dropdown_list() {
+        $result_set = array();
+        $country = new Country_Model();
+        $countries = $country->search('');
+        foreach($countries as $c) {
+            $result_set[$c->id] = $c->country_name;
+        }
+        return $result_set;
+    }
 }
