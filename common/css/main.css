@@ -131,6 +131,11 @@ ul.no-bullet li {
     color: #800000;
 }
 
+ul.order table {
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+}
+
 /* box */
 .box {
     margin-bottom: 20px;
@@ -448,4 +453,53 @@ a.button:hover span {
 	text-align: center;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+/* Table List */
+table.list {
+	border-collapse: collapse;
+	width: 100%;
+	border-top: 1px solid #DDDDDD;
+	border-left: 1px solid #DDDDDD;
+	margin-bottom: 20px;
+}
+table.list td {
+	border-right: 1px solid #DDDDDD;
+	border-bottom: 1px solid #DDDDDD;
+}
+table.list thead td {
+	background-color: #EFEFEF;
+	padding: 0px 5px;
+}
+table.list thead td a, .list thead td {
+	text-decoration: none;
+	color: #222222;
+	font-weight: bold;
+}
+table.list tbody td a {
+	text-decoration: underline;
+}
+table.list tbody td {
+	vertical-align: top;
+	padding: 0px 5px;
+}
+table.list .left {
+	text-align: left;
+	padding: 7px;
+}
+table.list .right {
+	text-align: right;
+	padding: 7px;
+}
+table.list .center {
+	text-align: center;
+	padding: 7px;
+}
+table.list .asc {
+	padding-right: 15px;
+	background: url('../image/asc.png') right center no-repeat;
+}
+table.list .desc {
+	padding-right: 15px;
+	background: url('../image/desc.png') right center no-repeat;
 }

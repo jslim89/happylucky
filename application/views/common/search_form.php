@@ -14,6 +14,7 @@ $(document).ready(function() {
             ));?></td>
             <td><?php echo form_submit(array(
                 'value' => lang('search'),
+                'class' => 'button',
             ));?></td>
         </tr>
 <!--

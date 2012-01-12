@@ -147,6 +147,15 @@ class Product_Model extends MY_Active_Record {
         return sizeof($this->amulet_product) > 0;
     }
 
+    public function amulet() {
+        if($this->is_amulet()) {
+            $this->_get_ci()->load->model('amulet_model');
+            $amulet = new Amulet_Model($this->amulet_product->amulet_id);
+            return $amulet;
+        }
+        return false;
+    }
+
     /**
      * I'm using CodeIgniter built-in Cart class.
      * There are several attributes are compulsory, this

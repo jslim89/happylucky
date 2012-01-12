@@ -3,6 +3,7 @@ $lang['happy_lucky'] = 'Happy Lucky';
 
 $lang['add_new']      = 'Add New';
 $lang['edit']         = 'Edit';
+$lang['view']         = 'View';
 $lang['delete']       = 'Delete';
 $lang['add_files']    = 'Add Files';
 $lang['delete_files'] = 'Delete Files';
