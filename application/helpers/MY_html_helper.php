@@ -163,4 +163,28 @@ if ( ! function_exists('sharable')) {
     }
 }
 
+/**
+ * button_link 
+ * 
+ * @param mixed $link 
+ * @param mixed $text 
+ * @param array $attr 
+ * @access public
+ * @return string
+ */
+if ( ! function_exists('button_link')) {
+    function button_link($link, $text, $attr = array()) {
+        $attributes[] = 'class="button '.element('class', $attr, '').'"';
+        if(array_key_exists('class', $attr)) unset($attr['class']);
+        foreach($attr as $key => $val) {
+            $attributes[] = $key.'="'.$val.'"';
+        }
+        $button = anchor(
+            $link,
+            '<span>'.$text.'</span>',
+            implode(' ', $attributes)
+        );
+        return $button;
+    }
+}
 

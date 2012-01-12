@@ -153,17 +153,15 @@ $(document).ready(function() {
             </a>
         </div>
         <div class="right"><?php
-            echo anchor(
+            echo button_link(
                 site_url('cart/checkout'),
-                '<span>'.lang('cart_check_out').'</span>',
-                'class="button"'
+                lang('cart_check_out')
             );
         ?></div>
         <div class="center"><?php
-            echo anchor(
+            echo button_link(
                 site_url(''),
-                '<span>'.lang('cart_continue_shopping').'</span>',
-                'class="button"'
+                lang('cart_continue_shopping')
             );
         ?></div>
     </div>
