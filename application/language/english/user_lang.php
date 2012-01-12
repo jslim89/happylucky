@@ -26,6 +26,15 @@ $lang['user_remember_me']     = "Remember Me";
 $lang['user_forgot_password'] = "Forgot Password";
 $lang['user_forgot_username'] = "Forgot Username";
 
+/* Registration */
+$lang['user_registration']        = "Registration";
+$lang['user_personal_details']    = "Personal Details";
+$lang['user_address_information'] = "Address Information";
+$lang['user_account']             = "Account";
+
+/* Agreement */
+$lang['user_agree_privacy_policy'] = "I have read and agree to the";
+
 $lang['user_invalid_username_or_password'] = "Invalid Username or Password";
 
 /* Tooltips */

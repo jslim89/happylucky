@@ -64,6 +64,7 @@ $lang['search']             = 'Search';
 $lang['close']              = 'Close';
 $lang['advanced_search']    = 'Advanced Search';
 $lang['save']               = 'Save';
+$lang['continue']           = 'Continue';
 $lang['reset']              = 'Reset';
 $lang['all_right_reserved'] = 'All Right Reserved';
 $lang['banner_img_alt']     = 'Happy Lucky';

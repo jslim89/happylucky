@@ -198,7 +198,7 @@ if ( ! function_exists('button_link')) {
  * @return string
  */
 if ( ! function_exists('required_indicator')) {
-    function required_indicator($indicator = '*') {
+    function required_indicator($indicator = '* ') {
         return '<span class="required">'.$indicator.'</span>';
     }
 }

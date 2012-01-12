@@ -23,7 +23,24 @@ h1, h2, h3, h4, h5, h6 {
 	outline: none;
 }
 
-.button:hover {
+input[type='text'], input[type='password'], textarea {
+	background: #F8F8F8;
+	border: 1px solid #CCCCCC;
+	padding: 3px;
+	margin-left: 0px;
+	margin-right: 0px;
+}
+select {
+	background: #F8F8F8;
+	border: 1px solid #CCCCCC;
+	padding: 2px;
+}
+label {
+	cursor: pointer;
+}
+
+span.required {
+    color: red;
 }
 
 .center {
@@ -502,4 +519,20 @@ table.list .asc {
 table.list .desc {
 	padding-right: 15px;
 	background: url('../image/desc.png') right center no-repeat;
+}
+
+/* table form */
+table.form {
+	width: 100%;
+	border-collapse: collapse;
+	margin-bottom: 20px;
+}
+table.form tr td:first-child {
+	width: 150px;
+}
+table.form > * > * > td {
+	color: #000000;
+}
+table.form td {
+	padding: 4px;
 }
