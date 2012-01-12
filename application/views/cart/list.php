@@ -41,82 +41,130 @@ $(document).ready(function() {
 <?php echo clear_div();?>
 
 <div class="grid_16">
-    <form id="cart_form" method="POST" action="">
-        <table class="listing">
-            <tr>
-                <th width="5%"><?php
-                    echo form_checkbox(array(
-                        'name'  => 'check_all',
-                        'id'    => 'check_all',
-                        'value' => 'CHECK_ALL',
-                    ));
-                ?></th>
-                <th><?php echo lang('image');?></th>
-                <th><?php echo lang('product_code');?></th>
-                <th><?php echo lang('product_name');?></th>
-                <th><?php echo lang('cart_quantity');?></th>
-                <th><?php echo lang('cart_price');?></th>
-                <th><?php echo lang('delete');?></th>
-            </tr>
-            <?php foreach($products as $rowid => $product):?>
-            <tr id="product_row_<?php echo $product->id; ?>">
-                <td><?php
-                    echo form_checkbox(array(
-                        'name'  => 'check_'.$product->id,
-                        'id'    => 'check_'.$product->id,
-                        'value' => $product->id,
-                        'class' => 'delete_check',
-                    ));
-                ?></td>
-                <td><?php 
-                    $image_src = $product->primary_image_url
-                        ? $product->primary_image_url
-                        : default_image_path();
-                    echo anchor(
-                        site_url('product/edit/'.$product->id),
-                        img(array(
-                            'src'    => $image_src,
-                            'alt'    => $product->product_name,
-                            'width'  => '100',
-                            'height' => '100',
-                        ))
-                    );
-                ?></td>
-                <td><?php 
-                    echo anchor(
-                        site_url('product/view/'.$product->id),
-                        $product->product_code
-                    );
-                ?></td>
-                <td><?php 
-                    echo anchor(
-                        site_url('product/view/'.$product->id),
-                        $product->product_name
-                    );
-                ?></td>
-                <td><?php
-                    echo form_input(array(
-                        'id'    => 'quantity',
-                        'value' => $product->qty,
-                        'class' => 'positive-integer validate[required,max['.$product->quantity_available.']]',
-                    ));
-                    echo br(1);
-                    ?>
-                    <span class="guide"><?php
-                        echo lang('product_quantity_available').': '.$product->quantity_available;
-                    ?></span>
-                </td>
-                <td><?php echo $product->standard_price;?></td>
-                <td>
-                    <ul id="icons" class="ui-widget ui-helper-clearfix" style="">
-                        <li class="ui-state-default ui-corner-all">
-                            <span id="delete_<?php echo $product->id; ?>" class="ui-icon ui-icon-trash"
-                                title="<?php echo lang('delete');?>"></span>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-            <?php endforeach;?>
-        </table>
+    <form id="cart_form" method="POST" action="<?php echo site_url('cart/update');?>">
+        <div class="cart-info">
+            <table class="listing" width="100%">
+                <thead>
+                    <tr>
+                        <td width="5%"><?php
+                            echo form_checkbox(array(
+                                'name'  => 'check_all',
+                                'id'    => 'check_all',
+                                'value' => 'CHECK_ALL',
+                            ));
+                        ?></td>
+                        <td class="image"><?php echo lang('image');?></td>
+                        <td><?php echo lang('product_code');?></td>
+                        <td class="name"><?php echo lang('product_name');?></td>
+                        <td class="quantity"><?php echo lang('cart_quantity');?></td>
+                        <td class="price"><?php echo lang('cart_unit_price');?></td>
+                        <td class="total"><?php echo lang('cart_total');?></td>
+                        <td><?php echo lang('delete');?></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($products as $rowid => $product):?>
+                    <tr id="product_row_<?php echo $product->id; ?>">
+                        <td class="remove"><?php
+                            echo form_checkbox(array(
+                                'name'  => 'check_'.$product->id,
+                                'id'    => 'check_'.$product->id,
+                                'value' => $product->id,
+                                'class' => 'delete_check',
+                            ));
+                        ?></td>
+                        <td class="image"><?php 
+                            $image_src = $product->primary_image_url
+                                ? $product->primary_image_url
+                                : default_image_path();
+                            echo anchor(
+                                site_url('product/edit/'.$product->id),
+                                img(array(
+                                    'src'    => $image_src,
+                                    'alt'    => $product->product_name,
+                                    'width'  => '100',
+                                    'height' => '100',
+                                ))
+                            );
+                        ?></td>
+                        <td class="code"><?php 
+                            echo anchor(
+                                site_url('product/view/'.$product->id),
+                                $product->product_code
+                            );
+                        ?></td>
+                        <td class="name"><?php 
+                            echo anchor(
+                                site_url('product/view/'.$product->id),
+                                $product->product_name
+                            );
+                        ?></td>
+                        <td class="quantity"><?php
+                            echo form_input(array(
+                                'id'    => 'quantity',
+                                'value' => $product->qty,
+                                'class' => 'positive-integer validate[required,max['.$product->quantity_available.']]',
+                            ));
+                            echo br(1);
+                            ?>
+                            <span class="guide"><?php
+                                echo lang('product_quantity_available').': '.$product->quantity_available;
+                            ?></span>
+                        </td>
+                        <td class="price"><?php echo $product->standard_price;?></td>
+                        <td class="price"><?php echo ($product->standard_price * $product->qty);?></td>
+                        <td>
+                            <ul id="icons" class="ui-widget ui-helper-clearfix" style="">
+                                <li class="ui-state-default ui-corner-all">
+                                    <span id="delete_<?php echo $product->id; ?>" class="ui-icon ui-icon-trash"
+                                        title="<?php echo lang('delete');?>"></span>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <?php endforeach;?>
+                </tbody>
+            </table>
+        </div>
     </form>
+    <div class="cart-total">
+        <table width="100%">
+            <tr>
+                <td colspan="5" width="70%">&nbsp;</td>
+                <td class="right"><?php echo label(lang('cart_sub_total'));?>: </td>
+                <td class="right">RM <?php echo 5000.00;?></td>
+            </tr>
+            <tr>
+                <td colspan="5">&nbsp;</td>
+                <td class="right"><?php echo label(lang('cart_shipping'));?>: </td>
+                <td class="right">RM <?php echo 20.00;?></td>
+            </tr>
+            <tr>
+                <td colspan="5">&nbsp;</td>
+                <td class="right"><?php echo label(lang('cart_total'));?>: </td>
+                <td class="right">RM <?php echo 5020.00;?></td>
+            </tr>
+        </table>
+    </div>
+    <div class="buttons">
+        <div class="left">
+            <a onclick="$('#cart_form').submit();" class="button">
+                <span><?php echo lang('update'); ?></span>
+            </a>
+        </div>
+        <div class="right"><?php
+            echo anchor(
+                site_url('cart/checkout'),
+                '<span>'.lang('cart_check_out').'</span>',
+                'class="button"'
+            );
+        ?></div>
+        <div class="center"><?php
+            echo anchor(
+                site_url('home'),
+                '<span>'.lang('cart_continue_shopping').'</span>',
+                'class="button"'
+            );
+        ?></div>
+    </div>
 </div>

@@ -280,3 +280,172 @@ ul.no-bullet li {
 #footer .column a:hover {
 	text-decoration: underline;
 }
+
+/* Cart */
+div#cart {
+	position: absolute;
+	top: 0px;
+	right: 145px;
+	z-index: 9;
+	min-width: 300px;
+}
+div#cart .heading {
+	float: right;
+	margin-right: 172px;
+	margin-top: 15px;
+	padding-left: 14px;
+	padding-right: 14px;
+	border-top: 1px solid #FFFFFF;
+	border-left: 1px solid #FFFFFF;
+	border-right: 1px solid #EEEEEE;
+	background: #FFF;
+	position: relative;
+	z-index: 1;
+}
+div#cart .heading h4 {
+	color: #333333;
+	font-size: 15px;
+	font-weight: bold;
+	margin-top: 0px;
+	margin-bottom: 3px;
+}
+div#cart .heading a {
+	color: #38B0E3;
+	text-decoration: none;
+}
+div#cart .heading a span {
+	background: #FFFFFF url('images/arrow-down.png') 100% 50% no-repeat;
+	padding-right: 15px;
+}
+div#cart .content {
+	clear: both;
+	display: none;
+	position: relative;
+	top: -1px;
+	padding: 8px;
+	min-height: 150px;
+	border-top: 1px solid #EEEEEE;
+	border-left: 1px solid #EEEEEE;
+	border-right: 1px solid #EEEEEE;
+	border-bottom: 1px solid #EEEEEE;
+	-webkit-border-radius: 0px 7px 7px 7px;
+	-moz-border-radius: 0px 7px 7px 7px;
+	-khtml-border-radius: 0px 7px 7px 7px;
+	border-radius: 0px 7px 7px 7px;
+	-webkit-box-shadow: 0px 2px 2px #DDDDDD;
+	-moz-box-shadow: 0px 2px 2px #DDDDDD;
+	box-shadow: 0px 2px 2px #DDDDDD;
+	background: #FFF;
+}
+
+div#cart.active .heading {
+	margin-top: 5px;
+	padding-top: 10px;
+	padding-bottom: 6px;
+	border-top: 1px solid #EEEEEE;
+	border-left: 1px solid #EEEEEE;
+	border-right: 1px solid #EEEEEE;
+	-webkit-border-radius: 7px 7px 0px 0px;
+	-moz-border-radius: 7px 7px 0px 0px;
+	-khtml-border-radius: 7px 7px 0px 0px;
+	border-radius: 7px 7px 0px 0px;
+}
+div#cart.active .content {
+	display: block;
+}
+div#cart .cart {
+	border-collapse: collapse;
+	width: 100%;
+	margin-bottom: 5px;
+}
+div#cart .cart td {
+	color: #000;
+	vertical-align: top;
+	padding: 10px 5px;
+	border-bottom: 1px solid #EEEEEE;
+}
+div#cart .cart .image {
+	width: 1px;
+}
+div#cart .cart .image img {
+	border: 1px solid #EEEEEE;
+	text-align: left;
+}
+div#cart .cart .name small {
+	color: #666;
+}
+div#cart .cart .quantity {
+	text-align: right;
+}
+div#cart .cart td.total {
+	text-align: right;
+}
+div#cart .cart .remove {
+	text-align: right;
+}
+div#cart .cart .remove img {
+	cursor: pointer;
+}
+div#cart table.total {
+	border-collapse: collapse;
+	padding: 5px;
+	float: right;
+	clear: left;
+	margin-bottom: 5px;
+}
+div#cart table.total td {
+	color: #000;
+}
+div#cart .content .checkout {
+	text-align: right;
+	clear: both;
+}
+div#cart .empty {
+	padding-top: 50px;
+	text-align: center;
+}
+
+/* button */
+a.button {
+	display: inline-block;
+	padding-left: 6px;
+	background: url('images/button-left.png') top left no-repeat;
+	text-decoration: none;
+	cursor: pointer;
+}
+a.button span {
+	color: #FFFFFF;
+	line-height: 12px;
+	font-size: 12px;
+	font-weight: bold;
+	display: inline-block;
+	padding: 6px 12px 8px 5px;
+	background: url('images/button-right.png') top right no-repeat;
+}
+a.button:hover {
+	background: url('images/button-left-active.png') top left no-repeat;
+}
+a.button:hover span {
+	color: #FFFFFF;
+	background: url('images/button-right-active.png') top right no-repeat;
+}
+.buttons {
+	background: #FFFFFF;
+	border: 1px solid #EEEEEE;
+	overflow: auto;
+	padding: 6px;
+	margin-bottom: 20px;
+}
+.buttons .left {
+	float: left;
+	text-align: left;
+}
+.buttons .right {
+	float: right;
+	text-align: right;
+}
+.buttons .center {
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
