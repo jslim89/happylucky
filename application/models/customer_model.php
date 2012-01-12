@@ -36,6 +36,17 @@ class Customer_Model extends MY_Active_Record {
      */
     var $_table = 'customer';
 
+    /**
+     * constant for sex 
+     */
+    const MALE   = 'M';
+    const FEMALE = 'F';
+
+    /**
+     * _encrypt_password 
+     * 
+     * @return void
+     */
     private function _encrypt_password() {
         // Generate a random salt if empty
         if(empty($this->salt)) {
@@ -44,6 +55,11 @@ class Customer_Model extends MY_Active_Record {
         $this->password = sha1($this->salt . $this->password);
     }
 
+    /**
+     * login 
+     * 
+     * @return boolean
+     */
     public function login() {
         $c = new Customer_Model();
         $c->load_by_email($this->email);
