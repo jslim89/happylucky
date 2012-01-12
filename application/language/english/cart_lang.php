@@ -9,4 +9,4 @@ $lang['cart_shipping']   = "Shipping";
 $lang['cart_quantity']   = "Quantity";
 
 $lang['cart_continue_shopping'] = "Continue Shopping";
-$lang['cart_check_out']          = "Check Out";
+$lang['cart_check_out']         = "Check Out";

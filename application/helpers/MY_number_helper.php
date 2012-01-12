@@ -5,13 +5,13 @@
  * Reference: http://www.php.net/manual/en/function.money-format.php#98783
  * 
  * @param mixed $value 
+ * @param mixed $symbol 
  * @param int $decimal 
- * @param string $symbol 
  * @access public
  * @return string
  */
 if (!function_exists('to_currency')) {
-    function to_currency($value, $decimal = 2, $symbol = 'MYR') {
+    function to_currency($value, $symbol = false, $decimal = 2) {
         $number = sprintf("%.".$decimal."f", $value);
         while (true) { 
             $replaced = preg_replace('/(-?\d+)(\d\d\d)/', '$1,$2', $number); 
@@ -21,6 +21,6 @@ if (!function_exists('to_currency')) {
                 break; 
             } 
         }
-        return $symbol . " " . $number;
+        return (!$symbol) ? $number : $symbol . " " . $number;
     }
 }

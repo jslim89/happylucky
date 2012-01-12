@@ -111,8 +111,8 @@ $(document).ready(function() {
                                 echo lang('product_quantity_available').': '.$product->quantity_available;
                             ?></span>
                         </td>
-                        <td class="price"><?php echo $product->standard_price;?></td>
-                        <td class="price"><?php echo ($product->standard_price * $product->qty);?></td>
+                        <td class="price"><?php echo to_currency($product->standard_price);?></td>
+                        <td class="price"><?php echo to_currency($product->standard_price * $product->qty);?></td>
                         <td>
                             <ul id="icons" class="ui-widget ui-helper-clearfix" style="">
                                 <li class="ui-state-default ui-corner-all">
@@ -132,17 +132,17 @@ $(document).ready(function() {
             <tr>
                 <td colspan="5" width="70%">&nbsp;</td>
                 <td class="right"><?php echo label(lang('cart_sub_total'));?>: </td>
-                <td class="right">RM <?php echo 5000.00;?></td>
+                <td class="right"><?php echo to_currency(5000.00, 'MYR');?></td>
             </tr>
             <tr>
                 <td colspan="5">&nbsp;</td>
                 <td class="right"><?php echo label(lang('cart_shipping'));?>: </td>
-                <td class="right">RM <?php echo 20.00;?></td>
+                <td class="right"><?php echo to_currency(20.00, 'MYR');?></td>
             </tr>
             <tr>
                 <td colspan="5">&nbsp;</td>
                 <td class="right"><?php echo label(lang('cart_total'));?>: </td>
-                <td class="right">RM <?php echo 5020.00;?></td>
+                <td class="right"><?php echo to_currency(5020.00, 'MYR');?></td>
             </tr>
         </table>
     </div>
@@ -161,7 +161,7 @@ $(document).ready(function() {
         ?></div>
         <div class="center"><?php
             echo anchor(
-                site_url('home'),
+                site_url(''),
                 '<span>'.lang('cart_continue_shopping').'</span>',
                 'class="button"'
             );
