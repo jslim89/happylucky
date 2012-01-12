@@ -179,12 +179,26 @@ if ( ! function_exists('button_link')) {
         foreach($attr as $key => $val) {
             $attributes[] = $key.'="'.$val.'"';
         }
-        $button = anchor(
+        $button = ($link) ? anchor(
             $link,
             '<span>'.$text.'</span>',
             implode(' ', $attributes)
-        );
+        )
+        :
+        '<a '.implode(' ', $attributes).'><span>'.$text.'</span></a>';
         return $button;
     }
 }
 
+/**
+ * Normally use a RED asterik (*) to indacate the field is required
+ * 
+ * @param string $indicator 
+ * @access public
+ * @return string
+ */
+if ( ! function_exists('required_indicator')) {
+    function required_indicator($indicator = '*') {
+        return '<span class="required">'.$indicator.'</span>';
+    }
+}
