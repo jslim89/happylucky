@@ -1,4 +1,22 @@
+<!-- Header -->
+<div class="header">
+    <!-- Banner -->
     <div class="grid_6">
+        <?php
+            echo img(array(
+                'src'    => 'images/banner.png',
+                'alt'    => lang('banner_img_alt'),
+                'class'  => '',
+                'width'  => '300px',
+                'height' => '116px',
+                'title'  => '',
+                'rel'    => '',
+                'border' => '0',
+            ));
+        ?>
+    </div>
+    <!-- End Banner -->
+    <div class="grid_10">
         <div id="header-login">
             <div id="header-welcome"><?php 
                 $username = get_session('user_id') 

@@ -18,22 +18,3 @@
 <div id="message-dialog"></div>
 <!-- A container to keep the jQuery confirm dialog -->
 <div id="confirm-dialog"></div>
-
-<!-- Header -->
-<div class="header">
-    <!-- Banner -->
-    <div class="grid_10">
-        <?php
-            echo img(array(
-                'src'    => 'images/banner.png',
-                'alt'    => lang('banner_img_alt'),
-                'class'  => '',
-                'width'  => '300px',
-                'height' => '116px',
-                'title'  => '',
-                'rel'    => '',
-                'border' => '0',
-            ));
-        ?>
-    </div>
-    <!-- End Banner -->
