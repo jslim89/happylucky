@@ -69,6 +69,19 @@ class MY_Active_Record extends ADOdb_Active_Record {
     }
 
     /**
+     * Return the object in array form 
+     * 
+     * @return array
+     */
+    public function to_array() {
+        $result_set = array();
+        foreach($this->columns_name() as $col) {
+            $result_set[$col] = $this->{$col};
+        }
+        return $result_set;
+    }
+
+    /**
      * The columns with metadata 
      * 
      * @param mixed $noncasesensitive 
