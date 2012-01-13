@@ -18,7 +18,7 @@ ALTER TABLE `order_detail` ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 ALTER TABLE `product` ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2;
 ALTER TABLE `product_image` ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 ALTER TABLE `supplier` ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2;
-ALTER TABLE `customer` ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+ALTER TABLE `customer` ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2;
 ALTER TABLE `user` ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2;
 ALTER TABLE `session` ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
@@ -298,6 +298,15 @@ INSERT INTO `supplier` (`id`, `supplier_name`, `address`, `town`,
 `postcode`, `city`, `state`, `country_id`, `contact_no`, `email`) VALUES 
 (1, '佛宝行', 'Jalan Kota Baru', 'Kota Baru', 12000, 'Kota Baru',
 'Kelantan', 129, '010-23432423', 'solid@sampo.com');
+
+INSERT INTO `customer` (`id`, `first_name`, `last_name`, `address`, `town`,
+`postcode`, `city`, `state`, `country_id`, `contact_no`, `email`,
+`password`, `registration_date`, `display_picture`, `sex`, `age`,
+`security_question`, `security_answer`, `salt`, `is_verified`) VALUES 
+(1, 'John', 'Rambo', 'Jalan Kota Baru', 'Kota Baru', 12000, 'Kota Baru',
+'Kelantan', 129, '010-23432423', 'solid@sampo.com',
+'48367792e29476308ad94e26d9fc58e7552754bd', '1326472561', null, 'M', 25,
+'What is your name?', 'John Rambo', 'c13fe37efaa711de8272f1a726bc1413', 1);
 
 INSERT INTO `product` (`id`, `product_code`, `product_name`, `product_desc`,
 `cost`, `standard_price`, `quantity_available`, `min_quantity`, `min_qty_alert`
