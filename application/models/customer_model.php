@@ -77,6 +77,25 @@ class Customer_Model extends MY_Active_Record {
     }
 
     /**
+     * Generate a random password and auto-populate
+     * into current object 
+     * 
+     * @return string
+     */
+    public function generate_new_password() {
+        $random_string = $this->id
+                        .$this->first_name
+                        .$this->last_name
+                        .$this->password
+                        .$this->registration_date;
+        $new_password = md5($random_string);
+        $this->password = $new_password;
+        $this->_encrypt_password();
+        $this->save();
+        return $new_password;
+    }
+
+    /**
      * Check for email unique 
      * 
      * @param mixed $email 
