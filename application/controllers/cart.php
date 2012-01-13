@@ -23,6 +23,7 @@ class Cart extends MY_Controller {
         $this->lang->load('cart');
         $this->load->library('my_cart');
         $this->load->Model('product_model');
+        $this->load->Model('country_model');
     }
 
 	public function index($page = 0)
@@ -57,6 +58,35 @@ class Cart extends MY_Controller {
             'expire' => days_to_seconds(7), // 1 week
         );
         set_cookie($cookie);
+    }
+
+    public function checkout($step = 1) {
+        $this->vars['title'] = lang('cart_check_out');
+        $this->vars['step'] = 'cart/steps/step_'.$step;
+        $this->vars['breadcrumb'] = $this->_breadcrumb($step);
+        $this->load_view('cart/checkout', $this->vars);
+    }
+
+    private function _step_1() {
+    }
+
+    /**
+     * Breadcrumb for checkout steps 
+     * 
+     * @param mixed $step 
+     * @return string
+     */
+    private function _breadcrumb($step) {
+        $breadcrumb = "";
+        for($i = 1; $i < $step; $i++) {
+            $link = anchor(
+                site_url('cart/checkout/'.$i),
+                lang('cart_checkout_step_'.$i)
+            );
+            $breadcrumb .= $link.' > ';
+        }
+        $breadcrumb .= lang('cart_checkout_step_'.$step);
+        return $breadcrumb;
     }
 }
 
