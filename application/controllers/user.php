@@ -33,6 +33,47 @@ class User extends MY_Controller {
         $this->vars['title'] = lang('user_registration');
         $this->load_view('account/register', $this->vars);
     }
+
+    public function login() {
+        if(count($_POST)) {
+            $customer = new Customer_Model();
+
+            $customer->email    = get_post('email');
+            $customer->password = get_post('password');
+
+            $success = $customer->login();
+            if($success) {
+                $session = array(
+                    'customer_id' => $customer->id,
+                    'password'    => $customer->password,
+                    'username'    => $customer->first_name.', '.$customer->last_name,
+                );
+                $this->session->set_customerdata($session);
+                redirect(site_url());
+            }
+            else {
+                $this->session->set_flashdata('login_error', lang('customer_invalid_customer_name_or_password'));
+                redirect(site_url('user/login'));
+            }
+        }
+        else {
+            $this->load_view('account/login', $this->vars);
+        }
+    }
+
+    public function logout() {
+        $this->session->sess_destroy();
+        redirect(site_url());
+    }
+
+    public function get_details_in_json($id) {
+        $customer = new Customer_Model($id);
+        $arr_cust = $customer->to_array();
+        unset($arr_cust['password']);
+        unset($arr_cust['salt']);
+        unset($arr_cust['security_answer']);
+        echo json_encode($customer->to_array());
+    }
 }
 
 /* End of file user.php */

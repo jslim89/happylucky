@@ -27,10 +27,16 @@ $lang['user_forgot_password'] = "Forgot Password";
 $lang['user_forgot_username'] = "Forgot Username";
 
 /* Registration */
-$lang['user_registration']        = "Registration";
-$lang['user_personal_details']    = "Personal Details";
-$lang['user_address_information'] = "Address Information";
-$lang['user_account']             = "Account";
+$lang['user_registration']          = "Registration";
+$lang['user_personal_details']      = "Personal Details";
+$lang['user_address_information']   = "Address Information";
+$lang['user_account']               = "Account";
+$lang['user_new_customer']          = "New Customer";
+$lang['user_existing_customer']     = "Existing Customer";
+$lang['user_create_account_reason'] = "By creating an account you should be 
+                                        able to shop faster, be up to date on 
+                                        an order's status, and keep track of
+                                        the orders you have previously made.";
 
 /* Agreement */
 $lang['user_agree_privacy_policy'] = "I have read and agree to the";
