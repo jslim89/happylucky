@@ -202,3 +202,19 @@ if ( ! function_exists('required_indicator')) {
         return '<span class="required">'.$indicator.'</span>';
     }
 }
+
+/**
+ * spinner 
+ * 
+ * @param string $id 
+ * @access public
+ * @return string
+ */
+if ( ! function_exists('spinner')) {
+    function spinner($id) {
+        return '<span id="'.$id.'" style="display: none;">'
+            .img(array(
+                'src'   => base_url('images/common/spinner.gif'),
+            )).'</span>';
+    }
+}
