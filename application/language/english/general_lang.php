@@ -19,6 +19,7 @@ $lang['last']         = 'Last';
 $lang['more']         = 'More';
 $lang['less']         = 'Less';
 $lang['error']        = 'Error';
+$lang['check']        = 'Check';
 
 $lang['updated']             = 'Updated';
 $lang['update_failed']       = 'Update Failed';

@@ -2,6 +2,9 @@
 <script type="text/javascript">
 $(document).ready(function() {
     $('#form_login').validationEngine('attach');
+    $('#btn_signin').click(function() {
+        $('#form_login').submit();
+    });
 });
 </script>
 </div>

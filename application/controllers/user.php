@@ -22,6 +22,7 @@ class User extends MY_Controller {
         $this->lang->load('user');
         $this->load->Model('customer_model');
         $this->load->Model('country_model');
+        $this->load->library('email');
     }
 
 	public function index() {
@@ -32,6 +33,15 @@ class User extends MY_Controller {
         $customer->populate_from_request($_POST);
         $this->vars['title'] = lang('user_registration');
         $this->load_view('account/register', $this->vars);
+    }
+
+    public function forgot_password() {
+        $this->vars['title'] = lang('user_forgot_password');
+        if(count($_POST)) {
+        }
+        else {
+            $this->load_view('account/forgot_password', $this->vars);
+        }
     }
 
     public function login() {
@@ -48,7 +58,7 @@ class User extends MY_Controller {
                     'password'    => $customer->password,
                     'username'    => $customer->first_name.', '.$customer->last_name,
                 );
-                $this->session->set_customerdata($session);
+                $this->session->set_userdata($session);
                 redirect(site_url());
             }
             else {
@@ -73,6 +83,45 @@ class User extends MY_Controller {
         unset($arr_cust['salt']);
         unset($arr_cust['security_answer']);
         echo json_encode($customer->to_array());
+    }
+
+    public function get_security_question() {
+        $customer = new Customer_Model();
+        $customer->load_by_email(get_post('email'));
+        $result = array();
+        if($customer->is_exist()) {
+            $result['status']            = 1;
+            $result['security_question'] = $customer->security_question;
+        }
+        else {
+            $result['status'] = 0;
+        }
+        echo json_encode($result);
+    }
+
+    public function check_security_answer() {
+        $customer = new Customer_Model();
+        $customer->load_by_email(get_post('email'));
+        $result = array();
+        if(strtolower($customer->security_answer) === strtolower(get_post('answer'))) {
+            /* Send Email */
+            $subject = lang('user_email_password_recovery_subject');
+            $message = lang('user_email_password_recovery_message_before_password');
+            $message .= $customer->generate_new_password();
+            $message .= lang('user_email_password_recovery_message_after_password');
+            $this->email->from('test.jslim89@qq.com', 'Mr Happy Lucky');
+            $this->email->to($customer->email);
+            $this->email->subject($subject);
+            $this->email->message($message);
+            $this->email->send();
+            /* End Send Email */
+
+            $result['response_text'] = lang('user_correct_answer_response_text');
+        }
+        else {
+            $result['response_text'] = lang('user_incorrect_answer_response_text');
+        }
+        echo json_encode($result);
     }
 }
 

@@ -17,10 +17,6 @@ $lang['cart_new_customer']     = "New Customer";
 $lang['cart_checkout_options'] = "Checkout Options";
 $lang['cart_register_account'] = "Register Account";
 $lang['cart_guest_checkout']   = "Guest Checkout";
-$lang['cart_create_account_reason']   = "By creating an account you should be 
-                                        able to shop faster, be up to date on 
-                                        an order's status, and keep track of
-                                        the orders you have previously made.";
 
 $lang['cart_checkout_step_2']  = "Step 2: Account &amp; Delivery Details";
 $lang['cart_personal_details']  = "Personal Details";
