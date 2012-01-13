@@ -1,7 +1,7 @@
 <div id="login-container">
   <div id="login-topnav" class="topnav"><a href="" class="signin"><span><?php echo lang('user_signin');?></span></a> </div>
   <fieldset id="login-signin_menu">
-      <form method="post" id="login-signin" action="<?php echo site_url('welcome/login');?>">
+      <form method="post" id="login-signin" action="<?php echo site_url('user/login');?>">
       <label for="email"><?php echo lang('email');?></label>
       <input id="login_email" name="email" value="" title="<?php echo lang('email');?>" tabindex="4" type="text">
       </p>
@@ -14,7 +14,7 @@
         <input id="remember" name="remember_me" value="1" tabindex="7" type="checkbox">
         <label for="remember"><?php echo lang('user_remember_me');?></label>
       </p>
-      <p class="forgot"><a href="<?php echo site_url('welcome/forgot_password');?>" id="resend_password_link"><?php echo lang('user_forgot_password');?>?</a> </p>
+      <p class="forgot"><a href="<?php echo site_url('user/forgot_password');?>" id="resend_password_link"><?php echo lang('user_forgot_password');?>?</a> </p>
     <!--
       <p class="forgot-username">
         <a id="forgot_username_link"
