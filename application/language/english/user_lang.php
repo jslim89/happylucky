@@ -16,6 +16,7 @@ $lang['user_sex']               = "Sex";
 $lang['user_male']              = "Male";
 $lang['user_female']            = "Female";
 $lang['user_password']          = "Password";
+$lang['user_old_password']      = "Old Password";
 $lang['user_confirm_password']  = "Confirm Password";
 $lang['user_security_question'] = "Security Question";
 $lang['user_security_answer']   = "Security Answer";

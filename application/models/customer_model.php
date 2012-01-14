@@ -63,6 +63,7 @@ class Customer_Model extends MY_Active_Record {
     public function register() {
         // current timestamp
         $this->registration_date = time();
+        $this->is_verified = 0;
         $this->_encrypt_password();
         return $this->save();
     }
@@ -99,6 +100,14 @@ class Customer_Model extends MY_Active_Record {
         $c->password = $password;
         $c->_encrypt_password();
         return $c->password === $this->password;
+    }
+
+    public function update_password($password) {
+        $c = new Customer_Model($this->id);
+        $c->password = $password;
+        $c->_encrypt_password();
+        $this->password = $c->password;
+        return $this->save();
     }
 
     /**

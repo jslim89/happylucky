@@ -37,7 +37,7 @@ class User extends MY_Controller {
         if($_POST) {
             $customer = new Customer_Model();
             $customer->populate_from_request($_POST);
-            $customer->register();
+            $ok = $customer->register();
 
             $this->_send_code($customer);
 
@@ -77,6 +77,8 @@ class User extends MY_Controller {
 
     private function _edit_password($customer) {
         if($_POST) {
+            $customer->update_password(get_post('password'));
+            redirect('user');
         }
         else {
             $this->vars['title'] = lang('user_edit_password');
@@ -242,6 +244,32 @@ class User extends MY_Controller {
             $result['response_text'] = lang('user_incorrect_answer_response_text');
         }
         echo json_encode($result);
+    }
+
+    /**
+     * ajax verification 
+     * 
+     * @return void
+     */
+    public function verify_password() {
+        $customer = new Customer_Model(get_session('customer_id'));
+        $password = get_post('fieldValue');
+        $match = $customer->match_password($password);
+        $to_js = array(
+            get_post('fieldId'),
+            $match,
+        );
+        echo json_encode($to_js);
+    }
+
+    public function check_email() {
+        $email = get_post('fieldValue');
+        $is_unique = Customer_Model::is_email_unique($email);
+        $to_js = array(
+            get_post('fieldId'),
+            $is_unique
+        );
+        echo json_encode($to_js);
     }
 }
 
