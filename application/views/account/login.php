@@ -42,6 +42,16 @@ $(document).ready(function() {
                         'class' => 'validate[required]',
                     ));
                     echo br(1);
+                    echo form_label(
+                        form_checkbox(array(
+                            'id'   => 'form_remember_me',
+                            'name' => 'remember_me',
+                            'value' => 1,
+                        )).lang('user_remember_me'),
+                        'form_remember_me'
+                    );
+                    echo nbs(1);
+                    echo br(1);
                     echo anchor(
                         site_url('user/forgot_password'),
                         lang('user_forgot_password')

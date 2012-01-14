@@ -52,6 +52,14 @@ class User extends MY_Controller {
             $this->email->send();
             /* End Send Email */
 
+            $session = array(
+                'customer_id' => $customer->id,
+                'password'    => $customer->password,
+                'username'    => $customer->first_name.', '.$customer->last_name,
+            );
+            $this->session->set_userdata($session);
+            redirect(site_url());
+
             $this->vars['timeout'] = 10;
             $this->vars['content'] = lang('user_please_check_your_email_for_your_account_verification');
             $this->vars['url']     = site_url('');
@@ -102,6 +110,13 @@ class User extends MY_Controller {
                     'username'    => $customer->first_name.', '.$customer->last_name,
                 );
                 $this->session->set_userdata($session);
+                if(get_post('remember_me', false)) {
+                    set_cookie(array(
+                        'name'   => 'customer_id',
+                        'value'  => $customer->id,
+                        'expire' => days_to_seconds(7),
+                    ));
+                }
                 redirect(site_url());
             }
             else {
@@ -116,6 +131,11 @@ class User extends MY_Controller {
 
     public function logout() {
         $this->session->sess_destroy();
+        // delete a cookie
+        set_cookie(array(
+            'name'   => 'customer_id',
+            'expire' => false,
+        ));
         redirect(site_url());
     }
 

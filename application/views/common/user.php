@@ -19,13 +19,13 @@
     <div class="grid_10">
         <div id="header-login">
             <div id="header-welcome"><?php 
-                $username = get_session('user_id') 
+                $username = get_session('customer_id') 
                     ? anchor(base_url('user/profile'), get_session('username')) 
                     : lang('guest');
                 echo lang('welcome').', '.$username;
             ?></div>
             <!-- Login Bar -->
-            <?php if(!get_session('user_id') || get_session('user_type') == 'ADMIN') {
+            <?php if(!get_session('customer_id')) {
                     // Login
                     $this->load->view('common/login');
                     // End Login
@@ -34,7 +34,7 @@
                       // Logout
             ?>
                 <div id="logout-topnav" class="topnav">
-                    <a href="<?php echo site_url('welcome/logout');?>" class="signout">
+                    <a href="<?php echo site_url('user/logout');?>" class="signout">
                         <span><?php echo lang('user_signout');?></span>
                     </a>
                 </div>

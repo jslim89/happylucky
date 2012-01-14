@@ -17,7 +17,15 @@ class MY_Hook {
                 }
                 break;
             default:
-                if($class != 'welcome') {
+                if(get_cookie('customer_id') && !get_session('customer_id')) {
+                    $ci->load->model('customer_model');
+                    $customer = new Customer_Model(get_cookie('customer_id'));
+                    $session = array(
+                        'customer_id' => $customer->id,
+                        'password'    => $customer->password,
+                        'username'    => $customer->first_name.', '.$customer->last_name,
+                    );
+                    $ci->session->set_userdata($session);
                 }
                 break;
         }

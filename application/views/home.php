@@ -1,4 +1,3 @@
-</div>
 <?php echo clear_div(); ?>
 <style type="text/css">
 div.product-header {
