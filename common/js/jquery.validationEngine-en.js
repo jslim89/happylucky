@@ -130,7 +130,7 @@
 	                },
 				 "ajaxCustomerEmail": {
 	                    // remote json service location
-	                    "url": base_url+"admin/customer/check_email",
+	                    "url": base_url+"user/check_email",
 	                    // error
 	                    "alertText": "* This email is already taken",
 	                    // speaks by itself
@@ -149,6 +149,14 @@
 	                    "url": base_url+"admin/amulet/check_amulet_code",
 	                    // error
 	                    "alertText": "* This amulet code is already taken",
+	                    // speaks by itself
+	                    "alertTextLoad": "* Validating, please wait"
+	                },
+				 "ajaxCustomerOldPassword": {
+	                    // remote json service location
+	                    "url": base_url+"user/verify_password",
+	                    // error
+	                    "alertText": "* Wrong password",
 	                    // speaks by itself
 	                    "alertTextLoad": "* Validating, please wait"
 	                },
