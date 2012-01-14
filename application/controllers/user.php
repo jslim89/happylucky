@@ -26,13 +26,56 @@ class User extends MY_Controller {
     }
 
 	public function index() {
+        $customer = new Customer_Model(1);
 	}
 
     public function register() {
-        $customer = new Customer_Model();
-        $customer->populate_from_request($_POST);
-        $this->vars['title'] = lang('user_registration');
-        $this->load_view('account/register', $this->vars);
+        if($_POST) {
+            $customer = new Customer_Model();
+            $customer->populate_from_request($_POST);
+            $customer->register();
+
+            $link = anchor(
+                site_url('user/verify/'.$customer->id).'?vcode='.$customer->generate_verification_code(),
+                site_url('user/verify/'.$customer->id).'?vcode='.$customer->generate_verification_code()
+            );
+
+            /* Send Email */
+            $subject = lang('user_email_verification_subject');
+            $message = lang('user_email_verification_message_before_link');
+            $message .= $link;
+            $message .= lang('user_email_verification_message_after_link');
+            $this->email->from('test.jslim89@qq.com', 'Mr Happy Lucky');
+            $this->email->to($customer->email);
+            $this->email->subject($subject);
+            $this->email->message($message);
+            $this->email->send();
+            /* End Send Email */
+
+            $this->vars['timeout'] = 10;
+            $this->vars['content'] = lang('user_please_check_your_email_for_your_account_verification');
+            $this->vars['url']     = site_url('');
+            $this->load_view('common/temp', $this->vars);
+        }
+        else {
+            $this->vars['title'] = lang('user_registration');
+            $this->load_view('account/register', $this->vars);
+        }
+    }
+
+    public function verify($id) {
+        $code = get_post('vcode');
+        $customer = new Customer_Model($id);
+        if($customer->verify($code)) {
+            $msg = lang('user_verify_successful_message');
+        }
+        else {
+            $msg = lang('user_verify_failed_message');
+        }
+        $this->vars['content'] = $msg;
+        $this->vars['timeout'] = 10;
+        $this->vars['url']     = site_url('');
+        $this->load_view('common/temp', $this->vars);
     }
 
     public function forgot_password() {

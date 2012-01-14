@@ -56,6 +56,18 @@ class Customer_Model extends MY_Active_Record {
     }
 
     /**
+     * register 
+     * 
+     * @return mixed
+     */
+    public function register() {
+        // current timestamp
+        $this->registration_date = time();
+        $this->_encrypt_password();
+        return $this->save();
+    }
+
+    /**
      * login 
      * 
      * @return boolean
@@ -93,6 +105,36 @@ class Customer_Model extends MY_Active_Record {
         $this->_encrypt_password();
         $this->save();
         return $new_password;
+    }
+
+    /**
+     * Generate a verification code for existing user 
+     * 
+     * @return mixed
+     */
+    public function generate_verification_code() {
+        // not an existing user
+        if( ! $this->is_exist()) return false;
+
+        $uniq_str = md5($this->id.$this->registration_date)
+                    .substr($this->salt, 0, -15);
+
+        return sha1($uniq_str);
+    }
+
+    /**
+     * Verify with the hashed code 
+     * 
+     * @param mixed $code 
+     * @return boolean
+     */
+    public function verify($code) {
+        if($this->generate_verification_code() === $code) {
+            $this->is_verified = 1;
+            $this->save();
+            return true;
+        }
+        return false;
     }
 
     /**

@@ -193,8 +193,8 @@ $(document).ready(function() {
                         ?></td>
                         <td><?php
                             echo form_password(array(
-                                'id'    => 'passwrod',
-                                'name'  => 'passwrod',
+                                'id'    => 'password',
+                                'name'  => 'password',
                                 'class' => 'validate[required]',
                             ));
                         ?></td>

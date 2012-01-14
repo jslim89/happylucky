@@ -18,5 +18,8 @@ $(document).ready(function() {
         ?>
         <span id="countdown"></span>
         <?php echo nbs(1).lang('seconds'); ?>
+        <div class="content-redirect"><?php
+            echo isset($content) ? $content : nbs(1);
+        ?></div>
     </div>
 <?php echo clear_div();?>

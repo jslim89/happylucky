@@ -51,6 +51,7 @@ $lang['user_email_password_recovery_message_before_password'] = "Dear customer,\
 $lang['user_email_password_recovery_message_after_password'] = "\n\nThank you.";
 
 /* Registration */
+$lang['user_please_check_your_email_for_your_account_verification'] = "Please check your email for your account verification";
 $lang['user_email_verification_subject'] = "Happy Lucky account verification";
 $lang['user_email_verification_message_before_link'] = "Dear customer, please click the link to verify your account.";
 $lang['user_email_verification_message_after_link'] = "Thank you.";
