@@ -26,7 +26,11 @@ class User extends MY_Controller {
     }
 
 	public function index() {
-        $customer = new Customer_Model(1);
+        if(!get_session('customer_id')) redirect(site_url('user/login'));
+        $customer = new Customer_Model(get_session('customer_id'));
+        $this->vars['title']    = lang('user_account');
+        $this->vars['customer'] = $customer;
+        $this->load_view('account/index', $this->vars);
 	}
 
     public function register() {
@@ -35,22 +39,7 @@ class User extends MY_Controller {
             $customer->populate_from_request($_POST);
             $customer->register();
 
-            $link = anchor(
-                site_url('user/verify/'.$customer->id).'?vcode='.$customer->generate_verification_code(),
-                site_url('user/verify/'.$customer->id).'?vcode='.$customer->generate_verification_code()
-            );
-
-            /* Send Email */
-            $subject = lang('user_email_verification_subject');
-            $message = lang('user_email_verification_message_before_link');
-            $message .= $link;
-            $message .= lang('user_email_verification_message_after_link');
-            $this->email->from('test.jslim89@qq.com', 'Mr Happy Lucky');
-            $this->email->to($customer->email);
-            $this->email->subject($subject);
-            $this->email->message($message);
-            $this->email->send();
-            /* End Send Email */
+            $this->_send_code($customer);
 
             $session = array(
                 'customer_id' => $customer->id,
@@ -69,6 +58,74 @@ class User extends MY_Controller {
             $this->vars['title'] = lang('user_registration');
             $this->load_view('account/register', $this->vars);
         }
+    }
+
+    public function edit($id) {
+        $customer = new Customer_Model($id);
+        switch(get_post('category')) {
+            case 'password':
+                $this->_edit_password($customer);
+                break;
+            case 'address':
+                $this->_edit_address($customer);
+                break;
+            case 'personal':
+                $this->_edit_personal($customer);
+                break;
+        }
+    }
+
+    private function _edit_password($customer) {
+        if($_POST) {
+        }
+        else {
+            $this->vars['title'] = lang('user_edit_password');
+            $this->load_view('account/edit_password', $this->vars);
+        }
+    }
+
+    private function _edit_address($customer) {
+    }
+
+    private function _edit_personal($customer) {
+    }
+
+    /**
+     * _send_code 
+     * 
+     * @param mixed $customer 
+     * @return boolean
+     */
+    private function _send_code($customer) {
+        $link = anchor(
+            site_url('user/verify/'.$customer->id).'?vcode='.$customer->generate_verification_code(),
+            site_url('user/verify/'.$customer->id).'?vcode='.$customer->generate_verification_code()
+        );
+
+        /* Send Email */
+        $subject = lang('user_email_verification_subject');
+        $message = lang('user_email_verification_message_before_link');
+        $message .= $link;
+        $message .= lang('user_email_verification_message_after_link');
+        $this->email->from('test.jslim89@qq.com', 'Mr Happy Lucky');
+        $this->email->to($customer->email);
+        $this->email->subject($subject);
+        $this->email->message($message);
+        $ok = $this->email->send();
+        $this->email->clear();
+        /* End Send Email */
+        return $ok;
+    }
+
+    /**
+     * ajax verification 
+     * 
+     * @return void
+     */
+    public function send_verification_code($id) {
+        $customer = new Customer_Model($id);
+        $ok = $this->_send_code($customer);
+        echo json_encode(array('status' => $ok));
     }
 
     public function verify($id) {

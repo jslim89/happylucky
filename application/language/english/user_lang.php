@@ -58,6 +58,16 @@ $lang['user_email_verification_message_after_link'] = "Thank you.";
 $lang['user_verify_successful_message'] = "Thank you. Your account have been verified.";
 $lang['user_verify_failed_message']     = "Verification failed. Please check the link that sent to your email";
 
+/* Verification */
+$lang['user_verify']                                 = "Verify";
+$lang['user_your_account_has_not_verified']          = "Your account has not verified";
+$lang['user_an_email_has_been_sent_to_your_mailbox'] = "An email has been sent to your mailbox";
+
+/* Account */
+$lang['user_change_password']          = "Change Password";
+$lang['user_edit_personal_details']    = "Edit Personal Details";
+$lang['user_edit_address_information'] = "Edit Address Information";
+
 /* Agreement */
 $lang['user_agree_privacy_policy'] = "I have read and agree to the";
 

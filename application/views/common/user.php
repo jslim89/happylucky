@@ -50,7 +50,7 @@
                 lang('shopping_cart')
             );
             echo anchor(
-                site_url('account'),
+                site_url('user'),
                 lang('user_account')
             );
         ?></div>
