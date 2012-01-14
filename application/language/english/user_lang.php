@@ -50,6 +50,13 @@ $lang['user_email_password_recovery_message_before_password'] = "Dear customer,\
     A new password is generated: ";
 $lang['user_email_password_recovery_message_after_password'] = "\n\nThank you.";
 
+/* Registration */
+$lang['user_email_verification_subject'] = "Happy Lucky account verification";
+$lang['user_email_verification_message_before_link'] = "Dear customer, please click the link to verify your account.";
+$lang['user_email_verification_message_after_link'] = "Thank you.";
+$lang['user_verify_successful_message'] = "Thank you. Your account have been verified.";
+$lang['user_verify_failed_message']     = "Verification failed. Please check the link that sent to your email";
+
 /* Agreement */
 $lang['user_agree_privacy_policy'] = "I have read and agree to the";
 

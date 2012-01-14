@@ -18,3 +18,4 @@
 <div id="message-dialog"></div>
 <!-- A container to keep the jQuery confirm dialog -->
 <div id="confirm-dialog"></div>
+<span id="temp-countdown" style="display: none;"></span>

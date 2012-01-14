@@ -11,6 +11,7 @@ $styles = array(
     'login/front.css',
     'topmenu/style.css',
     'menu/menu.css',
+    'jquery.countdown/jquery.countdown.css',
     'lightbox/jquery.lightbox-0.5.css',
     'nivo-slider/nivo-slider.css',
     'nivo-slider/themes/default/default.css',

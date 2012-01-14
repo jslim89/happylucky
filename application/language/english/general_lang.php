@@ -108,3 +108,21 @@ $lang['ordering']               = 'Ordering';
                                                                                                                               
 $lang['my_account']             = 'My Account';
 $lang['order_history']          = 'Order History';
+
+/* Browser redirection */
+$lang['browser_will_be_redirected_to'] = 'Browser will be redirected to';
+$lang['in']                            = 'in';
+
+/* Date */
+$lang['year']   = 'Year';
+$lang['month']  = 'Month';
+$lang['day']    = 'Day';
+$lang['hour']   = 'Hour';
+$lang['minute'] = 'Minute';
+$lang['second'] = 'Second';
+$lang['years']   = 'Years';
+$lang['months']  = 'Months';
+$lang['days']    = 'Days';
+$lang['hours']   = 'Hours';
+$lang['minutes'] = 'Minutes';
+$lang['seconds'] = 'Seconds';
