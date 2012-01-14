@@ -48,7 +48,7 @@ $(document).ready(function() {
                             echo form_input(array(
                                 'id'    => 'email',
                                 'name'  => 'email',
-                                'class' => 'validate[required,custom[email]]',
+                                'class' => 'validate[required,custom[email,ajax[ajaxCustomerEmail]]]',
                             ));
                         ?></td>
                     </tr>
