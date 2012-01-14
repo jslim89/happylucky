@@ -224,3 +224,24 @@ function add_to_cart(product_id, quantity) {
         }
     });
 }
+
+/* redirect_in_second
+ *
+ * @param obj_id element id
+ * @param timeout in second
+ * @param url where you want to redirect
+ */
+function redirect_in_second(obj_id, timeout, url) {
+    var timer = new Date();
+    timer.setSeconds(timer.getSeconds() + (timeout + 0.5));
+    $('span#temp-countdown').countdown({
+        until: timer,
+        format: 'S',
+        onTick: function(periods) {
+            $('#'+obj_id).text(periods[6]);
+        },
+        onExpiry: function() {
+            if(url != null) redirect(url);
+        }
+    });
+}
