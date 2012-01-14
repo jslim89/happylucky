@@ -89,6 +89,19 @@ class Customer_Model extends MY_Active_Record {
     }
 
     /**
+     * match_password 
+     * 
+     * @param mixed $password 
+     * @return boolean
+     */
+    public function match_password($password) {
+        $c = new Customer_Model($this->id);
+        $c->password = $password;
+        $c->_encrypt_password();
+        return $c->password === $this->password;
+    }
+
+    /**
      * Generate a random password and auto-populate
      * into current object 
      * 
