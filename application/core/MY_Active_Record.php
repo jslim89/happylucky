@@ -101,7 +101,7 @@ class MY_Active_Record extends ADOdb_Active_Record {
     public function populate_from_request($request) {
         foreach($this->columns_name() as $col) {
             if($col !== 'id') { // id doesn't need to populate
-                $this->{$col} = element($col, $request);
+                $this->{$col} = element($col, $request, $this->{$col});
             }
         }
     }
