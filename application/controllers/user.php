@@ -90,6 +90,16 @@ class User extends MY_Controller {
     }
 
     private function _edit_personal($customer) {
+        if($_POST) {
+            $customer->populate_from_request($_POST);
+            $customer->save();
+            redirect('user');
+        }
+        else {
+            $this->vars['customer'] = $customer;
+            $this->vars['title']    = lang('user_edit_personal_details');
+            $this->load_view('account/edit_personal', $this->vars);
+        }
     }
 
     /**
