@@ -34,6 +34,9 @@ class User extends MY_Controller {
 	}
 
     public function register() {
+        if(get_session('customer_id')) {
+            redirect('user');
+        }
         if($_POST) {
             $customer = new Customer_Model();
             $customer->populate_from_request($_POST);
