@@ -87,6 +87,16 @@ class User extends MY_Controller {
     }
 
     private function _edit_address($customer) {
+        if($_POST) {
+            $customer->populate_from_request($_POST);
+            $customer->save();
+            redirect('user');
+        }
+        else {
+            $this->vars['customer'] = $customer;
+            $this->vars['title']    = lang('user_edit_address_information');
+            $this->load_view('account/edit_address', $this->vars);
+        }
     }
 
     private function _edit_personal($customer) {
