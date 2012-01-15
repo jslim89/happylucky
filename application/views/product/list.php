@@ -132,46 +132,46 @@ $(document).ready(function() {
 
 <?php echo clear_div();?>
 
-<div class="grid_16">
+<div id="grid_16">
     <?php if(sizeof($products) == 0): ?>
         <span class="warning"><?php echo lang('product_no_product'); ?></span>
     <?php else: ?>
-        <ul class="no-bullet product">
+        <hr />
         <?php foreach($products as $product): ?>
-        <li>
-            <table id="product_list_<?php echo $product->id; ?>">
-                <tr>
-                    <td width="25%"><?php 
-                        $product_url = site_url('product/view/'.$product->id);
-                        echo anchor(
-                            $product_url,
-                            img(array(
-                                'src'    => $product->primary_image_url,
-                                'alt'    => $product->product_name,
-                                'width'  => 80,
-                                'height' => 80,
-                            ))
-                        );
-                    ?></td>
-                    <td width="*"><?php
-                    echo anchor($product_url, $product->product_code.' - '.$product->product_name);
-                    echo br(1);
-                    echo '<span class="expander">'.$product->product_desc.'</span>';
-                    ?></td>
-                    <td width="10%"><?php
-                        echo 'RM'.$product->standard_price;
-                    ?></td>
-                    <td width="10%"><?php
-                        echo form_button(array(
-                            'id' => 'add_to_cart_'.$product->id,
-                            'content' => lang('add_to_cart'),
-                            'onclick' => 'add_to_cart('.$product->id.')'
-                        ));
-                    ?></td>
-                </tr>
-            </table>
-        </li>
+        <div id="product_<?php echo $product->id;?>" style="margin-bottom: 3; margin-top: 3">
+            <div class="grid_3"><?php
+                $product_url = site_url('product/view/'.$product->id);
+                echo anchor(
+                    $product_url,
+                    img(array(
+                        'src'    => $product->primary_image_url,
+                        'alt'    => $product->product_name,
+                        'width'  => 80,
+                        'height' => 80,
+                    ))
+                );
+            ?></div>
+            <div class="grid_8"><?php
+                echo anchor($product_url, $product->product_code.' - '.$product->product_name);
+                echo br(1);
+                echo '<span class="expander">'.$product->product_desc.'</span>';
+            ?></div>
+            <div class="grid_2"><?php
+                echo 'RM'.$product->standard_price;
+            ?></div>
+            <div class="grid_2"><?php
+                echo button_link(
+                    false,
+                    lang('add_to_cart'),
+                    array(
+                        'id' => 'add_to_cart_'.$product->id,
+                        'onclick' => 'add_to_cart('.$product->id.')'
+                    )
+                );
+            ?></div>
+        <?php echo clear_div(); ?>
+        </div>
+        <hr />
         <?php endforeach; ?>
-        </ul>
     <?php endif; ?>
 </div>
