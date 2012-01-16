@@ -143,6 +143,40 @@ class Product_Model extends MY_Active_Record {
         return false;
     }
 
+    /**
+     * advanced_search 
+     * 
+     * @param array $post 
+     * @param mixed $limit 
+     * @param mixed $offset 
+     * @return array
+     */
+    public function advanced_search(array $post, $limit, $offset) {
+        $sql_price = '';
+        if(!empty($post['standard_price'])) {
+            $sql_price = ' AND standard_price '.Product_Model::price_operator($post['operator']).' '.$post['standard_price'];
+        }
+        if(!empty($post['product_category'])) {
+            switch($post['product_category']) {
+                case Product_Model::BOTH:
+                    $sql_category = '';
+                    break;
+                case Product_Model::AMULET:
+                    $sql_category = ' AND (amulet_product_id IS NOT NULL OR amulet_product_id > 0)';
+                    break;
+                case Product_Model::ACCESSORIES:
+                    $sql_category = ' AND (amulet_product_id IS NULL OR amulet_product_id = 0)';
+                    break;
+            }
+        }
+        unset($post['standard_price']);
+        unset($post['operator']);
+        unset($post['product_category']);
+        list($sql, $values) = $this->_create_criteria_sql($post);
+        $sql .= $sql_price.$sql_category;
+        return $this->search($sql, $values, $limit, $offset, true);
+    }
+
     public function is_amulet() {
         return sizeof($this->amulet_product) > 0;
     }
@@ -166,6 +200,28 @@ class Product_Model extends MY_Active_Record {
      */
     public function to_cart_item() {
         return array();
+    }
+
+    /**
+     * Price operator in string form 
+     * 
+     * @param mixed $opr 
+     * @return mixed
+     */
+    public static function price_operator($opr) {
+        switch($opr) {
+            case Product_Model::EQUAL: 
+                return '=';
+            case Product_Model::GREATER_EQUAL: 
+                return '>=';
+            case Product_Model::GREATER: 
+                return '>';
+            case Product_Model::LESS_EQUAL: 
+                return '<=';
+            case Product_Model::LESS_EQUAL: 
+                return '<';
+        }
+        return false;
     }
 
     /**
