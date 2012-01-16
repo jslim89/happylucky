@@ -76,6 +76,7 @@ class Product extends MY_Controller {
         $product->populate_from_request($_POST);
         if($id === null) {
             $product->created_date = time();
+            $product->total_num_sold = 0;
         }
 
         if($product->save()) {
@@ -92,7 +93,7 @@ class Product extends MY_Controller {
             redirect('admin/product/edit/'.$product->id);
         }
         else
-            $this->load->view('admin/product/index', $this->vars);
+            $this->load->view('admin/product/view/'.$product->id, $this->vars);
     }
 
     public function delete($id) {
