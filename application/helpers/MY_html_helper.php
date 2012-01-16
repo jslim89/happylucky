@@ -218,3 +218,37 @@ if ( ! function_exists('spinner')) {
             )).'</span>';
     }
 }
+
+/**
+ * span 
+ * 
+ * @param mixed $attributes 
+ * @access public
+ * @return string
+ */
+if ( ! function_exists('span')) {
+    function span($content = '', array $attributes) {
+        $attr = array();
+        foreach($attributes as $key => $val) {
+            $attr[] = $key.'="'.$val.'"';
+        }
+        return '<span '.implode(' ', $attr).'>'.$content.'</span>';
+    }
+}
+
+/**
+ * div 
+ * 
+ * @param mixed $attributes 
+ * @access public
+ * @return string
+ */
+if ( ! function_exists('div')) {
+    function div($content = '', array $attributes) {
+        $attr = array();
+        foreach($attributes as $key => $val) {
+            $attr[] = $key.'="'.$val.'"';
+        }
+        return '<div '.implode(' ', $attr).'>'.$content.'</div>';
+    }
+}
