@@ -60,6 +60,21 @@ class Cart extends MY_Controller {
         echo json_encode($to_js);
     }
 
+    public function update() {
+        $data_set = array();
+        $rowids     = (array)get_post('rowid');
+        $quantities = (array)get_post('quantity');
+        $i = 0;
+        foreach($rowids as $k => $rowid) {
+            $data_set[$i]['rowid'] = $rowid;
+            $data_set[$i]['qty']   = $quantities[$k];
+            $i++;
+        }
+        $status = $this->my_cart->update($data_set);
+        if($status) $this->my_cart->save_to_cookie();
+        redirect('cart');
+    }
+
     /**
      * ajax remove an item from cart 
      * 

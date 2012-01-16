@@ -74,6 +74,7 @@ echo button_link(
                     ?>
                     <tr id="cart_row_<?php echo $product->id; ?>">
                         <td class="remove"><?php
+                            echo form_hidden('rowid['.$product->id.']', $rowid);
                             echo form_checkbox(array(
                                 'name'  => 'check_'.$rowid,
                                 'id'    => 'check_'.$rowid,
@@ -112,6 +113,7 @@ echo button_link(
                                             .',min['.$product->min_quantity.']';
                             echo form_input(array(
                                 'id'    => 'quantity',
+                                'name'  => 'quantity['.$product->id.']',
                                 'value' => $product->qty,
                                 'class' => 'positive-integer validate[required,'.$qty_validation.']',
                             ));
