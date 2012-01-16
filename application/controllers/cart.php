@@ -37,7 +37,7 @@ class Cart extends MY_Controller {
 	}
 
     /**
-     * Add a product to cart 
+     * Add a product to cart by AJAX
      * 
      * @param mixed $id 
      * @param int $qty 
@@ -51,13 +51,18 @@ class Cart extends MY_Controller {
             'price' => $product->standard_price,
             'name'  => $product->product_name,
         );
-        $this->my_cart->insert($item);
-        $cookie = array(
-            'name' => MY_Cart::COOKIE,
-            'value' => $this->my_cart->to_cookie_string(),
-            'expire' => days_to_seconds(7), // 1 week
-        );
-        set_cookie($cookie);
+        $ret = $this->my_cart->insert($item);
+        $to_js = array('status' => 0);
+        if( ! empty($ret)) {
+            $to_js['status'] = 1;
+            $cookie = array(
+                'name' => MY_Cart::COOKIE,
+                'value' => $this->my_cart->to_cookie_string(),
+                'expire' => days_to_seconds(7), // 1 week
+            );
+            set_cookie($cookie);
+        }
+        echo json_encode($to_js);
     }
 
     public function checkout($step = 1) {

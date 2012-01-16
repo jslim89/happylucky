@@ -153,7 +153,7 @@ $(document).ready(function() {
                 ))
             );
         ?></div>
-        <div class="grid_8"><?php
+        <div class="grid_7"><?php
             echo anchor($product_url, $product->product_code.' - '.$product->product_name);
             echo br(1);
             echo '<span class="expander">'.$product->product_desc.'</span>';
@@ -161,15 +161,26 @@ $(document).ready(function() {
         <div class="grid_2"><?php
             echo 'RM'.$product->standard_price;
         ?></div>
-        <div class="grid_2"><?php
+        <div class="grid_3"><?php
+            echo div('', array(
+                'id'    => 'add_to_cart_status_'.$product->id,
+                'style' => 'display: none;',
+                'class' => 'warning',
+            ));
             echo button_link(
                 false,
                 lang('add_to_cart'),
                 array(
-                    'id' => 'add_to_cart_'.$product->id,
+                    'id'      => 'add_to_cart_'.$product->id,
                     'onclick' => 'add_to_cart('.$product->id.')'
                 )
             );
+            $min_qty_to_add = '('.lang('cart_min_quantity_to_add')
+                .': '.$product->min_quantity.')';
+            echo div($min_qty_to_add, array(
+                'class' => 'min_qty_add',
+                'style' => 'font-style: italic; font-size: 0.9em;',
+            ));
         ?></div>
     <?php echo clear_div(); ?>
     </div>

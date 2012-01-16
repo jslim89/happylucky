@@ -215,9 +215,23 @@ function add_to_cart(product_id, quantity) {
     $.ajax({
         url: base_url + 'cart/add/' + product_id + '/' + quantity,
         type: 'POST',
+        dataType: 'json',
         // data: 'quantity='+quantity,
         success: function(data) {
             // TODO: update cart content
+            if(data.status == 1) {
+                $('#add_to_cart_status_'+product_id).text(lang_added_to_cart)
+                                                    .removeClass('warning')
+                                                    .addClass('success');
+            }
+            else {
+                $('#add_to_cart_status_'+product_id).text(lang_add_to_cart_failed)
+                                                    .removeClass('success')
+                                                    .addClass('warning');
+            }
+        },
+        complete: function() {
+            $('#add_to_cart_status_'+product_id).show();
         },
         error: function(jqXHR, textStatus, errorThrown) {
             alert(errorThrown);

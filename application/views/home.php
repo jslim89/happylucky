@@ -79,13 +79,26 @@ div.product-header {
                     <div class="price"><?php
                         echo to_currency($product->standard_price, 'RM');
                     ?></div>
+                    <?php
+                        $min_qty_to_add = '('.lang('cart_min_quantity_to_add')
+                            .': '.$product->min_quantity.')';
+                        echo div($min_qty_to_add, array(
+                            'class' => 'min_qty_add',
+                            'style' => 'font-style: italic; font-size: 0.9em;',
+                        ));
+                        echo div('', array(
+                            'id'    => 'add_to_cart_status_'.$product->id,
+                            'style' => 'display: none;',
+                            'class' => 'warning',
+                        ));
+                    ?>
                     <div class="cart"><?php
                         echo button_link(
                             false,
                             lang('add_to_cart'),
                             array(
                                 'id'      => 'add_to_cart_'.$product->id,
-                                'onclick' => 'add_to_cart('.$product->id.')'
+                                'onclick' => 'add_to_cart('.$product->id.', '.$product->min_quantity.')'
                             )
                         );
                     ?></div>
@@ -130,13 +143,26 @@ div.product-header {
                     <div class="price"><?php
                         echo to_currency($product->standard_price, 'RM');
                     ?></div>
+                    <?php
+                        $min_qty_to_add = '('.lang('cart_min_quantity_to_add')
+                            .': '.$product->min_quantity.')';
+                        echo div($min_qty_to_add, array(
+                            'class' => 'min_qty_add',
+                            'style' => 'font-style: italic; font-size: 0.9em;',
+                        ));
+                        echo div('', array(
+                            'id'    => 'add_to_cart_status_'.$product->id,
+                            'style' => 'display: none;',
+                            'class' => 'warning',
+                        ));
+                    ?>
                     <div class="cart"><?php
                         echo button_link(
                             false,
                             lang('add_to_cart'),
                             array(
                                 'id'      => 'add_to_cart_'.$product->id,
-                                'onclick' => 'add_to_cart('.$product->id.')'
+                                'onclick' => 'add_to_cart('.$product->id.', '.$product->min_quantity.')'
                             )
                         );
                     ?></div>

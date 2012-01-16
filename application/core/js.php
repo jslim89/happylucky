@@ -19,6 +19,10 @@ lang_integer_tooltip                  = '<?php echo lang('integer_tooltip');?>';
 lang_more                             = '<?php echo lang('more');?>';
 lang_less                             = '<?php echo lang('less');?>';
 
+// Cart
+lang_added_to_cart      = '<?php echo lang('cart_added_to_cart');?>';
+lang_add_to_cart_failed = '<?php echo lang('cart_failed');?>';
+
 </script>
 <?php 
 // include file

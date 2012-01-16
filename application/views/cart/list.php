@@ -33,10 +33,13 @@ $(document).ready(function() {
 <!-- End Pagination -->
 
 <!-- Action Button -->
-<div class="grid_6 action-button">
-    <input type="button" class="button" id="btn_delete" 
-        value="<?php echo lang('delete');?>" />
-</div>
+<div class="grid_6 action-button"><?php
+echo button_link(
+    false,
+    lang('delete'),
+    array('id' => 'btn_delete')
+);
+?></div>
 <!-- End Action Button -->
 <?php echo clear_div();?>
 
@@ -63,7 +66,10 @@ $(document).ready(function() {
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach($products as $rowid => $product):?>
+                    <?php
+                        $total = 0;
+                        foreach($products as $rowid => $product):
+                    ?>
                     <tr id="product_row_<?php echo $product->id; ?>">
                         <td class="remove"><?php
                             echo form_checkbox(array(
@@ -112,7 +118,10 @@ $(document).ready(function() {
                             ?></span>
                         </td>
                         <td class="price"><?php echo to_currency($product->standard_price);?></td>
-                        <td class="price"><?php echo to_currency($product->standard_price * $product->qty);?></td>
+                        <td class="price"><?php
+                            echo to_currency($product->subtotal);
+                            $total += $product->subtotal;
+                        ?></td>
                         <td>
                             <ul id="icons" class="ui-widget ui-helper-clearfix" style="">
                                 <li class="ui-state-default ui-corner-all">
@@ -132,17 +141,17 @@ $(document).ready(function() {
             <tr>
                 <td colspan="5" width="70%">&nbsp;</td>
                 <td class="right"><?php echo label(lang('cart_sub_total'));?>: </td>
-                <td class="right"><?php echo to_currency(5000.00, 'MYR');?></td>
+                <td class="right"><?php echo to_currency($total, 'MYR');?></td>
             </tr>
             <tr>
                 <td colspan="5">&nbsp;</td>
                 <td class="right"><?php echo label(lang('cart_shipping'));?>: </td>
-                <td class="right"><?php echo to_currency(20.00, 'MYR');?></td>
+                <td class="right"><?php echo to_currency(0.00, 'MYR');?></td>
             </tr>
             <tr>
                 <td colspan="5">&nbsp;</td>
                 <td class="right"><?php echo label(lang('cart_total'));?>: </td>
-                <td class="right"><?php echo to_currency(5020.00, 'MYR');?></td>
+                <td class="right"><?php echo to_currency($total, 'MYR');?></td>
             </tr>
         </table>
     </div>

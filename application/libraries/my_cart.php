@@ -90,7 +90,7 @@ class MY_Cart extends CI_Cart {
     public function get_pagination($page_limit = 10) {
         $this->_get_ci()->load->library('pagination');
         $conf = array(
-            'total_rows'       => $this->total_items(),
+            'total_rows'       => sizeof($this->get_products()),
             'base_url'         => base_url('cart/index'),
             'per_page'         => $page_limit,
             'use_page_numbers' => FALSE,
@@ -111,7 +111,8 @@ class MY_Cart extends CI_Cart {
         foreach($this->contents() as $item) {
             $product = new Product_Model($item['id']);
             // user defined attribute which only apply for this case
-            $product->qty = $this->_get_available_qty($item['id'], $item['qty']);
+            $product->qty      = $item['qty'];
+            $product->subtotal = $item['subtotal'];
             // use the cart's rowid as key
             $products[$item['rowid']] = $product;
         }

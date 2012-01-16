@@ -10,6 +10,11 @@ $lang['cart_quantity']   = "Quantity";
 
 $lang['cart_continue_shopping'] = "Continue Shopping";
 
+/* add to cart */
+$lang['cart_added_to_cart']       = "Added to cart";
+$lang['cart_failed']              = "failed";
+$lang['cart_min_quantity_to_add'] = "Min qty to add";
+
 /* checkout */
 $lang['cart_check_out']        = "Check Out";
 $lang['cart_checkout_step_1']  = "Step 1: Checkout Option";
