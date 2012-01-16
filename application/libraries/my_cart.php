@@ -43,6 +43,20 @@ class MY_Cart extends CI_Cart {
     }
 
     /**
+     * Save the cart items to cookie 
+     * 
+     * @return void
+     */
+    public function save_to_cookie() {
+        $cookie = array(
+            'name' => MY_Cart::COOKIE,
+            'value' => $this->to_cookie_string(),
+            'expire' => days_to_seconds(7), // 1 week
+        );
+        set_cookie($cookie);
+    }
+
+    /**
      * Example:
      * array(
      *     1 => 2,

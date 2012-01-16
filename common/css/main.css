@@ -43,6 +43,11 @@ span.required {
     color: red;
 }
 
+.hint {
+    font-size: 0.9em;
+    font-style: italic;
+}
+
 .center {
     text-align: center;
 }

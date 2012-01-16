@@ -5,8 +5,8 @@ $(document).ready(function() {
     $('span[id^=delete_]').each(function() {
         $(this).click(function() {
             var id = get_element_index($(this));
-            var delete_url = base_url + 'admin/product/delete/' + id;
-            delete_row_confirmation(delete_url, 'product_row_'+id);
+            var delete_url = base_url + 'cart/remove/' + id;
+            delete_row_confirmation(delete_url, 'cart_row_'+id);
         });
     });
 
@@ -15,8 +15,8 @@ $(document).ready(function() {
         var row_ids     = [];
         $.each($('.delete_check:checked'), function(i) {
             var id = $(this).val();
-            row_ids[id]     = 'product_row_'+id;
-            delete_urls[id] = base_url + 'admin/product/delete/' + id;
+            row_ids[id]     = 'cart_row_'+id;
+            delete_urls[id] = base_url + 'cart/remove/' + id;
         });
         delete_row_confirmation(delete_urls, row_ids);
     });
@@ -33,7 +33,7 @@ $(document).ready(function() {
 <!-- End Pagination -->
 
 <!-- Action Button -->
-<div class="grid_6 action-button"><?php
+<div class="grid_5 right action-button"><?php
 echo button_link(
     false,
     lang('delete'),
@@ -70,12 +70,12 @@ echo button_link(
                         $total = 0;
                         foreach($products as $rowid => $product):
                     ?>
-                    <tr id="product_row_<?php echo $product->id; ?>">
+                    <tr id="cart_row_<?php echo $rowid; ?>">
                         <td class="remove"><?php
                             echo form_checkbox(array(
-                                'name'  => 'check_'.$product->id,
-                                'id'    => 'check_'.$product->id,
-                                'value' => $product->id,
+                                'name'  => 'check_'.$rowid,
+                                'id'    => 'check_'.$rowid,
+                                'value' => $rowid,
                                 'class' => 'delete_check',
                             ));
                         ?></td>
@@ -106,16 +106,22 @@ echo button_link(
                             );
                         ?></td>
                         <td class="quantity"><?php
+                            $qty_validation = 'max['.$product->quantity_available.']'
+                                            .',min['.$product->min_quantity.']';
                             echo form_input(array(
                                 'id'    => 'quantity',
                                 'value' => $product->qty,
-                                'class' => 'positive-integer validate[required,max['.$product->quantity_available.']]',
+                                'class' => 'positive-integer validate[required,'.$qty_validation.']',
                             ));
-                            echo br(1);
+                            echo div(lang('product_quantity_available').': '.$product->quantity_available, array(
+                                'class' => 'min_qty_add hint',
+                            ));
+                            $min_qty_to_add = '('.lang('cart_min_quantity_to_add')
+                                .': '.$product->min_quantity.')';
+                            echo div($min_qty_to_add, array(
+                                'class' => 'min_qty_add hint',
+                            ));
                             ?>
-                            <span class="guide"><?php
-                                echo lang('product_quantity_available').': '.$product->quantity_available;
-                            ?></span>
                         </td>
                         <td class="price"><?php echo to_currency($product->standard_price);?></td>
                         <td class="price"><?php
@@ -125,7 +131,7 @@ echo button_link(
                         <td>
                             <ul id="icons" class="ui-widget ui-helper-clearfix" style="">
                                 <li class="ui-state-default ui-corner-all">
-                                    <span id="delete_<?php echo $product->id; ?>" class="ui-icon ui-icon-trash"
+                                    <span id="delete_<?php echo $rowid; ?>" class="ui-icon ui-icon-trash"
                                         title="<?php echo lang('delete');?>"></span>
                                 </li>
                             </ul>

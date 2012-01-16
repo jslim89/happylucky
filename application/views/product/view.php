@@ -35,18 +35,24 @@ $(document).ready(function() {
                     );
                 ?></td>
                 <td valign="baseline" width="60%"><?php
+                    $qty_validation = 'max['.$product->quantity_available.']'
+                                    .',min['.$product->min_quantity.']';
                     $input_qty =  form_input(array(
                         'id'    => 'quantity',
                         'value' => $product->min_quantity,
-                        'class' => 'positive-integer validate[required,min['.$product->min_quantity.']]'
+                        'class' => 'positive-integer validate[required,'.$qty_validation.']'
                     ));
-                    $button_add_cart = form_button(array(
-                        'id' => 'add_to_cart',
-                        'content' => lang('add_to_cart'),
-                    ));
+                    $button_add_cart = button_link(
+                        false,
+                        lang('add_to_cart'),
+                        array(
+                            'id' => 'add_to_cart',
+                        )
+                    );
                     $info_list = array(
                         label(lang('product_code').':').' '.$product->product_code,
                         label(lang('product_availability').':').' '.$product->quantity_available,
+                        label(lang('cart_min_quantity_to_add').':').$product->min_quantity,
                         label(lang('product_quantity').':').' '.$input_qty.' '.$button_add_cart,
                     );
                     if($product->is_amulet()) {

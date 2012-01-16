@@ -55,14 +55,28 @@ class Cart extends MY_Controller {
         $to_js = array('status' => 0);
         if( ! empty($ret)) {
             $to_js['status'] = 1;
-            $cookie = array(
-                'name' => MY_Cart::COOKIE,
-                'value' => $this->my_cart->to_cookie_string(),
-                'expire' => days_to_seconds(7), // 1 week
-            );
-            set_cookie($cookie);
+            $this->my_cart->save_to_cookie();
         }
         echo json_encode($to_js);
+    }
+
+    /**
+     * ajax remove an item from cart 
+     * 
+     * @param mixed $rowid 
+     * @return void
+     */
+    public function remove($rowid) {
+        $status = $this->my_cart->update(array(
+            array(
+                'rowid' => $rowid,
+                'qty'   => 0
+            )
+        ));
+        $this->my_cart->save_to_cookie();
+        echo json_encode(array(
+            'status' => $status
+        ));
     }
 
     public function checkout($step = 1) {

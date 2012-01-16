@@ -178,8 +178,7 @@ $(document).ready(function() {
             $min_qty_to_add = '('.lang('cart_min_quantity_to_add')
                 .': '.$product->min_quantity.')';
             echo div($min_qty_to_add, array(
-                'class' => 'min_qty_add',
-                'style' => 'font-style: italic; font-size: 0.9em;',
+                'class' => 'min_qty_add hint',
             ));
         ?></div>
     <?php echo clear_div(); ?>
