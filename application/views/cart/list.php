@@ -4,8 +4,9 @@ $(document).ready(function() {
     $('#cart_form').validationEngine('attach');
     $('span[id^=delete_]').each(function() {
         $(this).click(function() {
-            var id = get_element_index($(this));
-            var delete_url = base_url + 'cart/remove/' + id;
+            var id = get_element_index($(this).parentsUntil('tr').parent());
+            var rowid = get_element_index($(this));
+            var delete_url = base_url + 'cart/remove/' + rowid;
             delete_row_confirmation(delete_url, 'cart_row_'+id);
         });
     });
@@ -15,8 +16,9 @@ $(document).ready(function() {
         var row_ids     = [];
         $.each($('.delete_check:checked'), function(i) {
             var id = $(this).val();
+            var rowid = get_element_index($(this));
             row_ids[id]     = 'cart_row_'+id;
-            delete_urls[id] = base_url + 'cart/remove/' + id;
+            delete_urls[id] = base_url + 'cart/remove/' + rowid;
         });
         delete_row_confirmation(delete_urls, row_ids);
     });
@@ -70,12 +72,12 @@ echo button_link(
                         $total = 0;
                         foreach($products as $rowid => $product):
                     ?>
-                    <tr id="cart_row_<?php echo $rowid; ?>">
+                    <tr id="cart_row_<?php echo $product->id; ?>">
                         <td class="remove"><?php
                             echo form_checkbox(array(
                                 'name'  => 'check_'.$rowid,
                                 'id'    => 'check_'.$rowid,
-                                'value' => $rowid,
+                                'value' => $product->id,
                                 'class' => 'delete_check',
                             ));
                         ?></td>

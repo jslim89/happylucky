@@ -68,7 +68,6 @@ function ui_confirm(title, message) {
                                     }
                             }
                         });
-    alert(is_confirmed);
     return is_confirmed;
 }
 
@@ -174,7 +173,8 @@ function delete_row_confirmation(delete_url, row_id) {
                                             // the key must be the same
                                             // i.e. delete_url[3] map to row_id[3]
                                             $.each(row_id, function(key, value) {
-                                                delete_row(delete_url[key], value);
+                                                if(value != undefined)
+                                                    delete_row(delete_url[key], value);
                                             });
                                         }
                                         else {
