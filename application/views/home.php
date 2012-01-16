@@ -50,66 +50,49 @@ div.product-header {
     <div class="box">
         <div class="box-heading"><?php echo lang('hot'); ?></div>
         <div class="box-content">
+        <?php if(sizeof($hot_products) == 0): ?>
+        <div class="warning"><?php echo lang('product_no_product'); ?></div>
+        <?php else: ?>
             <div class="box-product">
+            <?php foreach($hot_products as $product): ?>
                 <div>
                     <div class="image"><?php
+                        $img = $product->primary_image_url
+                            ? $product->primary_image_url
+                            : default_image_path();
                         echo anchor(
-                            site_url('product/view/1'),
+                            site_url('product/view/'.$product->id),
                             img(array(
-                                'src'    => base_url('images/products/1/2eba14f233925924e0767622de106054.jpg'),
+                                'src'    => $img,
                                 'height' => 90,
                                 'width'  => 90,
-                                'title'  => 'product description'
+                                'title'  => $product->product_desc
                             ))
                         );
                     ?></div>
                     <div class="name"><?php
                         echo anchor(
-                            site_url('product/view/1'),
-                            'TEST'
+                            site_url('product/view/'.$product->id),
+                            $product->product_name
                         );
                     ?></div>
                     <div class="price"><?php
-                        echo 'RM 150.00';
+                        echo to_currency($product->standard_price, 'RM');
                     ?></div>
                     <div class="cart"><?php
-                        echo form_button(array(
-                            'id'      => 'add_to_cart_1',
-                            'content' => lang('add_to_cart'),
-                            'onclick' => 'add_to_cart(1)'
-                        ));
-                    ?></div>
-                </div>
-                <div>
-                    <div class="image"><?php
-                        echo anchor(
-                            site_url('product/view/1'),
-                            img(array(
-                                'src'    => base_url('images/products/1/2eba14f233925924e0767622de106054.jpg'),
-                                'height' => 90,
-                                'width'  => 90,
-                                'title'  => 'product description'
-                            ))
+                        echo button_link(
+                            false,
+                            lang('add_to_cart'),
+                            array(
+                                'id'      => 'add_to_cart_'.$product->id,
+                                'onclick' => 'add_to_cart('.$product->id.')'
+                            )
                         );
                     ?></div>
-                    <div class="name"><?php
-                        echo anchor(
-                            site_url('product/view/1'),
-                            'TEST'
-                        );
-                    ?></div>
-                    <div class="price"><?php
-                        echo 'RM 150.00';
-                    ?></div>
-                    <div class="cart"><?php
-                        echo form_button(array(
-                            'id'      => 'add_to_cart_1',
-                            'content' => lang('add_to_cart'),
-                            'onclick' => 'add_to_cart(1)'
-                        ));
-                    ?></div>
                 </div>
+            <?php endforeach; ?>
             </div>
+        <?php endif; ?>
         </div>
     </div>
 </div>
@@ -118,37 +101,49 @@ div.product-header {
     <div class="box">
         <div class="box-heading"><?php echo lang('latest'); ?></div>
         <div class="box-content">
+        <?php if(sizeof($latest_products) == 0): ?>
+        <div class="warning"><?php echo lang('product_no_product'); ?></div>
+        <?php else: ?>
             <div class="box-product">
+            <?php foreach($latest_products as $product): ?>
                 <div>
                     <div class="image"><?php
+                        $img = $product->primary_image_url
+                            ? $product->primary_image_url
+                            : default_image_path();
                         echo anchor(
-                            site_url('product/view/1'),
+                            site_url('product/view/'.$product->id),
                             img(array(
-                                'src'    => base_url('images/products/1/2eba14f233925924e0767622de106054.jpg'),
+                                'src'    => $img,
                                 'height' => 90,
                                 'width'  => 90,
-                                'title'  => 'product description'
+                                'title'  => $product->product_desc
                             ))
                         );
                     ?></div>
                     <div class="name"><?php
                         echo anchor(
-                            site_url('product/view/1'),
-                            'TEST'
+                            site_url('product/view/'.$product->id),
+                            $product->product_name
                         );
                     ?></div>
                     <div class="price"><?php
-                        echo 'RM 150.00';
+                        echo to_currency($product->standard_price, 'RM');
                     ?></div>
                     <div class="cart"><?php
-                        echo form_button(array(
-                            'id'      => 'add_to_cart_1',
-                            'content' => lang('add_to_cart'),
-                            'onclick' => 'add_to_cart(1)'
-                        ));
+                        echo button_link(
+                            false,
+                            lang('add_to_cart'),
+                            array(
+                                'id'      => 'add_to_cart_'.$product->id,
+                                'onclick' => 'add_to_cart('.$product->id.')'
+                            )
+                        );
                     ?></div>
                 </div>
+            <?php endforeach; ?>
             </div>
+        <?php endif; ?>
         </div>
     </div>
 </div>

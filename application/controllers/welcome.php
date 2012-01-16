@@ -14,13 +14,18 @@ class Welcome extends MY_Controller {
 
     function __construct() {
         parent::__construct();
+        $this->load->model('customer_model');
+        $this->load->model('product_model');
     }
 
 	public function index()
 	{
-        $this->load->model('customer_model');
-		$this->load_view('home');
-	}
+        $hot_products = Product_Model::hot(10, 5);
+        $latest_products = Product_Model::latest(10);
+        $this->vars['hot_products'] = $hot_products;
+        $this->vars['latest_products'] = $latest_products;
+		$this->load_view('home', $this->vars);
+    }
 }
 
 /* End of file welcome.php */

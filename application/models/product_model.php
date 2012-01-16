@@ -225,6 +225,33 @@ class Product_Model extends MY_Active_Record {
     }
 
     /**
+     * hot 
+     * 
+     * @param mixed $limit 
+     * @param mixed $min_num_sold minimum number must achieve in order to 
+     *              consider as hot. i.e. If all products total_num_sold is 0,
+     *              then shouldn't return any result
+     * @return array
+     */
+    public static function hot($limit, $min_num_sold) {
+        $p = new Product_Model();
+        $sql = 'total_num_sold > ? order by total_num_sold desc';
+        return $p->search($sql, array($min_num_sold), $limit, 0);
+    }
+
+    /**
+     * latest 
+     * 
+     * @param mixed $limit 
+     * @return array
+     */
+    public static function latest($limit) {
+        $p = new Product_Model();
+        $sql = '1=1 order by created_date desc';
+        return $p->search($sql, array(), $limit, 0);
+    }
+
+    /**
      * is_product_code_unique 
      * 
      * @param mixed $code 
