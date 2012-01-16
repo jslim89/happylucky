@@ -23,13 +23,18 @@ $lang['cart_checkout_options'] = "Checkout Options";
 $lang['cart_register_account'] = "Register Account";
 $lang['cart_guest_checkout']   = "Guest Checkout";
 
-$lang['cart_checkout_step_2']  = "Step 2: Account &amp; Delivery Details";
-$lang['cart_personal_details']  = "Personal Details";
-$lang['cart_use_existing_address']  = "I want to use an existing address";
-$lang['cart_use_new_address']  = "I want to use a new address";
-$lang['cart_shipping_address']  = "Shipping Address";
+$lang['cart_checkout_step_2']      = "Step 2: Delivery Detail";
+$lang['cart_personal_details']     = "Personal Details";
+$lang['cart_use_existing_address'] = "I want to use an existing address";
+$lang['cart_use_new_address']      = "I want to use a new address";
+$lang['cart_shipping_address']     = "Shipping Address";
 
-$lang['cart_checkout_step_3']  = "Step 3: Delivery Detail";
-$lang['cart_checkout_step_4']  = "Step 4: Payment Method";
-$lang['cart_checkout_step_5']  = "Step 5: Confirm Order";
-$lang['cart_confirm_order']  = "Confirm Order";
+$lang['cart_checkout_step_3']  = "Step 3: Payment Method";
+$lang['cart_cash_on_delivery'] = "Cash On Delivery (COD)";
+$lang['cart_cod_hint']         = "Buyer must be able to meet face-to-face with seller";
+$lang['cart_bank_in']          = "Bank-in";
+$lang['cart_bank_in_hint']     = "After bank in, please contact seller by a phone call.\n
+                                The product(s) will be delivered once we have confirmed the payment.";
+
+$lang['cart_checkout_step_4'] = "Step 4: Confirm Order";
+$lang['cart_confirm_order']   = "Confirm Order";

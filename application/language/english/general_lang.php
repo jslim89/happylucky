@@ -127,3 +127,7 @@ $lang['hours']   = 'Hours';
 $lang['minutes'] = 'Minutes';
 $lang['seconds'] = 'Seconds';
 $lang['now']     = 'Now';
+
+/* General */
+$lang['any']    = 'Any';
+$lang['please'] = 'Please';

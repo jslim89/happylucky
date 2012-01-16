@@ -98,10 +98,22 @@ class Cart extends MY_Controller {
         $this->vars['title'] = lang('cart_check_out');
         $this->vars['step'] = 'cart/steps/step_'.$step;
         $this->vars['breadcrumb'] = $this->_breadcrumb($step);
+        $this->_step_4();
         $this->load_view('cart/checkout', $this->vars);
     }
 
     private function _step_1() {
+        $option = get_post('opt');
+        if($option == 'register') {
+            redirect('user/register');
+        }
+        else {
+            redirect('cart/checkout/2.html');
+        }
+    }
+
+    private function _step_4() {
+        $this->vars['products'] = $this->my_cart->get_products();
     }
 
     /**

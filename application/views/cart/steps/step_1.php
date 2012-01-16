@@ -2,7 +2,7 @@
 $(document).ready(function() {
     $('#button-account').click(function() {
         opt = $('input[name=account]:checked').val();
-        redirect(base_url+'cart/checkout/2.html?opt='+opt);
+        redirect(base_url+'cart/checkout.html?opt='+opt);
     });
 });
 </script>
