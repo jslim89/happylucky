@@ -266,6 +266,25 @@ class MY_Active_Record extends ADOdb_Active_Record {
             : $result_set;
     }
 
+    /**
+     * Convert the criteria set into sql statement. 
+     * 
+     * @param array $criteria_set 
+     * @return array
+     */
+    protected function _create_criteria_sql(array $criteria_set)
+    {
+        $value_set = array();
+        foreach ( $criteria_set as $column_name => $value )
+        {
+            if(empty($value)) continue;
+            $bind_column_set[] = "UPPER($column_name) = UPPER(?)";
+            $value_set[] = $value;
+        }
+        $sql = implode(' and ', $bind_column_set);
+        return array($sql, $value_set);
+    }
+
     public function delete() {
         $this->_get_ci()->adodb->StartTrans();
         $sql = "DELETE FROM ".$this->_table
