@@ -2,6 +2,10 @@
 $(document).ready(function() {
     var q = query_string('q');
     if(q != null) $('input#q').val(q);
+    $('#search_form').validationEngine('attach');
+    $('#search_form_submit').click(function() {
+        $('#search_form').submit();
+    });
 });
 </script>
 <form id="search_form" method="GET" 
@@ -11,11 +15,13 @@ $(document).ready(function() {
             <td><?php echo form_input(array(
                 'id'    => 'q',
                 'name'  => 'q',
+                'class' => 'validate[required]',
             ));?></td>
-            <td><?php echo form_submit(array(
-                'value' => lang('search'),
-                'class' => 'button',
-            ));?></td>
+            <td><?php echo button_link(
+                false,
+                lang('search'),
+                array('id' => 'search_form_submit')
+            );?></td>
         </tr>
 <!--
         <tr>

@@ -7,7 +7,7 @@ $(document).ready(function() {
 
     $('div#advanced_search_dialog').dialog({
         autoOpen: false,
-        height: 300,
+        height: 350,
         width: 500,
         modal: true,
         buttons: {
@@ -28,13 +28,13 @@ $(document).ready(function() {
 <div class="grid_16 search">
     <div id="advanced_search_dialog" title="<?php echo lang('advanced_search');?>">
     <?php
-        echo form_open(site_url('product/index'), array('id' => 'advanced_search_form'));
+        echo form_open(site_url('product/index').'?search_type=advanced', array('id' => 'advanced_search_form'));
         echo form_fieldset(lang('product'));
     ?>
-        <table width="100%">
+        <table class="form" width="100%">
             <tr>
                 <td width="50%"><?php
-                    echo form_label(lang('product_code'), 'product_code');
+                    echo form_label(label(lang('product_code')), 'product_code');
                 ?></td>
                 <td width="50%"><?php
                     echo form_input(array(
@@ -44,7 +44,7 @@ $(document).ready(function() {
             </tr>
             <tr>
                 <td width="50%"><?php
-                    echo form_label(lang('product_name'), 'product_name');
+                    echo form_label(label(lang('product_name')), 'product_name');
                 ?></td>
                 <td width="50%"><?php
                     echo form_input(array(
@@ -55,7 +55,7 @@ $(document).ready(function() {
             </tr>
             <tr>
                 <td width="50%"><?php
-                    echo form_label(lang('product_description'), 'product_desc');
+                    echo form_label(label(lang('product_description')), 'product_desc');
                 ?></td>
                 <td width="50%"><?php
                     echo form_input(array(
@@ -65,7 +65,7 @@ $(document).ready(function() {
                 ?></td>
             </tr>
                 <td width="50%"><?php
-                    echo form_label(lang('product_standard_price'), 'standard_price');
+                    echo form_label(label(lang('product_standard_price')), 'standard_price');
                 ?></td>
                 <td width="50%"><?php
                     $operator_option = array(
@@ -84,7 +84,7 @@ $(document).ready(function() {
                 ?></td>
             </tr>
                 <td width="50%"><?php
-                    echo form_label(lang('product_type'), 'product_type');
+                    echo form_label(label(lang('product_type')), 'product_type');
                 ?></td>
                 <td width="50%"><?php
                     $type_option = array(
@@ -96,7 +96,7 @@ $(document).ready(function() {
                 ?></td>
             </tr>
                 <td width="50%"><?php
-                    echo form_label(lang('product_category'), 'product_category');
+                    echo form_label(label(lang('product_category')), 'product_category');
                 ?></td>
                 <td width="50%"><?php
                     $category_option = array(
@@ -132,46 +132,47 @@ $(document).ready(function() {
 
 <?php echo clear_div();?>
 
-<div id="grid_16">
-    <?php if(sizeof($products) == 0): ?>
-        <span class="warning"><?php echo lang('product_no_product'); ?></span>
-    <?php else: ?>
-        <hr />
-        <?php foreach($products as $product): ?>
-        <div id="product_<?php echo $product->id;?>" style="margin-bottom: 3; margin-top: 3">
-            <div class="grid_3"><?php
-                $product_url = site_url('product/view/'.$product->id);
-                echo anchor(
-                    $product_url,
-                    img(array(
-                        'src'    => $product->primary_image_url,
-                        'alt'    => $product->product_name,
-                        'width'  => 80,
-                        'height' => 80,
-                    ))
-                );
-            ?></div>
-            <div class="grid_8"><?php
-                echo anchor($product_url, $product->product_code.' - '.$product->product_name);
-                echo br(1);
-                echo '<span class="expander">'.$product->product_desc.'</span>';
-            ?></div>
-            <div class="grid_2"><?php
-                echo 'RM'.$product->standard_price;
-            ?></div>
-            <div class="grid_2"><?php
-                echo button_link(
-                    false,
-                    lang('add_to_cart'),
-                    array(
-                        'id' => 'add_to_cart_'.$product->id,
-                        'onclick' => 'add_to_cart('.$product->id.')'
-                    )
-                );
-            ?></div>
-        <?php echo clear_div(); ?>
-        </div>
-        <hr />
-        <?php endforeach; ?>
-    <?php endif; ?>
-</div>
+<?php if(sizeof($products) == 0): ?>
+    <div class="grid_16">
+        <div class="warning"><?php echo lang('product_no_product'); ?></div>
+    </div>
+<?php echo clear_div();?>
+<?php else: ?>
+    <hr />
+    <?php foreach($products as $product): ?>
+    <div id="product_<?php echo $product->id;?>" style="margin-bottom: 3; margin-top: 3">
+        <div class="grid_3"><?php
+            $product_url = site_url('product/view/'.$product->id);
+            echo anchor(
+                $product_url,
+                img(array(
+                    'src'    => $product->primary_image_url,
+                    'alt'    => $product->product_name,
+                    'width'  => 80,
+                    'height' => 80,
+                ))
+            );
+        ?></div>
+        <div class="grid_8"><?php
+            echo anchor($product_url, $product->product_code.' - '.$product->product_name);
+            echo br(1);
+            echo '<span class="expander">'.$product->product_desc.'</span>';
+        ?></div>
+        <div class="grid_2"><?php
+            echo 'RM'.$product->standard_price;
+        ?></div>
+        <div class="grid_2"><?php
+            echo button_link(
+                false,
+                lang('add_to_cart'),
+                array(
+                    'id' => 'add_to_cart_'.$product->id,
+                    'onclick' => 'add_to_cart('.$product->id.')'
+                )
+            );
+        ?></div>
+    <?php echo clear_div(); ?>
+    </div>
+    <hr />
+    <?php endforeach; ?>
+<?php endif; ?>
