@@ -44,13 +44,17 @@ class Product extends MY_Controller {
         // either AMULET or ACCESSORIES
         $category = strtoupper(get_post('category', Product_Model::AMULET));
         // either RETAIL or WHOLESALE
-        $type     = strtoupper(get_post('type', Product_Model::RETAIL));
+        $type     = strtoupper(get_post('type', Product_Model::BOTH));
 
-        $sql = 'quantity_available > 0 AND UPPER(product_type) = ? AND ';
+        $criteria_set = array();
+        $sql = 'quantity_available > 0 AND';
+        if($type !== Product_Model::BOTH) {
+            $sql .= ' UPPER(product_type) = ? AND';
+            $criteria_set[] = $type;
+        }
         $sql .= ($category === Product_Model::AMULET)
             ? ' amulet_product_id > 0'
-            : ' amulet_product_id = 0';
-        $criteria_set = array($type);
+            : ' (amulet_product_id = 0 OR amulet_product_id IS NULL)';
 
         return (empty($q))
             ? $this->product_model->search($sql, $criteria_set, 10, $page, true)
