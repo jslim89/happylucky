@@ -190,18 +190,6 @@ class Product_Model extends MY_Active_Record {
     }
 
     /**
-     * I'm using CodeIgniter built-in Cart class.
-     * There are several attributes are compulsory, this
-     * function is convert the product object to cart item
-     * in array form. 
-     * 
-     * @return array
-     */
-    public function to_cart_item() {
-        return array();
-    }
-
-    /**
      * Price operator in string form 
      * 
      * @param mixed $opr 
