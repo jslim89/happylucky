@@ -39,4 +39,9 @@ class Monk extends MY_Controller {
         $this->load_view('monk/list', $this->vars);
     }
 
+    public function view($id) {
+        $monk = new Monk_Model($id);
+        $this->vars['monk'] = $monk;
+        $this->load_view('monk/view', $this->vars);
+    }
 }
