@@ -5,17 +5,18 @@ $(document).ready(function() {
         if($(this).is(':checked')) {
             $.ajax({
                 url: base_url+'user/get_details_in_json/<?php echo get_session('customer_id');?>',
+                dataType: 'json',
                 success: function(data) {
-                    $('input#first_name').val(data.first_name);
-                    $('input#last_name').val(data.last_name);
-                    $('input#email').val(data.email);
-                    $('input#shipping_contact_no').val(data.contact_no);
-                    $('input#shipping_address').val(data.address);
-                    $('input#shipping_town').val(data.town);
-                    $('input#shipping_postcode').val(data.postcode);
-                    $('input#shipping_city').val(data.city);
-                    $('input#shipping_state').val(data.state);
-                    $('select#shipping_country_id').val(data.country_id);
+                    $('input#first_name').val(data.first_name).attr('readonly', true);
+                    $('input#last_name').val(data.last_name).attr('readonly', true);
+                    $('input#email').val(data.email).attr('readonly', true);
+                    $('input#shipping_contact_no').val(data.contact_no).attr('readonly', true);
+                    $('input#shipping_address').val(data.address).attr('readonly', true);
+                    $('input#shipping_town').val(data.town).attr('readonly', true);
+                    $('input#shipping_postcode').val(data.postcode).attr('readonly', true);
+                    $('input#shipping_city').val(data.city).attr('readonly', true);
+                    $('input#shipping_state').val(data.state).attr('readonly', true);
+                    $('select#shipping_country_id').val(data.country_id).attr('readonly', true);
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     alert(errorThrown);
@@ -24,7 +25,7 @@ $(document).ready(function() {
         }
         else {
             $('input[type=text]').each(function() {
-                $(this).val('');
+                $(this).val('').attr('readonly', false);
             });
             $('select#shipping_country_id').val('129');
         }

@@ -21,6 +21,8 @@ class Order extends MY_Controller {
         parent::__construct();
         $this->lang->load('order');
         $this->lang->load('product');
+        $this->load->library('my_cart');
+        $this->load->Model('product_model');
         $this->load->Model('customer_order_model');
     }
 
@@ -47,7 +49,31 @@ class Order extends MY_Controller {
 
         $this->load_view('order/view', $this->vars);
     }
+
+    public function make_order() {
+        $order = new Customer_Order_Model();
+        $temp_order = (array)$this->session->flashdata('temp_order');
+        $order->populate_from_request($temp_order);
+        $order->populate_from_request($_POST);
+        $status = $order->make_order($this->my_cart->to_order_items());
+        if(is_array($status)) {
+            // The order made successful
+            if(sizeof($status) === 0) {
+                $error = false;
+            }
+            else { // some problems on order items
+                $error = implode("\n", $status);
+            }
+        }
+        else { // order cannot be made
+            $error = $status;
+        }
+
+        $this->vars['error'] = $error;
+        $this->vars['order'] = $order;
+        $this->load_view('order/made', $this->vars);
+    }
 }
 
 /* End of file order.php */
-/* Location: ./application/controllers/cart.php */
+/* Location: ./application/controllers/order.php */

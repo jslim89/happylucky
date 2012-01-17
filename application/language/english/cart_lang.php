@@ -32,8 +32,11 @@ $lang['cart_shipping_address']     = "Shipping Address";
 $lang['cart_checkout_step_3']  = "Step 3: Payment Method";
 $lang['cart_cash_on_delivery'] = "Cash On Delivery (COD)";
 $lang['cart_cod_hint']         = "Buyer must be able to meet face-to-face with seller";
+$lang['cart_bank_account_no']  = "Bank Account No.";
 $lang['cart_bank_in']          = "Bank-in";
 $lang['cart_bank_in_hint']     = "After bank in, please contact seller by a phone call.\n
+                                We will match your Bank Account no. with the bank receipt.\n
+                                Your Bank Account no. will not be given to any third party.\n
                                 The product(s) will be delivered once we have confirmed the payment.";
 
 $lang['cart_checkout_step_4'] = "Step 4: Confirm Order";

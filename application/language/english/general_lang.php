@@ -39,7 +39,7 @@ $lang['default']       = 'Default';
 
 // Top menu variable
 $lang['home']                  = 'Home';
-$lang['orders']                  = 'Orders';
+$lang['orders']                = 'Orders';
 $lang['product']               = 'Product';
 $lang['amulet']                = 'Amulet';
 $lang['accessories']           = 'Accessories';
@@ -129,5 +129,12 @@ $lang['seconds'] = 'Seconds';
 $lang['now']     = 'Now';
 
 /* General */
-$lang['any']    = 'Any';
-$lang['please'] = 'Please';
+$lang['any']       = 'Any';
+$lang['please']    = 'Please';
+$lang['only']      = 'Only';
+$lang['has']       = 'Has';
+$lang['available'] = 'Available';
+$lang['is']        = 'is';
+$lang['not']       = 'not';
+$lang['your']      = 'Your';
+$lang['thank_you'] = 'Thank You';

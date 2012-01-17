@@ -134,6 +134,47 @@ class MY_Cart extends CI_Cart {
     }
 
     /**
+     * Return the cart items in order_detail form 
+     * 
+     * @return array
+     */
+    public function to_order_items() {
+        $this->_get_ci()->load->model('order_detail_model');
+        $order_item_set = array();
+        foreach($this->contents() as $item) {
+            $order_item = new Order_Detail_Model();
+            $order_item->product_id      = $item['id'];
+            $order_item->qty             = $this->_get_available_qty($item['id'], $item['qty']);
+            $order_item->unit_sell_price = $item['price'];
+            $order_item->subtotal        = $item['subtotal'];
+
+            // Sometime is hard to guarantee that the quantity is
+            // always available.
+            // Let say, user1 add 5 items to cart, user2 add 6 items to cart
+            // the available quantity is 10. Now both users checkout at the
+            // same time, this validation should be done when the time user
+            // checkout.
+            if($order_item->qty != $item['qty']) {
+                $msg = lang('product').' '
+                    .anchor(
+                        site_url('product/view/'.$item['id']),
+                        $item['name']
+                    ).' '
+                    .lang('only').' '
+                    .lang('has').' '
+                    .$order_item->qty.' '
+                    .lang('available').'.';
+            }
+            else {
+                $msg = false;
+            }
+            $order_item->quantity_alert = $msg;
+            $order_item_set[] = $order_item;
+        }
+        return $order_item_set;
+    }
+
+    /**
      * Because the cart item is stored in session and cookie,
      * in multi-user environment, the quantity available may not
      * guarantee more than quantity ordered. In such a case, the

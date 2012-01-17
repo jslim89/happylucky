@@ -1,6 +1,17 @@
 <script type="text/javascript">
 $(document).ready(function() {
     $('#form_step_3').validationEngine('attach');
+
+    $('input[name=payment_method]').change(function() {
+        if($('#cod').is(':checked')) {
+            $('#bank-acc').hide(2000);
+            $('input#recipient_bank_acc').removeClass('validate[required]');
+        }
+        else {
+            $('#bank-acc').show(2000);
+            $('input#recipient_bank_acc').addClass('validate[required]');
+        }
+    });
 });
 </script>
 <div id="account-delivery">
@@ -31,10 +42,18 @@ $(document).ready(function() {
                 )).'<b>'.lang('cart_bank_in').'</b>',
                 'bank_in'
             );
+        ?>
+        <div id="bank-acc"><?php
+            echo label(lang('cart_bank_account_no')).': ';
+            echo form_input(array(
+                'id'   => 'recipient_bank_acc',
+                'name' => 'recipient_bank_acc',
+                'class' => 'validate[required]',
+            ));
             echo div(lang('cart_bank_in_hint'), array(
                 'class' => 'hint'
             ));
-        ?>
+        ?></div>
             <p><?php echo lang('any')
                 .' '.lang('information')
                 .' '.lang('please')

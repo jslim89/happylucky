@@ -92,6 +92,44 @@ class Customer_Order_Model extends MY_Active_Record {
     }
 
     /**
+     * make_order 
+     *
+     * if is empty array, then order no problem
+     * if array, then the order items got some problem
+     * if string, then this order doesn't made
+     * @return mixed
+     */
+    public function make_order($order_items) {
+        $this->order_date = time();
+        $this->order_status = Customer_Order_Model::PENDING;
+        $this->grand_total = $this->subtotal + $this->shipping_cost;
+        $this->customer_id = get_session('customer_id', null);
+        $is_order_ok = $this->save();
+        if($is_order_ok) {
+            $status = array();
+            foreach($order_items as $item) {
+                if($item->quantity_alert) {
+                    $status[] = $item->quantity_alert;
+                }
+                $item->order_id = $this->id;
+                $is_order_item_ok = $item->save();
+                if( ! $is_order_item_ok) {
+                    $status[] = lang('product')
+                        .' '.anchor(
+                            site_url('product/view/'.$item->product_id),
+                            $item->product->product_name
+                        ).' '.lang('is').' '.lang('not')
+                        .' '.lang('available').'.';
+                }
+            }
+        }
+        else {
+            $status = lang('order').' '.lang('order_cannot_be_made');
+        }
+        return $status;
+    }
+
+    /**
      * Get the Order list by customer date and ID 
      * 
      * @param mixed $customer_id 

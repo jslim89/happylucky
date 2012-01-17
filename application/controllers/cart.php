@@ -22,6 +22,7 @@ class Cart extends MY_Controller {
         $this->lang->load('product');
         $this->lang->load('cart');
         $this->load->library('my_cart');
+        $this->load->Model('customer_order_model');
         $this->load->Model('product_model');
         $this->load->Model('country_model');
     }
@@ -98,22 +99,47 @@ class Cart extends MY_Controller {
         $this->vars['title'] = lang('cart_check_out');
         $this->vars['step'] = 'cart/steps/step_'.$step;
         $this->vars['breadcrumb'] = $this->_breadcrumb($step);
-        $this->_step_4();
+        switch($step) {
+            case 1:
+                $this->_step_1();
+                break;
+            case 3:
+                $this->_step_3();
+                break;
+            case 4:
+                $this->_step_4();
+                break;
+        }
         $this->load_view('cart/checkout', $this->vars);
     }
 
     private function _step_1() {
         $option = get_post('opt');
-        if($option == 'register') {
+        if(get_session('customer_id')) {
+            redirect('cart/checkout/2');
+        }
+        else if($option == 'register') {
             redirect('user/register');
         }
-        else {
+        else if($option == 'guest'){
             redirect('cart/checkout/2.html');
         }
     }
 
+    private function _step_3() {
+        $order = new Customer_Order_Model();
+        $order->populate_from_request($_POST);
+        $this->session->set_userdata('temp_order', $order);
+    }
+
     private function _step_4() {
-        $this->vars['products'] = $this->my_cart->get_products();
+        $order = new Customer_Order_Model();
+        $products = $this->my_cart->get_products();
+        $temp_order = (array)$this->session->flashdata('temp_order');
+        $order->populate_from_request($temp_order);
+        $order->recipient_bank_acc = get_post('recipient_bank_acc');
+        $this->session->set_userdata('temp_order', $order);
+        $this->vars['products'] = $products;
     }
 
     /**

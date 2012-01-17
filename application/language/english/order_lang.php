@@ -1,4 +1,6 @@
 <?php
+$lang['order']    = "Order";
+
 $lang['order_retail_order']    = "Retail Order";
 $lang['order_wholesale_order'] = "Wholesale Order";
 
@@ -26,3 +28,11 @@ $lang['order_shipped']    = "Shipped";
 $lang['order_cancelled']  = "Cancelled";
 $lang['order_expired']    = "Expired";
 $lang['order_completed']  = "Completed";
+
+/* Make Order */
+$lang['order_product_item']  = "Product Item";
+$lang['order_cannot_be_made']  = "cannot be made";
+$lang['order_regarding_to_the_payment']  = "regarding to the payment";
+$lang['order_due_to_certain_issues_your_order_cannot_be_made']  = "Due to certain issues,
+                                                            your order cannot be made";
+$lang['order_apologize_about_that']  = "Apologize about that";
