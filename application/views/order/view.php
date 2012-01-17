@@ -21,15 +21,15 @@ $(document).ready(function() {
             <tbody>
                 <tr>
                     <td class="left" width="50%"><?php
-                        echo label(lang('order_invoice_no')).': ';
-                        echo 'INV-2012-001';
+                        echo label(lang('order_order_id')).': ';
+                        echo $order->id;
                         echo br(1);
                         echo label(lang('order_status')).': ';
-                        echo lang('order_pending');
+                        echo Customer_Order_Model::status($order->order_status);
                     ?></td>
                     <td class="left"><?php
                         echo label(lang('order_order_date')).': ';
-                        echo to_human_date_time(time());
+                        echo to_human_date_time($order->order_date);
                     ?></td>
                 </tr>
             </tbody>
@@ -45,8 +45,7 @@ $(document).ready(function() {
             <tbody>
                 <tr>
                     <td colspan="2"><?php
-                        echo nl2br("Block A-12-10, \nPrima Setapak, \nJalan Genting Klang"
-                            .", 53300, \nSetapak, \nKuala Lumpur, \nMalaysia");
+                        echo nl2br($order->get_full_address());
                     ?></td>
                 </tr>
             </tbody>
@@ -72,23 +71,33 @@ $(document).ready(function() {
                 </tr>
             </thead>
             <tbody>
+            <?php foreach($products as $product): ?>
                 <tr>
                     <td class="left"><?php
-                        echo 'P001';
+                        echo anchor(
+                            site_url('product/view/'.$product->product_id),
+                            $product->product_code,
+                            array('target' => '_blank')
+                        );
                     ?></td>
                     <td class="left"><?php
-                        echo 'Product 1';
+                        echo anchor(
+                            site_url('product/view/'.$product->product_id),
+                            $product->product_name,
+                            array('target' => '_blank')
+                        );
                     ?></td>
                     <td class="right"><?php
-                        echo 5;
+                        echo $product->quantity;
                     ?></td>
                     <td class="right"><?php
-                        echo to_currency(200, 'MYR');
+                        echo to_currency($product->unit_sell_price, 'MYR');
                     ?></td>
                     <td class="right"><?php
-                        echo to_currency(1000, 'MYR');
+                        echo to_currency($product->subtotal, 'MYR');
                     ?></td>
                 </tr>
+            <?php endforeach; ?>
             </tbody>
             <tfoot>
                 <tr>
@@ -97,7 +106,7 @@ $(document).ready(function() {
                         echo label(lang('product_subtotal'));
                     ?></td>
                     <td class="right"><?php
-                        echo to_currency(1000, 'MYR');
+                        echo to_currency($order->subtotal, 'MYR');
                     ?></td>
                 </tr>
                 <tr>
@@ -106,7 +115,7 @@ $(document).ready(function() {
                         echo label(lang('order_shipping'));
                     ?></td>
                     <td class="right"><?php
-                        echo to_currency(20, 'MYR');
+                        echo to_currency($order->shipping_cost, 'MYR');
                     ?></td>
                 </tr>
                 <tr>
@@ -115,7 +124,7 @@ $(document).ready(function() {
                         echo label(lang('product_grand_total'));
                     ?></td>
                     <td class="right"><?php
-                        echo to_currency(1020, 'MYR');
+                        echo to_currency($order->grand_total, 'MYR');
                     ?></td>
                 </tr>
             </tfoot>
@@ -123,7 +132,7 @@ $(document).ready(function() {
         <div class="buttons">
             <div class="right"><?php
                 echo button_link(
-                    site_url('order/list'),
+                    site_url('order'),
                     lang('back')
                 );
             ?></div>

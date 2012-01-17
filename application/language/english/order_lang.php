@@ -16,10 +16,14 @@ $lang['order_total']          = "Total";
 $lang['order_shipping']       = "Shipping";
 $lang['order_total_products'] = "Total Products";
 
-$lang['order_history']                      = "Order History";
-$lang['order_order_information']            = "Order Information";
-$lang['order_shipping_and_billing_address'] = "Shipping &amp; Billing Address";
-$lang['order_no_order_history']             = "Does not have any Order History";
+$lang['order_history']                        = "Order History";
+$lang['order_order_information']              = "Order Information";
+$lang['order_shipping_and_billing_address']   = "Shipping &amp; Billing Address";
+$lang['order_no_order_history']               = "Does not have any Order History";
+$lang['order_enter_your_order_id_and_search'] = "Enter your Order ID and search";
+$lang['order_please_include_your_email_address_in_order_for_us_to_verify'] = "Please
+    include your email address in order for us to verify";
+$lang['order_order_not_found']                = "Order not found";
 
 /* Order Status */
 $lang['order_pending']    = "Pending";

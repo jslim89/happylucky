@@ -43,9 +43,24 @@ class Order extends MY_Controller {
 	}
 
     public function view($id) {
-        $order = new Customer_Order_Model($id);
-        $this->vars['order'] = $order;
-        $this->vars['title'] = lang('order_order_information');
+        $order    = new Customer_Order_Model($id);
+        // if is not a member and this order belongs to existing customer
+        // an extra condition to verify the customer email
+        if( ! get_session('customer_id') &&
+            (! empty($order->customer_id) || $order->email != get_post('email'))) {
+            $this->session->set_flashdata('search_order_error', lang('order_order_not_found'));
+            redirect('order');
+        }
+        $products = array();
+        foreach($order->order_detail as $p) {
+            $temp_prod = new Product_Model($p->product_id);
+            $p->product_name = $temp_prod->product_name;
+            $p->product_code = $temp_prod->product_code;
+            $products[] = $p;
+        }
+        $this->vars['order']    = $order;
+        $this->vars['products'] = $products;
+        $this->vars['title']    = lang('order_order_information');
 
         $this->load_view('order/view', $this->vars);
     }

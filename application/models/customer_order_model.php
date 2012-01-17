@@ -82,13 +82,25 @@ class Customer_Order_Model extends MY_Active_Record {
         return $status_text;
     }
 
+    /**
+     * get_full_address 
+     * 
+     * @return string
+     */
     public function get_full_address() {
-        return $this->shipping_address
-            . ", \n" . $this->shipping_town
-            . ", \n" . $this->shipping_postcode
-            . ", \n" . $this->shipping_city
-            . ", \n" . $this->shipping_state
-            . ", \n" . $this->country->country_name;
+        $this->_get_ci()->load->model('country_model');
+        $country = new Country_Model($this->shipping_country_id);
+        $address = $this->shipping_address;
+        if( ! empty($this->shipping_town)) {
+            $address .= ", \n".$this->shipping_town;
+        }
+        if( ! empty($this->shipping_postcode)) {
+            $address .= ", \n".$this->shipping_postcode;
+        }
+        $address .= ", \n" . $this->shipping_city
+                . ", \n" . $this->shipping_state
+                . ", \n" . $country->country_name;
+        return $address;
     }
 
     /**

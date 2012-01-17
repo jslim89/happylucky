@@ -133,6 +133,7 @@ $lang['any']       = 'Any';
 $lang['please']    = 'Please';
 $lang['only']      = 'Only';
 $lang['has']       = 'Has';
+$lang['for']       = 'for';
 $lang['available'] = 'Available';
 $lang['is']        = 'is';
 $lang['not']       = 'not';
