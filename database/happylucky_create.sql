@@ -5,7 +5,7 @@
 # Project name:                                                          #
 # Author:                                                                #
 # Script type:           Database creation script                        #
-# Created on:            2011-12-25 00:38                                #
+# Created on:            2012-01-17 13:38                                #
 # ---------------------------------------------------------------------- #
 
 
@@ -92,9 +92,11 @@ CREATE TABLE `supplier` (
     `postcode` VARCHAR(20) COLLATE utf8_general_ci,
     `city` VARCHAR(50) COLLATE utf8_general_ci NOT NULL,
     `state` VARCHAR(50) COLLATE utf8_general_ci NOT NULL,
-    `country_id` INTEGER(3) UNSIGNED DEFAULT 129,
     `contact_no` VARCHAR(30) COLLATE utf8_general_ci NOT NULL,
     `email` VARCHAR(80) COLLATE utf8_general_ci NOT NULL,
+    `contact_person` VARCHAR(50) COLLATE utf8_general_ci NOT NULL,
+    `fax` VARCHAR(30) COLLATE utf8_general_ci,
+    `country_id` INTEGER(3) UNSIGNED DEFAULT 129,
     PRIMARY KEY (`id`),
     CONSTRAINT `uniq` UNIQUE (`email`)
 );
@@ -148,7 +150,6 @@ CREATE TABLE `customer` (
     `email` VARCHAR(80) COLLATE utf8_general_ci NOT NULL,
     `password` VARCHAR(100) COLLATE utf8_general_ci NOT NULL,
     `registration_date` BIGINT(8) UNSIGNED NOT NULL DEFAULT 0,
-    `display_picture` VARCHAR(100) COLLATE utf8_general_ci,
     `age` INTEGER(3) UNSIGNED,
     `sex` CHAR(1),
     `security_question` VARCHAR(100) COLLATE utf8_general_ci NOT NULL,
@@ -183,7 +184,6 @@ CREATE TABLE `customer_order` (
     `payment_date` BIGINT(8) UNSIGNED,
     `shipping_cost` DECIMAL(15,2) NOT NULL DEFAULT 0.00,
     `order_status` VARCHAR(50) COLLATE utf8_general_ci NOT NULL,
-    `order_type` VARCHAR(50) COLLATE utf8_general_ci NOT NULL,
     CONSTRAINT `PK_customer_order` PRIMARY KEY (`id`)
 );
 
@@ -241,17 +241,15 @@ CREATE TABLE `product` (
     `product_code` VARCHAR(30) COLLATE utf8_general_ci NOT NULL,
     `product_name` VARCHAR(50) COLLATE utf8_general_ci NOT NULL,
     `product_desc` TEXT COLLATE utf8_general_ci NOT NULL,
-    `cost` DECIMAL(15,2) DEFAULT 0.00,
     `standard_price` DECIMAL(15,2) NOT NULL DEFAULT 0.00,
-    `quantity_available` INTEGER(5) UNSIGNED NOT NULL DEFAULT 0,
-    `min_quantity` INTEGER(5) UNSIGNED NOT NULL DEFAULT 0,
+    `quantity_available` INTEGER(5) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'Whenever a product_batch is stocked in, this attribute will be sum with the quantity stocked in',
+    `min_quantity` INTEGER(5) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'Minimum quantity that must be ordered',
     `min_qty_alert` INTEGER(5) UNSIGNED COMMENT 'When the quantity left few unit, it will alert. Example: quantity_available <= min_qty_alert, it will inform to re-stock',
     `total_num_sold` INTEGER(9) UNSIGNED NOT NULL DEFAULT 0,
     `created_date` BIGINT(8) UNSIGNED NOT NULL,
     `primary_image_url` VARCHAR(100) COLLATE utf8_general_ci,
-    `product_type` VARCHAR(50) COLLATE utf8_general_ci NOT NULL,
+    `product_type` VARCHAR(50) COLLATE utf8_general_ci NOT NULL COMMENT 'Product type to indicate whether it is RETAIL or WHOLESALE',
     `amulet_product_id` BIGINT(8) UNSIGNED,
-    `supplier_id` BIGINT(8) UNSIGNED,
     CONSTRAINT `PK_product` PRIMARY KEY (`id`)
 );
 
@@ -268,6 +266,21 @@ CREATE TABLE `product_image` (
     `image_desc` TEXT COLLATE utf8_general_ci NOT NULL,
     `product_id` BIGINT(8) UNSIGNED,
     CONSTRAINT `PK_product_image` PRIMARY KEY (`id`)
+);
+
+# ---------------------------------------------------------------------- #
+# Add table "product_batch"                                              #
+# ---------------------------------------------------------------------- #
+
+CREATE TABLE `product_batch` (
+    `id` BIGINT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `unit_cost` DECIMAL(15,2) UNSIGNED NOT NULL DEFAULT 0.00,
+    `stock_in_date` BIGINT(8) NOT NULL,
+    `batch_no` INTEGER(10) UNSIGNED NOT NULL,
+    `quantity_stock_in` INTEGER(5) UNSIGNED NOT NULL DEFAULT 1,
+    `product_id` BIGINT(8) UNSIGNED,
+    `supplier_id` BIGINT(8) UNSIGNED,
+    CONSTRAINT `PK_product_batch` PRIMARY KEY (`id`)
 );
 
 # ---------------------------------------------------------------------- #
@@ -306,9 +319,6 @@ ALTER TABLE `order_detail` ADD CONSTRAINT `product_order_detail`
 ALTER TABLE `product` ADD CONSTRAINT `amulet_product_product` 
     FOREIGN KEY (`amulet_product_id`) REFERENCES `amulet_product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
-ALTER TABLE `product` ADD CONSTRAINT `supplier_product` 
-    FOREIGN KEY (`supplier_id`) REFERENCES `supplier` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
-
 ALTER TABLE `product_image` ADD CONSTRAINT `product_product_image` 
     FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
@@ -332,3 +342,9 @@ ALTER TABLE `supplier` ADD CONSTRAINT `country_supplier`
 
 ALTER TABLE `amulet_image` ADD CONSTRAINT `amulet_amulet_image` 
     FOREIGN KEY (`id`) REFERENCES `amulet` (`id`);
+
+ALTER TABLE `product_batch` ADD CONSTRAINT `product_product_batch` 
+    FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+ALTER TABLE `product_batch` ADD CONSTRAINT `supplier_product_batch` 
+    FOREIGN KEY (`supplier_id`) REFERENCES `supplier` (`id`);
