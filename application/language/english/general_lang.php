@@ -78,6 +78,13 @@ $lang['city']     = 'City';
 $lang['state']    = 'State';
 $lang['country']  = 'Country';
 
+// Contact
+$lang['contact'] = 'Contact';
+$lang['tel']     = 'Tel';
+$lang['fax']     = 'Fax';
+$lang['please_do_not_hesitate_to_call_us_if_you_have_any_questions'] = 'Please
+    do not hesitate to call us if you have any questions';
+
 // Table Header
 $lang['address_information']  = 'Address Information';
 $lang['contact_information']  = 'Contact Information';
@@ -108,6 +115,9 @@ $lang['ordering']               = 'Ordering';
                                                                                                                               
 $lang['my_account']             = 'My Account';
 $lang['order_history']          = 'Order History';
+
+/* Information */
+$lang['our_location']          = 'Our Location';
 
 /* Browser redirection */
 $lang['browser_will_be_redirected_to'] = 'Browser will be redirected to';
