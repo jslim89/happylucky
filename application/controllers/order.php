@@ -52,7 +52,7 @@ class Order extends MY_Controller {
 
     public function make_order() {
         $order = new Customer_Order_Model();
-        $temp_order = (array)$this->session->flashdata('temp_order');
+        $temp_order = (array)get_session('temp_order');
         $order->populate_from_request($temp_order);
         $order->populate_from_request($_POST);
         $status = $order->make_order($this->my_cart->to_order_items());
@@ -60,6 +60,7 @@ class Order extends MY_Controller {
             // The order made successful
             if(sizeof($status) === 0) {
                 $error = false;
+                $this->my_cart->destroy();
             }
             else { // some problems on order items
                 $error = implode("\n", $status);

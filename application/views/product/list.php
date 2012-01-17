@@ -172,7 +172,7 @@ $(document).ready(function() {
                 lang('add_to_cart'),
                 array(
                     'id'      => 'add_to_cart_'.$product->id,
-                    'onclick' => 'add_to_cart('.$product->id.')'
+                    'onclick' => 'add_to_cart('.$product->id.', '.$product->min_quantity.')'
                 )
             );
             $min_qty_to_add = '('.lang('cart_min_quantity_to_add')

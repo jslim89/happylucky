@@ -138,3 +138,4 @@ $lang['is']        = 'is';
 $lang['not']       = 'not';
 $lang['your']      = 'Your';
 $lang['thank_you'] = 'Thank You';
+$lang['please_check_your_mailbox'] = 'Please check your mailbox';

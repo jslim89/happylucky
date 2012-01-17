@@ -122,7 +122,7 @@ class Cart extends MY_Controller {
             redirect('user/register');
         }
         else if($option == 'guest'){
-            redirect('cart/checkout/2.html');
+            redirect('cart/checkout/2');
         }
     }
 
@@ -135,7 +135,7 @@ class Cart extends MY_Controller {
     private function _step_4() {
         $order = new Customer_Order_Model();
         $products = $this->my_cart->get_products();
-        $temp_order = (array)$this->session->flashdata('temp_order');
+        $temp_order = (array)get_session('temp_order');
         $order->populate_from_request($temp_order);
         $order->recipient_bank_acc = get_post('recipient_bank_acc');
         $this->session->set_userdata('temp_order', $order);

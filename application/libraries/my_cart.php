@@ -28,6 +28,7 @@ class MY_Cart extends CI_Cart {
      * @return void
      */
     public function load_from_cookie($cookie) {
+        if( ! get_cookie($cookie, false)) return;
         $this->_get_ci()->load->model('product_model');
         $minimized_cart = json_decode(get_cookie($cookie), TRUE);
         foreach($minimized_cart as $product_id => $qty) {
@@ -144,7 +145,7 @@ class MY_Cart extends CI_Cart {
         foreach($this->contents() as $item) {
             $order_item = new Order_Detail_Model();
             $order_item->product_id      = $item['id'];
-            $order_item->qty             = $this->_get_available_qty($item['id'], $item['qty']);
+            $order_item->quantity        = $this->_get_available_qty($item['id'], $item['qty']);
             $order_item->unit_sell_price = $item['price'];
             $order_item->subtotal        = $item['subtotal'];
 
@@ -154,7 +155,7 @@ class MY_Cart extends CI_Cart {
             // the available quantity is 10. Now both users checkout at the
             // same time, this validation should be done when the time user
             // checkout.
-            if($order_item->qty != $item['qty']) {
+            if($order_item->quantity != $item['qty']) {
                 $msg = lang('product').' '
                     .anchor(
                         site_url('product/view/'.$item['id']),
@@ -162,7 +163,7 @@ class MY_Cart extends CI_Cart {
                     ).' '
                     .lang('only').' '
                     .lang('has').' '
-                    .$order_item->qty.' '
+                    .$order_item->quantity.' '
                     .lang('available').'.';
             }
             else {
@@ -172,6 +173,15 @@ class MY_Cart extends CI_Cart {
             $order_item_set[] = $order_item;
         }
         return $order_item_set;
+    }
+
+    public function destroy() {
+        $cookie = array(
+            'name' => MY_Cart::COOKIE,
+            'expire' => '',
+        );
+        set_cookie($cookie);
+        parent::destroy();
     }
 
     /**

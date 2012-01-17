@@ -2,7 +2,7 @@
 </script>
 <?php if( ! $error): ?>
 <div class="grid_16">
-    <p><?php echo lang('order_your_order_has_been_successfully_processed');?>!</p>
+    <div class="success"><?php echo lang('order_your_order_has_been_successfully_processed');?>!</div>
     <p><?php
         echo lang('view').' '.lang('your').' '
         .anchor(
@@ -18,6 +18,7 @@
         ).' '.lang('order_regarding_to_the_payment').'.';
     ?></p>
     <p><?php
+        echo lang('please_check_your_mailbox').'. ';
         echo lang('thank_you');
     ?></p>
 </div>

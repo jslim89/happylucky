@@ -9,6 +9,7 @@ $lang['cart_shipping']   = "Shipping";
 $lang['cart_quantity']   = "Quantity";
 
 $lang['cart_continue_shopping'] = "Continue Shopping";
+$lang['cart_no_item_in_cart'] = "No item in cart";
 
 /* add to cart */
 $lang['cart_added_to_cart']       = "Added to cart";

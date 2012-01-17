@@ -36,3 +36,4 @@ $lang['order_regarding_to_the_payment']  = "regarding to the payment";
 $lang['order_due_to_certain_issues_your_order_cannot_be_made']  = "Due to certain issues,
                                                             your order cannot be made";
 $lang['order_apologize_about_that']  = "Apologize about that";
+$lang['order_your_order_has_been_successfully_processed']  = "Your order has been successfully processed";
