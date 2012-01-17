@@ -11,6 +11,13 @@ ADOdb_Active_Record::TableKeyHasMany(
 ADOdb_Active_Record::TableKeyHasMany(
     'product', // parent table name
     'id', // parent primary key
+    'product_batch', // child table name
+    'product_id' // child foreign key
+);
+
+ADOdb_Active_Record::TableKeyHasMany(
+    'product', // parent table name
+    'id', // parent primary key
     'order_detail', // child table name
     'product_id' // child foreign key
 );
@@ -20,14 +27,6 @@ ADOdb_Active_Record::TableKeyBelongsTo(
     'id', // child primary key
     'amulet_product', // parent table name
     'amulet_product_id', // child foreign key
-    'id' // parent primary key
-);
-
-ADOdb_Active_Record::TableKeyBelongsTo(
-    'product', // child table name
-    'id', // child primary key
-    'supplier', // parent table name
-    'supplier_id', // child foreign key
     'id' // parent primary key
 );
 

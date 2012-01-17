@@ -1,23 +1,24 @@
 <?php
 require_once(APPPATH.'core/MY_Active_Record.php');
 
-ADOdb_Active_Record::TableKeyHasMany(
-    'supplier', // parent table name
-    'id', // parent primary key
+ADOdb_Active_Record::TableKeyBelongsTo(
     'product_batch', // child table name
-    'supplier_id' // child foreign key
+    'id', // child primary key
+    'product', // parent table name
+    'product_id', // child foreign key
+    'id' // parent primary key
 );
 
 ADOdb_Active_Record::TableKeyBelongsTo(
-    'supplier', // child table name
+    'product_batch', // child table name
     'id', // child primary key
-    'country', // parent table name
-    'country_id', // child foreign key
+    'supplier', // parent table name
+    'supplier_id', // child foreign key
     'id' // parent primary key
 );
 
 /**
- * Supplier_Model 
+ * Product_Batch_Model 
  * 
  * @uses MY_Active_Record
  * @package 
@@ -26,7 +27,7 @@ ADOdb_Active_Record::TableKeyBelongsTo(
  * @author Jeong-Sheng, Lim <jslim89@gmail.com> 
  * @license GPL Version 3 {@link http://www.gnu.org/licenses/gpl.html}
  */
-class Supplier_Model extends MY_Active_Record {
+class Product_Batch_Model extends MY_Active_Record {
 
     /**
      * _table 
@@ -34,5 +35,5 @@ class Supplier_Model extends MY_Active_Record {
      * @var string
      * @access protected
      */
-    var $_table = 'supplier';
+    var $_table = 'product_batch';
 }
