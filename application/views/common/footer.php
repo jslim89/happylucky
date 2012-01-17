@@ -7,19 +7,19 @@
     <div class="column"><?php
         $info_list = array(
             anchor(
-                '#',
+                site_url('information/about_us'),
                 lang('about_us')
             ),
             anchor(
-                '#',
+                site_url('information/delivery_info'),
                 lang('delivery_infomation')
             ),
             anchor(
-                '#',
+                site_url('information/privacy_policy'),
                 lang('privacy_policy')
             ),
             anchor(
-                '#',
+                site_url('information/terms_and_conditions'),
                 lang('terms_and_conditions')
             ),
         );
@@ -29,11 +29,11 @@
     <div class="column"><?php
         $service_list = array(
             anchor(
-                '#',
+                site_url('information/contact_us'),
                 lang('contact_us')
             ),
             anchor(
-                '#',
+                site_url('information/ordering'),
                 lang('ordering')
             ),
         );
@@ -43,11 +43,11 @@
     <div class="column"><?php
         $my_acc_list = array(
             anchor(
-                '#',
+                site_url('user'),
                 lang('my_account')
             ),
             anchor(
-                '#',
+                site_url('order'),
                 lang('order_history')
             ),
         );
