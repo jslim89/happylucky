@@ -3,6 +3,7 @@
 
 <!-- Footer -->
 
+<?php if(get_session('user_type') !== User_Model::ADMIN): ?>
 <div id="footer" class="grid_16">
     <div class="column"><?php
         $info_list = array(
@@ -55,6 +56,7 @@
         echo ul($my_acc_list);
     ?></div>
 </div>
+<?php endif; ?>
 
 <div class="legal">
     <div class="copyright">
