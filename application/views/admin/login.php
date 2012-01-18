@@ -60,7 +60,13 @@ $this->lang->load ('general', get_cookie ('language'));
                     </tr-->
                     <tr>
                         <td></td>
-                        <td><input id="submit" type="submit" class="button" value="<?php echo lang ('user_signin');?>" /></td>
+                        <td><?php
+                            echo button_link(
+                                false,
+                                lang('user_signin'),
+                                array('id' => 'btn_signin')
+                            );
+                        ?></td>
                     </tr>
                     <!--tr>
                         <td></td>
@@ -106,6 +112,9 @@ $this->lang->load ('general', get_cookie ('language'));
         $(document).ready(function() {
             $('#email').focus();
             $('#login_form').validationEngine('attach');
+            $('#btn_signin').click(function() {
+                $('#login_form').submit();
+            });
         });
     </script>
 </body>
