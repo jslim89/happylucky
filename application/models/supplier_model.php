@@ -35,4 +35,33 @@ class Supplier_Model extends MY_Active_Record {
      * @access protected
      */
     var $_table = 'supplier';
+
+    /**
+     * A list of products which are order from this supplier 
+     * 
+     * @return array
+     */
+    public function get_product_list($page_limit = false, $offset = false) {
+        $this->_get_ci()->load->model('product_model');
+        $product_set = array();
+        foreach($this->product_batch as $batch) {
+            $p = new Product_Model($batch->product_id);
+            // user defined attributes
+            $p->stock_in_date     = $batch->stock_in_date;
+            $p->quantity_stock_in = $batch->quantity_stock_in;
+            $p->unit_cost         = $batch->unit_cost;
+            $product_set[] = $p;
+        }
+        if($page_limit !== false && $offset !== false) {
+            $result_set = array();
+            $limit = (sizeof($product_set) < $page_limit) ? sizeof($product_set) : $page_limit;
+            $result_set = array_slice($product_set, $offset, $limit);
+        }
+        else {
+            $result_set = $product_set;
+        }
+        return ($page_limit !== false && $offset !== false)
+            ? array($result_set, sizeof($product_set))
+            : $result_set;
+    }
 }

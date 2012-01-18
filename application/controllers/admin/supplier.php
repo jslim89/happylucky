@@ -20,6 +20,7 @@ class Supplier extends MY_Controller {
     public function __construct() {
         parent::__construct();
         $this->lang->load('supplier');
+        $this->lang->load('product');
         $this->load->Model('supplier_model');
         $this->load->Model('product_model');
         $this->load->Model('country_model');
@@ -56,7 +57,7 @@ class Supplier extends MY_Controller {
         /* product ordered from this particular supplier */
         $product = new Product_Model();
         $base_url = base_url('admin/supplier/edit/'.$id);
-        list($products, $total_rows) = $product->search('supplier_id=?', array($id), 10, $page, true);
+        list($products, $total_rows) = $supplier->get_product_list(10, $page);
         $this->vars['pagination'] = $product->get_pagination($total_rows, 10, 5, $base_url);
         $this->vars['title'] = lang('supplier_management');
         $this->vars['products'] = $products;

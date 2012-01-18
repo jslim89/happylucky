@@ -1,8 +1,12 @@
 <?php  if (!defined('BASEPATH')) exit('No direct script access allowed');?>
 <script>
 $(document).ready(function() {
-    $('button#back').click(function() {
+    $('#back').click(function() {
         redirect(base_url+'admin/supplier');
+    });
+
+    $('#save_supplier_add_edit').click(function() {
+        $('#supplier_add_edit').submit();
     });
 
     // Override the original paging link,
@@ -28,36 +32,6 @@ $(document).ready(function() {
             }
         }
     });
-
-    $('input#country').autocomplete({
-        highlight: true,
-        minLength: 1,
-        scroll: true,
-        dataType: 'json',
-        source: base_url + 'admin/country/ajax_search',
-        focus: function(event, ui) {
-            $(this).val(ui.item.country_name);
-            return false;
-        },
-        select: function(event, ui) {
-            $(this).val(ui.item.country_name);
-            $('input[name=country_id]').val(ui.item.id);
-            return false;
-        },
-        open: function() {
-            $(this).removeClass('ui-corner-all').addClass('ui-corner-top');
-        },
-        close: function() {
-            $(this).removeClass('ui-corner-top').addClass('ui-corner-all');
-        }
-    })
-    .data('autocomplete')._renderItem = function(ul, item){
-        return $('<li></li>')
-                .data('item.autocomplete', item)
-                .append('<a>' + format_country(item) + '</a>')
-                .appendTo(ul);
-    };
-
 });
 </script>
 
@@ -73,9 +47,9 @@ $(document).ready(function() {
     <div id="general">
         <form id="supplier_add_edit" method="POST" 
               action="<?php echo site_url("admin/supplier/save/".$supplier->id);?>">
-            <table>
+            <table class="form">
                 <tr>
-                    <td class="label"><?php echo lang('supplier_name');?></td>
+                    <td class="label"><?php echo required_indicator().lang('supplier_name');?></td>
                     <td colspan="3">
                         <?php 
                             echo form_input(array(
@@ -88,7 +62,7 @@ $(document).ready(function() {
                     </td>
                 </tr>
                 <tr>
-                    <td><?php echo lang('address');?></td>
+                    <td><?php echo required_indicator().lang('address');?></td>
                     <td>
                         <?php 
                             echo form_input(array(
@@ -123,7 +97,7 @@ $(document).ready(function() {
                             ));
                         ?>
                     </td>
-                    <td><?php echo lang('city');?></td>
+                    <td><?php echo required_indicator().lang('city');?></td>
                     <td>
                         <?php 
                             echo form_input(array(
@@ -136,7 +110,7 @@ $(document).ready(function() {
                     </td>
                 </tr>
                 <tr>
-                    <td><?php echo lang('state');?></td>
+                    <td><?php echo required_indicator().lang('state');?></td>
                     <td>
                         <?php 
                             echo form_input(array(
@@ -147,35 +121,22 @@ $(document).ready(function() {
                             ));
                         ?>
                     </td>
-                    <td><?php echo lang('country');?></td>
+                    <td><?php echo required_indicator().lang('country');?></td>
                     <td>
                         <?php 
-                            $country = (sizeof($supplier->country) < 1)
-                                ? new Country_Model() 
-                                : $supplier->country;
-                            echo form_input(array(
-                                'name'  => 'country',
-                                'id'    => 'country',
-                                'value' => $country->country_name,
-                                'class' => 'validate[required]'
-                            ));
-                            echo form_hidden('country_id', $supplier->country_id);
+                            $country_selected = (sizeof($supplier->country) < 1)
+                                ? 129 // Default is Malaysia
+                                : $supplier->country_id;
+                            echo form_dropdown(
+                                'country_id',
+                                Country_Model::get_dropdown_list(),
+                                $country_selected
+                            );
                         ?>
                     </td>
                 </tr>
                 <tr>
-                    <td><?php echo lang('supplier_contact');?></td>
-                    <td>
-                        <?php 
-                            echo form_input(array(
-                                'name'  => 'contact_no',
-                                'id'    => 'contact_no',
-                                'value' => $supplier->contact_no,
-                                'class' => 'validate[required]'
-                            ));
-                        ?>
-                    </td>
-                    <td><?php echo lang('email');?></td>
+                    <td><?php echo required_indicator().lang('email');?></td>
                     <td>
                         <?php 
                             echo form_input(array(
@@ -186,15 +147,56 @@ $(document).ready(function() {
                             ));
                         ?>
                     </td>
+                    <td><?php echo required_indicator().lang('supplier_contact');?></td>
+                    <td>
+                        <?php 
+                            echo form_input(array(
+                                'name'  => 'contact_no',
+                                'id'    => 'contact_no',
+                                'value' => $supplier->contact_no,
+                                'class' => 'validate[required]'
+                            ));
+                        ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td><?php echo lang('supplier_fax');?></td>
+                    <td>
+                        <?php 
+                            echo form_input(array(
+                                'name'  => 'fax',
+                                'id'    => 'fax',
+                                'value' => $supplier->fax,
+                                'class' => ''
+                            ));
+                        ?>
+                    </td>
+                    <td><?php echo required_indicator().lang('supplier_contact_person');?></td>
+                    <td>
+                        <?php 
+                            echo form_input(array(
+                                'name'  => 'contact_person',
+                                'id'    => 'contact_person',
+                                'value' => $supplier->contact_person,
+                                'class' => 'validate[required]'
+                            ));
+                        ?>
+                    </td>
                 </tr>
             </table>
             <div class="right">
                 <?php
-                    echo form_button(array(
-                        'id'      => 'back',
-                        'content' => lang('back'),
-                    ));
-                    echo form_submit('save_supplier', lang('save'), 'class="button"');
+                    echo button_link(
+                        false,
+                        lang('back'),
+                        array('id' => 'back')
+                    );
+                    echo nbs(2);
+                    echo button_link(
+                        false,
+                        lang('save'),
+                        array('id' => 'save_supplier_add_edit')
+                    );
                 ?>
             </div>
         </form>
@@ -207,79 +209,52 @@ $(document).ready(function() {
             <?php echo $pagination->create_links().nbs(1);?>
         </div>
         <!-- End Pagination -->
-        <table class="listing">
-            <tr>
-                <th width="5%"><?php
-                    echo form_checkbox(array(
-                        'name'  => 'check_all',
-                        'id'    => 'check_all',
-                        'value' => 'CHECK_ALL',
-                    ));
-                ?></th>
-                <th><?php echo lang('image');?></th>
-                <th><?php echo lang('product_code');?></th>
-                <th><?php echo lang('product_name');?></th>
-                <th><?php echo lang('product_cost');?></th>
-                <th><?php echo lang('product_type');?></th>
-            </tr>
-            <?php foreach($products as $product):?>
-            <tr id="product_row_<?php echo $product->id; ?>">
-                <td><?php
-                    echo form_checkbox(array(
-                        'name'  => 'check_'.$product->id,
-                        'id'    => 'check_'.$product->id,
-                        'value' => $product->id,
-                        'class' => 'delete_check',
-                    ));
-                ?></td>
-                <td><?php 
-                    $image_src = $product->primary_image_url
-                        ? $product->primary_image_url
-                        : default_image_path();
-                    echo anchor(
-                        site_url('admin/product/edit/'.$product->id),
-                        img(array(
-                            'src'    => $image_src,
-                            'alt'    => $product->product_name,
-                            'width'  => '100',
-                            'height' => '100',
-                        ))
-                    );
-                ?></td>
-                <td><?php 
-                    echo anchor(
-                        site_url('admin/product/edit/'.$product->id),
-                        $product->product_code
-                    );
-                ?></td>
-                <td><?php 
-                    echo anchor(
-                        site_url('admin/product/edit/'.$product->id),
-                        $product->product_name
-                    );
-                ?></td>
-                <td><?php echo $product->cost;?></td>
-                <td><?php echo $product->product_type;?></td>
-                <td><?php 
-                    echo (empty($product->supplier_id)) ? nbs(1) : anchor(
-                        site_url('admin/supplier/edit/'.$product->supplier_id),
-                        $product->supplier->supplier_name
-                    );
-                ?></td>
-                <td>
-                    <ul id="icons" class="ui-widget ui-helper-clearfix" style="">
-                        <li class="ui-state-default ui-corner-all">
-                            <span id="edit_<?php echo $product->id; ?>" class="ui-icon ui-icon-pencil"
-                                title="<?php echo lang('edit');?>"></span>
-                        </li>
-                        <li class="ui-state-default ui-corner-all">
-                            <span id="delete_<?php echo $product->id; ?>" class="ui-icon ui-icon-trash"
-                                title="<?php echo lang('delete');?>"></span>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-            <?php endforeach;?>
+        <table class="list">
+            <thead>
+                <tr>
+                    <td><?php echo lang('image');?></td>
+                    <td><?php echo lang('product_code');?></td>
+                    <td><?php echo lang('product_name');?></td>
+                    <td><?php echo lang('product_stock_in_date');?></td>
+                    <td><?php echo lang('product_unit_cost');?></td>
+                    <td><?php echo lang('product_quantity_stock_in');?></td>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach($products as $product):?>
+                <tr id="product_row_<?php echo $product->id; ?>">
+                    <td><?php 
+                        $image_src = $product->primary_image_url
+                            ? $product->primary_image_url
+                            : default_image_path();
+                        echo anchor(
+                            site_url('admin/product/edit/'.$product->id),
+                            img(array(
+                                'src'    => $image_src,
+                                'alt'    => $product->product_name,
+                                'width'  => '100',
+                                'height' => '100',
+                            ))
+                        );
+                    ?></td>
+                    <td><?php 
+                        echo anchor(
+                            site_url('admin/product/edit/'.$product->id),
+                            $product->product_code
+                        );
+                    ?></td>
+                    <td><?php 
+                        echo anchor(
+                            site_url('admin/product/edit/'.$product->id),
+                            $product->product_name
+                        );
+                    ?></td>
+                    <td><?php echo to_human_date($product->stock_in_date);?></td>
+                    <td><?php echo to_currency($product->unit_cost);?></td>
+                    <td><?php echo $product->quantity_stock_in;?></td>
+                </tr>
+                <?php endforeach;?>
+            </tbody>
         </table>
     <?php endif; ?>
     </div>
