@@ -24,6 +24,7 @@ class Product extends MY_Controller {
         $this->load->Model('supplier_model');
         $this->load->Model('amulet_product_model');
         $this->load->Model('product_image_model');
+        $this->load->Model('product_batch_model');
     }
 
     public function index($page = 0) {
@@ -63,6 +64,7 @@ class Product extends MY_Controller {
         $amulet_product = new Amulet_Product_Model($product->amulet_product_id);
 
         $this->vars['product']        = $product;
+        $this->vars['batch_no']       = $product->get_last_batch_no() + 1;
         $this->vars['amulet_product'] = $amulet_product;
         $this->vars['images']         = $product->product_image;
         $this->vars['image_upload']   = $product->get_image_upload_config();
@@ -92,6 +94,12 @@ class Product extends MY_Controller {
         }
         else
             $this->load->view('admin/product/view/'.$product->id, $this->vars);
+    }
+
+    public function save_batch($id) {
+        $product = new Product_Model($id);
+        $product->stock_in($_POST);
+        redirect(site_url('admin/product/edit/'.$id).'?tab=2');
     }
 
     public function delete($id) {

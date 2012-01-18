@@ -190,6 +190,40 @@ class Product_Model extends MY_Active_Record {
     }
 
     /**
+     * stock_in 
+     * 
+     * @param array $data 
+     * @return mixed
+     */
+    public function stock_in(array $data) {
+        $this->_get_ci()->load->model('product_batch_model');
+        $batch = new Product_Batch_Model();
+        $batch->populate_from_request($data);
+        $batch->stock_in_date = time();
+        $batch->batch_no = $this->get_last_batch_no() + 1;
+        $batch->product_id = $this->id;
+        $is_stock_in = $batch->save();
+        if($is_stock_in) {
+            $this->quantity_available += $batch->quantity_stock_in;
+            return $this->save();
+        }
+        return false;
+    }
+
+    /**
+     * get_last_batch_no 
+     * 
+     * @return int
+     */
+    public function get_last_batch_no() {
+        $sql = "SELECT batch_no FROM product_batch"
+            . " WHERE product_id = ?"
+            . " ORDER BY batch_no DESC";
+        $result = $this->_get_ci()->adodb->GetOne($sql, array($this->id));
+        return (int)$result;
+    }
+
+    /**
      * Price operator in string form 
      * 
      * @param mixed $opr 
