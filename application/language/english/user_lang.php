@@ -22,6 +22,7 @@ $lang['user_security_question'] = "Security Question";
 $lang['user_security_answer']   = "Security Answer";
 $lang['user_registration_date'] = "Registration Date";
 $lang['user_photo']             = "Photo";
+$lang['user_member_since']      = "Member Since";
 
 $lang['user_remember_me']     = "Remember Me";
 $lang['user_forgot_password'] = "Forgot Password";
@@ -31,6 +32,7 @@ $lang['user_forgot_username'] = "Forgot Username";
 $lang['user_registration']          = "Registration";
 $lang['user_personal_details']      = "Personal Details";
 $lang['user_address_information']   = "Address Information";
+$lang['user_security']              = "Security";
 $lang['user_account']               = "Account";
 $lang['user_new_customer']          = "New Customer";
 $lang['user_existing_customer']     = "Existing Customer";

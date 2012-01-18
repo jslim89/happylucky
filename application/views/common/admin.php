@@ -55,6 +55,7 @@ $list = array(
         anchor(site_url('admin/monk'), lang('monk_management')),
         anchor(site_url('admin/supplier'), lang('supplier_management')),
         anchor(site_url('admin/user'), lang('user_management')),
+        anchor(site_url('admin/customer'), lang('customer_management')),
     ),
     anchor(site_url('admin/report'), lang('report')),
 );

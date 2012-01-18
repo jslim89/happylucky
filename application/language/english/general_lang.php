@@ -59,6 +59,7 @@ $lang['monk_management']       = 'Monk Management';
 $lang['supplier_management']   = 'Supplier Management';
 $lang['membership_management'] = 'Membership Management';
 $lang['user_management']       = 'User Management';
+$lang['customer_management']   = 'Customer Management';
 $lang['order_management']      = 'Order Management';
 $lang['retail']                = 'Retail';
 $lang['wholesale']             = 'Wholesale';
