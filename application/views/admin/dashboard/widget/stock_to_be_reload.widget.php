@@ -11,23 +11,21 @@
                 echo lang('dashboard_no_stock_to_be_reload');
             ?></div>
         <?php else: ?>
-            <table id="pending_order_list" class="listing">
-                <tr>
+            <table id="pending_order_list" class="listing" width="100%">
+                <tr class="left">
                     <th width="15%"><?php echo lang('product_code');?></th>
                     <th width="30%"><?php echo lang('product_name');?></th>
-                    <th width="10%"><?php echo lang('product_quantity_left');?></th>
-                    <th width="45%"><?php echo lang('product_suppliers_available');?></th>
+                    <th width="20%"><?php echo lang('product_quantity_left');?></th>
+                    <th width="35%"><?php echo lang('product_total_number_sold');?></th>
                 </tr>
                 <?php foreach($stocks as $stock):?>
                 <tr>
-                    <td><a href="admin/product/edit/<?php echo $stock->product_id;?>">
+                    <td><a href="admin/product/edit/<?php echo $stock->id;?>">
                         <?php echo $stock->product_code;?>
                     </a></td>
                     <td><?php echo $stock->product_name;?></td>
                     <td><?php echo $stock->quantity_available;?></td>
-                    <td>
-                        <?php echo $stock->suppliers_available;?>
-                    </td>
+                    <td><?php echo $stock->total_num_sold;?></td>
                 </tr>
                 <?php endforeach; ?>
             </table>

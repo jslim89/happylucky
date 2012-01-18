@@ -250,4 +250,17 @@ class Product_Model extends MY_Active_Record {
         // exist => Not unique
         return ( ! $product->is_exist());
     }
+
+    /**
+     * Return a list of product which its quantity available is below
+     * the treshold 
+     * 
+     * @return array
+     */
+    public static function pending_for_reload() {
+        $product = new Product_Model();
+        $sql = "quantity_available <= min_qty_alert ORDER BY quantity_available";
+        $product_list = $product->search($sql);
+        return $product_list;
+    }
 }

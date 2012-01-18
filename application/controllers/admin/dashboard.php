@@ -24,7 +24,7 @@ class Dashboard extends MY_Controller {
         $vars['title'] = lang('dashboard');
         $vars['widgets'] = $this->dashboard->get_widgets();
         $vars['pending_orders'] = Customer_Order_Model::get_all_by_status(Customer_Order_Model::PENDING);
-        $vars['stocks'] = array();
+        $vars['stocks'] = Product_Model::pending_for_reload();
         $this->load_view('admin/dashboard/index', $vars);
     }
 }
