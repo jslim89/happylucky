@@ -1,32 +1,35 @@
-<table class="primary_image">
-    <tr>
-        <td class="label"><?php echo lang('primary_image');?></td>
-    </tr>
-    <?php if($primary_image_url): ?>
-    <tr>
-        <td rowspan="2"><?php
+<?php
+$error_msg = $this->session->flashdata ('upload_error');
+if( ! empty($error_msg)): ?>
+    <div class="warning"><?php
+            echo lang('error').br(1);
+            echo $error_msg;
+    ?></div>
+<?php endif; ?>
+<div class="box" style="float: left;width: 45%; margin: 0px 30px 10px 30px;">
+    <div class="box-heading"><?php
+        echo lang('primary_image');
+    ?></div>
+    <div class="box-content center">
+        <?php
+        if($primary_image_url) {
             echo img(array(
                 'src'    => $primary_image_url,
                 'alt'    => $primary_image_alt,
                 'width'  => '200',
                 'height' => '200',
             ));
-        ?></td>
-    </tr>
-    <?php else: ?>
-    <tr>
-        <td rowspan="2"><?php
+        }
+        else {
             echo img(array(
                 'src'    => default_image_path(),
                 'alt'    => lang('default').' '.lang('image'),
                 'width'  => '200',
                 'height' => '200',
             ));
-        ?></td>
-    </tr>
-    <?php endif; ?>
-    <tr>
-        <td>
+        }
+        ?>
+        <div class="buttons">
             <form id="upload_primary" method="POST" enctype="multipart/form-data"
                   action="<?php echo $primary_upload_url;?>">
                 <?php 
@@ -34,14 +37,171 @@
                         'name' => 'primary_image',
                         'id' => 'primary_image',
                     )); 
-                    echo form_submit('upload_primary', lang('upload'), 'class="button"');
+                    echo nbs(2);
+                    echo button_link(
+                        false,
+                        lang('upload'),
+                        array('id' => 'btn_upload_primary')
+                    );
                 ?>
             </form>
-        </td>
-    </tr>
-</table>
+        </div>
+    </div>
+</div>
+<div class="box" style="width: 45%;float:left;">
+    <div class="box-heading"><?php
+        echo lang('upload').' '.lang('images');
+    ?></div>
+    <div class="box-content center">
+        <form id="upload_image" method="POST" enctype="multipart/form-data"
+              action="<?php echo $upload_url;?>">
+            <table class="image_upload">
+                <tr id="tr_image_0">
+                    <td><?php 
+                        echo form_upload(array(
+                            'name' => 'image_0',
+                            'id' => 'image_0',
+                        )); 
+                    ?></td>
+                </tr>
+            </table>
+            <div class="buttons right">
+            <?php 
+                echo button_link(
+                    false,
+                    lang('more'),
+                    array(
+                        'id' => 'add_more',
+                        'name' => 'add_more',
+                    )
+                );
+                echo nbs(2);
+                echo button_link(
+                    false,
+                    lang('upload'),
+                    array('id' => 'btn_upload_addition_image')
+                );
+            ?>
+            </div>
+        </form>
+    </div>
+</div>
+<div style="clear:both;">&nbsp;</div>
+
+<?php if(sizeof($images) == 0): ?>
+    <div class="warning"><?php
+        echo lang('no_additional_images');
+    ?></div>
+<?php else: ?>
+    <div class="buttons">
+        <div class="right"><?php
+            echo button_link(
+                false,
+                lang('delete'),
+                array('id' => 'btn_delete')
+            );
+        ?></div>
+        <div class="left"><?php
+            echo div(
+                lang('delete_image_hint'),
+                array('class' => 'hint')
+            );
+        ?></div>
+    </div>
+    <table class="list">
+        <thead>
+            <tr>
+                <td width="1"><?php
+                    echo form_checkbox(array(
+                        'name'  => 'check_all',
+                        'id'    => 'check_all',
+                        'value' => 'CHECK_ALL',
+                    ));
+                ?></td>
+                <td>
+                <?php echo lang('images'); ?>
+                </td>
+                <td>
+                <?php echo lang('image_name'); ?>
+                </td>
+                <td>
+                <?php echo lang('description'); ?>
+                </td>
+                <td>
+                <?php echo lang('edit'); ?>
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach($images as $image): ?>
+            <tr id="existing_image_<?php echo $image->id;?>">
+                <td><?php
+                echo form_checkbox(array(
+                    'name'  => 'check_'.$image->id,
+                    'id'    => 'check_'.$image->id,
+                    'value' => $image->id,
+                    'class' => 'delete_check',
+                ));?></td>
+                <td><?php
+                echo anchor(
+                    $image->url,
+                    img(array(
+                    'src'    => $image->url,
+                    'alt'    => $image->alt,
+                    'width'  => '100',
+                    'height' => '100',
+                    )),
+                    array('rel' => 'lightbox')
+                );
+                ?></td>
+                <td><?php
+                echo form_input(array(
+                    'name'     => 'image_name['.$image->id.']',
+                    'id'       => 'image_name_'.$image->id,
+                    'value'    => $image->image_name,
+                    'readonly' => true,
+                ));
+                ?></td>
+                <td><?php
+                echo form_textarea(array(
+                    'name'     => 'image_desc['.$image->id.']',
+                    'id'       => 'image_desc_'.$image->id,
+                    'value'    => $image->image_desc,
+                    'rows'     => '4',
+                    'columns'  => '10',
+                    'readonly' => true,
+                ));
+                ?></td>
+                <td>
+                    <ul id="icons" class="ui-widget ui-helper-clearfix" style="">
+                        <li class="ui-state-default ui-corner-all">
+                            <span id="edit_<?php echo $image->id; ?>" class="ui-icon ui-icon-pencil"
+                                title="<?php echo lang('edit');?>"></span>
+                        </li>
+                        <li class="ui-state-default ui-corner-all">
+                            <span id="delete_<?php echo $image->id; ?>" class="ui-icon ui-icon-trash"
+                                title="<?php echo lang('delete');?>"></span>
+                        </li>
+                        <li class="ui-state-default ui-corner-all">
+                            <span id="save_<?php echo $image->id; ?>" class="ui-icon ui-icon-check"
+                                title="<?php echo lang('save');?>"></span>
+                        </li>
+                    </ul>
+                    <span id="upd_msg_<?php echo $image->id; ?>"></span>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+<?php endif; ?>
 <script type="text/javascript">
     $(document).ready(function() {
+        $('#btn_upload_primary').click(function() {
+            $('#upload_primary').submit();
+        });
+        $('#btn_upload_addition_image').click(function() {
+            $('#upload_image').submit();
+        });
         $('#add_more').click(function() {
             var last = $('tr[id^=tr_image_]').last();
             var last_idx = parseInt(get_element_index(last));
@@ -125,158 +285,3 @@
         });
     });
 </script>
-<form id="upload_image" method="POST" enctype="multipart/form-data"
-      action="<?php echo $upload_url;?>">
-    <table class="image_upload">
-        <tr>
-            <td colspan="2">
-                <div class="error">
-                <?php
-                    $error_msg = $this->session->flashdata ('upload_error');
-                    if( ! empty($error_msg)) {
-                        echo lang('error').br(1);
-                        echo $error_msg;
-                    }
-                ?>&nbsp;
-                </div>
-            </td>
-        </tr>
-        <tr id="tr_image_0">
-            <td colspan="2">
-            <?php 
-                echo form_upload(array(
-                    'name' => 'image_0',
-                    'id' => 'image_0',
-                )); 
-            ?>
-            </td>
-        </tr>
-        <tr>
-            <td>
-            <?php
-                echo form_submit('add_image', lang('upload'), 'class="button"');
-            ?>
-            </td>
-            <td>
-            <?php
-                echo form_button(array(
-                    'id'      => 'add_more',
-                    'name'    => 'add_more',
-                    'content' => lang('more'),
-                    'class'   => 'button'
-                ));
-            ?>
-            </td>
-        </tr>
-        <tr><td colspan="2">&nbsp;</td></tr>
-        <tr>
-            <td colspan="2"><?php
-                echo form_button(array(
-                    'name'  => 'btn_delete',
-                    'id'    => 'btn_delete',
-                    'content' => lang('delete'),
-                ));
-            ?></td>
-        </tr>
-    </table>
-</form>
-<table class="image_display">
-    <thead>
-        <tr>
-            <th width="5%"><?php
-                echo form_checkbox(array(
-                    'name'  => 'check_all',
-                    'id'    => 'check_all',
-                    'value' => 'CHECK_ALL',
-                ));
-            ?></th>
-            <th>
-            <?php echo lang('images'); ?>
-            </th>
-            <th>
-            <?php echo lang('image_name'); ?>
-            </th>
-            <th>
-            <?php echo lang('description'); ?>
-            </th>
-            <th>
-            <?php echo lang('edit'); ?>
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-<?php if(sizeof($images) == 0) { ?>
-<tr>
-<td colspan='5'><?php
-echo img(array(
-    'src'    => base_url().'images/default.jpg',
-    'alt'    => lang('default').' '.lang('image'),
-    'width'  => '100',
-    'height' => '100',
-));
-?></td>
-</tr>
-<?php }
-else {
-foreach($images as $image): ?>
-<tr id="existing_image_<?php echo $image->id;?>">
-    <td><?php
-    echo form_checkbox(array(
-        'name'  => 'check_'.$image->id,
-        'id'    => 'check_'.$image->id,
-        'value' => $image->id,
-        'class' => 'delete_check',
-    ));?></td>
-    <td><?php
-    echo anchor(
-        $image->url,
-        img(array(
-        'src'    => $image->url,
-        'alt'    => $image->alt,
-        'width'  => '100',
-        'height' => '100',
-        )),
-        array('rel' => 'lightbox')
-    );
-    ?></td>
-    <td><?php
-    echo form_input(array(
-        'name'     => 'image_name['.$image->id.']',
-        'id'       => 'image_name_'.$image->id,
-        'value'    => $image->image_name,
-        'readonly' => true,
-    ));
-    ?></td>
-    <td><?php
-    echo form_textarea(array(
-        'name'     => 'image_desc['.$image->id.']',
-        'id'       => 'image_desc_'.$image->id,
-        'value'    => $image->image_desc,
-        'rows'     => '4',
-        'columns'  => '10',
-        'readonly' => true,
-    ));
-    ?></td>
-    <td>
-        <ul id="icons" class="ui-widget ui-helper-clearfix" style="">
-            <li class="ui-state-default ui-corner-all">
-                <span id="edit_<?php echo $image->id; ?>" class="ui-icon ui-icon-pencil"
-                    title="<?php echo lang('edit');?>"></span>
-            </li>
-            <li class="ui-state-default ui-corner-all">
-                <span id="delete_<?php echo $image->id; ?>" class="ui-icon ui-icon-trash"
-                    title="<?php echo lang('delete');?>"></span>
-            </li>
-            <li class="ui-state-default ui-corner-all">
-                <span id="save_<?php echo $image->id; ?>" class="ui-icon ui-icon-check"
-                    title="<?php echo lang('save');?>"></span>
-            </li>
-        </ul>
-        <span id="upd_msg_<?php echo $image->id; ?>"></span>
-    </td>
-</tr>
-<?php endforeach;
-}
-?>
-    </tbody>
-</table>

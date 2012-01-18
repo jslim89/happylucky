@@ -27,15 +27,18 @@ $lang['nothing_has_changed'] = 'Nothing Has Changed';
 
 $lang['this_email_already_been_used'] = 'This email already been used.';
 
-$lang['general']       = 'General';
-$lang['primary']       = 'Primary';
-$lang['image']         = 'Image';
-$lang['primary_image'] = 'Primary Image';
-$lang['image_name']    = 'Image Name';
-$lang['images']        = 'Images';
-$lang['upload']        = 'Upload';
-$lang['description']   = 'Description';
-$lang['default']       = 'Default';
+$lang['general']              = 'General';
+$lang['primary']              = 'Primary';
+$lang['image']                = 'Image';
+$lang['primary_image']        = 'Primary Image';
+$lang['image_name']           = 'Image Name';
+$lang['images']               = 'Images';
+$lang['no_additional_images'] = 'No additional images';
+$lang['upload']               = 'Upload';
+$lang['description']          = 'Description';
+$lang['default']              = 'Default';
+$lang['delete_image_hint']    = 'All the checked images will be deleted
+                              once you click on the delete button';
 
 // Top menu variable
 $lang['home']                  = 'Home';
