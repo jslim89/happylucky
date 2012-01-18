@@ -48,10 +48,7 @@ $list = array(
     anchor(site_url('admin/dashboard'), lang('dashboard')),
     '<a href="#">'.lang('management').'</a>' => array(
         anchor(site_url('admin/product'), lang('product_management')),
-        anchor(site_url('admin/order'), lang('order_management')) => array(
-            anchor(site_url('admin/order/retail'), lang('retail')),
-            anchor(site_url('admin/order/wholesale'), lang('wholesale')),
-        ),
+        anchor(site_url('admin/order'), lang('order_management')),
         anchor(site_url('admin/amulet'), lang('amulet_management')) => array(
             anchor(site_url('admin/amulet_type'), lang('amulet_type'))
         ),
