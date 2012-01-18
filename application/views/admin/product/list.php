@@ -86,7 +86,6 @@ echo button_link(
                 <td width="5%"><?php echo lang('product_quantity_available');?></td>
                 <td><?php echo lang('product_standard_price');?></td>
                 <td><?php echo lang('product_type');?></td>
-                <td><?php echo lang('product_from_supplier');?></td>
                 <td><?php echo lang('edit');?></td>
             </tr>
         </thead>
@@ -130,12 +129,6 @@ echo button_link(
                 <td><?php echo $product->quantity_available;?></td>
                 <td><?php echo $product->standard_price;?></td>
                 <td><?php echo $product->product_type;?></td>
-                <td><?php 
-                    echo (empty($product->supplier_id)) ? nbs(1) : anchor(
-                        site_url('admin/supplier/edit/'.$product->supplier_id),
-                        $product->supplier->supplier_name
-                    );
-                ?></td>
                 <td>
                     <ul id="icons" class="ui-widget ui-helper-clearfix" style="">
                         <li class="ui-state-default ui-corner-all">
