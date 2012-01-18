@@ -202,7 +202,7 @@ class User extends MY_Controller {
                 redirect(site_url());
             }
             else {
-                $this->session->set_flashdata('login_error', lang('customer_invalid_customer_name_or_password'));
+                $this->session->set_flashdata('login_error', lang('user_invalid_username_or_password'));
                 redirect(site_url('user/login'));
             }
         }

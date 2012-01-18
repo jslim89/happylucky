@@ -56,7 +56,12 @@ $(document).ready(function() {
                         site_url('user/forgot_password'),
                         lang('user_forgot_password')
                     );
-                    echo br(2);
+                    echo br(1);
+                    echo span(
+                        $this->session->flashdata('login_error'),
+                        array('class' => 'error')
+                    );
+                    echo br(1);
                     echo button_link(
                         false,
                         lang('user_signin'),
