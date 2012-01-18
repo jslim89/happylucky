@@ -53,17 +53,17 @@ $(document).ready(function() {
 
 <!-- Action Button -->
 <div class="grid_5 right"><?php
-echo button_link(
-    false,
-    lang('delete'),
-    array('id' => 'btn_delete')
-);
-echo nbs(2);
-echo button_link(
-    false,
-    lang('add_new'),
-    array('id' => 'btn_add_new')
-);
+    echo button_link(
+        false,
+        lang('delete'),
+        array('id' => 'btn_delete')
+    );
+    echo nbs(2);
+    echo button_link(
+        false,
+        lang('add_new'),
+        array('id' => 'btn_add_new')
+    );
 ?></div>
 <!-- End Action Button -->
 <?php echo clear_div();?>
