@@ -99,8 +99,9 @@ $lang['add_to_cart'] = 'Add To Cart';
 $lang['welcome'] = 'Welcome';
 $lang['guest']   = 'Guest';
 
-$lang['hot']    = 'HOT';
-$lang['latest'] = 'Latest';
+$lang['hot']     = 'HOT';
+$lang['latest']  = 'Latest';
+$lang['history'] = 'History';
 
 // Footer
 $lang['information']            = 'Information';

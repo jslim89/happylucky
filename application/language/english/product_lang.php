@@ -26,12 +26,13 @@ $lang['product_min_qty_alert_desc']     = "Whenever quantity left is less than t
 $lang['product_quantity']               = "Quantity";
 $lang['product_quantity_left']          = "Quantity Left";
 $lang['product_quantity_available']     = "Quantity Available";
-$lang['product_suppliers_available']    = "Supplier(s) Available";
 $lang['product_created_date']           = "Created Date";
 $lang['product_from_supplier']          = "From Supplier";
                                       
 $lang['product_add_new_product'] = "Add New Product";
 $lang['product_edit_product']    = "Edit Product";
+
+$lang['product_batch']    = "Batch";
 
 $lang['product_basic_info']        = "Basic Information";
 $lang['product_extra_amulet_info'] = "Extra Amulet Information";
@@ -43,3 +44,10 @@ $lang['product_ingredient'] = "Ingredient";
 
 $lang['product_no_product']   = "No Product";
 $lang['product_availability'] = "Availability";
+
+// Batch
+$lang['product_batch_no']          = "Batch No.";
+$lang['product_stock_in_date']     = "Stock-in Date";
+$lang['product_unit_cost']         = "Unit Cost";
+$lang['product_quantity_stock_in'] = "Quantity Stock-in";
+$lang['product_add_batch']          = "Add Batch";

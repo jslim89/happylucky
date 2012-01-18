@@ -61,11 +61,9 @@ class Product extends MY_Controller {
 
         $product        = new Product_Model($id);
         $amulet_product = new Amulet_Product_Model($product->amulet_product_id);
-        $supplier       = new Supplier_Model($product->supplier_id);
 
         $this->vars['product']        = $product;
         $this->vars['amulet_product'] = $amulet_product;
-        $this->vars['supplier']       = $supplier;
         $this->vars['images']         = $product->product_image;
         $this->vars['image_upload']   = $product->get_image_upload_config();
         $this->load_view('admin/product/add_edit', $this->vars);

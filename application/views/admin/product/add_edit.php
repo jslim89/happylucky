@@ -1,13 +1,17 @@
 <?php  if (!defined('BASEPATH')) exit('No direct script access allowed');?>
 <script type="text/javascript">
 $(document).ready(function() {
-    $('button#back').click(function() {
+    $('back').click(function() {
         redirect(base_url+'admin/product');
+    });
+
+    $('#save_product_add_edit').click(function() {
+        $('#product_add_edit').submit();
     });
 
     $('#product_add_edit').validationEngine('attach');
     var is_add_new = <?php echo empty($product->id) ? 'true' : 'false'; ?>;
-    var tabs_disable = (is_add_new) ? [1] : [];
+    var tabs_disable = (is_add_new) ? [1,2] : [];
     var tabs_selected = (query_string('tab') == null) ? 0 : query_string('tab');
     $('#tabs').tabs({
         disabled: tabs_disable,
@@ -57,35 +61,6 @@ $(document).ready(function() {
                 .append('<a>' + format_amulet(item) + '</a>')
                 .appendTo(ul);
     };
-
-    $('input#supplier').autocomplete({
-        highlight: true,
-        minLength: 1,
-        scroll: true,
-        dataType: 'json',
-        source: base_url + 'admin/supplier/ajax_search',
-        focus: function(event, ui) {
-            $(this).val(ui.item.supplier_name);
-            return false;
-        },
-        select: function(event, ui) {
-            $(this).val(ui.item.supplier_name);
-            $('input[name=supplier_id]').val(ui.item.id);
-            return false;
-        },
-        open: function() {
-            $(this).removeClass('ui-corner-all').addClass('ui-corner-top');
-        },
-        close: function() {
-            $(this).removeClass('ui-corner-top').addClass('ui-corner-all');
-        }
-    })
-    .data('autocomplete')._renderItem = function(ul, item){
-        return $('<li></li>')
-                .data('item.autocomplete', item)
-                .append('<a>' + item.supplier_name + '</a>')
-                .appendTo(ul);
-    };
 });
 
 function check_is_amulet() {
@@ -124,20 +99,25 @@ function format_amulet(amulet) {
     <ul>
         <li><a href="#general"><?php echo lang('general'); ?></a></li>
         <li><a href="#images"><?php echo lang('images'); ?></a></li>
+        <li><a href="#batch"><?php echo lang('product_batch'); ?></a></li>
     </ul>
     <div id="general">
         <form id="product_add_edit" method="POST" 
               action="<?php echo site_url("admin/product/save/".$product->id);?>">
-            <table>
+            <table class="form">
                 <tr>
                     <td class="label"><?php echo lang('product_code');?></td>
                     <td><?php 
-                            echo form_input(array(
-                                'name'  => 'product_code',
-                                'id'    => 'product_code',
-                                'value' => $product->product_code,
-                                'class' => 'validate[required,ajax[ajaxProductCode]] text'
-                            ));
+                            if($product->is_exist()) {
+                                echo $product->product_code;
+                            }
+                            else {
+                                echo form_input(array(
+                                    'name'  => 'product_code',
+                                    'id'    => 'product_code',
+                                    'class' => 'validate[required,ajax[ajaxProductCode]] text'
+                                ));
+                            }
                     ?></td>
                     <td class="label"><?php echo lang('product_name');?></td>
                     <td><?php 
@@ -150,15 +130,8 @@ function format_amulet(amulet) {
                     ?></td>
                 </tr>
                 <tr>
-                    <td class="label"><?php echo lang('product_cost');?></td>
-                    <td><?php 
-                            echo form_input(array(
-                                'name'  => 'cost',
-                                'id'    => 'cost',
-                                'value' => $product->cost,
-                                'class' => 'validate[required] text positive'
-                            ));
-                    ?></td>
+                    <td class="txt-label"><?php echo lang('product_created_date');?></td>
+                    <td><?php echo to_human_date($product->created_date); ?></td>
                     <td class="label"><?php echo lang('product_standard_price');?></td>
                     <td><?php 
                             echo form_input(array(
@@ -172,12 +145,7 @@ function format_amulet(amulet) {
                 <tr>
                     <td class="label"><?php echo lang('product_quantity_available');?></td>
                     <td><?php 
-                            echo form_input(array(
-                                'name'  => 'quantity_available',
-                                'id'    => 'quantity_available',
-                                'value' => $product->quantity_available,
-                                'class' => 'validate[required] text positive-integer'
-                            ));
+                        echo $product->quantity_available;
                     ?></td>
                     <td class="label"><?php echo lang('product_minimum_quantity_alert');?></td>
                     <td><?php 
@@ -233,20 +201,6 @@ function format_amulet(amulet) {
                             ));
                             echo lang('product_wholesale');
                     ?></td>
-                </tr>
-                <tr>
-                    <td class="txt-label"><?php echo lang('product_from_supplier');?></td>
-                    <td><?php 
-                            echo form_input(array(
-                                'name'  => 'supplier',
-                                'id'    => 'supplier',
-                                'value' => $supplier->supplier_name,
-                                'class' => 'validate[required]'
-                            ));
-                            echo form_hidden('supplier_id', $product->supplier_id);
-                    ?></td>
-                    <td class="txt-label"><?php echo lang('product_created_date');?></td>
-                    <td><?php echo to_human_date($product->created_date); ?></td>
                 </tr>
                 <tr>
                     <td class="txt-label"><?php echo lang('product_description');?></td>
@@ -311,18 +265,27 @@ function format_amulet(amulet) {
                     ?></td>
                 </tr>
             </table>
-            <div class="right">
-                <?php
-                    echo form_button(array(
-                        'id'      => 'back',
-                        'content' => lang('back'),
-                    ));
-                    echo form_submit('save_product', lang('save'), 'class="button"');
-                ?>
+            <div class="buttons">
+                <div class="right"><?php
+                        echo button_link(
+                            false,
+                            lang('back'),
+                            array('id' => 'back')
+                        );
+                        echo nbs(2);
+                        echo button_link(
+                            false,
+                            lang('save'),
+                            array('id' => 'save_product_add_edit')
+                        );
+                ?></div>
             </div>
         </form>
     </div>
-    <div id="images">
-        <?php $this->load->view('common/admin_images', $image_upload);?>
-    </div>
+    <div id="images"><?php
+        $this->load->view('common/admin_images', $image_upload);
+    ?></div>
+    <div id="batch"><?php
+        $this->load->view('admin/product/batch');
+    ?></div>
 </div>
