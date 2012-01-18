@@ -16,12 +16,14 @@ class Dashboard extends MY_Controller {
         parent::__construct();
         $this->lang->load('dashboard');
         $this->load->model('dashboard_model', 'dashboard');
+        $this->load->model('customer_order_model');
+        $this->load->model('product_model');
     }
 
     function index() {
         $vars['title'] = lang('dashboard');
         $vars['widgets'] = $this->dashboard->get_widgets();
-        $vars['pending_orders'] = array();
+        $vars['pending_orders'] = Customer_Order_Model::get_all_by_status(Customer_Order_Model::PENDING);
         $vars['stocks'] = array();
         $this->load_view('admin/dashboard/index', $vars);
     }

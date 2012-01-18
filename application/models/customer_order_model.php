@@ -83,6 +83,15 @@ class Customer_Order_Model extends MY_Active_Record {
     }
 
     /**
+     * Whether this order is order by an existing member 
+     * 
+     * @return bool
+     */
+    public function is_member_order() {
+        return ( ! empty($this->customer_id));
+    }
+
+    /**
      * get_full_address 
      * 
      * @return string
@@ -227,6 +236,20 @@ class Customer_Order_Model extends MY_Active_Record {
             $criteria_set[] = $end_date;
         }
         $order_list = $order_model->search($sql, $criteria_set, $limit, $offset, true);
+        return $order_list;
+    }
+
+    /**
+     * Return a list of order according to its status 
+     * 
+     * @param mixed $status 
+     * @return array
+     */
+    public static function get_all_by_status($status) {
+        $order_model = new Customer_Order_Model();
+        $sql = "order_status = ?";
+        $criteria_set = array($status);
+        $order_list = $order_model->search($sql, $criteria_set);
         return $order_list;
     }
 }
