@@ -245,11 +245,25 @@ class Customer_Order_Model extends MY_Active_Record {
      * @param mixed $status 
      * @return array
      */
-    public static function get_all_by_status($status) {
+    public static function get_all_by_status(
+        $status = false, // order status
+        $order_by = 'order_date',
+        $seq = 'ASC', // Sequence
+        $limit = false,
+        $offset = false
+    ) {
         $order_model = new Customer_Order_Model();
-        $sql = "order_status = ?";
-        $criteria_set = array($status);
-        $order_list = $order_model->search($sql, $criteria_set);
+        $criteria_set = array();
+        if( ! $status) {
+            $sql = '1=1';
+        }
+        else {
+            $sql = 'order_status = ?';
+            $criteria_set = array($status);
+        }
+        $sql .= ' ORDER BY '.$order_by.' '.$seq;
+        $total_rows = ($limit !== false && $offset !== false);
+        $order_list = $order_model->search($sql, $criteria_set, $limit, $offset, $total_rows);
         return $order_list;
     }
 }

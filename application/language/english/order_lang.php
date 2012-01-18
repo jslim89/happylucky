@@ -13,6 +13,7 @@ $lang['order_customer_name']  = "Customer Name";
 $lang['order_contact_no']     = "Contact No";
 $lang['order_total_amount']   = "Total Amount";
 $lang['order_total']          = "Total";
+$lang['order_subtotal']       = "Subtotal";
 $lang['order_shipping']       = "Shipping";
 $lang['order_total_products'] = "Total Products";
 
