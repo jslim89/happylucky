@@ -307,7 +307,7 @@ ul.order table {
 	text-decoration: none;
 }
 #header-cart .heading a span {
-	background: #FFFFFF url('../image/arrow-down.png') 100% 50% no-repeat;
+	background: #FFFFFF url('images/arrow-down.png') 100% 50% no-repeat;
 	padding-right: 15px;
 }
 #header-cart .content {
@@ -666,11 +666,11 @@ table.list .center {
 }
 table.list .asc {
 	padding-right: 15px;
-	background: url('../image/asc.png') right center no-repeat;
+	background: url('images/asc.png') right center no-repeat;
 }
 table.list .desc {
 	padding-right: 15px;
-	background: url('../image/desc.png') right center no-repeat;
+	background: url('images/desc.png') right center no-repeat;
 }
 
 /* table form */

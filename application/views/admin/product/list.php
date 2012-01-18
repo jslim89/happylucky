@@ -26,6 +26,9 @@ $(document).ready(function() {
         delete_row_confirmation(delete_urls, row_ids);
     });
 
+    $('#btn_add_new').click(function() {
+        redirect('<?php echo site_url('admin/product/add'); ?>');
+    });
     /*
     $('span#advanced_search').click(function() {
     });
@@ -50,95 +53,103 @@ $(document).ready(function() {
 <!-- End Pagination -->
 
 <!-- Action Button -->
-<div class="grid_6 action-button">
-    <input type="button" class="button" id="btn_delete" 
-        value="<?php echo lang('delete');?>" />
-    <input type="button" class="button" 
-        value="<?php echo lang('add_new');?>" 
-        onclick="redirect('<?php echo site_url('admin/product/add');?>');" />
-</div>
+<div class="grid_5 right"><?php
+echo button_link(
+    false,
+    lang('delete'),
+    array('id' => 'btn_delete')
+);
+echo nbs(2);
+echo button_link(
+    false,
+    lang('add_new'),
+    array('id' => 'btn_add_new')
+);
+?></div>
 <!-- End Action Button -->
 <?php echo clear_div();?>
 
 <div class="grid_16">
-    <table class="listing">
-        <tr>
-            <th width="5%"><?php
-                echo form_checkbox(array(
-                    'name'  => 'check_all',
-                    'id'    => 'check_all',
-                    'value' => 'CHECK_ALL',
-                ));
-            ?></th>
-            <th><?php echo lang('image');?></th>
-            <th><?php echo lang('product_code');?></th>
-            <th><?php echo lang('product_name');?></th>
-            <th><?php echo lang('product_quantity_available');?></th>
-            <th><?php echo lang('product_cost');?></th>
-            <th><?php echo lang('product_standard_price');?></th>
-            <th><?php echo lang('product_type');?></th>
-            <th><?php echo lang('product_from_supplier');?></th>
-            <th><?php echo lang('edit');?></th>
-        </tr>
-        <?php foreach($products as $product):?>
-        <tr id="product_row_<?php echo $product->id; ?>">
-            <td><?php
-                echo form_checkbox(array(
-                    'name'  => 'check_'.$product->id,
-                    'id'    => 'check_'.$product->id,
-                    'value' => $product->id,
-                    'class' => 'delete_check',
-                ));
-            ?></td>
-            <td><?php 
-                $image_src = $product->primary_image_url
-                    ? $product->primary_image_url
-                    : default_image_path();
-                echo anchor(
-                    site_url('admin/product/edit/'.$product->id),
-                    img(array(
-                        'src'    => $image_src,
-                        'alt'    => $product->product_name,
-                        'width'  => '100',
-                        'height' => '100',
-                    ))
-                );
-            ?></td>
-            <td><?php 
-                echo anchor(
-                    site_url('admin/product/edit/'.$product->id),
-                    $product->product_code
-                );
-            ?></td>
-            <td><?php 
-                echo anchor(
-                    site_url('admin/product/edit/'.$product->id),
-                    $product->product_name
-                );
-            ?></td>
-            <td><?php echo $product->quantity_available;?></td>
-            <td><?php echo $product->cost;?></td>
-            <td><?php echo $product->standard_price;?></td>
-            <td><?php echo $product->product_type;?></td>
-            <td><?php 
-                echo (empty($product->supplier_id)) ? nbs(1) : anchor(
-                    site_url('admin/supplier/edit/'.$product->supplier_id),
-                    $product->supplier->supplier_name
-                );
-            ?></td>
-            <td>
-                <ul id="icons" class="ui-widget ui-helper-clearfix" style="">
-                    <li class="ui-state-default ui-corner-all">
-                        <span id="edit_<?php echo $product->id; ?>" class="ui-icon ui-icon-pencil"
-                            title="<?php echo lang('edit');?>"></span>
-                    </li>
-                    <li class="ui-state-default ui-corner-all">
-                        <span id="delete_<?php echo $product->id; ?>" class="ui-icon ui-icon-trash"
-                            title="<?php echo lang('delete');?>"></span>
-                    </li>
-                </ul>
-            </td>
-        </tr>
-        <?php endforeach;?>
+    <table class="list">
+        <thead>
+            <tr>
+                <td width="1"><?php
+                    echo form_checkbox(array(
+                        'name'  => 'check_all',
+                        'id'    => 'check_all',
+                        'value' => 'CHECK_ALL',
+                    ));
+                ?></td>
+                <td><?php echo lang('image');?></td>
+                <td><?php echo lang('product_code');?></td>
+                <td><?php echo lang('product_name');?></td>
+                <td width="5%"><?php echo lang('product_quantity_available');?></td>
+                <td><?php echo lang('product_standard_price');?></td>
+                <td><?php echo lang('product_type');?></td>
+                <td><?php echo lang('product_from_supplier');?></td>
+                <td><?php echo lang('edit');?></td>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach($products as $product):?>
+            <tr id="product_row_<?php echo $product->id; ?>">
+                <td><?php
+                    echo form_checkbox(array(
+                        'name'  => 'check_'.$product->id,
+                        'id'    => 'check_'.$product->id,
+                        'value' => $product->id,
+                        'class' => 'delete_check',
+                    ));
+                ?></td>
+                <td><?php 
+                    $image_src = $product->primary_image_url
+                        ? $product->primary_image_url
+                        : default_image_path();
+                    echo anchor(
+                        site_url('admin/product/edit/'.$product->id),
+                        img(array(
+                            'src'    => $image_src,
+                            'alt'    => $product->product_name,
+                            'width'  => '100',
+                            'height' => '100',
+                        ))
+                    );
+                ?></td>
+                <td><?php 
+                    echo anchor(
+                        site_url('admin/product/edit/'.$product->id),
+                        $product->product_code
+                    );
+                ?></td>
+                <td><?php 
+                    echo anchor(
+                        site_url('admin/product/edit/'.$product->id),
+                        $product->product_name
+                    );
+                ?></td>
+                <td><?php echo $product->quantity_available;?></td>
+                <td><?php echo $product->standard_price;?></td>
+                <td><?php echo $product->product_type;?></td>
+                <td><?php 
+                    echo (empty($product->supplier_id)) ? nbs(1) : anchor(
+                        site_url('admin/supplier/edit/'.$product->supplier_id),
+                        $product->supplier->supplier_name
+                    );
+                ?></td>
+                <td>
+                    <ul id="icons" class="ui-widget ui-helper-clearfix" style="">
+                        <li class="ui-state-default ui-corner-all">
+                            <span id="edit_<?php echo $product->id; ?>" class="ui-icon ui-icon-pencil"
+                                title="<?php echo lang('edit');?>"></span>
+                        </li>
+                        <li class="ui-state-default ui-corner-all">
+                            <span id="delete_<?php echo $product->id; ?>" class="ui-icon ui-icon-trash"
+                                title="<?php echo lang('delete');?>"></span>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <?php endforeach;?>
+        </tbody>
     </table>
 </div>
