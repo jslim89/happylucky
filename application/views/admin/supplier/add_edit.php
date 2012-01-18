@@ -184,20 +184,22 @@ $(document).ready(function() {
                     </td>
                 </tr>
             </table>
-            <div class="right">
-                <?php
-                    echo button_link(
-                        false,
-                        lang('back'),
-                        array('id' => 'back')
-                    );
-                    echo nbs(2);
-                    echo button_link(
-                        false,
-                        lang('save'),
-                        array('id' => 'save_supplier_add_edit')
-                    );
-                ?>
+            <div class="buttons">
+                <div class="right">
+                    <?php
+                        echo button_link(
+                            false,
+                            lang('back'),
+                            array('id' => 'back')
+                        );
+                        echo nbs(2);
+                        echo button_link(
+                            false,
+                            lang('save'),
+                            array('id' => 'save_supplier_add_edit')
+                        );
+                    ?>
+                </div>
             </div>
         </form>
     </div>

@@ -1,8 +1,12 @@
 <?php  if (!defined('BASEPATH')) exit('No direct script access allowed');?>
 <script>
 $(document).ready(function() {
-    $('button#back').click(function() {
+    $('#back').click(function() {
         redirect(base_url+'admin/amulet_type');
+    });
+
+    $('#save_amulet_type_add_edit').click(function() {
+        $('#amulet_type_add_edit').submit();
     });
 
     $('#amulet_type_add_edit').validationEngine('attach');
@@ -24,7 +28,7 @@ $(document).ready(function() {
     <div id="general">
         <form id="amulet_type_add_edit" method="POST" 
               action="<?php echo site_url("admin/amulet_type/save/".$amulet_type->id);?>">
-            <table>
+            <table class="form">
                 <tr>
                     <td class="label"><?php echo lang('amulet_type_name');?></td>
                     <td>
@@ -55,14 +59,20 @@ $(document).ready(function() {
                     </td>
                 </tr>
             </table>
-            <div class="right">
-                <?php
-                    echo form_button(array(
-                        'id'      => 'back',
-                        'content' => lang('back'),
-                    ));
-                    echo form_submit('save_amulet_type', lang('save'), 'class="button"');
-                ?>
+            <div class="buttons">
+                <div class="right"><?php
+                    echo button_link(
+                        false,
+                        lang('back'),
+                        array('id' => 'back')
+                    );
+                    echo nbs(2);
+                    echo button_link(
+                        false,
+                        lang('save'),
+                        array('id' => 'save_amulet_type_add_edit')
+                    );
+                ?></div>
             </div>
         </form>
     </div>

@@ -27,7 +27,7 @@ $(document).ready(function() {
     });
 
     $('#btn_add_new').click(function() {
-        redirect('<?php echo site_url('admin/product/add'); ?>');
+        redirect('<?php echo site_url('admin/supplier/add'); ?>');
     });
 
     /*
