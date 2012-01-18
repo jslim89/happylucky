@@ -1,8 +1,12 @@
 <?php  if (!defined('BASEPATH')) exit('No direct script access allowed');?>
 <script>
 $(document).ready(function() {
-    $('button#back').click(function() {
+    $('#back').click(function() {
         redirect(base_url+'admin/user');
+    });
+
+    $('#save_user_add_edit').click(function() {
+        $('#user_add_edit').submit();
     });
 
     $('#user_add_edit').validationEngine('attach');
@@ -13,7 +17,7 @@ $(document).ready(function() {
 <div id="general">
     <form id="user_add_edit" method="POST" 
           action="<?php echo site_url("admin/user/save/".$user->id);?>">
-        <table>
+        <table class="form">
             <tr>
                 <td class="label"><?php echo lang('user_first_name');?></td>
                 <td>
@@ -94,14 +98,20 @@ $(document).ready(function() {
                 </td>
             </tr>
         </table>
-        <div class="right">
-            <?php
-                echo form_button(array(
-                    'id'      => 'back',
-                    'content' => lang('back'),
-                ));
-                echo form_submit('save_user', lang('save'), 'class="button"');
-            ?>
+        <div class="buttons">
+            <div class="right"><?php
+                echo button_link(
+                    false,
+                    lang('back'),
+                    array('id' => 'back')
+                );
+                echo nbs(2);
+                echo button_link(
+                    false,
+                    lang('save'),
+                    array('id' => 'save_user_add_edit')
+                );
+            ?></div>
         </div>
     </form>
 </div>

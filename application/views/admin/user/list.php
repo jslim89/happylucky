@@ -26,6 +26,10 @@ $(document).ready(function() {
         delete_row_confirmation(delete_urls, row_ids);
     });
 
+    $('#btn_add_new').click(function() {
+        redirect('<?php echo site_url('admin/user/add'); ?>');
+    });
+
     /*
     $('span#advanced_search').click(function() {
     });
@@ -48,62 +52,72 @@ $(document).ready(function() {
 <!-- End Pagination -->
 
 <!-- Action Button -->
-<div class="grid_6 action-button">
-    <input type="button" class="button" id="btn_delete" 
-        value="<?php echo lang('delete');?>" />
-    <input type="button" class="button" 
-        value="<?php echo lang('add_new');?>" 
-        onclick="redirect('<?php echo site_url('admin/user/add');?>');" />
-</div>
+<div class="grid_5 right"><?php
+    echo button_link(
+        false,
+        lang('delete'),
+        array('id' => 'btn_delete')
+    );
+    echo nbs(2);
+    echo button_link(
+        false,
+        lang('add_new'),
+        array('id' => 'btn_add_new')
+    );
+?></div>
 <!-- End Action Button -->
 <?php echo clear_div();?>
 
 <div class="grid_16">
-    <table class="listing">
-        <tr>
-            <th width="5%"><?php
-                echo form_checkbox(array(
-                    'name'  => 'check_all',
-                    'id'    => 'check_all',
-                    'value' => 'CHECK_ALL',
-                ));
-            ?></th>
-            <th><?php echo lang('email');?></th>
-            <th><?php echo lang('user_first_name');?></th>
-            <th><?php echo lang('user_last_name');?></th>
-            <th width="5%"><?php echo lang('edit');?></th>
-        </tr>
-        <?php foreach($users as $user):?>
-        <tr id="user_row_<?php echo $user->id; ?>">
-            <td><?php
-                echo form_checkbox(array(
-                    'name'  => 'check_'.$user->id,
-                    'id'    => 'check_'.$user->id,
-                    'value' => $user->id,
-                    'class' => 'delete_check',
-                ));
-            ?></td>
-            <td><?php 
-                echo anchor(
-                    site_url('admin/user/edit/'.$user->id),
-                    $user->email
-                );
-            ?></td>
-            <td><?php echo $user->first_name; ?></td>
-            <td><?php echo $user->last_name; ?></td>
-            <td>
-                <ul id="icons" class="ui-widget ui-helper-clearfix" style="">
-                    <li class="ui-state-default ui-corner-all">
-                        <span id="edit_<?php echo $user->id; ?>" class="ui-icon ui-icon-pencil"
-                            title="<?php echo lang('edit');?>"></span>
-                    </li>
-                    <li class="ui-state-default ui-corner-all">
-                        <span id="delete_<?php echo $user->id; ?>" class="ui-icon ui-icon-trash"
-                            title="<?php echo lang('delete');?>"></span>
-                    </li>
-                </ul>
-            </td>
-        </tr>
-        <?php endforeach;?>
+    <table class="list">
+        <thead>
+            <tr>
+                <td width="1"><?php
+                    echo form_checkbox(array(
+                        'name'  => 'check_all',
+                        'id'    => 'check_all',
+                        'value' => 'CHECK_ALL',
+                    ));
+                ?></td>
+                <td><?php echo lang('email');?></td>
+                <td><?php echo lang('user_first_name');?></td>
+                <td><?php echo lang('user_last_name');?></td>
+                <td width="5%"><?php echo lang('edit');?></td>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach($users as $user):?>
+            <tr id="user_row_<?php echo $user->id; ?>">
+                <td><?php
+                    echo form_checkbox(array(
+                        'name'  => 'check_'.$user->id,
+                        'id'    => 'check_'.$user->id,
+                        'value' => $user->id,
+                        'class' => 'delete_check',
+                    ));
+                ?></td>
+                <td><?php 
+                    echo anchor(
+                        site_url('admin/user/edit/'.$user->id),
+                        $user->email
+                    );
+                ?></td>
+                <td><?php echo $user->first_name; ?></td>
+                <td><?php echo $user->last_name; ?></td>
+                <td>
+                    <ul id="icons" class="ui-widget ui-helper-clearfix" style="">
+                        <li class="ui-state-default ui-corner-all">
+                            <span id="edit_<?php echo $user->id; ?>" class="ui-icon ui-icon-pencil"
+                                title="<?php echo lang('edit');?>"></span>
+                        </li>
+                        <li class="ui-state-default ui-corner-all">
+                            <span id="delete_<?php echo $user->id; ?>" class="ui-icon ui-icon-trash"
+                                title="<?php echo lang('delete');?>"></span>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <?php endforeach;?>
+        </tbody>
     </table>
 </div>
