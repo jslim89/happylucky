@@ -44,13 +44,6 @@ class Order extends MY_Controller {
 
     public function view($id) {
         $order    = new Customer_Order_Model($id);
-        // if is not a member and this order belongs to existing customer
-        // an extra condition to verify the customer email
-        if( ! get_session('customer_id') &&
-            (! empty($order->customer_id) || $order->email != get_post('email'))) {
-            $this->session->set_flashdata('search_order_error', lang('order_order_not_found'));
-            redirect('order');
-        }
         $products = array();
         foreach($order->order_detail as $p) {
             $temp_prod = new Product_Model($p->product_id);
@@ -62,34 +55,21 @@ class Order extends MY_Controller {
         $this->vars['products'] = $products;
         $this->vars['title']    = lang('order_order_information');
 
-        $this->load_view('order/view', $this->vars);
+        $this->load_view('admin/order/view', $this->vars);
     }
 
-    public function make_order() {
-        $order = new Customer_Order_Model();
-        $temp_order = (array)get_session('temp_order');
-        $order->populate_from_request($temp_order);
+    public function save($id = null) {
+        $order = new Customer_Order_Model($id);
         $order->populate_from_request($_POST);
-        $status = $order->make_order($this->my_cart->to_order_items());
-        if(is_array($status)) {
-            // The order made successful
-            if(sizeof($status) === 0) {
-                $error = false;
-                $this->my_cart->destroy();
-            }
-            else { // some problems on order items
-                $error = implode("\n", $status);
-            }
-        }
-        else { // order cannot be made
-            $error = $status;
-        }
 
-        $this->vars['error'] = $error;
-        $this->vars['order'] = $order;
-        $this->load_view('order/made', $this->vars);
+        if($order->save()) {
+            redirect('admin/order/view/'.$order->id);
+        }
+        else {
+            $this->load_view('admin/order', $this->vars);
+        }
     }
 }
 
 /* End of file order.php */
-/* Location: ./application/controllers/order.php */
+/* Location: ./application/controllers/admin/order.php */

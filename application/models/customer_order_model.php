@@ -44,12 +44,19 @@ class Customer_Order_Model extends MY_Active_Record {
      */
     var $_table = 'customer_order';
 
+    /* Order Status */
     const PENDING    = 'PENDING';
     const PROCESSING = 'PROCESSING';
     const SHIPPED    = 'SHIPPED';
     const CANCELLED  = 'CANCELLED';
     const EXPIRED    = 'EXPIRED';
     const COMPLETED  = 'COMPLETED';
+    /* End Order Status */
+
+    /* Payment Method */
+    const CASH_ON_DELIVERY = 'Cash On Delivery';
+    const BANK_IN          = 'Bank-In';
+    /* End Payment Method */
 
     /**
      * Return the status in human readable form 
@@ -89,6 +96,20 @@ class Customer_Order_Model extends MY_Active_Record {
      */
     public function is_member_order() {
         return ( ! empty($this->customer_id));
+    }
+
+    /**
+     * In this table got some DATE, thus need to explicitly
+     * convert to unix timestamp 
+     * 
+     * @param mixed $request 
+     * @return void
+     */
+    public function populate_from_request($request) {
+        if(isset($request['payment_date'])) {
+            $request['payment_date'] = strtotime($request['payment_date']);
+        }
+        parent::populate_from_request($request);
     }
 
     /**
@@ -207,6 +228,44 @@ class Customer_Order_Model extends MY_Active_Record {
         $this->_get_ci()->email->clear();
 
         return $is_send;
+    }
+
+    /**
+     * is_completed 
+     * 
+     * @return bool
+     */
+    public function is_completed() {
+        return $this->order_status === Customer_Order_Model::COMPLETED;
+    }
+
+    /**
+     * payment_method 
+     * 
+     * @return string
+     */
+    public function payment_method() {
+        $method = empty($this->recipient_bank_acc)
+            ? Customer_Order_Model::CASH_ON_DELIVERY
+            : Customer_Order_Model::BANK_IN;
+        return $method;
+    }
+
+    /**
+     * Return a list of status 
+     * 
+     * @return array
+     */
+    public static function get_dropdown_list() {
+        $status = array(
+            Customer_Order_Model::PENDING    => Customer_Order_Model::status(Customer_Order_Model::PENDING),
+            Customer_Order_Model::PROCESSING => Customer_Order_Model::status(Customer_Order_Model::PROCESSING),
+            Customer_Order_Model::SHIPPED    => Customer_Order_Model::status(Customer_Order_Model::SHIPPED),
+            Customer_Order_Model::CANCELLED  => Customer_Order_Model::status(Customer_Order_Model::CANCELLED),
+            Customer_Order_Model::EXPIRED    => Customer_Order_Model::status(Customer_Order_Model::EXPIRED),
+            Customer_Order_Model::COMPLETED  => Customer_Order_Model::status(Customer_Order_Model::COMPLETED),
+        );
+        return $status;
     }
 
     /**

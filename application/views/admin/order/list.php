@@ -1,10 +1,10 @@
 <?php  if (!defined('BASEPATH')) exit('No direct script access allowed');?>
 <script type="text/javascript">
 $(document).ready(function() {
-    $('span[id^=edit_]').each(function() {
+    $('span[id^=view_]').each(function() {
         $(this).click(function() {
             var id = get_element_index($(this));
-            redirect('order/edit/'+id);
+            redirect(base_url+'admin/order/view/'+id);
         });
     });
     $('#btn_add_new').click(function() {
@@ -48,7 +48,7 @@ $(document).ready(function() {
                 <td><?php echo lang('order_shipping');?></td>
                 <td><?php echo lang('order_total');?></td>
                 <td><?php echo lang('order_status');?></td>
-                <td width="5%"><?php echo lang('edit');?></td>
+                <td width="5%"><?php echo lang('view');?></td>
             </tr>
         </thead>
         <tbody>
@@ -56,7 +56,7 @@ $(document).ready(function() {
             <tr id="order_row_<?php echo $order->id; ?>">
                 <td><?php 
                     echo anchor(
-                        site_url('admin/order/edit/'.$order->id),
+                        site_url('admin/order/view/'.$order->id),
                         $order->id
                     );
                 ?></td>
@@ -80,7 +80,7 @@ $(document).ready(function() {
                 <td>
                     <ul id="icons" class="ui-widget ui-helper-clearfix" style="">
                         <li class="ui-state-default ui-corner-all">
-                            <span id="edit_<?php echo $order->id; ?>" class="ui-icon ui-icon-pencil"
+                            <span id="view_<?php echo $order->id; ?>" class="ui-icon ui-icon-pencil"
                                 title="<?php echo lang('edit');?>"></span>
                         </li>
                     </ul>

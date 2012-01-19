@@ -1,4 +1,6 @@
 <?php
+$lang['products']    = "Products";
+
 $lang['product_hot']    = "Hot";
 $lang['product_latest'] = "Latest";
 

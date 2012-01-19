@@ -2,41 +2,41 @@
 <script>
 $(document).ready(function() {
     $('#back').click(function() {
-        redirect(base_url+'admin/user');
+        redirect(base_url+'admin/order');
     });
 
-    $('#save_user_add_edit').click(function() {
-        $('#user_add_edit').submit();
+    $('#save_order_add_edit').click(function() {
+        $('#order_add_edit').submit();
     });
 
-    $('#user_add_edit').validationEngine('attach');
+    $('#order_add_edit').validationEngine('attach');
 });
 
 </script>
 
 <div id="general">
-    <form id="user_add_edit" method="POST" 
-          action="<?php echo site_url("admin/user/save/".$user->id);?>">
+    <form id="order_add_edit" method="POST" 
+          action="<?php echo site_url("admin/order/save/".$order->id);?>">
         <table class="form">
             <tr>
-                <td class="label"><?php echo lang('user_first_name');?></td>
+                <td class="label"><?php echo lang('order_first_name');?></td>
                 <td>
                     <?php 
                         echo form_input(array(
                             'name'  => 'first_name',
                             'id'    => 'first_name',
-                            'value' => $user->first_name,
+                            'value' => $order->first_name,
                             'class' => 'validate[required] text'
                         ));
                     ?>
                 </td>
-                <td class="label"><?php echo lang('user_last_name');?></td>
+                <td class="label"><?php echo lang('order_last_name');?></td>
                 <td>
                     <?php 
                         echo form_input(array(
                             'name'  => 'last_name',
                             'id'    => 'last_name',
-                            'value' => $user->last_name,
+                            'value' => $order->last_name,
                             'class' => 'validate[required] text'
                         ));
                     ?>
@@ -44,25 +44,25 @@ $(document).ready(function() {
             </tr>
             <tr>
                 <td><?php echo lang('email');?></td>
-                <td colspan="<?php $user->is_exist() ? 3 : 1;?>">
+                <td colspan="<?php $order->is_exist() ? 3 : 1;?>">
                     <?php 
-                        if($user->is_exist()) { // Email cannot be change
+                        if($order->is_exist()) { // Email cannot be change
                             echo "<span>"
-                                .$user->email
+                                .$order->email
                                 ."</span>";
                         }
                         else {
                             echo form_input(array(
                                 'name'  => 'email',
                                 'id'    => 'email',
-                                'value' => $user->email,
+                                'value' => $order->email,
                                 'class' => 'validate[required,custom[email,ajax[ajaxUserEmail]]]'
                             ));
                         }
                     ?>
                 </td>
-                <?php if( ! $user->is_exist()): ?>
-                <td><?php echo lang('user_password');?></td>
+                <?php if( ! $order->is_exist()): ?>
+                <td><?php echo lang('order_password');?></td>
                 <td><?php 
                     echo form_password(array(
                         'name'  => 'password',
@@ -74,24 +74,24 @@ $(document).ready(function() {
                 <?php endif; ?>
             </tr>
             <tr>
-                <td><?php echo lang('user_security_question');?></td>
+                <td><?php echo lang('order_security_question');?></td>
                 <td>
                     <?php 
                         echo form_input(array(
                             'name'  => 'security_question',
                             'id'    => 'security_question',
-                            'value' => $user->security_question,
+                            'value' => $order->security_question,
                             'class' => ''
                         ));
                     ?>
                 </td>
-                <td><?php echo lang('user_security_answer');?></td>
+                <td><?php echo lang('order_security_answer');?></td>
                 <td>
                     <?php 
                         echo form_input(array(
                             'name'  => 'security_answer',
                             'id'    => 'security_answer',
-                            'value' => $user->security_answer,
+                            'value' => $order->security_answer,
                             'class' => ''
                         ));
                     ?>
@@ -109,7 +109,7 @@ $(document).ready(function() {
                 echo button_link(
                     false,
                     lang('save'),
-                    array('id' => 'save_user_add_edit')
+                    array('id' => 'save_order_add_edit')
                 );
             ?></div>
         </div>
