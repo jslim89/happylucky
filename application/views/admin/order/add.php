@@ -198,6 +198,16 @@ function format_customer(customer) {
                     ?></td>
                 </tr>
                 <tr>
+                    <td class="label"><?php echo required_indicator().lang('order_order_date');?></td>
+                    <td><?php 
+                        echo form_input(array(
+                            'id'    => 'order_date',
+                            'name'  => 'order_date',
+                            'class' => 'date validate[required]',
+                        ));
+                    ?></td>
+                </tr>
+                <tr>
                     <td class="label"><?php echo lang('order_payment_date');?></td>
                     <td><?php 
                         echo form_input(array(
@@ -317,7 +327,7 @@ function format_customer(customer) {
             echo button_link(
                 false,
                 lang('save'),
-                array('id' => 'save_form_order')
+                array('id' => 'save_order_add')
             );
         ?></div>
     </div>

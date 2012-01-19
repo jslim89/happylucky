@@ -218,6 +218,13 @@ $(document).ready(function() {
     </div>
     <?php echo clear_div(); ?>
     <div class="buttons">
+        <div class="left"><?php
+            echo button_link(
+                site_url('admin/order/add_products/'.$order->id),
+                lang('order_add_products_to_this_order'),
+                array('id' => 'btn_add_product')
+            );
+        ?></div>
         <div class="right"><?php
             echo button_link(
                 false,

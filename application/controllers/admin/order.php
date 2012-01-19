@@ -25,6 +25,7 @@ class Order extends MY_Controller {
         $this->load->Model('product_model');
         $this->load->Model('country_model');
         $this->load->Model('customer_order_model');
+        $this->load->Model('order_detail_model');
     }
 
 	public function index($page = 0)
@@ -70,12 +71,31 @@ class Order extends MY_Controller {
     public function save($id = null) {
         $order = new Customer_Order_Model($id);
         $order->populate_from_request($_POST);
+        // if is add new order
+        if($id === null) {
+            $order->subtotal      = 0.00;
+            $order->shipping_cost = 0.00;
+            $order->grand_total   = 0.00;
+        }
 
-        if($order->save()) {
+        $is_saved = $order->save();
+        if($is_saved) {
             redirect('admin/order/view/'.$order->id);
         }
         else {
-            $this->load_view('admin/order', $this->vars);
+            $this->load_view('admin/order/list', $this->vars);
+        }
+    }
+
+    public function add_products($order_id) {
+        $this->vars['title']    = lang('order_add_products');
+        if($_POST) {
+            $order_detail = new Order_Detail_Model();
+            $order_detail->order_id = $order_id;
+        }
+        else {
+            $this->vars['order_id'] = $order_id;
+            $this->load_view('admin/order/add_products', $this->vars);
         }
     }
 }

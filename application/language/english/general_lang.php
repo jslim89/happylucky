@@ -8,6 +8,7 @@ $lang['delete']       = 'Delete';
 $lang['add_files']    = 'Add Files';
 $lang['delete_files'] = 'Delete Files';
 $lang['save']         = 'Save';
+$lang['insert']       = 'Insert';
 $lang['update']       = 'Update';
 $lang['done']         = 'Done';
 $lang['cancel']       = 'Cancel';

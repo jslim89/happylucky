@@ -178,6 +178,20 @@ class Customer_Order_Model extends MY_Active_Record {
     }
 
     /**
+     * add_product 
+     * 
+     * @param mixed $order_detail 
+     * @return mixed
+     */
+    public function add_product($order_detail) {
+        $is_saved = $order_detail->save();
+        if($is_saved) {
+            return $order_detail->update_product_quantity();
+        }
+        return $is_saved;
+    }
+
+    /**
      * Send email acknowledgement after the order has made 
      * 
      * @param mixed $order_items 
