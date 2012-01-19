@@ -1,8 +1,11 @@
 <?php
 $lang['order']    = "Order";
 
-$lang['order_retail_order']    = "Retail Order";
-$lang['order_wholesale_order'] = "Wholesale Order";
+$lang['order_add_new_order']                      = "Add New Order";
+$lang['order_customer_information']               = "Customer Information";
+$lang['order_existing_customer']                  = "Existing Customer";
+$lang['order_search_for_customer']                = "Search For Customer";
+$lang['order_please_select_an_existing_customer'] = "Please select an existing customer";
 
 $lang['order_detail']          = "Order Detail";
 $lang['order_payment_details'] = "Payment Details";

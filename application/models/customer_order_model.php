@@ -109,6 +109,9 @@ class Customer_Order_Model extends MY_Active_Record {
         if(isset($request['payment_date'])) {
             $request['payment_date'] = strtotime($request['payment_date']);
         }
+        if(isset($request['order_date'])) {
+            $request['order_date'] = strtotime($request['order_date']);
+        }
         parent::populate_from_request($request);
     }
 

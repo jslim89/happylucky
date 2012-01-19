@@ -23,6 +23,7 @@ class Order extends MY_Controller {
         $this->lang->load('product');
         $this->load->library('my_cart');
         $this->load->Model('product_model');
+        $this->load->Model('country_model');
         $this->load->Model('customer_order_model');
     }
 
@@ -41,6 +42,14 @@ class Order extends MY_Controller {
         $this->vars['orders'] = $orders;
         $this->load_view('admin/order/list', $this->vars);
 	}
+
+    public function add() {
+        // Set an empty object as the order variable is required
+        $this->vars['title'] = lang('order_add_new_order');
+        $order = new Customer_Order_Model();
+        $this->vars['order'] = $order;
+        $this->load_view('admin/order/add', $this->vars);
+    }
 
     public function view($id) {
         $order    = new Customer_Order_Model($id);

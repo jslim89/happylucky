@@ -5,7 +5,8 @@ $lang['confirm_delete']        = 'Delete this item?';
 $lang['confirm_delete_detail'] = 'This item will be permanently deleted and 
                                   cannot be recovered.\nAre you sure?';
 
-$lang['invalid_input']                    = 'Invalid Input';
+$lang['invalid_input'] = 'Invalid Input';
+$lang['warning']       = 'Warning';
 
 // Numeric variable
 $lang['positive_integer_warning_message'] = 'Only positive integer is allowed! Please re-enter...';

@@ -18,10 +18,14 @@ lang_integer_warning_message          = '<?php echo lang('integer_warning_messag
 lang_integer_tooltip                  = '<?php echo lang('integer_tooltip');?>';
 lang_more                             = '<?php echo lang('more');?>';
 lang_less                             = '<?php echo lang('less');?>';
+lang_warning                          = '<?php echo lang('warning');?>';
 
 // Cart
 lang_added_to_cart      = '<?php echo lang('cart_added_to_cart');?>';
 lang_add_to_cart_failed = '<?php echo lang('cart_failed');?>';
+
+// Order
+lang_please_select_an_existing_customer = '<?php echo lang('order_please_select_an_existing_customer');?>';
 
 </script>
 <?php 
