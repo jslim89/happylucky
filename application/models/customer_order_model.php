@@ -257,6 +257,24 @@ class Customer_Order_Model extends MY_Active_Record {
     }
 
     /**
+     * Update the total after add some products 
+     * 
+     * @return mixed
+     */
+    public function update_total() {
+        if( ! $this->is_exist()) return false;
+        $subtotal    = 0;
+        $grand_total = 0;
+        foreach($this->order_detail as $product) {
+            $subtotal += $product->subtotal;
+        }
+        $grand_total = $subtotal + 0; // 0 is shipping
+        $this->subtotal    = $subtotal;
+        $this->grand_total = $grand_total;
+        return $this->save();
+    }
+
+    /**
      * payment_method 
      * 
      * @return string

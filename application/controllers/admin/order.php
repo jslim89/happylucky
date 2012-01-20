@@ -90,8 +90,23 @@ class Order extends MY_Controller {
     public function add_products($order_id) {
         $this->vars['title']    = lang('order_add_products');
         if($_POST) {
-            $order_detail = new Order_Detail_Model();
-            $order_detail->order_id = $order_id;
+            $product_id_set      = (array)get_post('product_id');
+            $quantity_set        = (array)get_post('quantity');
+            $unit_sell_price_set = (array)get_post('unit_sell_price');
+
+            foreach($product_id_set as $k => $product_id) {
+                $order_detail = new Order_Detail_Model();
+                $order_detail->order_id = $order_id;
+                $order_detail->quantity = $quantity_set[$k];
+                $order_detail->unit_sell_price = $unit_sell_price_set[$k];
+                $order_detail->product_id = $product_id;
+                $order_detail->subtotal = $order_detail->quantity * $order_detail->unit_sell_price;
+                $order_detail->save();
+                $order_detail->update_product_quantity();
+            }
+            $order = new Customer_Order_Model($order_id);
+            $order->update_total();
+            redirect('admin/order/view/'.$order_id);
         }
         else {
             $this->vars['order_id'] = $order_id;

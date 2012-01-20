@@ -43,9 +43,9 @@ class Order_Detail_Model extends MY_Active_Record {
      * @return mixed
      */
     public function update_product_quantity() {
-        $qty_left = $this->product->quantity_available;
+        $qty_left                          = $this->product->quantity_available;
         $this->product->quantity_available -= $this->quantity;
-        $this->product->total_num_sold += $this->quantity;
+        $this->product->total_num_sold     += $this->quantity;
         return $this->product->save();
     }
 }

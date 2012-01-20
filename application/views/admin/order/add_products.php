@@ -19,9 +19,8 @@ $(function() {
         $('#standard_price_'+idx).text(standard_price);
         $('#unit_sell_price_'+idx).val(standard_price);
 
-        $('#quantity_'+idx)[0].className = $('#quantity_'+idx).className.replace(/\bvalidate.*?\b/g, '');
-        $('#quantity_'+idx).removeClass('^validate')
-            .addClass('validate[required,max['+quantity_available+'],min['+min_quantity+']]');
+        $('#quantity_'+idx).removeClass()
+            .addClass('positive-integer validate[required,max['+quantity_available+'],min['+min_quantity+']]');
     });
 
     $('#btn_add_more').click(function() {
@@ -168,7 +167,7 @@ function format_product(product) {
     </div>
 </div>
 <form id="form_add_product" method="POST" 
-      action="<?php echo site_url("admin/order/add_product/".$order_id);?>">
+      action="<?php echo site_url("admin/order/add_products/".$order_id);?>">
     <div class="grid_11">
         <div class="box" id="product_0">
             <div class="box-heading"><?php
