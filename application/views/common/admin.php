@@ -17,15 +17,6 @@
     </div>
     <!-- End Banner -->
     <div class="grid_10">
-        <div id="cart">
-            <div class="heading">
-            <?php 
-                echo heading(lang('cart'), 4);
-            ?>
-            <span id="cart-total">
-            </span>
-            </div>
-        </div>
         <!-- Login Bar -->
         <div id="logout-topnav" class="topnav">
             <a href="<?php echo site_url('admin/welcome/logout');?>" class="signout">
@@ -33,9 +24,6 @@
             </a>
         </div>
         <!-- End Login Bar -->
-        <a href="<?php echo site_url('cart/index');?>" id="cart-nav">
-            <span><?php echo lang('go_to_cart');?></span>
-        </a>
     </div>
 </div>
 <!-- End Header -->
@@ -57,7 +45,11 @@ $list = array(
         anchor(site_url('admin/user'), lang('user_management')),
         anchor(site_url('admin/customer'), lang('customer_management')),
     ),
-    anchor(site_url('admin/report'), lang('report')),
+    '<a href="#">'.lang('report').'</a>' => array(
+        anchor(site_url('admin/report/sales'), lang('report_sales_report')),
+        anchor(site_url('admin/report/product'), lang('report_product_report')),
+        anchor(site_url('admin/report/customer'), lang('report_customer_report')),
+    )
 );
 $topmenu = array();
 $topmenu['list'] = $list;

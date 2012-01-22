@@ -114,7 +114,7 @@ $autoload['config'] = array();
 |
 */
 
-$autoload['language'] = array('javascript', 'cart');
+$autoload['language'] = array('javascript', 'cart', 'report');
 
 
 /*

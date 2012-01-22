@@ -304,6 +304,20 @@ class Customer_Order_Model extends MY_Active_Record {
     }
 
     /**
+     * get_by_date_range 
+     * 
+     * @param mixed $start_date // unix timestamp
+     * @param mixed $end_date  // unix timestamp
+     * @return array
+     */
+    public static function get_by_date_range($start_date, $end_date) {
+        $sql = "order_date BETWEEN $start_date AND $end_date";
+        $order = new Customer_Order_Model();
+        $order_set = $order->find($sql);
+        return $order_set;
+    }
+
+    /**
      * Get the Order list by customer date and ID 
      * 
      * @param mixed $customer_id 
