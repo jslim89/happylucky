@@ -38,9 +38,43 @@ class Order extends MY_Controller {
             $page
         );
 
-        $this->vars['pagination'] = $this->customer_order_model->get_pagination($total_rows, 10);
-        $this->vars['title'] = lang('order_management');
-        $this->vars['orders'] = $orders;
+        $this->vars['seq_order_id']      = get_post('seq', 'DESC');
+        $this->vars['seq_customer_name'] = get_post('seq', 'DESC');
+        $this->vars['seq_order_date']    = get_post('seq', 'DESC');
+        $this->vars['seq_subtotal']      = get_post('seq', 'DESC');
+        $this->vars['seq_shipping']      = get_post('seq', 'DESC');
+        $this->vars['seq_grand_total']   = get_post('seq', 'DESC');
+        $this->vars['seq_status']        = get_post('seq', 'DESC');
+
+        $order_by = get_post('order_by', 'order_status');
+        switch($order_by) {
+            case 'id':
+                $this->vars['seq_order_id']    = (get_post('seq', 'ASC') == 'ASC') ? 'DESC' : 'ASC';
+                break;
+            case 'customer_name':
+                $this->vars['seq_customer_name']    = (get_post('seq', 'ASC') == 'ASC') ? 'DESC' : 'ASC';
+                break;
+            case 'order_date':
+                $this->vars['seq_order_date']    = (get_post('seq', 'ASC') == 'ASC') ? 'DESC' : 'ASC';
+                break;
+            case 'subtotal':
+                $this->vars['seq_subtotal']    = (get_post('seq', 'ASC') == 'ASC') ? 'DESC' : 'ASC';
+                break;
+            case 'shipping_cost':
+                $this->vars['seq_shipping']    = (get_post('seq', 'ASC') == 'ASC') ? 'DESC' : 'ASC';
+                break;
+            case 'grand_total':
+                $this->vars['seq_grand_total']    = (get_post('seq', 'ASC') == 'ASC') ? 'DESC' : 'ASC';
+                break;
+            case 'order_status':
+                $this->vars['seq_status']    = (get_post('seq', 'ASC') == 'ASC') ? 'DESC' : 'ASC';
+                break;
+        }
+
+        $this->vars['pagination']      = $this->customer_order_model->get_pagination($total_rows, 10);
+        $this->vars['title']           = lang('order_management');
+        $this->vars['status_selected'] = get_post('status', Customer_Order_Model::PENDING);
+        $this->vars['orders']          = $orders;
         $this->load_view('admin/order/list', $this->vars);
 	}
 
