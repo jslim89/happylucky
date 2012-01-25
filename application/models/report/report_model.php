@@ -48,4 +48,21 @@ class Report_Model {
         $report = new Report_Model();
         return $report->months;
     }
+
+    public static function get_short_month_dropdown_list() {
+        return array(
+            0  => lang('jan'),
+            1  => lang('feb'),
+            2  => lang('mar'),
+            3  => lang('apr'),
+            4  => lang('may'),
+            5  => lang('jun'),
+            6  => lang('jul'),
+            7  => lang('aug'),
+            8  => lang('sep'),
+            9  => lang('oct'),
+            10 => lang('nov'),
+            11 => lang('dec'),
+        );
+    }
 }

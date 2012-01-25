@@ -47,12 +47,12 @@ class Report extends MY_Controller {
         $this->load->model('report/product_report_model', 'product_report');
 
         $this->product_report->init(get_post('year', false), 10);
-        $column_set                   = $this->product_report->get_column_set();
-        $this->vars['title']          = lang('report_product_report');
-        $this->vars['column_set']     = $column_set;
+        $column_set                  = $this->product_report->get_column_set();
+        $this->vars['title']         = lang('report_total_product_sold');
+        $this->vars['column_set']    = $column_set;
         $this->vars['start_year']    = (int)date('Y') - 5;
         $this->vars['end_year']      = (int)date('Y');
-        $this->vars['selected_year']  = get_post('year', (int)date('Y'));
+        $this->vars['selected_year'] = get_post('year', (int)date('Y'));
         $this->load_view('admin/report/product', $this->vars);
     }
 
@@ -62,7 +62,15 @@ class Report extends MY_Controller {
      * @return void
      */
     public function customer() {
-        $this->vars['title'] = lang('report_customer_report');
+        $this->load->model('report/customer_report_model', 'customer_report');
+
+        $this->customer_report->init(get_post('year', false), 10);
+        $column_set                  = $this->customer_report->get_column_set();
+        $this->vars['title']         = lang('report_total_customer_spent');
+        $this->vars['column_set']    = $column_set;
+        $this->vars['start_year']    = (int)date('Y') - 5;
+        $this->vars['end_year']      = (int)date('Y');
+        $this->vars['selected_year'] = get_post('year', (int)date('Y'));
         $this->load_view('admin/report/customer', $this->vars);
     }
 }

@@ -1,14 +1,14 @@
 <script type="text/javascript">
 $(function() {
     $('#btn_view').click(function() {
-        $('#view_product_report').submit();
+        $('#view_customer_report').submit();
     });
 });
 </script>
 <div class="grid_16">
     <div class="buttons">
-        <form id="view_product_report" method="POST"
-            action="<?php echo site_url('admin/report/product'); ?>">
+        <form id="view_customer_report" method="POST"
+            action="<?php echo site_url('admin/report/customer'); ?>">
             <div class="right"><?php
                 echo form_dropdown(
                     'year',
@@ -28,7 +28,7 @@ $(function() {
         <thead>
             <tr>
                 <td><?php
-                    echo lang('report_product');
+                    echo lang('report_customer_name');
                 ?></td>
                 <?php foreach(Report_Model::get_short_month_dropdown_list() as $k => $v): ?>
                 <td><?php
@@ -45,48 +45,48 @@ $(function() {
         <tr>
             <td><?php
                 echo anchor(
-                    site_url('admin/product/edit/'.$col['product_id']),
-                    $col['product']
+                    site_url('admin/customer/edit/'.$col['customer_id']),
+                    $col['customer']
                 );
             ?></td>
             <td><?php
-                echo $col['january'];
+                echo to_currency($col['january']);
             ?></td>
             <td><?php
-                echo $col['february'];
+                echo to_currency($col['february']);
             ?></td>
             <td><?php
-                echo $col['march'];
+                echo to_currency($col['march']);
             ?></td>
             <td><?php
-                echo $col['april'];
+                echo to_currency($col['april']);
             ?></td>
             <td><?php
-                echo $col['may'];
+                echo to_currency($col['may']);
             ?></td>
             <td><?php
-                echo $col['june'];
+                echo to_currency($col['june']);
             ?></td>
             <td><?php
-                echo $col['july'];
+                echo to_currency($col['july']);
             ?></td>
             <td><?php
-                echo $col['august'];
+                echo to_currency($col['august']);
             ?></td>
             <td><?php
-                echo $col['september'];
+                echo to_currency($col['september']);
             ?></td>
             <td><?php
-                echo $col['october'];
+                echo to_currency($col['october']);
             ?></td>
             <td><?php
-                echo $col['november'];
+                echo to_currency($col['november']);
             ?></td>
             <td><?php
-                echo $col['december'];
+                echo to_currency($col['december']);
             ?></td>
             <td><?php
-                echo $col['total'];
+                echo to_currency($col['total']);
             ?></td>
         </tr>
         <?php endforeach; ?>
