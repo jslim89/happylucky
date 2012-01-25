@@ -44,13 +44,12 @@ class Sales_Report_Model extends Report_Model {
             // Only return the data until last month if it is current year
             if($this->_is_current_year() && $this->_is_current_month($month_idx+1))
                 break;
-            // ISO 8601 format YYYY-MM-DD
-            $start_date = strtotime("$this->year-$month_idx-01");
-            $end_date   = strtotime("$this->year-$month_idx-$no_of_days");
 
-            $column_set[$month_idx] = $this->_get_total($start_date, $end_date);
+            // month_idx start from 0, whereas MONTH(FROM_UNIXTIME(month)) 
+            // start from 1
+            $column_set[$month_idx] = $this->_get_total($month_idx+1);
             $column_set[$month_idx]['month'] = $this->months[$month_idx];
-            $column_set[$month_idx]['products'] = $this->_get_product_count($start_date, $end_date);
+            $column_set[$month_idx]['products'] = $this->_get_product_count($month_idx+1);
         }
         return $column_set;
     }
@@ -62,12 +61,13 @@ class Sales_Report_Model extends Report_Model {
      * @param mixed $end_date 
      * @return array
      */
-    private function _get_total($start_date, $end_date) {
+    private function _get_total($month) {
         $sql = "SELECT SUM(subtotal) AS s_total"
             . ", SUM(shipping_cost) AS shipping"
             . ", SUM(grand_total) AS g_total"
             . " FROM customer_order"
-            . " WHERE order_date BETWEEN $start_date AND $end_date";
+            . " WHERE YEAR(FROM_UNIXTIME(order_date)) = $this->year"
+            . " AND MONTH(FROM_UNIXTIME(order_date)) = $month";
         $result_set = $this->adodb->GetRow($sql);
         return array(
             'subtotal'    => $result_set['s_total'],
@@ -83,10 +83,11 @@ class Sales_Report_Model extends Report_Model {
      * @param mixed $end_date 
      * @return array
      */
-    private function _get_product_count($start_date, $end_date) {
+    private function _get_product_count($month) {
         $sql = "SELECT product_id, SUM(quantity) as qty_sold"
             . " FROM customer_order o JOIN order_detail d ON o.id = d.order_id"
-            . " WHERE order_date BETWEEN $start_date AND $end_date"
+            . " WHERE YEAR(FROM_UNIXTIME(order_date)) = $this->year"
+            . " AND MONTH(FROM_UNIXTIME(order_date)) = $month"
             . " GROUP BY product_id";
 
         $products = $this->adodb->Execute($sql);
