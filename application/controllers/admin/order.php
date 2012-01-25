@@ -147,6 +147,14 @@ class Order extends MY_Controller {
             $this->load_view('admin/order/add_products', $this->vars);
         }
     }
+     
+    public function send_email_acknowledge_customer($order_id) {
+        $order = new Customer_Order_Model($order_id);
+        $is_send = $order->send_email_acknowledgement($order->order_detail);
+        echo json_encode(array(
+            'status' => $is_send
+        ));
+    }
 }
 
 /* End of file order.php */

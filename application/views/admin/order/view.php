@@ -10,6 +10,30 @@ $(document).ready(function() {
     });
 
     $('#form_order').validationEngine('attach');
+
+    $('#btn_send_email').click(function() {
+        $('span#spinner_email').show();
+        $.ajax({
+            url: base_url + 'admin/order/send_email_acknowledge_customer/<?php echo $order->id; ?>',
+            dataType: 'json',
+            success: function(data) {
+                if(data.status == true) {
+                    $('#email_sent').show();
+                    $('#email_failed').hide();
+                }
+                else {
+                    $('#email_sent').hide();
+                    $('#email_failed').show();
+                }
+            },
+            complete: function(jqXHR, textStatus) {
+                $('span#spinner_email').hide();
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        });
+    });
 });
 
 </script>
@@ -217,6 +241,12 @@ $(document).ready(function() {
         </div>
     </div>
     <?php echo clear_div(); ?>
+    <div id="email_failed" class="warning" style="display: none;"><?php
+        echo lang('order_email_failed_to_send');
+    ?></div>
+    <div id="email_sent" class="success" style="display: none;"><?php
+        echo lang('order_email_sent');
+    ?></div>
     <div class="buttons">
         <div class="left"><?php
             echo button_link(
@@ -224,6 +254,13 @@ $(document).ready(function() {
                 lang('order_add_products_to_this_order'),
                 array('id' => 'btn_add_product')
             );
+            echo nbs(2);
+            echo button_link(
+                false,
+                lang('order_send_email_acknowledge_customer'),
+                array('id' => 'btn_send_email')
+            );
+            echo spinner('spinner_email');
         ?></div>
         <div class="right"><?php
             echo button_link(

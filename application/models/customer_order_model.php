@@ -169,7 +169,7 @@ class Customer_Order_Model extends MY_Active_Record {
                 }
                 $item->update_product_quantity();
             }
-            $this->_send_email_acknowledgement($order_items);
+            $this->send_email_acknowledgement($order_items);
         }
         else {
             $status = lang('order').' '.lang('order_cannot_be_made');
@@ -197,7 +197,7 @@ class Customer_Order_Model extends MY_Active_Record {
      * @param mixed $order_items 
      * @return bool
      */
-    private function _send_email_acknowledgement($order_items) {
+    public function send_email_acknowledgement($order_items) {
         $this->_get_ci()->load->library('email');
         $subject = "Order from Happy Lucky";
 
