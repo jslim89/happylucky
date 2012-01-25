@@ -178,11 +178,13 @@ function format_amulet(amulet) {
                     <td><?php 
                             if($product->is_exist()) {
                                 $type_retail_checked = ($product->product_type === Product_Model::RETAIL);
-                                $type_wholesale_checked = ( ! $type_retail_checked);
+                                $type_wholesale_checked = ($product->product_type === Product_Model::WHOLESALE);
+                                $type_both_checked = ($product->product_type === Product_Model::BOTH);
                             }
                             else {
                                 $type_retail_checked      = TRUE;
                                 $type_wholesale_checked = FALSE;
+                                $type_both_checked = FALSE;
                             }
                             echo form_radio(array(
                                 'name'    => 'product_type',
@@ -200,6 +202,14 @@ function format_amulet(amulet) {
                                 'class'   => 'radio'
                             ));
                             echo lang('product_wholesale');
+                            echo form_radio(array(
+                                'name'    => 'product_type',
+                                'id'      => 'type_both',
+                                'checked' => $type_both_checked,
+                                'value'   => Product_Model::BOTH,
+                                'class'   => 'radio'
+                            ));
+                            echo lang('product_both');
                     ?></td>
                 </tr>
                 <tr>
