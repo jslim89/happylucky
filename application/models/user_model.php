@@ -43,8 +43,8 @@ class User_Model extends MY_Active_Record {
      * @return void
      */
     public function populate_from_request($post) {
+        unset($post['password']);
         parent::populate_from_request($post);
-        $this->_encrypt_password();
     }
 
     /**
@@ -66,6 +66,33 @@ class User_Model extends MY_Active_Record {
             }
         }
         return false;
+    }
+
+    /**
+     * match_password 
+     * 
+     * @param mixed $password 
+     * @return boolean
+     */
+    public function match_password($password) {
+        $u = new User_Model($this->id);
+        $u->password = $password;
+        $u->_encrypt_password();
+        return $u->password === $this->password;
+    }
+
+    /**
+     * update_password 
+     * 
+     * @param mixed $password 
+     * @return mixed
+     */
+    public function update_password($password) {
+        $u = new User_Model($this->id);
+        $u->password = $password;
+        $u->_encrypt_password();
+        $this->password = $u->password;
+        return $this->save();
     }
 
     /**

@@ -53,6 +53,7 @@ $lang['user_email_password_recovery_message_before_password'] = "Dear customer,\
     A new password is generated: ";
 $lang['user_email_password_recovery_message_after_password'] = "\n\nThank you.";
 
+
 /* Registration */
 $lang['user_please_check_your_email_for_your_account_verification'] = "Please check your email for your account verification";
 $lang['user_email_verification_subject'] = "Happy Lucky account verification";
@@ -68,6 +69,7 @@ $lang['user_an_email_has_been_sent_to_your_mailbox'] = "An email has been sent t
 
 /* Account */
 $lang['user_change_password']          = "Change Password";
+$lang['user_password_does_not_match']  = "Password does not match";
 $lang['user_edit_personal_details']    = "Edit Personal Details";
 $lang['user_edit_address_information'] = "Edit Address Information";
 

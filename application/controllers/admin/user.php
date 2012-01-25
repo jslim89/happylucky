@@ -58,6 +58,17 @@ class User extends MY_Controller {
         $user = new User_Model($id);
         $user->populate_from_request($_POST);
 
+        if(get_post('password')) {
+            $is_match = $user->match_password(get_post('old_password'));
+            if( ! $is_match) {
+                $this->session->set_flashdata('password_not_match', lang('user_password_does_not_match'));
+                redirect('admin/user/edit/'.$user->id);
+            }
+            else {
+                $user->update_password(get_post('password'));
+            }
+        }
+
         if($user->save()) {
             redirect('admin/user/edit/'.$user->id);
         }
