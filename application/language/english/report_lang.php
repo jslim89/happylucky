@@ -23,6 +23,8 @@ $lang['report_grand_total']  = "Grand Total";
 
 /* Product Report */
 $lang['report_product_report'] = "Product Report";
+$lang['report_product']        = "Product";
+$lang['report_total']        = "Total";
 
 /* Customer Report */
 $lang['report_customer_report'] = "Customer Report";

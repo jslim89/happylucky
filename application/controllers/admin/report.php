@@ -44,7 +44,15 @@ class Report extends MY_Controller {
      * @return void
      */
     public function product() {
-        $this->vars['title'] = lang('report_product_report');
+        $this->load->model('report/product_report_model', 'product_report');
+
+        $this->product_report->init(get_post('year', false), 10);
+        $column_set                   = $this->product_report->get_column_set();
+        $this->vars['title']          = lang('report_product_report');
+        $this->vars['column_set']     = $column_set;
+        $this->vars['start_year']    = (int)date('Y') - 5;
+        $this->vars['end_year']      = (int)date('Y');
+        $this->vars['selected_year']  = get_post('year', (int)date('Y'));
         $this->load_view('admin/report/product', $this->vars);
     }
 

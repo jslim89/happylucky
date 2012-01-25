@@ -43,4 +43,9 @@ class Report_Model {
         }
         return $list;
     }
+
+    public static function get_month_dropdown_list() {
+        $report = new Report_Model();
+        return $report->months;
+    }
 }
