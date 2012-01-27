@@ -56,10 +56,29 @@ class Customer extends MY_Controller {
 
     public function save($id = null) {
         $customer = new Customer_Model($id);
-        $customer->populate_from_request($_POST);
-        $status = $customer->register();
+        // If is add new
+        if( ! $customer->is_exist()) {
+            $customer->populate_from_request($_POST);
+            $status = $customer->register();
+        }
+        else {
+            if(get_post('password')) {
+                $is_match = $customer->match_password(get_post('old_password'));
+                if($is_match) {
+                    $customer->update_password(get_post('password'));
+                }
+                else {
+                    $this->session->set_flashdata('password_not_match', lang('user_password_does_not_match'));
+                    redirect('admin/customer/edit/'.$customer->id);
+                }
+            }
+            unset($_POST['password']);
+            $customer->populate_from_request($_POST);
+            $status = $customer->save();
+        }
 
         if($status) {
+            $this->session->set_flashdata('record_saved', lang('updated'));
             redirect('admin/customer/edit/'.$customer->id);
         }
         else

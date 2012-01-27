@@ -6,6 +6,16 @@ $(document).ready(function() {
     });
 
     $('#save_customer_add_edit').click(function() {
+        if($('#password').val() != '') {
+            $('#old_password').addClass('validate[required]');
+            $('#confirm_password').addClass('validate[required,equals[password]]');
+            $('#password').addClass('validate[required]');
+        }
+        else {
+            $('#old_password').removeClass('validate[required]');
+            $('#confirm_password').removeClass('validate[required,equals[password]]');
+            $('#password').removeClass('validate[required]');
+        }
         $('#customer_add_edit').submit();
     });
 
@@ -14,6 +24,23 @@ $(document).ready(function() {
 
 </script>
 
+<?php if($this->session->flashdata('password_not_match')): ?>
+<div class="grid_16">
+    <div class="warning"><?php
+        echo $this->session->flashdata('password_not_match');
+    ?></div>
+</div>
+<?php clear_div(); ?>
+<?php endif; ?>
+
+<?php if($this->session->flashdata('record_saved')): ?>
+<div class="grid_16">
+    <div class="success"><?php
+        echo $this->session->flashdata('record_saved');
+    ?></div>
+</div>
+<?php clear_div(); ?>
+<?php endif; ?>
 <form id="customer_add_edit" method="POST" 
       action="<?php echo site_url("admin/customer/save/".$customer->id);?>">
     <div class="box grid_8">
@@ -92,33 +119,30 @@ $(document).ready(function() {
             <table class="form">
                 <?php if($customer->is_exist()): ?>
                 <tr>
-                    <td class="label"><?php echo required_indicator().lang('user_old_password');?></td>
+                    <td class="label"><?php echo lang('user_old_password');?></td>
                     <td><?php 
                         echo form_password(array(
                             'id'    => 'old_password',
                             'name'  => 'old_password',
-                            'class' => 'validate[required,ajax[ajaxCustomerOldPassword]]',
                         ));
                     ?></td>
                 </tr>
                 <?php endif; ?>
                 <tr>
-                    <td class="label"><?php echo required_indicator().lang('user_password');?></td>
+                    <td class="label"><?php echo lang('user_password');?></td>
                     <td><?php 
                         echo form_password(array(
                             'name'  => 'password',
                             'id'    => 'password',
-                            'class' => 'validate[required] text'
                         ));
                     ?></td>
                 </tr>
                 <tr>
-                    <td class="label"><?php echo required_indicator().lang('user_confirm_password');?></td>
+                    <td class="label"><?php echo lang('user_confirm_password');?></td>
                     <td><?php 
                         echo form_password(array(
                             'name'  => 'confirm_password',
                             'id'    => 'confirm_password',
-                            'class' => 'validate[required,equals[password]]',
                         ));
                     ?></td>
                 </tr>
