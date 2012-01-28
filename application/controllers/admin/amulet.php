@@ -64,6 +64,7 @@ class Amulet extends MY_Controller {
         $amulet->populate_from_request($_POST);
 
         if($amulet->save()) {
+            $this->session->set_flashdata('record_saved', lang('updated'));
             redirect('admin/amulet/edit/'.$amulet->id);
         }
         else

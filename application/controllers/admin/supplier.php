@@ -70,6 +70,7 @@ class Supplier extends MY_Controller {
         $supplier->populate_from_request($_POST);
 
         if($supplier->save()) {
+            $this->session->set_flashdata('record_saved', lang('updated'));
             redirect('admin/supplier/edit/'.$supplier->id);
         }
         else

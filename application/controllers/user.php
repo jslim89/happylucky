@@ -80,7 +80,10 @@ class User extends MY_Controller {
 
     private function _edit_password($customer) {
         if($_POST) {
-            $customer->update_password(get_post('password'));
+            $is_updated = $customer->update_password(get_post('password'));
+            if($is_updated) {
+                $this->session->set_flashdata('record_saved', lang('updated'));
+            }
             redirect('user');
         }
         else {
@@ -92,7 +95,9 @@ class User extends MY_Controller {
     private function _edit_address($customer) {
         if($_POST) {
             $customer->populate_from_request($_POST);
-            $customer->save();
+            if($customer->save()) {
+                $this->session->set_flashdata('record_saved', lang('updated'));
+            }
             redirect('user');
         }
         else {
@@ -105,7 +110,9 @@ class User extends MY_Controller {
     private function _edit_personal($customer) {
         if($_POST) {
             $customer->populate_from_request($_POST);
-            $customer->save();
+            if($customer->save()) {
+                $this->session->set_flashdata('record_saved', lang('updated'));
+            }
             redirect('user');
         }
         else {

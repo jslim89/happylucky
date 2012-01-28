@@ -62,6 +62,7 @@ class Amulet_Type extends MY_Controller {
         $amulet_type->populate_from_request($_POST);
 
         if($amulet_type->save()) {
+            $this->session->set_flashdata('record_saved', lang('updated'));
             redirect('admin/amulet_type/edit/'.$amulet_type->id);
         }
         else

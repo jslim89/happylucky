@@ -22,6 +22,15 @@ $(document).ready(function() {
 </div>
 <?php clear_div(); ?>
 <?php endif; ?>
+
+<?php if($this->session->flashdata('record_saved')): ?>
+<div class="grid_16">
+    <div class="success"><?php
+        echo $this->session->flashdata('record_saved');
+    ?></div>
+</div>
+<?php clear_div(); ?>
+<?php endif; ?>
 <form id="user_add_edit" method="POST" 
       action="<?php echo site_url("admin/user/save/".$user->id);?>">
     <div class="box grid_7">
@@ -101,15 +110,16 @@ $(document).ready(function() {
                 <tr>
                     <td><?php echo lang('user_password');?></td>
                     <td><?php 
+                        $required_validation = ($user->is_exist())
+                            ? '' : 'required';
                         echo form_password(array(
                             'name'  => 'password',
                             'id'    => 'password',
                             'value' => '',
-                            'class' => 'validate[minSize[8]]'
+                            'class' => 'validate['.$required_validation.'minSize[8]]'
                         ));
                     ?></td>
                 </tr>
-                <?php if($user->is_exist()): ?>
                 <tr>
                     <td><?php echo lang('user_confirm_password');?></td>
                     <td><?php 
@@ -117,11 +127,10 @@ $(document).ready(function() {
                             'name'  => 'confirm_password',
                             'id'    => 'confirm_password',
                             'value' => '',
-                            'class' => 'validate[equals[password],minSize[8]]'
+                            'class' => 'validate['.$required_validation.'equals[password],minSize[8]]'
                         ));
                     ?></td>
                 </tr>
-                <?php endif; ?>
                 <tr>
                     <td><?php echo lang('user_security_question');?></td>
                     <td>

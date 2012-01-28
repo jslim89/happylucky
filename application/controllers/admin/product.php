@@ -90,6 +90,7 @@ class Product extends MY_Controller {
                 $product->amulet_product_id = $amulet_product->id;
                 $product->save();
             }
+            $this->session->set_flashdata('record_saved', lang('updated'));
             redirect('admin/product/edit/'.$product->id);
         }
         else

@@ -52,6 +52,15 @@ $(document).ready(function() {
     endif;
 ?>
 
+<?php if($this->session->flashdata('record_saved')): ?>
+<div class="grid_16">
+    <div class="success"><?php
+        echo $this->session->flashdata('record_saved');
+    ?></div>
+</div>
+<?php clear_div(); ?>
+<?php endif; ?>
+
 <div class="grid_11">
     <div class="box">
         <div class="box-heading"><?php

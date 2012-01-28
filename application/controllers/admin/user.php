@@ -70,6 +70,7 @@ class User extends MY_Controller {
         }
 
         if($user->save()) {
+            $this->session->set_flashdata('record_saved', lang('updated'));
             redirect('admin/user/edit/'.$user->id);
         }
         else

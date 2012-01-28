@@ -62,6 +62,7 @@ class Monk extends MY_Controller {
         $monk->populate_from_request($_POST);
 
         if($monk->save()) {
+            $this->session->set_flashdata('record_saved', lang('updated'));
             redirect('admin/monk/edit/'.$monk->id);
         }
         else

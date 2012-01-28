@@ -45,6 +45,16 @@ $(document).ready(function() {
         </li>
     </ul>
     <div id="general">
+
+        <?php if($this->session->flashdata('record_saved')): ?>
+        <div>
+            <div class="success"><?php
+                echo $this->session->flashdata('record_saved');
+            ?></div>
+        </div>
+        <?php clear_div(); ?>
+        <?php endif; ?>
+
         <form id="supplier_add_edit" method="POST" 
               action="<?php echo site_url("admin/supplier/save/".$supplier->id);?>">
             <table class="form">

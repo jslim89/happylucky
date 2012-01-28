@@ -103,6 +103,16 @@ function format_amulet_type(amulet_type) {
         <li><a href="#images"><?php echo lang('images'); ?></a></li>
     </ul>
     <div id="general">
+
+        <?php if($this->session->flashdata('record_saved')): ?>
+        <div>
+            <div class="success"><?php
+                echo $this->session->flashdata('record_saved');
+            ?></div>
+        </div>
+        <?php clear_div(); ?>
+        <?php endif; ?>
+
         <form id="amulet_add_edit" method="POST" 
               action="<?php echo site_url("admin/amulet/save/".$amulet->id);?>">
             <table class="form">
