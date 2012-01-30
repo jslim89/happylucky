@@ -1,0 +1,287 @@
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/18/trunk/application/libraries/phpexcel_1.7.6/Tests
+END
+14excel5.php
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/18/trunk/application/libraries/phpexcel_1.7.6/Tests/14excel5.php
+END
+03formulas.php
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/18/trunk/application/libraries/phpexcel_1.7.6/Tests/03formulas.php
+END
+GnumericTest.gnumeric
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/18/trunk/application/libraries/phpexcel_1.7.6/Tests/GnumericTest.gnumeric
+END
+GnumericReader.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/18/trunk/application/libraries/phpexcel_1.7.6/Tests/GnumericReader.php
+END
+runall.php
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/18/trunk/application/libraries/phpexcel_1.7.6/Tests/runall.php
+END
+26utf8.php
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/18/trunk/application/libraries/phpexcel_1.7.6/Tests/26utf8.php
+END
+OOCalcTest.ods
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/18/trunk/application/libraries/phpexcel_1.7.6/Tests/OOCalcTest.ods
+END
+Excel2003XMLTest.xml
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/18/trunk/application/libraries/phpexcel_1.7.6/Tests/Excel2003XMLTest.xml
+END
+16csv.php
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/18/trunk/application/libraries/phpexcel_1.7.6/Tests/16csv.php
+END
+28iterator.php
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/18/trunk/application/libraries/phpexcel_1.7.6/Tests/28iterator.php
+END
+05featuredemo.php
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/18/trunk/application/libraries/phpexcel_1.7.6/Tests/05featuredemo.php
+END
+SylkReader.php
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/18/trunk/application/libraries/phpexcel_1.7.6/Tests/SylkReader.php
+END
+01simple-download-pdf.php
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/18/trunk/application/libraries/phpexcel_1.7.6/Tests/01simple-download-pdf.php
+END
+02types.php
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/18/trunk/application/libraries/phpexcel_1.7.6/Tests/02types.php
+END
+11documentsecurity.php
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/18/trunk/application/libraries/phpexcel_1.7.6/Tests/11documentsecurity.php
+END
+25inmemoryimage.php
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/18/trunk/application/libraries/phpexcel_1.7.6/Tests/25inmemoryimage.php
+END
+07reader.php
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/18/trunk/application/libraries/phpexcel_1.7.6/Tests/07reader.php
+END
+22heavilyformatted.php
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/18/trunk/application/libraries/phpexcel_1.7.6/Tests/22heavilyformatted.php
+END
+17html.php
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/18/trunk/application/libraries/phpexcel_1.7.6/Tests/17html.php
+END
+09pagebreaks.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/18/trunk/application/libraries/phpexcel_1.7.6/Tests/09pagebreaks.php
+END
+20readexcel5.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/18/trunk/application/libraries/phpexcel_1.7.6/Tests/20readexcel5.php
+END
+OOCalcReader.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/18/trunk/application/libraries/phpexcel_1.7.6/Tests/OOCalcReader.php
+END
+XMLReader.php
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/18/trunk/application/libraries/phpexcel_1.7.6/Tests/XMLReader.php
+END
+Quadratic.xlsx
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/18/trunk/application/libraries/phpexcel_1.7.6/Tests/Quadratic.xlsx
+END
+15datavalidation.php
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/18/trunk/application/libraries/phpexcel_1.7.6/Tests/15datavalidation.php
+END
+01simple.php
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/18/trunk/application/libraries/phpexcel_1.7.6/Tests/01simple.php
+END
+01simple-download-xlsx.php
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/18/trunk/application/libraries/phpexcel_1.7.6/Tests/01simple-download-xlsx.php
+END
+04printing.php
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/18/trunk/application/libraries/phpexcel_1.7.6/Tests/04printing.php
+END
+Quadratic2.php
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/18/trunk/application/libraries/phpexcel_1.7.6/Tests/Quadratic2.php
+END
+29advancedvaluebinder.php
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/18/trunk/application/libraries/phpexcel_1.7.6/Tests/29advancedvaluebinder.php
+END
+13calculation.php
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/18/trunk/application/libraries/phpexcel_1.7.6/Tests/13calculation.php
+END
+01simple-download-xls.php
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/18/trunk/application/libraries/phpexcel_1.7.6/Tests/01simple-download-xls.php
+END
+08conditionalformatting.php
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/18/trunk/application/libraries/phpexcel_1.7.6/Tests/08conditionalformatting.php
+END
+06largescale.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/18/trunk/application/libraries/phpexcel_1.7.6/Tests/06largescale.php
+END
+Excel2003XMLReader.php
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/18/trunk/application/libraries/phpexcel_1.7.6/Tests/Excel2003XMLReader.php
+END
+XMLTest.xml
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/18/trunk/application/libraries/phpexcel_1.7.6/Tests/XMLTest.xml
+END
+19namedrange.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/18/trunk/application/libraries/phpexcel_1.7.6/Tests/19namedrange.php
+END
+21pdf.php
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/18/trunk/application/libraries/phpexcel_1.7.6/Tests/21pdf.php
+END
+05featuredemo.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/18/trunk/application/libraries/phpexcel_1.7.6/Tests/05featuredemo.inc.php
+END
+Quadratic.php
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/18/trunk/application/libraries/phpexcel_1.7.6/Tests/Quadratic.php
+END
+30template.php
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/18/trunk/application/libraries/phpexcel_1.7.6/Tests/30template.php
+END
+23sharedstyles.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/18/trunk/application/libraries/phpexcel_1.7.6/Tests/23sharedstyles.php
+END
+10autofilter.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/18/trunk/application/libraries/phpexcel_1.7.6/Tests/10autofilter.php
+END
+27imagesexcel5.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/18/trunk/application/libraries/phpexcel_1.7.6/Tests/27imagesexcel5.php
+END
+SylkTest.slk
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/18/trunk/application/libraries/phpexcel_1.7.6/Tests/SylkTest.slk
+END
+24readfilter.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/18/trunk/application/libraries/phpexcel_1.7.6/Tests/24readfilter.php
+END
+18extendedcalculation.php
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/18/trunk/application/libraries/phpexcel_1.7.6/Tests/18extendedcalculation.php
+END
