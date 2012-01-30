@@ -3,14 +3,50 @@ require_once "report_model.php";
 
 class Customer_Report_Model extends Report_Model {
 
+    public $title;
+
+    protected $header_set;
+    protected $auto_fit_width;
+
     public function __construct() {
         parent::__construct();
         $this->_ci->load->model('customer_model');
+        $this->header_set = array_merge(
+            array(lang('report_customer_name')),
+            parent::get_short_month_dropdown_list(),
+            array(lang('report_total'))
+        );
+
+        $this->title = lang('report_total_customer_spent');
+        $this->auto_fit_width = true;
     }
 
     public function init($year, $limit) {
         $this->year  = $year ? $year : (int)date('Y');
         $this->limit = $limit ? $limit : 10;
+    }
+
+    public function to_excel() {
+        $this->_ci->load->library('xlsreport');
+        $this->_ci->xlsreport->init($this);
+        $this->_ci->xlsreport->build_header($this->header_set);
+
+        $row = $this->_ci->xlsreport->get_starting_row();
+        foreach($this->get_column_set() as $rs) {
+            $col = 0;
+            foreach($rs as $k => $v) {
+                if($k === 'customer_id') continue;
+                if($k != 'customer') $v = to_currency($v);
+                $this->_ci->xlsreport->set_text_by_col_row($col, $row, $v);
+                $col++;
+            }
+            $row++;
+        }
+        $this->_ci->xlsreport->send_file(true);
+    }
+
+    public function get_header_set() {
+        return $this->header_set;
     }
 
     public function get_column_set() {
@@ -20,9 +56,9 @@ class Customer_Report_Model extends Report_Model {
             echo $this->adodb->ErrorMsg();
         $column_set = array();
         foreach($result_set as $result) {
-            $c               = new Customer_Model($result['customer_id']);
-            $temp            = $result;
-            $temp['customer'] = $c->first_name . ' - ' . $c->last_name;
+            $c            = new Customer_Model($result['customer_id']);
+            $cust_name    = $c->first_name . ' - ' . $c->last_name;
+            $temp         = array_merge(array('customer' => $cust_name), $result);
             $column_set[] = $temp;
         }
         return $column_set;

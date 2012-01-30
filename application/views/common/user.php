@@ -44,14 +44,18 @@
             ?>
             <!-- End Login Bar -->
         </div>
-        <div id="header-links"><?php 
+        <div id="header-links" style="float:right;"><?php 
+            echo anchor(
+                site_url('user'),
+                lang('user_account')
+            );
             echo anchor(
                 site_url('cart'),
                 lang('shopping_cart')
             );
             echo anchor(
-                site_url('user'),
-                lang('user_account')
+                site_url('cart/checkout'),
+                lang('cart_check_out')
             );
         ?></div>
     </div>

@@ -1,4 +1,5 @@
 <?php
+$lang['report_export_to_excel'] = "Export to Excel";
 
 $lang['january']   = "January";
 $lang['february']  = "February";
