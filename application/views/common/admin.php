@@ -44,6 +44,7 @@ $list = array(
         anchor(site_url('admin/supplier'), lang('supplier_management')),
         anchor(site_url('admin/user'), lang('user_management')),
         anchor(site_url('admin/customer'), lang('customer_management')),
+        anchor(site_url('admin/banner'), lang('banner_management')),
     ),
     '<a href="#">'.lang('report').'</a>' => array(
         anchor(site_url('admin/report/sales'), lang('report_sales_report')),
