@@ -14,5 +14,6 @@ images/amulet_types/*
 images/amulets/*
 images/monks/*
 images/products/*
+images/slideshows/*
 
 application/config/email.php

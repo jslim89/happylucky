@@ -22,9 +22,25 @@ class Welcome extends MY_Controller {
 	{
         $hot_products = Product_Model::hot(10, 5);
         $latest_products = Product_Model::latest(10);
-        $this->vars['hot_products'] = $hot_products;
+        $this->vars['slideshows']      = $this->_get_slideshows();
+        $this->vars['hot_products']    = $hot_products;
         $this->vars['latest_products'] = $latest_products;
 		$this->load_view('home', $this->vars);
+    }
+
+    /**
+     * _get_slideshows 
+     * 
+     * @return array
+     */
+    private function _get_slideshows() {
+        $files = glob(BASEPATH.'../images/slideshows/*');
+        foreach($files as $file) {
+            // filter only jpg, jpeg, png files out
+            if(preg_match_all('/.jpe?g|.png$/', $file, $temp))
+                $images[] = base_url('images/slideshows/'.basename($file));
+        }
+        return $images;
     }
 }
 

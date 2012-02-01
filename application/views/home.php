@@ -7,43 +7,17 @@ div.product-header {
 </style>
 <div class="grid_16">
     <div class="slider-wrapper theme-default">
-        <div class="ribbon"></div>
         <div id="slider" class="nivoSlider" style="height: 280px;"><?php
-            echo anchor(
-                site_url('product/view/1'),
-                img(array(
-                    'src'    => base_url('images/products/1/2eba14f233925924e0767622de106054.jpg'),
-                    'height' => 280,
-                ))
-            );
-            echo anchor(
-                site_url('product/view/1'),
-                img(array(
-                    'src'    => base_url('images/products/1/2eba14f233925924e0767622de106054.jpg'),
-                    'height' => 280,
-                ))
-            );
-            echo anchor(
-                site_url('product/view/1'),
-                img(array(
-                    'src'    => base_url('images/products/1/2eba14f233925924e0767622de106054.jpg'),
-                    'height' => 280,
-                    'title'  => '#htmlcaption'
-                ))
-            );
-            echo anchor(
-                site_url('product/view/1'),
-                img(array(
-                    'src'    => base_url('images/products/1/2eba14f233925924e0767622de106054.jpg'),
-                    'height' => 280,
-                    'title'  => 'product description'
-                ))
-            );
-        ?>
-        </div>
-        <div id="htmlcaption" class="nivo-html-caption">
-            <strong>This</strong> is an example of a <em>HTML</em> caption with <a href="#">a link</a>.
-        </div>
+            foreach($slideshows as $img) {
+                echo anchor(
+                    site_url('product/view/1'),
+                    img(array(
+                        'src'    => $img,
+                        'height' => 280,
+                    ))
+                );
+            }
+        ?></div>
     </div>
 <?php echo clear_div(); ?>
 <div id="hot-product" class="grid_16">
