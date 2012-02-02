@@ -39,6 +39,7 @@ if (!function_exists('firelog')) {
         if (getenv('APPLICATION_ENV') != 'development') 
             $ci->firephp->setEnabled(false);
         $ci->firephp->log($obj);
+        if($die) die();
     }
 }
 
