@@ -34,7 +34,7 @@
                       // Logout
             ?>
                 <div id="logout-topnav" class="topnav">
-                    <a href="<?php echo site_url('user/logout');?>" class="signout">
+                    <a href="<?php echo site_url('user/logout').'?url='.current_url();?>" class="signout">
                         <span><?php echo lang('user_signout');?></span>
                     </a>
                 </div>

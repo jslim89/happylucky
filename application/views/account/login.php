@@ -10,7 +10,7 @@ $(document).ready(function() {
 </div>
 <?php echo clear_div();?>
 
-    <form id="form_login" method="POST" action="<?php echo site_url('user/login');?>">
+    <form id="form_login" method="POST" action="<?php echo site_url('user/login').'?url='.site_url('user');?>">
         <div class="login-content">
             <div class="left grid_8">
                 <?php echo heading(lang('user_new_customer'), 2); ?>

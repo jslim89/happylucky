@@ -64,6 +64,7 @@ class User extends MY_Controller {
     }
 
     public function edit($id) {
+        if(!get_session('customer_id')) redirect(site_url('user/login'));
         $customer = new Customer_Model($id);
         switch(get_post('category')) {
             case 'password':
@@ -176,6 +177,7 @@ class User extends MY_Controller {
     }
 
     public function forgot_password() {
+        if(get_session('customer_id')) redirect(site_url('user'));
         $this->vars['title'] = lang('user_forgot_password');
         if(count($_POST)) {
         }
@@ -185,6 +187,7 @@ class User extends MY_Controller {
     }
 
     public function login() {
+        if(get_session('customer_id')) redirect(site_url('user'));
         if(count($_POST)) {
             $customer = new Customer_Model();
 
@@ -226,7 +229,7 @@ class User extends MY_Controller {
             'name'   => 'customer_id',
             'expire' => false,
         ));
-        redirect(site_url());
+        redirect(get_post('url', site_url()));
     }
 
     public function get_details_in_json($id) {
