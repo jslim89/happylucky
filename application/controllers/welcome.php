@@ -17,6 +17,7 @@ class Welcome extends MY_Controller {
         $this->load->model('customer_model');
         $this->load->model('product_model');
         $this->load->model('banner_model');
+        $this->lang->load('product');
     }
 
 	public function index()

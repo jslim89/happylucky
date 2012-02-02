@@ -44,10 +44,12 @@ $(document).ready(function() {
                         ?></td>
                         <td class="amulet"><?php 
                             $amulet = $product->amulet();
-                            echo anchor(
-                                site_url('amulet/view/'.$amulet->id),
-                                $amulet->amulet_name
-                            );
+                            if($amulet) {
+                                echo anchor(
+                                    site_url('amulet/view/'.$amulet->id),
+                                    $amulet->amulet_name
+                                );
+                            }
                         ?></td>
                         <td class="quantity"><?php
                             echo $product->qty;
