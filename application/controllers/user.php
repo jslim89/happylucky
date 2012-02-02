@@ -50,7 +50,7 @@ class User extends MY_Controller {
                 'username'    => $customer->first_name.', '.$customer->last_name,
             );
             $this->session->set_userdata($session);
-            redirect(site_url());
+            redirect(get_post('url', site_url('user')));
 
             $this->vars['timeout'] = 10;
             $this->vars['content'] = lang('user_please_check_your_email_for_your_account_verification');
@@ -58,7 +58,8 @@ class User extends MY_Controller {
             $this->load_view('common/temp', $this->vars);
         }
         else {
-            $this->vars['title'] = lang('user_registration');
+            $this->vars['title']                = lang('user_registration');
+            $this->vars['url_after_registered'] = get_post('url', site_url('user'));
             $this->load_view('account/register', $this->vars);
         }
     }

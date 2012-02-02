@@ -110,6 +110,13 @@ $this->load->view('common/topmenu', $topmenu);
 <?php echo clear_div();?>
 <?php endif;?>
 
+<?php if($this->session->flashdata('general_success')): ?>
+<div class="grid_16 success"><?php
+    echo $this->session->flashdata('general_success');
+?></div>
+<?php echo clear_div();?>
+<?php endif;?>
+
 <!-- Content -->
 <div class="content">
     <!-- Content DIV (For normal user is grid_16) -->

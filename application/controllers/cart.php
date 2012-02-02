@@ -123,7 +123,7 @@ class Cart extends MY_Controller {
             redirect('cart/checkout/2');
         }
         else if($option == 'register') {
-            redirect('user/register');
+            redirect(site_url('user/register').'?url='.site_url('cart/checkout/2'));
         }
         else if($option == 'guest'){
             redirect('cart/checkout/2');

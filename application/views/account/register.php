@@ -8,7 +8,7 @@ $(document).ready(function() {
 <?php echo clear_div();?>
 
 <div class="grid_16">
-    <form id="form_register" method="POST" action="<?php echo site_url('user/register');?>">
+    <form id="form_register" method="POST" action="<?php echo site_url('user/register').'?url='.$url_after_registered;?>">
         <?php echo heading(lang('user_personal_details'), 2); ?>
         <div class="content">
             <table class="form" width="100%">
