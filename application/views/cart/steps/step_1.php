@@ -43,7 +43,7 @@ $(document).ready(function() {
             );
         ?></div>
         <div id="login" class="left"><?php
-            echo form_open(site_url('user/login'), array('id' => 'sign-in-form'));
+            echo form_open(site_url('user/login').'?url='.site_url('cart/checkout/2'), array('id' => 'sign-in-form'));
             echo heading(lang('user_signin'), 2);
             echo '<p>'.lang('cart_checkout_options').':</p>';
             echo form_label(lang('email'));

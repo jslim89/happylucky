@@ -206,7 +206,8 @@ class User extends MY_Controller {
                         'expire' => days_to_seconds(7),
                     ));
                 }
-                redirect(site_url());
+                $url = get_post('url', site_url());
+                redirect($url);
             }
             else {
                 $this->session->set_flashdata('login_error', lang('user_invalid_username_or_password'));
