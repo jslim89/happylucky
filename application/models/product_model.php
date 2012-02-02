@@ -172,7 +172,7 @@ class Product_Model extends MY_Active_Record {
         unset($post['operator']);
         unset($post['product_category']);
         list($sql, $values) = $this->_create_criteria_sql($post);
-        $sql .= $sql_price.$sql_category;
+        $sql .= $sql_price.$sql_category.' AND quantity_available > 0';
         return $this->search($sql, $values, $limit, $offset, true);
     }
 
@@ -268,8 +268,8 @@ class Product_Model extends MY_Active_Record {
      */
     public static function latest($limit) {
         $p = new Product_Model();
-        $sql = '1=1 order by created_date desc';
-        return $p->search($sql, array(), $limit, 0);
+        $sql = 'quantity_available > ? order by created_date desc';
+        return $p->search($sql, array(0), $limit, 0);
     }
 
     /**
