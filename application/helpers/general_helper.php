@@ -169,3 +169,16 @@ if(!function_exists('default_image_path')) {
         return base_url().'images/default.jpg';
     }
 }
+
+/**
+ * current_url 
+ * 
+ * @access public
+ * @return string
+ */
+if(!function_exists('current_url')) {
+    function current_url() {
+        $ci =& get_instance();
+        return $ci->uri->uri_string();
+    }
+}

@@ -1,7 +1,7 @@
 <div id="login-container">
   <div id="login-topnav" class="topnav"><a href="" class="signin"><span><?php echo lang('user_signin');?></span></a> </div>
   <fieldset id="login-signin_menu">
-      <form method="post" id="login-signin" action="<?php echo site_url('user/login');?>">
+      <form method="post" id="login-signin" action="<?php echo site_url('user/login').'?url='.current_url();?>">
       <label for="email"><?php echo lang('email');?></label>
       <input id="login_email" name="email" value="" title="<?php echo lang('email');?>" tabindex="4" type="text">
       </p>
