@@ -58,3 +58,5 @@ $lang['order_due_to_certain_issues_your_order_cannot_be_made']  = "Due to certai
                                                             your order cannot be made";
 $lang['order_apologize_about_that']  = "Apologize about that";
 $lang['order_your_order_has_been_successfully_processed']  = "Your order has been successfully processed";
+
+$lang['order_your_order_id_is']  = "Your Order ID is";

@@ -3,10 +3,16 @@
 <?php if( ! $error): ?>
 <div class="grid_16">
     <div class="success"><?php echo lang('order_your_order_has_been_successfully_processed');?>!</div>
+    <p><h2><?php
+        echo lang('order_your_order_id_is').' '
+        span($order->id, array(
+            'style' => 'color: red; font-size: 1.5em;'
+        ));
+    ?></h2></p>
     <p><?php
         echo lang('view').' '.lang('your').' '
         .anchor(
-            site_url('order/history'),
+            site_url('order'),
             lang('order_history')
         ).'.'
     ?></p>
