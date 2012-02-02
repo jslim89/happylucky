@@ -18,6 +18,7 @@ $lang['cart_min_quantity_to_add'] = "Min qty to add";
 
 /* checkout */
 $lang['cart_check_out']        = "Check Out";
+$lang['cart_cart_is_empty']    = "Cart is empty";
 $lang['cart_checkout_step_1']  = "Step 1: Checkout Option";
 $lang['cart_new_customer']     = "New Customer";
 $lang['cart_checkout_options'] = "Checkout Options";

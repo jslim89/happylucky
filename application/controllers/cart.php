@@ -96,6 +96,10 @@ class Cart extends MY_Controller {
     }
 
     public function checkout($step = 1) {
+        if($this->my_cart->is_empty()) {
+            $this->session->set_flashdata('general_error', lang('cart_cart_is_empty'));
+            redirect(site_url('product'));
+        }
         $this->vars['title'] = lang('cart_check_out');
         $this->vars['step'] = 'cart/steps/step_'.$step;
         $this->vars['breadcrumb'] = $this->_breadcrumb($step);

@@ -175,6 +175,15 @@ class MY_Cart extends CI_Cart {
         return $order_item_set;
     }
 
+    /**
+     * Is the cart empty 
+     * 
+     * @return bool
+     */
+    public function is_empty() {
+        return $this->total_items() == 0;
+    }
+
     public function destroy() {
         $cookie = array(
             'name' => MY_Cart::COOKIE,
