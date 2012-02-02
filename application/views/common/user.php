@@ -103,6 +103,13 @@ $this->load->view('common/topmenu', $topmenu);
 <!-- End Title -->
 <?php echo clear_div();?>
 
+<?php if($this->session->flashdata('general_error')): ?>
+<div class="grid_16 warning"><?php
+    echo $this->session->flashdata('general_error');
+?></div>
+<?php echo clear_div();?>
+<?php endif;?>
+
 <!-- Content -->
 <div class="content">
     <!-- Content DIV (For normal user is grid_16) -->
