@@ -99,7 +99,10 @@ class Product extends MY_Controller {
 
     public function save_batch($id) {
         $product = new Product_Model($id);
-        $product->stock_in($_POST);
+        $is_stock_in = $product->stock_in($_POST);
+        if($is_stock_in) {
+            $this->session->set_flashdata('general_success', lang('product_batch').' '.lang('added'));
+        }
         redirect(site_url('admin/product/edit/'.$id).'?tab=2');
     }
 
