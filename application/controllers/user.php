@@ -167,6 +167,12 @@ class User extends MY_Controller {
         $customer = new Customer_Model($id);
         if($customer->verify($code)) {
             $msg = lang('user_verify_successful_message');
+            $session = array(
+                'customer_id' => $customer->id,
+                'password'    => $customer->password,
+                'username'    => $customer->first_name.', '.$customer->last_name,
+            );
+            $this->session->set_userdata($session);
         }
         else {
             $msg = lang('user_verify_failed_message');

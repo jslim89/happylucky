@@ -20,7 +20,7 @@
         <div id="header-login">
             <div id="header-welcome"><?php 
                 $username = get_session('customer_id') 
-                    ? anchor(base_url('user/profile'), get_session('username')) 
+                    ? anchor(base_url('user'), get_session('username')) 
                     : lang('guest');
                 echo lang('welcome').', '.$username;
             ?></div>
