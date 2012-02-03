@@ -90,11 +90,13 @@ class Product extends MY_Controller {
                 $product->amulet_product_id = $amulet_product->id;
                 $product->save();
             }
-            $this->session->set_flashdata('record_saved', lang('updated'));
+            $this->session->set_flashdata('general_success', lang('updated'));
             redirect('admin/product/edit/'.$product->id);
         }
-        else
-            $this->load->view('admin/product/view/'.$product->id, $this->vars);
+        else {
+            $this->session->set_flashdata('general_error', lang('update_failed'));
+            redirect('admin/product/index');
+        }
     }
 
     public function save_batch($id) {

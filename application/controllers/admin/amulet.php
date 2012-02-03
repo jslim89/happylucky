@@ -64,11 +64,13 @@ class Amulet extends MY_Controller {
         $amulet->populate_from_request($_POST);
 
         if($amulet->save()) {
-            $this->session->set_flashdata('record_saved', lang('updated'));
+            $this->session->set_flashdata('general_success', lang('updated'));
             redirect('admin/amulet/edit/'.$amulet->id);
         }
-        else
-            $this->load->view('admin/amulet/index', $this->vars);
+        else {
+            $this->session->set_flashdata('general_error', lang('update_failed'));
+            redirect('admin/amulet/index');
+        }
     }
 
     public function delete($id) {

@@ -61,7 +61,7 @@ class User extends MY_Controller {
         if(get_post('password')) {
             $is_match = $user->match_password(get_post('old_password'));
             if( ! $is_match) {
-                $this->session->set_flashdata('password_not_match', lang('user_password_does_not_match'));
+                $this->session->set_flashdata('general_error', lang('user_password_does_not_match'));
                 redirect('admin/user/edit/'.$user->id);
             }
             else {
@@ -70,11 +70,13 @@ class User extends MY_Controller {
         }
 
         if($user->save()) {
-            $this->session->set_flashdata('record_saved', lang('updated'));
+            $this->session->set_flashdata('general_success', lang('updated'));
             redirect('admin/user/edit/'.$user->id);
         }
-        else
-            $this->load->view('admin/user/index', $this->vars);
+        else {
+            $this->session->set_flashdata('general_error', lang('update_failed'));
+            redirect('admin/user/index');
+        }
     }
 
     public function delete($id) {

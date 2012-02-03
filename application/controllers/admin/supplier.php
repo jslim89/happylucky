@@ -70,11 +70,13 @@ class Supplier extends MY_Controller {
         $supplier->populate_from_request($_POST);
 
         if($supplier->save()) {
-            $this->session->set_flashdata('record_saved', lang('updated'));
+            $this->session->set_flashdata('general_success', lang('updated'));
             redirect('admin/supplier/edit/'.$supplier->id);
         }
-        else
-            $this->load->view('admin/supplier/index', $this->vars);
+        else {
+            $this->session->set_flashdata('general_error', lang('update_failed'));
+            redirect('admin/supplier/index');
+        }
     }
 
     public function delete($id) {

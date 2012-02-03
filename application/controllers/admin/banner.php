@@ -48,12 +48,17 @@ class Banner extends MY_Controller {
 
         if(is_array($ret)) {
             list($errors, $successes) = $ret;
-            $error_set = array();
+            $success_set = array();
+            $error_set   = array();
             foreach($errors as $k => $err) {
                 $error_set[] = $k . " -> " . $err;
             }
             $error_msg = implode(br(1), $error_set);
-            $this->session->set_flashdata('upload_error', $error_msg);
+            $this->session->set_flashdata('general_error', $error_msg);
+            foreach($successes as $img) {
+                $success_set[] = $img['orig_name'].' '.lang('uploaded');
+            }
+            $this->session->set_flashdata('general_success', implode(br(1), $success_set));
         }
         redirect(site_url('admin/banner'));
     }

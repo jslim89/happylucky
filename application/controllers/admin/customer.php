@@ -68,7 +68,7 @@ class Customer extends MY_Controller {
                     $customer->update_password(get_post('password'));
                 }
                 else {
-                    $this->session->set_flashdata('password_not_match', lang('user_password_does_not_match'));
+                    $this->session->set_flashdata('general_error', lang('user_password_does_not_match'));
                     redirect('admin/customer/edit/'.$customer->id);
                 }
             }
@@ -78,11 +78,13 @@ class Customer extends MY_Controller {
         }
 
         if($status) {
-            $this->session->set_flashdata('record_saved', lang('updated'));
+            $this->session->set_flashdata('general_success', lang('updated'));
             redirect('admin/customer/edit/'.$customer->id);
         }
-        else
+        else {
+            $this->session->set_flashdata('general_error', lang('update_failed'));
             redirect('admin/customer');
+        }
     }
 
     public function delete($id) {

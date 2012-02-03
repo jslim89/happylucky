@@ -1,11 +1,3 @@
-<?php
-$error_msg = $this->session->flashdata ('upload_error');
-if( ! empty($error_msg)): ?>
-    <div class="warning"><?php
-            echo lang('error').br(1);
-            echo $error_msg;
-    ?></div>
-<?php endif; ?>
 <div class="box" style="float: left;width: 45%; margin: 0px 30px 10px 30px;">
     <div class="box-heading"><?php
         echo lang('primary_image');

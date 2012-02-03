@@ -26,16 +26,6 @@ $(document).ready(function() {
         <li><a href="#images"><?php echo lang('images'); ?></a></li>
     </ul>
     <div id="general">
-
-        <?php if($this->session->flashdata('record_saved')): ?>
-        <div>
-            <div class="success"><?php
-                echo $this->session->flashdata('record_saved');
-            ?></div>
-        </div>
-        <?php clear_div(); ?>
-        <?php endif; ?>
-
         <form id="amulet_type_add_edit" method="POST" 
               action="<?php echo site_url("admin/amulet_type/save/".$amulet_type->id);?>">
             <table class="form">

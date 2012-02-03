@@ -114,10 +114,12 @@ class Order extends MY_Controller {
 
         $is_saved = $order->save();
         if($is_saved) {
+            $this->session->set_flashdata('general_success', lang('updated'));
             redirect('admin/order/view/'.$order->id);
         }
         else {
-            $this->load_view('admin/order/list', $this->vars);
+            $this->session->set_flashdata('general_error', lang('update_failed'));
+            redirect('admin/order/index');
         }
     }
 
@@ -140,6 +142,7 @@ class Order extends MY_Controller {
             }
             $order = new Customer_Order_Model($order_id);
             $order->update_total();
+            $this->session->set_flashdata('general_success', lang('updated'));
             redirect('admin/order/view/'.$order_id);
         }
         else {

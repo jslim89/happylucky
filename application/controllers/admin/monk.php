@@ -62,11 +62,13 @@ class Monk extends MY_Controller {
         $monk->populate_from_request($_POST);
 
         if($monk->save()) {
-            $this->session->set_flashdata('record_saved', lang('updated'));
+            $this->session->set_flashdata('general_success', lang('updated'));
             redirect('admin/monk/edit/'.$monk->id);
         }
-        else
-            $this->load->view('admin/monk/index', $this->vars);
+        else {
+            $this->session->set_flashdata('general_error', lang('update_failed'));
+            redirect('admin/monk/index');
+        }
     }
 
     public function delete($id) {

@@ -14,23 +14,6 @@ $(document).ready(function() {
 
 </script>
 
-<?php if($this->session->flashdata('password_not_match')): ?>
-<div class="grid_16">
-    <div class="warning"><?php
-        echo $this->session->flashdata('password_not_match');
-    ?></div>
-</div>
-<?php clear_div(); ?>
-<?php endif; ?>
-
-<?php if($this->session->flashdata('record_saved')): ?>
-<div class="grid_16">
-    <div class="success"><?php
-        echo $this->session->flashdata('record_saved');
-    ?></div>
-</div>
-<?php clear_div(); ?>
-<?php endif; ?>
 <form id="user_add_edit" method="POST" 
       action="<?php echo site_url("admin/user/save/".$user->id);?>">
     <div class="box grid_7">
