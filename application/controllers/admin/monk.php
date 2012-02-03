@@ -103,12 +103,15 @@ class Monk extends MY_Controller {
                 $error_set[] = $k . " -> " . $err;
             }
             $error_msg = implode(br(1), $error_set);
-            $this->session->set_flashdata('upload_error', $error_msg);
+            $this->session->set_flashdata('general_error', $error_msg);
 
             $monk->monk_image = $this->monk_image_model->insert_multiple($monk, $successes);
+            $success_set = array();
             foreach($monk->monk_image as $monk_img) {
                 $monk_img->save();
+                $success_set[] = $monk_img->image_name.' '.lang('uploaded');
             }
+            $this->session->set_flashdata('general_success', implode(br(1), $success_set));
         }
         redirect(site_url('admin/monk/edit/'.$monk->id)."?tab=1");
     }
@@ -124,13 +127,14 @@ class Monk extends MY_Controller {
         $this->load->library('my_upload', $conf);
         if( ! $this->my_upload->do_upload('primary_image')) {
             $error = "Primary Image -> ".$this->my_upload->error_msg[0];
-            $this->session->set_flashdata('upload_error', $error);
+            $this->session->set_flashdata('general_error', $error);
         }
         else {
             $success = $this->my_upload->data();
             $monk->delete_primary_image();
             $monk->primary_image_url = $monk->get_download_path().$success['file_name'];
             $monk->save();
+            $this->session->set_flashdata('general_success', lang('primary_image').' '.lang('updated'));
         }
         redirect(site_url('admin/monk/edit/'.$monk->id)."?tab=1");
     }

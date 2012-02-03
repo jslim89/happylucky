@@ -137,12 +137,15 @@ class Product extends MY_Controller {
                 $error_set[] = $k . " -> " . $err;
             }
             $error_msg = implode(br(1), $error_set);
-            $this->session->set_flashdata('upload_error', $error_msg);
+            $this->session->set_flashdata('general_error', $error_msg);
 
             $product->product_image = $this->product_image_model->insert_multiple($product, $successes);
+            $success_set = array();
             foreach($product->product_image as $product_img) {
                 $product_img->save();
+                $success_set[] = $product_img->image_name.' '.lang('uploaded');
             }
+            $this->session->set_flashdata('general_success', implode(br(1), $success_set));
         }
         redirect(site_url('admin/product/edit/'.$product->id)."?tab=1");
     }
@@ -158,13 +161,14 @@ class Product extends MY_Controller {
         $this->load->library('my_upload', $conf);
         if( ! $this->my_upload->do_upload('primary_image')) {
             $error = "Primary Image -> ".$this->my_upload->error_msg[0];
-            $this->session->set_flashdata('upload_error', $error);
+            $this->session->set_flashdata('general_error', $error);
         }
         else {
             $success = $this->my_upload->data();
             $product->delete_primary_image();
             $product->primary_image_url = $product->get_download_path().$success['file_name'];
             $product->save();
+            $this->session->set_flashdata('general_success', lang('primary_image').' '.lang('updated'));
         }
         redirect(site_url('admin/product/edit/'.$product->id)."?tab=1");
     }

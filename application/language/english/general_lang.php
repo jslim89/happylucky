@@ -39,6 +39,7 @@ $lang['images']               = 'Images';
 $lang['no_additional_images'] = 'No additional images';
 $lang['no_banner']            = 'No Banner';
 $lang['upload']               = 'Upload';
+$lang['uploaded']             = 'Uploaded';
 $lang['description']          = 'Description';
 $lang['default']              = 'Default';
 $lang['delete_image_hint']    = 'All the checked images will be deleted
