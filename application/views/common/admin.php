@@ -66,9 +66,6 @@ $this->load->view('common/topmenu', $topmenu);
     <h1 title="<?php echo isset($title) ? $title : '';?>" class="title">
         <?php echo isset($title) ? $title : '';?>
     </h1>
-    <div class="breadcrumb">
-        <?php echo set_breadcrumb();?>
-    </div>
 </div>
 <!-- End Title -->
 <?php echo clear_div();?>
