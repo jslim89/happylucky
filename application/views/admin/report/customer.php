@@ -49,10 +49,15 @@ $(function() {
         <?php foreach($column_set as $col): ?>
         <tr>
             <td><?php
-                echo anchor(
-                    site_url('admin/customer/edit/'.$col['customer_id']),
-                    $col['customer']
-                );
+                if( ! empty($col['customer_id'])) {
+                    echo anchor(
+                        site_url('admin/customer/edit/'.$col['customer_id']),
+                        $col['customer']
+                    );
+                }
+                else {
+                    echo $col['customer'];
+                }
             ?></td>
             <td><?php
                 echo to_currency($col['january']);

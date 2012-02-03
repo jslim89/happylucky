@@ -44,4 +44,5 @@ $lang['report_total']              = "Total";
 /* Customer Report */
 $lang['report_customer_report']      = "Customer Report";
 $lang['report_customer_name']        = "Customer Name";
+$lang['report_non_member']           = "Non-member";
 $lang['report_total_customer_spent'] = "Total Customer Spent";

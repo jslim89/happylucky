@@ -56,8 +56,13 @@ class Customer_Report_Model extends Report_Model {
             echo $this->adodb->ErrorMsg();
         $column_set = array();
         foreach($result_set as $result) {
-            $c            = new Customer_Model($result['customer_id']);
-            $cust_name    = $c->first_name . ' - ' . $c->last_name;
+            if(empty($result['customer_id'])) { // Not a member
+                $cust_name    = lang('report_non_member');
+            }
+            else {
+                $c            = new Customer_Model($result['customer_id']);
+                $cust_name    = $c->first_name . ', ' . $c->last_name;
+            }
             $temp         = array_merge(array('customer' => $cust_name), $result);
             $column_set[] = $temp;
         }
@@ -81,7 +86,8 @@ class Customer_Report_Model extends Report_Model {
             . ", SUM(grand_total) AS total"
             . " FROM customer_order"
             . " WHERE YEAR(FROM_UNIXTIME(order_date)) = $this->year"
-            . " GROUP BY customer_id";
+            . " GROUP BY customer_id"
+            . " ORDER BY total";
         return $sql;
     }
 }
