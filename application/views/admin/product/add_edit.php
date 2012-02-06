@@ -1,7 +1,7 @@
 <?php  if (!defined('BASEPATH')) exit('No direct script access allowed');?>
 <script type="text/javascript">
 $(document).ready(function() {
-    $('back').click(function() {
+    $('#back').click(function() {
         redirect(base_url+'admin/product');
     });
 

@@ -5,7 +5,7 @@
     <div class="success"><?php echo lang('order_your_order_has_been_successfully_processed');?>!</div>
     <p><h2><?php
         echo lang('order_your_order_id_is').' '
-        span($order->id, array(
+        .span($order->id, array(
             'style' => 'color: red; font-size: 1.5em;'
         ));
     ?></h2></p>
