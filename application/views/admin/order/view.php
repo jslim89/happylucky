@@ -113,17 +113,9 @@ $(document).ready(function() {
                 <tr>
                     <td><?php echo lang('order_payment_method');?></td>
                     <td><?php 
-                        echo $order->payment_method();
+                        echo $order->payment_method;
                     ?></td>
                 </tr>
-                <?php if($order->payment_method() === Customer_Order_Model::BANK_IN): ?>
-                <tr>
-                    <td><?php echo lang('order_bank_account_no');?></td>
-                    <td><?php 
-                        echo $order->recipient_bank_acc;
-                    ?></td>
-                </tr>
-                <?php endif; ?>
             </table>
             <?php if( ! $order->is_completed()): ?>
             <div class="buttons">

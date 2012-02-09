@@ -275,18 +275,6 @@ class Customer_Order_Model extends MY_Active_Record {
     }
 
     /**
-     * payment_method 
-     * 
-     * @return string
-     */
-    public function payment_method() {
-        $method = empty($this->recipient_bank_acc)
-            ? Customer_Order_Model::CASH_ON_DELIVERY
-            : Customer_Order_Model::BANK_IN;
-        return $method;
-    }
-
-    /**
      * Return a list of status 
      * 
      * @return array

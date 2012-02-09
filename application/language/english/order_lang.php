@@ -53,6 +53,7 @@ $lang['order_completed']  = "Completed";
 /* Make Order */
 $lang['order_product_item']  = "Product Item";
 $lang['order_cannot_be_made']  = "cannot be made";
+$lang['order_order_id_remark']  = "Please remember the Order ID in order for you to check your order in order history.";
 $lang['order_regarding_to_the_payment']  = "regarding to the payment";
 $lang['order_due_to_certain_issues_your_order_cannot_be_made']  = "Due to certain issues,
                                                             your order cannot be made";

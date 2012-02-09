@@ -1,6 +1,11 @@
 <script type="text/javascript">
 $(document).ready(function() {
     $('#form_step_4').validationEngine('attach');
+    $('#button-continue').click(function() {
+        $('#spinner_confirm').show();
+        $(this).attr('disabled', true);
+        $('#form_step_4').submit();
+    });
 });
 </script>
 <div id="account-delivery">
@@ -95,12 +100,12 @@ $(document).ready(function() {
             </table>
             <div class="buttons">
                 <div class="right"><?php
+                    echo spinner('spinner_confirm');
                     echo button_link(
                         false,
                         lang('cart_confirm_order'),
                         array(
-                            'id'      => 'button-continue',
-                            'onclick' => '$(\'#form_step_4\').submit();'
+                            'id' => 'button-continue',
                         )
                     );
                 ?></div>
