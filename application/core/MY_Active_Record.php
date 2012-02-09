@@ -59,11 +59,12 @@ class MY_Active_Record extends ADOdb_Active_Record {
      * @param mixed $noncasesensitive 
      * @return array
      */
-    public function columns_name($noncasesensitive = true) {
+    public function columns_name($types = array(), $noncasesensitive = true) {
         $columns = $this->columns($noncasesensitive);
         $result = array();
         foreach($columns as $col) {
-            $result[] = $col->name;
+            if(in_array($col->type, $types)) $result[] = $col->name;
+            else if(sizeof($types) == 0) $result[] = $col->name;
         }
         return $result;
     }
@@ -270,16 +271,33 @@ class MY_Active_Record extends ADOdb_Active_Record {
      * Convert the criteria set into sql statement. 
      * 
      * @param array $criteria_set 
+     * @param bool $using_like 
      * @return array
      */
-    protected function _create_criteria_sql(array $criteria_set)
+    protected function _create_criteria_sql(array $criteria_set, $using_like = false)
     {
-        $value_set = array();
+        $value_set       = array();
+        $bind_column_set = array();
+        $str_columns     = $this->columns_name(array('varchar', 'text'));
         foreach ( $criteria_set as $column_name => $value )
         {
             if(empty($value)) continue;
-            $bind_column_set[] = "UPPER($column_name) = UPPER(?)";
-            $value_set[] = $value;
+            if($using_like) {
+                $bind_column_set[] = in_array($column_name, $str_columns)
+                    ? "UPPER($column_name) LIKE ?"
+                    : "$column_name = ?";
+                $value_set[] = in_array($column_name, $str_columns)
+                    ? "%".strtoupper($value)."%"
+                    : $value;
+            }
+            else {
+                $bind_column_set[] = in_array($column_name, $str_columns)
+                    ? "UPPER($column_name) = ?"
+                    : "$column_name = ?";
+                $value_set[] = in_array($column_name, $str_columns)
+                    ? strtoupper($value)
+                    : $value;
+            }
         }
         $sql = implode(' and ', $bind_column_set);
         return array($sql, $value_set);

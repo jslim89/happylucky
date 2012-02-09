@@ -168,12 +168,17 @@ class Product_Model extends MY_Active_Record {
                     break;
             }
         }
+        if(empty($post['product_code'])) unset($post['product_code']);
+        if(empty($post['product_name'])) unset($post['product_name']);
+        if(empty($post['product_desc'])) unset($post['product_desc']);
+        if($post['product_type'] == Product_Model::BOTH) unset($post['product_type']);
         unset($post['standard_price']);
         unset($post['operator']);
         unset($post['product_category']);
-        list($sql, $values) = $this->_create_criteria_sql($post);
-        $sql .= $sql_price.$sql_category.' AND quantity_available > 0';
-        return $this->search($sql, $values, $limit, $offset, true);
+        list($sql, $values) = $this->_create_criteria_sql($post, true);
+        $final_sql = 'quantity_available >= min_quantity '.$sql_price.$sql_category;
+        $final_sql .= empty($sql) ? '' : ' AND '.$sql;
+        return $this->search($final_sql, $values, $limit, $offset, true);
     }
 
     public function is_amulet() {
@@ -239,7 +244,7 @@ class Product_Model extends MY_Active_Record {
                 return '>';
             case Product_Model::LESS_EQUAL: 
                 return '<=';
-            case Product_Model::LESS_EQUAL: 
+            case Product_Model::LESS: 
                 return '<';
         }
         return false;
