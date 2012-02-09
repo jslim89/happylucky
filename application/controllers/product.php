@@ -42,19 +42,21 @@ class Product extends MY_Controller {
 
     private function _general_search($q, $page) {
         // either AMULET or ACCESSORIES
-        $category = strtoupper(get_post('category', Product_Model::AMULET));
+        $category = get_post('category', false);
         // either RETAIL or WHOLESALE
         $type     = strtoupper(get_post('type', Product_Model::BOTH));
 
         $criteria_set = array();
-        $sql = 'quantity_available > 0 AND';
+        $sql = 'quantity_available > 0';
         if($type !== Product_Model::BOTH) {
-            $sql .= ' UPPER(product_type) = ? AND';
+            $sql .= ' AND UPPER(product_type) = ?';
             $criteria_set[] = $type;
         }
-        $sql .= ($category === Product_Model::AMULET)
-            ? ' amulet_product_id > 0'
-            : ' (amulet_product_id = 0 OR amulet_product_id IS NULL)';
+        if($category != false) {
+            $sql .= (strtoupper($category) === Product_Model::AMULET)
+                ? ' AND amulet_product_id > 0'
+                : ' AND (amulet_product_id = 0 OR amulet_product_id IS NULL)';
+        }
 
         return (empty($q))
             ? $this->product_model->search($sql, $criteria_set, 10, $page, true)
