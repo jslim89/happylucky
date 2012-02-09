@@ -187,7 +187,7 @@ $(document).ready(function() {
                     <tr>
                         <td><?php 
                             echo anchor(
-                                site_url('admin/product/edit/'.$product->id),
+                                site_url('admin/product/edit/'.$product->product_id),
                                 $product->product_code.' - '.$product->product_name
                             );
                         ?></td>
