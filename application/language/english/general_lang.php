@@ -24,10 +24,11 @@ $lang['error']        = 'Error';
 $lang['check']        = 'Check';
 $lang['added']        = 'Added';
 
-$lang['updated']             = 'Updated';
-$lang['update_failed']       = 'Update Failed';
-$lang['failed_to_delete']    = 'failed to delete';
-$lang['nothing_has_changed'] = 'Nothing Has Changed';
+$lang['updated']              = 'Updated';
+$lang['update_failed']        = 'Update Failed';
+$lang['failed_to_delete']     = 'failed to delete';
+$lang['nothing_has_changed']  = 'Nothing Has Changed';
+$lang['email_sending_failed'] = 'Email sending failed';
 
 $lang['this_email_already_been_used'] = 'This email already been used.';
 

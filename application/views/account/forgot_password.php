@@ -13,9 +13,12 @@ $(document).ready(function() {
                 if(data.status == 1) {
                     $('span#question').text(data.security_question);
                     $('div.security-qa').show(2000);
+                    $('#invalid-email').hide(2000);
                 }
                 else {
-                    $('span#invalid-email').text('<?php echo lang('user_invalid_email');?>');
+                    $('#invalid-email')
+                        .text('<?php echo lang('user_invalid_email');?>')
+                        .show(2000);
                 }
             },
             complete: function(jqXHR, textStatus) {
@@ -35,7 +38,17 @@ $(document).ready(function() {
             data: 'email='+email+'&answer='+answer,
             dataType: 'json',
             success: function(data) {
-                $('span#answer-response').text(data.response_text);
+                $('#answer-response').text(data.response_text)
+                if(data.status == true) {
+                    $('#answer-response')
+                        .addClass('success')
+                        .removeClass('warning');
+                }
+                else {
+                    $('#answer-response')
+                        .addClass('warning')
+                        .removeClass('success');
+                }
             },
             complete: function(jqXHR, textStatus) {
                 $('span#spinner-answer').hide();
@@ -73,7 +86,7 @@ $(document).ready(function() {
                     );
                     echo br(1);
                 ?>
-                <span id="invalid-email"></span>
+                <div class="warning" style="display:none;" id="invalid-email"></div>
                 <div class="security-qa"><?php
                     echo br(2);
                     echo label(lang('user_security_question'));
@@ -94,8 +107,8 @@ $(document).ready(function() {
                     );
                     echo br(1);
                 ?>
-                    <span id="answer-response"></span>
                 </div>
+                <div id="answer-response"></div>
             </div>
         </div>
     </div>

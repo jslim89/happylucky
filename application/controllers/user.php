@@ -276,12 +276,20 @@ class User extends MY_Controller {
             $this->email->to($customer->email);
             $this->email->subject($subject);
             $this->email->message($message);
-            $this->email->send();
+            $is_send = $this->email->send();
             /* End Send Email */
 
-            $result['response_text'] = lang('user_correct_answer_response_text');
+            if($is_send) {
+                $result['status'] = true;
+                $result['response_text'] = lang('user_correct_answer_response_text');
+            }
+            else {
+                $result['status'] = false;
+                $result['response_text'] = lang('email_sending_failed');
+            }
         }
         else {
+            $result['status'] = false;
             $result['response_text'] = lang('user_incorrect_answer_response_text');
         }
         echo json_encode($result);
