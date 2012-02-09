@@ -158,6 +158,7 @@ $lang['has']       = 'Has';
 $lang['for']       = 'for';
 $lang['available'] = 'Available';
 $lang['is']        = 'is';
+$lang['to']        = 'to';
 $lang['not']       = 'not';
 $lang['your']      = 'Your';
 $lang['thank_you'] = 'Thank You';

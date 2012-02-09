@@ -180,7 +180,7 @@ CREATE TABLE `customer_order` (
     `first_name` VARCHAR(50) COLLATE utf8_general_ci NOT NULL,
     `last_name` VARCHAR(50) COLLATE utf8_general_ci NOT NULL,
     `email` VARCHAR(80) COLLATE utf8_general_ci NOT NULL,
-    `recipient_bank_acc` VARCHAR(30) COLLATE utf8_general_ci,
+    `payment_method` VARCHAR(30) COLLATE utf8_general_ci,
     `payment_date` BIGINT(8) UNSIGNED,
     `shipping_cost` DECIMAL(15,2) NOT NULL DEFAULT 0.00,
     `order_status` VARCHAR(50) COLLATE utf8_general_ci NOT NULL,

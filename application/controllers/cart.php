@@ -141,7 +141,6 @@ class Cart extends MY_Controller {
         $products = $this->my_cart->get_products();
         $temp_order = (array)get_session('temp_order');
         $order->populate_from_request($temp_order);
-        $order->recipient_bank_acc = get_post('recipient_bank_acc');
         $this->session->set_userdata('temp_order', $order);
         $this->vars['products'] = $products;
     }

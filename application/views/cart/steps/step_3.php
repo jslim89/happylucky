@@ -26,7 +26,7 @@ $(document).ready(function() {
                 form_radio(array(
                     'id'      => 'cod',
                     'name'    => 'payment_method',
-                    'value'   => 'cod',
+                    'value'   => Customer_Order_Model::CASH_ON_DELIVERY,
                 )).'<b>'.lang('cart_cash_on_delivery').'</b>',
                 'cod'
             );
@@ -38,18 +38,16 @@ $(document).ready(function() {
                     'id'      => 'bank_in',
                     'name'    => 'payment_method',
                     'checked' => TRUE,
-                    'value'   => 'bank_in',
+                    'value'   => Customer_Order_Model::BANK_IN,
                 )).'<b>'.lang('cart_bank_in').'</b>',
                 'bank_in'
             );
         ?>
         <div id="bank-acc"><?php
-            echo label(lang('cart_bank_account_no')).': ';
-            echo form_input(array(
-                'id'   => 'recipient_bank_acc',
-                'name' => 'recipient_bank_acc',
-                'class' => 'validate[required]',
-            ));
+            echo lang('cart_bank_in').' '.lang('to').' Public Bank <br />'
+            .lang('cart_name').': '.label('Happy Lucky').'<br />'
+            .lang('cart_bank_account_no').': '.label('4-1234567-01').'<br />'
+            .lang('contact').': '.label('012-3456789');
             echo div(lang('cart_bank_in_hint'), array(
                 'class' => 'hint'
             ));
@@ -58,7 +56,7 @@ $(document).ready(function() {
                 .' '.lang('information')
                 .' '.lang('please')
                 .' '.anchor(
-                    site_url('contact_us'),
+                    site_url('information/contact_us'),
                     lang('contact_us'),
                     array(
                         'target' => '_blank'

@@ -54,7 +54,7 @@ class Customer_Order_Model extends MY_Active_Record {
     /* End Order Status */
 
     /* Payment Method */
-    const CASH_ON_DELIVERY = 'Cash On Delivery';
+    const CASH_ON_DELIVERY = 'Cash-On-Delivery';
     const BANK_IN          = 'Bank-In';
     /* End Payment Method */
 
