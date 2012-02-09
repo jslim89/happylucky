@@ -197,47 +197,26 @@ class Customer_Order_Model extends MY_Active_Record {
      * @param mixed $order_items 
      * @return bool
      */
-    public function send_email_acknowledgement($order_items) {
+    public function send_email_acknowledgement($order_items, $customer_name = false) {
         $this->_get_ci()->load->library('email');
+        $this->_get_ci()->lang->load('product');
+        $this->_get_ci()->lang->load('cart');
+
         $subject = "Order from Happy Lucky";
 
-        $text = "Dear ".get_session('username', 'Customer').", ";
-        $text .= "\n\nYour order has been successfully made.";
-        $text .= "\n<div>".heading('Order ID: '.$this->id, 2)."</div>";
+        $vars['customer_name'] = ($customer_name === false)
+                            ? get_session('username', 'Customer')
+                            : $customer_name;
+        $vars['order_id']      = $this->id;
+        $vars['items']         = $order_items;
+        $vars['subtotal']      = $this->subtotal;
+        $vars['shipping']      = $this->shipping_cost;
+        $vars['grand_total']   = $this->grand_total;
+        $vars['address']       = $this->get_full_address();
 
-        $table = "<table border='1' width='100%'>";
-        foreach($order_items as $item) {
-            $table .= "<tr><td>"
-                   . $item->product->product_name
-                   . "</td>"
-                   . "<td>"
-                   . $item->quantity
-                   . "</td>"
-                   . "<td>"
-                   . to_currency($item->unit_sell_price)
-                   . "</td>"
-                   . "<td>"
-                   . to_currency($item->subtotal)
-                   . "</td></tr>";
-        }
-        $table .= "<tr>"
-               ."<td colspan='3'>Subtotal: </td>"
-               ."<td>".to_currency($this->subtotal, 'MYR')."</td>"
-               ."</tr>"
-               ."<tr>"
-               ."<td colspan='3'>Shipping: </td>"
-               ."<td>".to_currency($this->shipping_cost, 'MYR')."</td>"
-               ."</tr>"
-               ."<tr>"
-               ."<td colspan='3'>Grand Total: </td>"
-               ."<td>".to_currency($this->grand_total, 'MYR')."</td>"
-               ."</tr>";
-        $table .= "</table>";
+        $text = $this->_get_ci()->load->view('templates/order_email', $vars, true);
 
-        $text .= $table;
-        $text .= "\n\n<p>Thank You.</p>";
-
-        $this->_get_ci()->email->from('test.jslim89@qq.com', 'Mr. Happy Lucky');
+        $this->_get_ci()->email->from('fbjslim@gmail.com', 'Mr. Happy Lucky');
         $this->_get_ci()->email->to($this->email);
         $this->_get_ci()->email->subject($subject);
         $this->_get_ci()->email->message($text);

@@ -55,8 +55,9 @@ $lang['order_product_item']  = "Product Item";
 $lang['order_cannot_be_made']  = "cannot be made";
 $lang['order_order_id_remark']  = "Please remember the Order ID in order for you to check your order in order history.";
 $lang['order_regarding_to_the_payment']  = "regarding to the payment";
-$lang['order_due_to_certain_issues_your_order_cannot_be_made']  = "Due to certain issues,
-                                                            your order cannot be made";
+$lang['order_not_enough_quantity_message']  = "Due to certain issues,
+                                    some products are not sufficient to supply.
+                                    Thus, we will send you the maximum that we have.";
 $lang['order_apologize_about_that']  = "Apologize about that";
 $lang['order_your_order_has_been_successfully_processed']  = "Your order has been successfully processed";
 
