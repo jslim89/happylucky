@@ -7,7 +7,7 @@ $(document).ready(function() {
             var id = get_element_index($(this).parentsUntil('tr').parent());
             var rowid = get_element_index($(this));
             var delete_url = base_url + 'cart/remove/' + rowid;
-            delete_row_confirmation(delete_url, 'cart_row_'+id);
+            del_cart_item(delete_url, id);
         });
     });
 
@@ -17,13 +17,53 @@ $(document).ready(function() {
         $.each($('.delete_check:checked'), function(i) {
             var id = $(this).val();
             var rowid = get_element_index($(this));
-            row_ids[id]     = 'cart_row_'+id;
+            row_ids[id]     = id;
             delete_urls[id] = base_url + 'cart/remove/' + rowid;
         });
-        delete_row_confirmation(delete_urls, row_ids);
+        del_cart_item(delete_urls, row_ids);
     });
 
 });
+
+function del_cart_item(url, id) {
+    var content = '<p>'+lang_confirm_delete+'</p>';
+    $('#confirm-dialog').attr({ title: lang_confirmation });
+    $('#confirm-dialog').html(content);
+    $('#confirm-dialog').dialog({
+        buttons: {
+            Ok: function() {
+                if($.isArray(id)) {
+                    $.each(id, function(key, value) {
+                        if(value != undefined) {
+                            delete_row(url[key], 'cart_row_'+value);
+                            var prod_total = Number($('#prod_total_'+value).text().replace(/[^0-9\.]+/g, ""));
+                            update_total(parseFloat(prod_total));
+                        }
+                    });
+                }
+                else {
+                    delete_row(url, 'cart_row_'+id);
+                    var prod_total = Number($('#prod_total_'+id).text().replace(/[^0-9\.]+/g, ""));
+                    update_total(parseFloat(prod_total));
+                }
+                $(this).dialog('close');
+            },
+            Cancel: function() {
+                $(this).dialog('close');
+            }
+        }
+    });
+    $('#confirm-dialog').dialog('open');
+}
+
+function update_total(price_to_be_minus) {
+    var subtotal    = $('#subtotal').text();
+    var grand_total = $('#grand_total').text();
+    subtotal    = Number(subtotal.replace(/[^0-9\.]+/g, "")) - price_to_be_minus;
+    grand_total = Number(grand_total.replace(/[^0-9\.]+/g, "")) - price_to_be_minus;
+    $('#subtotal').text(to_currency(subtotal, 'MYR'));
+    $('#grand_total').text(to_currency(grand_total, 'MYR'));
+}
 </script>
 
 <?php echo clear_div();?>
@@ -133,10 +173,12 @@ $(document).ready(function() {
                                 ?>
                             </td>
                             <td class="price"><?php echo to_currency($product->standard_price);?></td>
-                            <td class="price"><?php
-                                echo to_currency($product->subtotal);
-                                $total += $product->subtotal;
-                            ?></td>
+                            <td class="price">
+                                <span id="prod_total_<?php echo $product->id;?>"><?php
+                                    echo to_currency($product->subtotal);
+                                    $total += $product->subtotal;
+                                ?></span>
+                            </td>
                             <td>
                                 <ul id="icons" class="ui-widget ui-helper-clearfix" style="">
                                     <li class="ui-state-default ui-corner-all">
@@ -156,17 +198,29 @@ $(document).ready(function() {
                 <tr>
                     <td colspan="5" width="70%">&nbsp;</td>
                     <td class="right"><?php echo label(lang('cart_sub_total'));?>: </td>
-                    <td class="right"><?php echo to_currency($total, 'MYR');?></td>
+                    <td class="right">
+                        <span id="subtotal"><?php
+                            echo to_currency($total, 'MYR');
+                        ?></span>
+                    </td>
                 </tr>
                 <tr>
                     <td colspan="5">&nbsp;</td>
                     <td class="right"><?php echo label(lang('cart_shipping'));?>: </td>
-                    <td class="right"><?php echo to_currency(0.00, 'MYR');?></td>
+                    <td class="right">
+                        <span id="shipping"><?php
+                            echo to_currency(0.00, 'MYR');
+                        ?></span>
+                    </td>
                 </tr>
                 <tr>
                     <td colspan="5">&nbsp;</td>
                     <td class="right"><?php echo label(lang('cart_total'));?>: </td>
-                    <td class="right"><?php echo to_currency($total, 'MYR');?></td>
+                    <td class="right">
+                        <span id="grand_total"><?php
+                            echo to_currency($total, 'MYR');
+                        ?></span>
+                    </td>
                 </tr>
             </table>
         </div>

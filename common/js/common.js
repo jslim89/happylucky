@@ -36,6 +36,18 @@ function get_element_index(obj, offset, delimiter) {
     return index;
 }
 
+/*
+ * I have made some modification from the link below
+ * Reference: http://stackoverflow.com/questions/149055/how-can-i-format-numbers-as-money-in-javascript#answer-5342097
+ */
+function to_currency(num, symbol) {
+    var p = num.toFixed(2).split(".");
+    if(symbol == null) symbol = "";
+    return symbol + " " + p[0].split("").reverse().reduce(function(acc, num, i, orig) {
+        return  num + (i && !(i % 3) ? "," : "") + acc;
+    }, "") + "." + p[1];
+}
+
 function ui_alert(title, message) {
     var content = '<p>'+message+'</p>';
     $('#message-dialog').attr({title: title});
