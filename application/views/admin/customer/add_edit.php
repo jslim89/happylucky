@@ -6,6 +6,7 @@ $(document).ready(function() {
     });
 
     $('#save_customer_add_edit').click(function() {
+        /*
         if($('#password').val() != '') {
             $('#old_password').addClass('validate[required]');
             $('#confirm_password').addClass('validate[required,equals[password]]');
@@ -16,6 +17,7 @@ $(document).ready(function() {
             $('#confirm_password').removeClass('validate[required,equals[password]]');
             $('#password').removeClass('validate[required]');
         }
+         */
         $('#customer_add_edit').submit();
     });
 
@@ -94,7 +96,7 @@ $(document).ready(function() {
             </table>
         </div>
     </div>
-    <div class="box grid_7">
+    <!--div class="box grid_7">
         <div class="box-heading"><?php
             echo lang('user_security');
         ?></div>
@@ -153,9 +155,8 @@ $(document).ready(function() {
                 </tr>
             </table>
         </div>
-    </div>
-    <?php echo clear_div(); ?>
-    <div class="box grid_15">
+    </div-->
+    <div class="box grid_7">
         <div class="box-heading"><?php
             echo lang('user_address_information');
         ?></div>
@@ -171,6 +172,8 @@ $(document).ready(function() {
                             'class' => 'validate[required]'
                         ));
                     ?></td>
+                </tr>
+                <tr>
                     <td><?php echo lang('town');?></td>
                     <td><?php 
                         echo form_input(array(
@@ -191,6 +194,8 @@ $(document).ready(function() {
                             'class' => ''
                         ));
                     ?></td>
+                </tr>
+                <tr>
                     <td><?php echo required_indicator().lang('city');?></td>
                     <td><?php 
                         echo form_input(array(
@@ -211,6 +216,8 @@ $(document).ready(function() {
                             'class' => 'validate[required]'
                         ));
                     ?></td>
+                </tr>
+                <tr>
                     <td><?php echo required_indicator().lang('country');?></td>
                     <td>
                         <?php 
