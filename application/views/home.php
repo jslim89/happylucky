@@ -60,9 +60,8 @@ div.product-header {
                             'class' => 'min_qty_add hint',
                         ));
                         echo div('', array(
-                            'id'    => 'add_to_cart_status_'.$product->id,
+                            'class' => 'warning add_to_cart_status_'.$product->id,
                             'style' => 'display: none;',
-                            'class' => 'warning',
                         ));
                     ?>
                     <div class="cart"><?php
@@ -123,9 +122,8 @@ div.product-header {
                             'class' => 'min_qty_add hint',
                         ));
                         echo div('', array(
-                            'id'    => 'add_to_cart_status_'.$product->id,
+                            'class' => 'warning add_to_cart_status_'.$product->id,
                             'style' => 'display: none;',
-                            'class' => 'warning',
                         ));
                     ?>
                     <div class="cart"><?php

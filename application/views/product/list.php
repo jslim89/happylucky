@@ -172,9 +172,8 @@ $(document).ready(function() {
         ?></div>
         <div class="grid_3"><?php
             echo div('', array(
-                'id'    => 'add_to_cart_status_'.$product->id,
+                'class' => 'warning add_to_cart_status_'.$product->id,
                 'style' => 'display: none;',
-                'class' => 'warning',
             ));
             echo button_link(
                 false,

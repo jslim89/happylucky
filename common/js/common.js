@@ -232,18 +232,18 @@ function add_to_cart(product_id, quantity) {
         success: function(data) {
             // TODO: update cart content
             if(data.status == 1) {
-                $('#add_to_cart_status_'+product_id).text(lang_added_to_cart)
+                $('.add_to_cart_status_'+product_id).text(lang_added_to_cart)
                                                     .removeClass('warning')
                                                     .addClass('success');
             }
             else {
-                $('#add_to_cart_status_'+product_id).text(lang_add_to_cart_failed)
+                $('.add_to_cart_status_'+product_id).text(lang_add_to_cart_failed)
                                                     .removeClass('success')
                                                     .addClass('warning');
             }
         },
         complete: function() {
-            $('#add_to_cart_status_'+product_id).show();
+            $('.add_to_cart_status_'+product_id).show();
         },
         error: function(jqXHR, textStatus, errorThrown) {
             alert(errorThrown);

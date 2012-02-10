@@ -1,10 +1,10 @@
 <?php  if (!defined('BASEPATH')) exit('No direct script access allowed');?>
 <script type="text/javascript">
 $(document).ready(function() {
-    $('button#back').click(function() {
+    $('#back').click(function() {
         redirect(base_url+'product');
     });
-    $('button#add_to_cart').click(function() {
+    $('#add_to_cart').click(function() {
         var qty = $('input#quantity').val();
         add_to_cart(<?php echo $product->id; ?>, qty);
     })
@@ -23,10 +23,13 @@ $(document).ready(function() {
             </tr>
             <tr class="content">
                 <td width="40%"><?php
+                    $image_url = empty($product->primary_image_url)
+                        ? default_image_path()
+                        : $product->primary_image_url;
                     echo anchor(
-                        $product->primary_image_url,
+                        $image_url,
                         img(array(
-                            'src'    => $product->primary_image_url,
+                            'src'    => $image_url,
                             'alt'    => $product->product_name,
                             'width'  => '150',
                             'height' => '150',
@@ -49,6 +52,10 @@ $(document).ready(function() {
                             'id' => 'add_to_cart',
                         )
                     );
+                    echo div('', array(
+                        'class' => 'warning add_to_cart_status_'.$product->id,
+                        'style' => 'display: none;',
+                    ));
                     $info_list = array(
                         label(lang('product_code').':').' '.$product->product_code,
                         label(lang('product_availability').':').' '.$product->quantity_available,
@@ -98,5 +105,14 @@ $(document).ready(function() {
                 ?></td>
             </tr>
         </table>
+        <div class="buttons">
+            <div class="right"><?php
+                echo button_link(
+                    false,
+                    lang('back'),
+                    array('id' => 'back')
+                );
+            ?></div>
+        </div>
     </form>
 </div>
