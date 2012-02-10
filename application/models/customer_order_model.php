@@ -148,7 +148,12 @@ class Customer_Order_Model extends MY_Active_Record {
         $this->_get_ci()->load->model('product_model');
         $this->order_date = time();
         $this->order_status = Customer_Order_Model::PENDING;
-        $this->grand_total = $this->subtotal + $this->shipping_cost;
+        /* initialize to 0 */
+        $this->subtotal           = 0;
+        $this->shipping_cost      = 0;
+        $this->grand_total        = 0;
+        $this->total_product_cost = 0;
+
         $this->customer_id = get_session('customer_id', null);
         $is_order_ok = $this->save();
         if($is_order_ok) {
@@ -169,6 +174,7 @@ class Customer_Order_Model extends MY_Active_Record {
                 }
                 $item->update_product_quantity();
             }
+            $this->update_total();
             $this->send_email_acknowledgement($order_items);
         }
         else {
@@ -244,12 +250,15 @@ class Customer_Order_Model extends MY_Active_Record {
         if( ! $this->is_exist()) return false;
         $subtotal    = 0;
         $grand_total = 0;
+        $total_cost  = 0;
         foreach($this->order_detail as $product) {
             $subtotal += $product->subtotal;
+            $total_cost += $product->total_cost;
         }
         $grand_total = $subtotal + 0; // 0 is shipping
-        $this->subtotal    = $subtotal;
-        $this->grand_total = $grand_total;
+        $this->subtotal           = $subtotal;
+        $this->grand_total        = $grand_total;
+        $this->total_product_cost = $total_cost;
         return $this->save();
     }
 

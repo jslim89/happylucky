@@ -112,9 +112,10 @@ class Order extends MY_Controller {
         $order->populate_from_request($_POST);
         // if is add new order
         if($id === null) {
-            $order->subtotal      = 0.00;
-            $order->shipping_cost = 0.00;
-            $order->grand_total   = 0.00;
+            $order->subtotal           = 0.00;
+            $order->shipping_cost      = 0.00;
+            $order->grand_total        = 0.00;
+            $order->total_product_cost = 0.00;
         }
 
         $is_saved = $order->save();
