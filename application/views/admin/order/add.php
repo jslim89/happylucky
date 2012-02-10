@@ -56,17 +56,6 @@ $(document).ready(function() {
         }
     });
 
-    $('select[name=payment_method]').change(function() {
-        if($(this).val() == 0) { // Cash on delivery
-            $('#tr_bank_account_no').hide(2000);
-            $('#recipient_bank_acc').removeClass('validate[required]');
-        }
-        else { // bank in
-            $('#tr_bank_account_no').show(2000);
-            $('#recipient_bank_acc').addClass('validate[required]');
-        }
-    });
-
     $('input#search_customer').autocomplete({
         highlight: true,
         minLength: 1,
@@ -221,23 +210,13 @@ function format_customer(customer) {
                     <td><?php echo required_indicator().lang('order_payment_method');?></td>
                     <td><?php 
                         $payment_method_list = array(
-                            Customer_Order_Model::CASH_ON_DELIVERY,
-                            Customer_Order_Model::BANK_IN,
+                            Customer_Order_Model::CASH_ON_DELIVERY => Customer_Order_Model::CASH_ON_DELIVERY,
+                            Customer_Order_Model::BANK_IN          => Customer_Order_Model::BANK_IN,
                         );
                         echo form_dropdown(
                             'payment_method',
                             $payment_method_list
                         );
-                    ?></td>
-                </tr>
-                <tr id="tr_bank_account_no" style="display: none;">
-                    <td><?php echo required_indicator().lang('order_bank_account_no');?></td>
-                    <td><?php 
-                        echo form_input(array(
-                            'id'    => 'recipient_bank_acc',
-                            'name'  => 'recipient_bank_acc',
-                            'class' => 'validate[required]',
-                        ));
                     ?></td>
                 </tr>
             </table>
