@@ -149,10 +149,13 @@ $(document).ready(function() {
     <div id="product_<?php echo $product->id;?>" style="margin-bottom: 3; margin-top: 3">
         <div class="grid_3"><?php
             $product_url = site_url('product/view/'.$product->id);
+            $image_url = empty($product->primary_image_url)
+                ? default_image_path()
+                : $product->primary_image_url;
             echo anchor(
                 $product_url,
                 img(array(
-                    'src'    => $product->primary_image_url,
+                    'src'    => $image_url,
                     'alt'    => $product->product_name,
                     'width'  => 80,
                     'height' => 80,

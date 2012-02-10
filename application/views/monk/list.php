@@ -39,10 +39,13 @@ $(document).ready(function() {
             <tr id="monk_list_<?php echo $monk->id; ?>">
                 <td width="25%"><?php 
                     $monk_url = site_url('monk/view/'.$monk->id);
+                    $image_url = empty($monk->primary_image_url)
+                        ? default_image_path()
+                        : $monk->primary_image_url;
                     echo anchor(
                         $monk_url,
                         img(array(
-                            'src'    => $monk->primary_image_url,
+                            'src'    => $image_url,
                             'alt'    => $monk->monk_name,
                             'width'  => 80,
                             'height' => 80,
