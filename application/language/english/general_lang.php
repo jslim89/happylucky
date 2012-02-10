@@ -6,6 +6,7 @@ $lang['edit']         = 'Edit';
 $lang['view']         = 'View';
 $lang['delete']       = 'Delete';
 $lang['deleted']      = 'Deleted';
+$lang['remove']       = 'Remove';
 $lang['add_files']    = 'Add Files';
 $lang['delete_files'] = 'Delete Files';
 $lang['save']         = 'Save';

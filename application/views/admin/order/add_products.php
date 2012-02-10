@@ -85,6 +85,8 @@ $(function() {
                 .attr('id', 'standard_price_' + next_idx)
                 .text('');
 
+            clone.find('div.buttons').html(remove_button(next_idx));
+
             clone.show().insertAfter(last);
         }
     });
@@ -135,6 +137,22 @@ function format_product(product) {
     var str = '<img src="'+img_src+'" height="30" width="30" />';
     str += product.product_code + ' - ' + product.product_name;
     return str;
+}
+
+function remove_button(id) {
+    var text = '<div class="right">'
+        + '<a class="button" onclick="remove('+id+')">'
+        + '<span><?php echo lang('remove'); ?></span>'
+        + '</a>'
+        + '</div>';
+    return text;
+}
+
+function remove(id) {
+    $('#product_'+id).remove();
+    /* Bind to searching dropdown list */
+    $('select[name=product_selection] option[value="'+id+'"]').remove();
+    /* End Bind to searching dropdown list */
 }
 </script>
 <div class="grid_4">
@@ -243,6 +261,7 @@ function format_product(product) {
                         ?></td>
                     </tr>
                 </table>
+                <div class="buttons"></div>
             </div>
         </div>
         <div class="buttons">
