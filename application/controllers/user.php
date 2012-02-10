@@ -267,12 +267,12 @@ class User extends MY_Controller {
         $customer->load_by_email(get_post('email'));
         $result = array();
         if(strtolower($customer->security_answer) === strtolower(get_post('answer'))) {
+            $vars['password']      = $customer->generate_new_password();
+            $vars['customer_name'] = $customer->first_name.', '.$customer->last_name;
             /* Send Email */
             $subject = lang('user_email_password_recovery_subject');
-            $message = lang('user_email_password_recovery_message_before_password');
-            $message .= $customer->generate_new_password();
-            $message .= lang('user_email_password_recovery_message_after_password');
-            $this->email->from('test.jslim89@qq.com', 'Mr Happy Lucky');
+            $message = $this->load->view('templates/forgot_password_email', $vars, true);
+            $this->email->from('test.jslim89@qq.com', 'Happy Lucky');
             $this->email->to($customer->email);
             $this->email->subject($subject);
             $this->email->message($message);
