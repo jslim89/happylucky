@@ -11,12 +11,12 @@ ALTER TABLE `amulet_product` ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=
 ALTER TABLE `amulet_type` ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4;
 ALTER TABLE `amulet_type_image` ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 ALTER TABLE `country` ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=243;
-ALTER TABLE `customer_order` ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+ALTER TABLE `customer_order` ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3;
 ALTER TABLE `monk` ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13;
 ALTER TABLE `monk_image` ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
-ALTER TABLE `order_detail` ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+ALTER TABLE `order_detail` ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9;
 ALTER TABLE `product` ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9;
-ALTER TABLE `product_batch` ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12;
+ALTER TABLE `product_batch` ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15;
 ALTER TABLE `product_image` ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 ALTER TABLE `supplier` ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3;
 ALTER TABLE `customer` ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3;
@@ -268,46 +268,46 @@ INSERT INTO `country` (`id`, `country_name`, `iso_code_2`, `iso_code_3`, `postco
 (242, 'Montenegro (Republic of)', 'ME', 'MNE', 0);
 
 INSERT INTO `user` (`id`, `first_name`, `last_name`, `email`, `password`, `salt`, `security_question`, `security_answer`) VALUES
-(1, 'admin', 'admin', 'admin@happylucky.com', '48367792e29476308ad94e26d9fc58e7552754bd', 'c13fe37efaa711de8272f1a726bc1413', 'Which year is this project started?', '2011');
+(1, 'admin', 'admin', 'admin@happylucky.com', 'e3eb7f17b3516e104656686648a88073af4dab50', 'c13fe37efaa711de8272f1a726bc1413', 'Which year is this project started?', '2011');
 
 INSERT INTO `monk` (`id`, `monk_name`, `monk_story`) VALUES 
-(1, 'Ah Chan Tim (阿参添)', 'As a head of Wat Chang Hai on Year 24??. He has made a lot of Amulet---Long Phor Thuad....'),
-(2, 'Ah Chan Do (阿参多)', 'The most famous and the most valuable Amulet he had made is Somdej, or we call it---Somdej Wat Ra Kang. At some time in the past, an anonymous exchange his amulet with a banglo....'),
-(3, 'Long Phor Thuad (龙泡托)', 'A very peace monk. He meet a snake when he was a child.....'),
-(4, 'Long Phor Tim (龙泡添)', 'A monk that come out with the most famous Kun Peng (amulet).....'),
-(5, 'Than Tit (陈铁)', 'Currently he is famous in Kelantan, Malaysia. A lot of people like his amulet.....'),
-(6, 'Tok Raja (夺拉惹)', 'Khron Ratchanaren (known as Tok Raja) was born on Thursday December 1, BE2419 (1876). He was sent to Wat Uttamaram by his parents when he was 12 years old to learn Buddhism and Thai language. He stayed with Archan Lok who was the temple Chief Abbot at that time. Tok had showed great interest in Buddhism and became a "Dek Jom" under the supervision of Bhikkhu (monks) in the temple. Besides, he also learned crafting and construction. He once told the devotees that even from an early age, he cherished the ambition of joining the monk hood and stay in the temple to learn Buddhism unlike his other kampung (village) boys of the same age who more preferred to stay in their homes in the kampung.'),
-(7, 'Than Chan (陈展)', 'His master is Tok Raja......'),
-(8, 'Than Lek (陈烈)', 'His amulet currently famous in Kelantan, Malaysia.'),
-(9, 'Chao Kun Onn (招昆安)', 'He is famous on making Phra Pita.....The solid\'s favourite'),
-(10, 'Ah Chan Deng (阿参廷)', 'He is a head of Wat Sai Kao which also come out a lot of Long Phor Thuad.....'),
-(11, 'Ah Chan Kao (阿参叩)', 'He is after the Ah Chan Tim then he became the head of Wat Chang Hai......'),
+(1, 'Ah Chan Tim', 'As a head of Wat Chang Hai on Year 24??. He has made a lot of Amulet---Long Phor Thuad....'),
+(2, 'Ah Chan Do', 'The most famous and the most valuable Amulet he had made is Somdej, or we call it---Somdej Wat Ra Kang. At some time in the past, an anonymous exchange his amulet with a banglo....'),
+(3, 'Long Phor Thuad', 'A very peace monk. He meet a snake when he was a child.....'),
+(4, 'Long Phor Tim', 'A monk that come out with the most famous Kun Peng (amulet).....'),
+(5, 'Than Tit', 'Currently he is famous in Kelantan, Malaysia. A lot of people like his amulet.....'),
+(6, 'Tok Raja', 'Khron Ratchanaren (known as Tok Raja) was born on Thursday December 1, BE2419 (1876). He was sent to Wat Uttamaram by his parents when he was 12 years old to learn Buddhism and Thai language. He stayed with Archan Lok who was the temple Chief Abbot at that time. Tok had showed great interest in Buddhism and became a "Dek Jom" under the supervision of Bhikkhu (monks) in the temple. Besides, he also learned crafting and construction. He once told the devotees that even from an early age, he cherished the ambition of joining the monk hood and stay in the temple to learn Buddhism unlike his other kampung (village) boys of the same age who more preferred to stay in their homes in the kampung.'),
+(7, 'Than Chan', 'His master is Tok Raja......'),
+(8, 'Than Lek', 'His amulet currently famous in Kelantan, Malaysia.'),
+(9, 'Chao Kun Onn', 'He is famous on making Phra Pita.....The solid\'s favourite'),
+(10, 'Ah Chan Deng', 'He is a head of Wat Sai Kao which also come out a lot of Long Phor Thuad.....'),
+(11, 'Ah Chan Kao', 'He is after the Ah Chan Tim then he became the head of Wat Chang Hai......'),
 (12, 'Phor Than Klai', 'Luang Phor Klai (Phor Than Klai) is one of the respectable monk and famous southern monk. It was rumored that whatever he said or predicted, often came true, and that is why he was given the title "Golden Mouth" (金口和尚) by many. When Luang Phor Klai was 14 years old, he went with his uncle to chop firewood and the tree he was chopping fell towards him and squashed his left leg. Luang Phor Klai though it was nothing much just a small injury and did not seek for medical attention, but eventually it become worse and worse. His left ankle was shattered upon inspection, it swelled till very big, started going gangreous and the pain was unbearable couldn\'t be cured.....');
 
 INSERT INTO `amulet_type` (`id`, `amulet_type_name`, `amulet_desc`) VALUES 
-(1, 'Long Phor Thuad (龙泡托)', '保平安的佛牌'),
-(2, 'Kun Peng (坤平)', '会增加女人缘'),
+(1, 'Long Phor Thuad', 'This amulet is very good in driving. It can keep you safety.'),
+(2, 'Kun Peng', 'This amulet will make your social relation good...'),
 (3, 'Phor Than Klai', 'A rumor said, once you possess his amulet, your dream will become true.....');
 
 INSERT INTO `amulet` (`id`, `amulet_code`, `amulet_name`, `amulet_desc`,
 `produced_date`, `produced_place`, `monk_id`, `amulet_type_id`) VALUES 
-(1, 'A001', 'Rang tao lek', '制作于佛历2505年,出自于Ah Chan Tim (阿参添)之手',
+(1, 'A001', 'Rang tao lek', 'Made in year 2505, made by Ah Chan Tim...',
     '2505', 'Wat Chang Hai', 1, 1),
-(2, 'A002', 'Phor Than Klai 2505', '制作于佛历2505年,出自于Phor Than Klai之手',
+(2, 'A002', 'Phor Than Klai 2505', 'Made in year 2505, made by Phor Than Klai',
     '2505', 'Wat Suan Kan', 12, 3);
 
 INSERT INTO `amulet_product` (`id`, `size`, `ingredient`, `amulet_id`) VALUES 
-(1, 'Pin Lek (小模)', 'Nawa (九宝铜)', 1),
-(2, 'Pin Kang (中模)', 'Nawa (九宝铜)', 1),
-(3, 'Pin Yai (大模)', 'Nawa (九宝铜)', 1),
-(4, 'Pin Yai (大模)', 'Nawa (九宝铜)', 2),
-(5, 'Pin Kang (中模)', 'Nawa (九宝铜)', 2),
-(6, 'Pin Lek (小模)', 'Nawa (九宝铜)', 2);
+(1, 'Pin Lek (Small)', 'Nawa (Level 9 copper)', 1),
+(2, 'Pin Kang (Medium)', 'Nawa (Level 9 copper)', 1),
+(3, 'Pin Yai (Big)', 'Nawa (Level 9 copper)', 1),
+(4, 'Pin Yai (Big)', 'Nawa (Level 9 copper)', 2),
+(5, 'Pin Kang (Medium)', 'Nawa (Level 9 copper)', 2),
+(6, 'Pin Lek (Small)', 'Nawa (Level 9 copper)', 2);
 
 INSERT INTO `supplier` (`id`, `supplier_name`, `address`, `town`,
 `postcode`, `city`, `state`, `country_id`, `contact_no`, `email`,
 `contact_person`, `fax`) VALUES 
-(1, '佛宝行', 'Jalan Kota Baru', 'Kota Baru', 12000, 'Kota Baru',
+(1, 'Sampo Sdn. Bhd.', 'Jalan Kota Baru', 'Kota Baru', 12000, 'Kota Baru',
 'Kelantan', 129, '010-23432423', 'solid@sampo.com', 'Mr. Solid',
 '09-9777988'),
 (2, 'Siam Beh', 'Jalan Tun Razak', 'Pudu', 54300, 'Pudu',
@@ -319,47 +319,50 @@ INSERT INTO `customer` (`id`, `first_name`, `last_name`, `address`, `town`,
 `password`, `registration_date`, `sex`, `age`, `security_question`,
 `security_answer`, `salt`, `is_verified`) VALUES 
 (1, 'John', 'Rambo', 'Jalan Kota Baru', 'Kota Baru', 12000, 'Kota Baru',
-'Kelantan', 129, '010-23432423', 'solid@sampo.com',
+'Kelantan', 129, '010-23432423', 'fbjslim@gmail.com',
 '48367792e29476308ad94e26d9fc58e7552754bd', '1326472561', 'M', 25,
 'What is your name?', 'John Rambo', 'c13fe37efaa711de8272f1a726bc1413', 1),
 (2, 'English', 'Johnny', 'Jalan Genting Klang', 'Wangsa Maju', 53300, 'Setapak',
-'Kuala Lumpur', 129, '010-3451234', 'test@try.com',
+'Kuala Lumpur', 129, '010-3451234', 'jslim89@msn.com',
 '48367792e29476308ad94e26d9fc58e7552754bd', '1326472561', 'M', 25,
 'What is your name?', 'John Rambo', 'c13fe37efaa711de8272f1a726bc1413', 1);
 
 INSERT INTO `product` (`id`, `product_code`, `product_name`, `product_desc`,
 `standard_price`, `quantity_available`, `min_quantity`, `min_qty_alert`
 , `created_date`, `product_type`, `amulet_product_id`) VALUES 
-(1, 'RTL2505A', 'Rang tao lek 2505 - Pin Lek', '制作于佛历2505年,出自于Ah Chan Tim (阿参添)之手',
+(1, 'RTL2505A', 'Rang tao lek 2505 - Pin Lek', 'Made in year 2505, made by Ah Chan Tim',
     '20000.00', 5, 2, 1, 1324746582, 'WHOLESALE', 1),
-(2, 'RTL2505B', 'Rang tao lek 2505 - Pin Kang', '制作于佛历2505年,出自于Ah Chan Tim (阿参添)之手',
+(2, 'RTL2505B', 'Rang tao lek 2505 - Pin Kang', 'Made in year 2505, made by Ah Chan Tim',
     '25000.00', 1, 1, 1, 1324746582, 'RETAIL', 2),
-(3, 'RTL2505C', 'Rang tao lek 2505 - Pin Yai', '制作于佛历2505年,出自于Ah Chan Tim (阿参添)之手',
+(3, 'RTL2505C', 'Rang tao lek 2505 - Pin Yai', 'Made in year 2505, made by Ah Chan Tim',
     '30000.00', 1, 1, 1, 1324746582, 'RETAIL', 3),
-(4, 'PTK2505A', 'Phor Than klai 2505 - Pin Lek', '制作于佛历2505年,出自于Phor Than Klai (金口和尚)之手',
+(4, 'PTK2505A', 'Phor Than klai 2505 - Pin Lek', 'Made in year 2505, made by Phor Than Klai',
     '3200.00', 5, 2, 1, 1324746582, 'WHOLESALE', 6),
-(5, 'PTK2505B', 'Phor Than klai 2505 - Pin Kang', '制作于佛历2505年,出自于Phor Than Klai (金口和尚)之手',
+(5, 'PTK2505B', 'Phor Than klai 2505 - Pin Kang', 'Made in year 2505, made by Phor Than Klai',
     '5000.00', 2, 1, 1, 1324746582, 'RETAIL', 5),
-(6, 'PTK2505C', 'Phor Than klai 2505 - Pin Yai', '制作于佛历2505年,出自于Phor Than Klai (金口和尚)之手',
+(6, 'PTK2505C', 'Phor Than klai 2505 - Pin Yai', 'Made in year 2505, made by Phor Than Klai',
     '9000.00', 1, 1, 1, 1324746582, 'RETAIL', 4),
-(7, 'GC01', 'Gold Casing', '很美的金壳，适用于铜牌',
+(7, 'GC01', 'Gold Casing', 'A very beautiful casing, this is suitable for copper type amulet...',
     '2500.00', 1, 1, 1, 1324746582, 'RETAIL', null),
-(8, 'GN01', 'Gold Necklace', '高贵的金佛链，拥有七个洞(可以戴最多七个佛牌)',
+(8, 'GN01', 'Gold Necklace', 'A very beautiful necklace, got 7 hole which mean that can keep 7 amulets',
     '10000.00', 1, 1, 1, 1324746582, 'RETAIL', null);
 
 INSERT INTO `product_batch` (`id`, `unit_cost`, `stock_in_date`,
 `batch_no`, `quantity_stock_in`, `product_id`, `supplier_id`) VALUES 
-(1, 12000.00, 1324746582, 1, 3, 1, 1),
+(1, 12000.00, 1324746582, 1, 5, 1, 1),
 (2, 18000.00, 1324746582, 1, 2, 2, 2),
 (3, 2000.00, 1324746582, 1, 5, 4, 1),
 (4, 20000.00, 1324746582, 1, 1, 3, 2),
-(5, 14000.00, 1326783977, 2, 4, 1, 2),
-(6, 2300.00, 1326783977, 2, 3, 4, 2),
+(5, 14000.00, 1326783977, 2, 6, 1, 2),
+(6, 2300.00, 1326783977, 2, 6, 4, 2),
 (7, 3000.00, 1324746582, 1, 1, 5, 1),
 (8, 6000.00, 1324746582, 1, 3, 6, 1),
 (9, 12000.00, 1326783977, 2, 1, 5, 1),
 (10, 1800.00, 1324746582, 1, 3, 7, 1),
-(11, 7000.00, 1324746582, 1, 2, 8, 2);
+(11, 7000.00, 1324746582, 1, 2, 8, 2),
+(12, 15000.00, 1324746882, 3, 3, 1, 2),
+(13, 2500.00, 1324756882, 3, 4, 4, 2),
+(14, 2700.00, 1324759882, 4, 7, 4, 1);
 
 INSERT INTO `customer_order` (`id`, `customer_id`, `order_date`, `subtotal`,
 `grand_total`, `shipping_address`, `shipping_town`, `shipping_postcode`,
@@ -374,10 +377,12 @@ INSERT INTO `customer_order` (`id`, `customer_id`, `order_date`, `subtotal`,
 1324756582, 0.00, 'PENDING');
 
 INSERT INTO `order_detail` (`id`, `product_id`, `quantity`, `unit_sell_price`,
-`subtotal`, `order_id`) VALUES
-(1, 1, 2, 20000.00, 40000.00, 1),
-(2, 4, 3, 3200.00, 12800.00, 1),
-(3, 8, 1, 10000.00, 10000.00, 1),
-(4, 2, 1, 25000.00, 25000.00, 2),
-(5, 6, 2, 9000.00, 18000.00, 2),
-(6, 7, 2, 2500.00, 5000.00, 2);
+`subtotal`, `total_cost`, `order_id`) VALUES
+(1, 1, 3, 20000.00, 60000.00, 36000.00, 1),
+(2, 4, 3, 3200.00, 9600.00, 6000.00, 1),
+(3, 8, 1, 10000.00, 10000.00, 7000.00, 1),
+(4, 2, 1, 25000.00, 25000.00, 18000.00, 2),
+(5, 6, 2, 9000.00, 18000.00, 12000.00, 2),
+(6, 7, 2, 2500.00, 5000.00, 3600.00, 2),
+(7, 1, 6, 25000.00, 150000.00, 80000.00, 2),
+(8, 4, 14, 3200.00, 44800.00, 33200.00, 2);
