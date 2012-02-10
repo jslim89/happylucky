@@ -112,9 +112,6 @@ $(document).ready(function() {
             </div>
         </div>
     <?php
-        echo form_hidden('subtotal', $total);
-        echo form_hidden('shipping_cost', $shipping_cost);
-        echo form_hidden('grand_total', $total + $shipping_cost);
         echo form_close(); 
     ?>
 </div>
