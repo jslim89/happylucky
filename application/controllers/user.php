@@ -131,17 +131,13 @@ class User extends MY_Controller {
      * @return boolean
      */
     private function _send_code($customer) {
-        $link = anchor(
-            site_url('user/verify/'.$customer->id).'?vcode='.$customer->generate_verification_code(),
-            site_url('user/verify/'.$customer->id).'?vcode='.$customer->generate_verification_code()
-        );
+        $vars['url'] = site_url('user/verify/'.$customer->id).'?vcode='.$customer->generate_verification_code();
+        $vars['customer_name'] = $customer->first_name.', '.$customer->last_name;
 
         /* Send Email */
         $subject = lang('user_email_verification_subject');
-        $message = lang('user_email_verification_message_before_link');
-        $message .= $link;
-        $message .= lang('user_email_verification_message_after_link');
-        $this->email->from('test.jslim89@qq.com', 'Mr Happy Lucky');
+        $message = $this->load->view('templates/member_registration_email', $vars, true);
+        $this->email->from('test.jslim89@qq.com', 'Happy Lucky');
         $this->email->to($customer->email);
         $this->email->subject($subject);
         $this->email->message($message);

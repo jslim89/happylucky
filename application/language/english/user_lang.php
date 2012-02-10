@@ -49,16 +49,10 @@ $lang['user_incorrect_answer_response_text'] = "Answer does not match";
 $lang['user_correct_answer_response_text'] = "A new password is generated and sent to your
                                                 email, please check your email";
 $lang['user_email_password_recovery_subject'] = "New Password for your account";
-$lang['user_email_password_recovery_message_before_password'] = "Dear customer,\n\n
-    A new password is generated: ";
-$lang['user_email_password_recovery_message_after_password'] = "\n\nThank you.";
-
 
 /* Registration */
 $lang['user_please_check_your_email_for_your_account_verification'] = "Please check your email for your account verification";
 $lang['user_email_verification_subject'] = "Happy Lucky account verification";
-$lang['user_email_verification_message_before_link'] = "Dear customer, please click the link to verify your account.";
-$lang['user_email_verification_message_after_link'] = "Thank you.";
 $lang['user_verify_successful_message'] = "Thank you. Your account have been verified.";
 $lang['user_verify_failed_message']     = "Verification failed. Please check the link that sent to your email";
 
