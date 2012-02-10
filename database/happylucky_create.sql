@@ -5,7 +5,7 @@
 # Project name:                                                          #
 # Author:                                                                #
 # Script type:           Database creation script                        #
-# Created on:            2012-01-17 13:38                                #
+# Created on:            2012-02-10 18:16                                #
 # ---------------------------------------------------------------------- #
 
 
@@ -293,6 +293,7 @@ CREATE TABLE `order_detail` (
     `quantity` INTEGER(5) UNSIGNED NOT NULL DEFAULT 0,
     `unit_sell_price` DECIMAL(15,2) NOT NULL DEFAULT 0.00,
     `subtotal` DECIMAL(15,2) NOT NULL DEFAULT 0.00,
+    `total_cost` DECIMAL(15,2) NOT NULL DEFAULT 0.00 COMMENT 'This field is to keep the total cost for this particular order product. Just for report generating purpose.',
     `order_id` BIGINT(8) UNSIGNED,
     CONSTRAINT `PK_order_detail` PRIMARY KEY (`id`)
 );
