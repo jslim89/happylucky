@@ -41,6 +41,7 @@ $lang['image']                = 'Image';
 $lang['primary_image']        = 'Primary Image';
 $lang['image_name']           = 'Image Name';
 $lang['images']               = 'Images';
+$lang['upload_image_remark']  = 'NOTE: Only "jpg" and "png" file type are allowed.';
 $lang['no_additional_images'] = 'No additional images';
 $lang['no_banner']            = 'No Banner';
 $lang['upload']               = 'Upload';

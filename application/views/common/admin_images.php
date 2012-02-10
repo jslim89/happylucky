@@ -1,3 +1,6 @@
+<div class="attention"><?php
+    echo lang('upload_image_remark');
+?></div>
 <div class="box" style="float: left;width: 45%; margin: 0px 30px 10px 30px;">
     <div class="box-heading"><?php
         echo lang('primary_image');
