@@ -23,6 +23,7 @@ $lang['less']         = 'Less';
 $lang['error']        = 'Error';
 $lang['check']        = 'Check';
 $lang['added']        = 'Added';
+$lang['page']         = 'Page';
 
 $lang['updated']              = 'Updated';
 $lang['inserted']             = 'Inserted';
@@ -162,6 +163,7 @@ $lang['for']       = 'for';
 $lang['available'] = 'Available';
 $lang['is']        = 'is';
 $lang['to']        = 'to';
+$lang['of']        = 'of';
 $lang['not']       = 'not';
 $lang['your']      = 'Your';
 $lang['thank_you'] = 'Thank You';

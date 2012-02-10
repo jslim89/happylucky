@@ -764,6 +764,30 @@ table.form td {
 	border-bottom: 1px solid #DDDDDD;
 }
 
+/* Pagination */
+div.pagination {
+    font-size: 0.917em;
+}
+div.pagination span.pagin {
+    font-weight: bold;
+    margin-right: 5px;
+}
+div.pagination a, div.pagination a:link {
+    text-decoration: none;
+    font-weight:normal;
+    border:1px solid #eee;padding: 3pt;
+}
+div.pagination a:hover {
+    font-weight: bold;
+    text-decoration: underline;
+    background-color:#eee;
+}
+div.pagination strong {
+    background-color: #eee;
+    border: 1px solid #eee;
+    padding: 3pt;
+}
+
 /* Four type of notification */
 .success, .warning, .attention, .information {
 	padding: 10px 10px 10px 33px;

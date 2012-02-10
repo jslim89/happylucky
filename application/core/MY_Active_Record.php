@@ -219,6 +219,8 @@ class MY_Active_Record extends ADOdb_Active_Record {
             'base_url'         => $base_url ? $base_url : $this->_get_curr_url(),
             'per_page'         => $page_limit,
             'use_page_numbers' => FALSE,
+            'first_link'       => lang('first'),
+            'last_link'        => lang('last'),
             'uri_segment'      => $uri_segment,
             'is_ajax_paging'   => $is_ajax_paging,
             'paging_function'  => $paging_function,

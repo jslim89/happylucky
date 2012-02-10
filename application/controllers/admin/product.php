@@ -33,7 +33,12 @@ class Product extends MY_Controller {
         list($products, $total_rows) = (empty($q)) 
             ? $product->get_paged(10, $page)
             : $product->search_related($q, 10, $page);
-        $this->vars['pagination'] = $product->get_pagination($total_rows, 10);
+        /* Pagination */
+        $this->vars['pagination']  = $product->get_pagination($total_rows, 10);
+        $pagin_first               = $page + 1;
+        $pagin_last                = (($page + 10) < $total_rows) ? ($page + 10) : $total_rows;
+        $this->vars['pagin'] = $pagin_first.' - '.$pagin_last.' '.lang('of').' '.$total_rows;
+
         $this->vars['title'] = lang('product_management');
         $this->vars['products'] = $products;
         $this->vars['search_form_info'] = array(
