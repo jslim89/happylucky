@@ -6,7 +6,7 @@
                 font-size: 0.9em;
                 font-style: italic;
             }
-            div.order_id {
+            .order_id {
                 font-size: 1.5em;
                 font-weight: bold;
             }
@@ -15,10 +15,12 @@
     <body>
         <p><?php
             echo nl2br("Dear $customer_name, \n");
+        ?></p>
+        <p><?php
             echo "Your Order has been successfully made."
         ?></p>
         <div id="order_id"><?php
-            echo "Order ID: $order_id";
+            echo "Order ID: <strong>$order_id</strong>";
         ?></div>
         <table id="product_info" border="1" width="100%">
             <thead>
@@ -54,14 +56,18 @@
                 </tr>
             </tfoot>
         </table>
-        <div id="shipping_info">
-            Delivery Address: <?php echo $address; ?>
-            <div class="hint">
-                The product will be delivered within 3 days (Excluding non-working days).
-            </div>
-        </div>
-        <div id="thank_you">
+        <br />
+        <hr />
+        <p id="shipping_info">
+            Delivery Address: <br />
+            <?php echo $address; ?>
+        </p>
+        <hr />
+        <p class="hint">
+            The product will be delivered within 3 days (Excluding non-working days).
+        </p>
+        <p id="thank_you">
             Thank You.
-        </div>
+        </p>
     </body>
 </html>

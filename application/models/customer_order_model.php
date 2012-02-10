@@ -216,7 +216,7 @@ class Customer_Order_Model extends MY_Active_Record {
 
         $text = $this->_get_ci()->load->view('templates/order_email', $vars, true);
 
-        $this->_get_ci()->email->from('fbjslim@gmail.com', 'Mr. Happy Lucky');
+        $this->_get_ci()->email->from('fbjslim@gmail.com', 'Happy Lucky');
         $this->_get_ci()->email->to($this->email);
         $this->_get_ci()->email->subject($subject);
         $this->_get_ci()->email->message($text);
