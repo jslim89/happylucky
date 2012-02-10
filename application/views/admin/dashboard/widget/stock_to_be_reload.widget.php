@@ -20,9 +20,12 @@
                 </tr>
                 <?php foreach($stocks as $stock):?>
                 <tr>
-                    <td><a href="admin/product/edit/<?php echo $stock->id;?>">
-                        <?php echo $stock->product_code;?>
-                    </a></td>
+                    <td><?php
+                        echo anchor(
+                            site_url('admin/product/edit/'.$stock->id),
+                            $stock->product_code
+                        );
+                    ?></td>
                     <td><?php echo $stock->product_name;?></td>
                     <td><?php echo $stock->quantity_available;?></td>
                     <td><?php echo $stock->total_num_sold;?></td>
