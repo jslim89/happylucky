@@ -5,7 +5,7 @@
 # Project name:                                                          #
 # Author:                                                                #
 # Script type:           Database creation script                        #
-# Created on:            2012-02-10 18:16                                #
+# Created on:            2012-02-10 21:54                                #
 # ---------------------------------------------------------------------- #
 
 
@@ -183,6 +183,7 @@ CREATE TABLE `customer_order` (
     `payment_method` VARCHAR(30) COLLATE utf8_general_ci,
     `payment_date` BIGINT(8) UNSIGNED,
     `shipping_cost` DECIMAL(15,2) NOT NULL DEFAULT 0.00,
+    `total_product_cost` DECIMAL(15,2) NOT NULL DEFAULT 0.00 COMMENT 'The cost of product purchased.',
     `order_status` VARCHAR(50) COLLATE utf8_general_ci NOT NULL,
     CONSTRAINT `PK_customer_order` PRIMARY KEY (`id`)
 );

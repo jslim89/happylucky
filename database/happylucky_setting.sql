@@ -368,13 +368,13 @@ INSERT INTO `customer_order` (`id`, `customer_id`, `order_date`, `subtotal`,
 `grand_total`, `shipping_address`, `shipping_town`, `shipping_postcode`,
 `shipping_city`, `shipping_state`, `shipping_country_id`, `shipping_contact_no`,
 `first_name`, `last_name`, `email`, `payment_method`, `payment_date`,
-`shipping_cost`, `order_status`) VALUES 
+`shipping_cost`, `total_product_cost`, `order_status`) VALUES 
 (1, 1, 1324746582, 62800.00, 62800.00, 'Jalan Kota Baru', 'Kota Baru', 12000, 'Kota Baru',
 'Kelantan', 129, '010-23432423', 'John', 'Rambo', 'solid@sampo.com', 'Bank-In',
-1324756582, 0.00, 'PENDING'),
+1324756582, 0.00, 49000.00, 'PENDING'),
 (2, 2, 1324746582, 48000.00, 48000.00, 'Jalan Genting Klang', 'Wangsa Maju', 53300, 'Setapak',
 'Kuala Lumpur', 129, '010-23432423', 'English', 'Johnny', 'test@try.com', 'Bank-In',
-1324756582, 0.00, 'PENDING');
+1324756582, 0.00, 146800.00, 'PENDING');
 
 INSERT INTO `order_detail` (`id`, `product_id`, `quantity`, `unit_sell_price`,
 `subtotal`, `total_cost`, `order_id`) VALUES
