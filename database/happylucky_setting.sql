@@ -329,23 +329,23 @@ INSERT INTO `customer` (`id`, `first_name`, `last_name`, `address`, `town`,
 
 INSERT INTO `product` (`id`, `product_code`, `product_name`, `product_desc`,
 `standard_price`, `quantity_available`, `min_quantity`, `min_qty_alert`
-, `created_date`, `product_type`, `amulet_product_id`) VALUES 
+, `total_num_sold`, `created_date`, `product_type`, `amulet_product_id`) VALUES 
 (1, 'RTL2505A', 'Rang tao lek 2505 - Pin Lek', 'Made in year 2505, made by Ah Chan Tim',
-    '20000.00', 5, 2, 1, 1324746582, 'WHOLESALE', 1),
+    '20000.00', 5, 2, 1, 9, 1324746582, 'WHOLESALE', 1),
 (2, 'RTL2505B', 'Rang tao lek 2505 - Pin Kang', 'Made in year 2505, made by Ah Chan Tim',
-    '25000.00', 1, 1, 1, 1324746582, 'RETAIL', 2),
+    '25000.00', 1, 1, 1, 1, 1324746582, 'RETAIL', 2),
 (3, 'RTL2505C', 'Rang tao lek 2505 - Pin Yai', 'Made in year 2505, made by Ah Chan Tim',
-    '30000.00', 1, 1, 1, 1324746582, 'RETAIL', 3),
+    '30000.00', 1, 1, 1, 0, 1324746582, 'RETAIL', 3),
 (4, 'PTK2505A', 'Phor Than klai 2505 - Pin Lek', 'Made in year 2505, made by Phor Than Klai',
-    '3200.00', 5, 2, 1, 1324746582, 'WHOLESALE', 6),
+    '3200.00', 5, 2, 1, 17, 1324746582, 'WHOLESALE', 6),
 (5, 'PTK2505B', 'Phor Than klai 2505 - Pin Kang', 'Made in year 2505, made by Phor Than Klai',
-    '5000.00', 2, 1, 1, 1324746582, 'RETAIL', 5),
+    '5000.00', 2, 1, 1, 0, 1324746582, 'RETAIL', 5),
 (6, 'PTK2505C', 'Phor Than klai 2505 - Pin Yai', 'Made in year 2505, made by Phor Than Klai',
-    '9000.00', 1, 1, 1, 1324746582, 'RETAIL', 4),
+    '9000.00', 1, 1, 1, 2, 1324746582, 'RETAIL', 4),
 (7, 'GC01', 'Gold Casing', 'A very beautiful casing, this is suitable for copper type amulet...',
-    '2500.00', 1, 1, 1, 1324746582, 'RETAIL', null),
+    '2500.00', 1, 1, 1, 2, 1324746582, 'RETAIL', null),
 (8, 'GN01', 'Gold Necklace', 'A very beautiful necklace, got 7 hole which mean that can keep 7 amulets',
-    '10000.00', 1, 1, 1, 1324746582, 'RETAIL', null);
+    '10000.00', 1, 1, 1, 1, 1324746582, 'RETAIL', null);
 
 INSERT INTO `product_batch` (`id`, `unit_cost`, `stock_in_date`,
 `batch_no`, `quantity_stock_in`, `product_id`, `supplier_id`) VALUES 
@@ -371,7 +371,7 @@ INSERT INTO `customer_order` (`id`, `customer_id`, `order_date`, `subtotal`,
 `shipping_cost`, `order_status`) VALUES 
 (1, 1, 1324746582, 62800.00, 62800.00, 'Jalan Kota Baru', 'Kota Baru', 12000, 'Kota Baru',
 'Kelantan', 129, '010-23432423', 'John', 'Rambo', 'solid@sampo.com', 'Bank-In',
-1324756582, 0.00, 'COMPLETED'),
+1324756582, 0.00, 'PENDING'),
 (2, 2, 1324746582, 48000.00, 48000.00, 'Jalan Genting Klang', 'Wangsa Maju', 53300, 'Setapak',
 'Kuala Lumpur', 129, '010-23432423', 'English', 'Johnny', 'test@try.com', 'Bank-In',
 1324756582, 0.00, 'PENDING');
