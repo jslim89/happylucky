@@ -34,10 +34,10 @@ class Product extends MY_Controller {
             ? $product->get_paged(10, $page)
             : $product->search_related($q, 10, $page);
         /* Pagination */
-        $this->vars['pagination']  = $product->get_pagination($total_rows, 10);
-        $pagin_first               = $page + 1;
-        $pagin_last                = (($page + 10) < $total_rows) ? ($page + 10) : $total_rows;
-        $this->vars['pagin'] = $pagin_first.' - '.$pagin_last.' '.lang('of').' '.$total_rows;
+        $this->vars['pagination'] = $product->get_pagination($total_rows, 10);
+        $pagin_first              = $page + 1;
+        $pagin_last               = (($page + 10) < $total_rows) ? ($page + 10) : $total_rows;
+        $this->vars['pagin']      = $pagin_first.' - '.$pagin_last.' '.lang('of').' '.$total_rows;
 
         $this->vars['title'] = lang('product_management');
         $this->vars['products'] = $products;

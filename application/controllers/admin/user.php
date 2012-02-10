@@ -30,7 +30,12 @@ class User extends MY_Controller {
         list($users, $total_rows) = (empty($q)) 
             ? $user->get_paged(10, $page)
             : $user->search_related($q, 10, $page);
+        /* Pagination */
         $this->vars['pagination'] = $user->get_pagination($total_rows, 10);
+        $pagin_first              = $page + 1;
+        $pagin_last               = (($page + 10) < $total_rows) ? ($page + 10) : $total_rows;
+        $this->vars['pagin']      = $pagin_first.' - '.$pagin_last.' '.lang('of').' '.$total_rows;
+
         $this->vars['title'] = lang('user_management');
         $this->vars['users'] = $users;
         $this->vars['search_form_info'] = array(
@@ -70,11 +75,13 @@ class User extends MY_Controller {
         }
 
         if($user->save()) {
-            $this->session->set_flashdata('general_success', lang('updated'));
+            $success = ($id === null) ? lang('inserted') : lang('updated');
+            $this->session->set_flashdata('general_success', $success);
             redirect('admin/user/edit/'.$user->id);
         }
         else {
-            $this->session->set_flashdata('general_error', lang('update_failed'));
+            $error = ($id === null) ? lang('insert_failed') : lang('update_failed');
+            $this->session->set_flashdata('general_error', $error);
             redirect('admin/user/index');
         }
     }

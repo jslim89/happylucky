@@ -71,7 +71,12 @@ class Order extends MY_Controller {
                 break;
         }
 
-        $this->vars['pagination']      = $this->customer_order_model->get_pagination($total_rows, 10);
+        /* Pagination */
+        $this->vars['pagination'] = $this->customer_order_model->get_pagination($total_rows, 10);
+        $pagin_first              = $page + 1;
+        $pagin_last               = (($page + 10) < $total_rows) ? ($page + 10) : $total_rows;
+        $this->vars['pagin']      = $pagin_first.' - '.$pagin_last.' '.lang('of').' '.$total_rows;
+
         $this->vars['title']           = lang('order_management');
         $this->vars['status_selected'] = get_post('status', Customer_Order_Model::PENDING);
         $this->vars['orders']          = $orders;
@@ -114,11 +119,13 @@ class Order extends MY_Controller {
 
         $is_saved = $order->save();
         if($is_saved) {
-            $this->session->set_flashdata('general_success', lang('updated'));
+            $success = ($id === null) ? lang('inserted') : lang('updated');
+            $this->session->set_flashdata('general_success', $success);
             redirect('admin/order/view/'.$order->id);
         }
         else {
-            $this->session->set_flashdata('general_error', lang('update_failed'));
+            $error = ($id === null) ? lang('insert_failed') : lang('update_failed');
+            $this->session->set_flashdata('general_error', $error);
             redirect('admin/order/index');
         }
     }

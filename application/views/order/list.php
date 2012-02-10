@@ -83,8 +83,14 @@
     </form>
 <?php else: ?>
     <!-- Pagination -->
-    <div class="grid_16">
-        <?php echo $pagination->create_links().nbs(1);?>
+    <div class="grid_16 pagination">
+        <span class="pagin"><?php
+            echo $pagin;
+        ?></span>
+        <?php
+            echo lang('page').nbs(2);
+            echo $pagination->create_links().nbs(1);
+        ?>
     </div>
     <!-- End Pagination -->
 

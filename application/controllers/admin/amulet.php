@@ -32,7 +32,12 @@ class Amulet extends MY_Controller {
         list($amulets, $total_rows) = (empty($q)) 
             ? $amulet->get_paged(10, $page)
             : $amulet->search_related($q, 10, $page);
+        /* Pagination */
         $this->vars['pagination'] = $amulet->get_pagination($total_rows, 10);
+        $pagin_first              = $page + 1;
+        $pagin_last               = (($page + 10) < $total_rows) ? ($page + 10) : $total_rows;
+        $this->vars['pagin']      = $pagin_first.' - '.$pagin_last.' '.lang('of').' '.$total_rows;
+
         $this->vars['title'] = lang('amulet_management');
         $this->vars['amulets'] = $amulets;
         $this->vars['search_form_info'] = array(
@@ -64,11 +69,13 @@ class Amulet extends MY_Controller {
         $amulet->populate_from_request($_POST);
 
         if($amulet->save()) {
-            $this->session->set_flashdata('general_success', lang('updated'));
+            $success = ($id === null) ? lang('inserted') : lang('updated');
+            $this->session->set_flashdata('general_success', $success);
             redirect('admin/amulet/edit/'.$amulet->id);
         }
         else {
-            $this->session->set_flashdata('general_error', lang('update_failed'));
+            $error = ($id === null) ? lang('insert_failed') : lang('update_failed');
+            $this->session->set_flashdata('general_error', $error);
             redirect('admin/amulet/index');
         }
     }

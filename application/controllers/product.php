@@ -31,7 +31,12 @@ class Product extends MY_Controller {
             ? $this->product_model->advanced_search($_POST, 10, $page)
             : $this->_general_search($q, $page);
 
+        /* Pagination */
         $this->vars['pagination'] = $this->product_model->get_pagination($total_rows, 10, 3);
+        $pagin_first              = $page + 1;
+        $pagin_last               = (($page + 10) < $total_rows) ? ($page + 10) : $total_rows;
+        $this->vars['pagin']      = $pagin_first.' - '.$pagin_last.' '.lang('of').' '.$total_rows;
+
         $this->vars['title'] = lang('product');
         $this->vars['products'] = $products;
         $this->vars['search_form_info'] = array(

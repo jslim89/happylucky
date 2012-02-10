@@ -36,7 +36,12 @@ class Order extends MY_Controller {
             $page
         );
 
+        /* Pagination */
         $this->vars['pagination'] = $this->customer_order_model->get_pagination($total_rows, 10, 3);
+        $pagin_first              = $page + 1;
+        $pagin_last               = (($page + 10) < $total_rows) ? ($page + 10) : $total_rows;
+        $this->vars['pagin']      = $pagin_first.' - '.$pagin_last.' '.lang('of').' '.$total_rows;
+
         $this->vars['title'] = lang('order_history');
         $this->vars['orders'] = $orders;
         $this->load_view('order/list', $this->vars);

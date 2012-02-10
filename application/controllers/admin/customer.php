@@ -30,7 +30,12 @@ class Customer extends MY_Controller {
         list($customers, $total_rows) = (empty($q)) 
             ? $customer->get_paged(10, $page)
             : $customer->search_related($q, 10, $page);
+        /* Pagination */
         $this->vars['pagination'] = $customer->get_pagination($total_rows, 10);
+        $pagin_first              = $page + 1;
+        $pagin_last               = (($page + 10) < $total_rows) ? ($page + 10) : $total_rows;
+        $this->vars['pagin']      = $pagin_first.' - '.$pagin_last.' '.lang('of').' '.$total_rows;
+
         $this->vars['title'] = lang('customer_management');
         $this->vars['customers'] = $customers;
         $this->vars['search_form_info'] = array(
@@ -78,11 +83,13 @@ class Customer extends MY_Controller {
         }
 
         if($status) {
-            $this->session->set_flashdata('general_success', lang('updated'));
+            $success = ($id === null) ? lang('inserted') : lang('updated');
+            $this->session->set_flashdata('general_success', $success);
             redirect('admin/customer/edit/'.$customer->id);
         }
         else {
-            $this->session->set_flashdata('general_error', lang('update_failed'));
+            $error = ($id === null) ? lang('insert_failed') : lang('update_failed');
+            $this->session->set_flashdata('general_error', $error);
             redirect('admin/customer');
         }
     }
