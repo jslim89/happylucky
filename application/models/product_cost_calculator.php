@@ -100,7 +100,7 @@ class Product_Cost_Calculator {
         $estimated_num_sold = $this->product->total_num_sold + $this->qty;
         foreach($this->product->product_batch as $batch) {
             $total_batch_qty += $batch->quantity_stock_in;
-            if($total_batch_qty > $estimated_num_sold) return $batch->id;
+            if($total_batch_qty >= $estimated_num_sold) return $batch->id;
         }
         return false;
     }
