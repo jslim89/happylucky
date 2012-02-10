@@ -32,7 +32,7 @@ class Customer extends MY_Controller {
             : $customer->search_related($q, 10, $page);
         /* Pagination */
         $this->vars['pagination'] = $customer->get_pagination($total_rows, 10);
-        $pagin_first              = $page + 1;
+        $pagin_first              = ($total_rows == 0) ? $page : $page + 1;
         $pagin_last               = (($page + 10) < $total_rows) ? ($page + 10) : $total_rows;
         $this->vars['pagin']      = $pagin_first.' - '.$pagin_last.' '.lang('of').' '.$total_rows;
 

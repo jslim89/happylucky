@@ -31,7 +31,7 @@ class Order extends MY_Controller {
 	public function index($page = 0)
 	{
         list($orders, $total_rows) = Customer_Order_Model::get_all_by_status(
-            get_post('status', false),
+            get_post('status', Customer_Order_Model::PENDING),
             get_post('order_by', 'order_date'),
             get_post('seq', 'ASC'),
             10,
@@ -73,7 +73,7 @@ class Order extends MY_Controller {
 
         /* Pagination */
         $this->vars['pagination'] = $this->customer_order_model->get_pagination($total_rows, 10);
-        $pagin_first              = $page + 1;
+        $pagin_first              = ($total_rows == 0) ? $page : $page + 1;
         $pagin_last               = (($page + 10) < $total_rows) ? ($page + 10) : $total_rows;
         $this->vars['pagin']      = $pagin_first.' - '.$pagin_last.' '.lang('of').' '.$total_rows;
 
