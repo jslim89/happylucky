@@ -25,7 +25,9 @@ $lang['check']        = 'Check';
 $lang['added']        = 'Added';
 
 $lang['updated']              = 'Updated';
+$lang['inserted']             = 'Inserted';
 $lang['update_failed']        = 'Update Failed';
+$lang['insert_failed']        = 'Insert Failed';
 $lang['failed_to_delete']     = 'failed to delete';
 $lang['nothing_has_changed']  = 'Nothing Has Changed';
 $lang['email_sending_failed'] = 'Email sending failed';

@@ -75,8 +75,9 @@ class Product extends MY_Controller {
         $product = new Product_Model($id);
         $product->populate_from_request($_POST);
         if($id === null) {
-            $product->created_date = time();
-            $product->total_num_sold = 0;
+            $product->created_date       = time();
+            $product->total_num_sold     = 0;
+            $product->quantity_available = 0;
         }
 
         if($product->save()) {
@@ -90,11 +91,13 @@ class Product extends MY_Controller {
                 $product->amulet_product_id = $amulet_product->id;
                 $product->save();
             }
-            $this->session->set_flashdata('general_success', lang('updated'));
+            $success = ($id === null) ? lang('inserted') : lang('updated');
+            $this->session->set_flashdata('general_success', $success);
             redirect('admin/product/edit/'.$product->id);
         }
         else {
-            $this->session->set_flashdata('general_error', lang('update_failed'));
+            $error = ($id === null) ? lang('insert_failed') : lang('update_failed');
+            $this->session->set_flashdata('general_error', $error);
             redirect('admin/product/index');
         }
     }
