@@ -48,4 +48,18 @@ class Order_Detail_Model extends MY_Active_Record {
         $this->product->total_num_sold     += $this->quantity;
         return $this->product->save();
     }
+
+    /**
+     * Use update rather than save, since the total cost need
+     * to be calculated 
+     * 
+     * @return mixed
+     */
+    public function update() {
+        $this->_get_ci()->load->model('product_cost_calculator');
+        $calculator = new Product_Cost_Calculator();
+        $calculator->init($this->product_id, $this->quantity);
+        $this->total_cost = $calculator->get_current_total_cost();
+        return $this->save();
+    }
 }

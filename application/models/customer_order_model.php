@@ -158,7 +158,7 @@ class Customer_Order_Model extends MY_Active_Record {
                     $status[] = $item->quantity_alert;
                 }
                 $item->order_id = $this->id;
-                $is_order_item_ok = $item->save();
+                $is_order_item_ok = $item->update();
                 if( ! $is_order_item_ok) {
                     $status[] = lang('product')
                         .' '.anchor(
@@ -184,7 +184,7 @@ class Customer_Order_Model extends MY_Active_Record {
      * @return mixed
      */
     public function add_product($order_detail) {
-        $is_saved = $order_detail->save();
+        $is_saved = $order_detail->update();
         if($is_saved) {
             return $order_detail->update_product_quantity();
         }

@@ -144,7 +144,7 @@ class Order extends MY_Controller {
                 $order_detail->unit_sell_price = $unit_sell_price_set[$k];
                 $order_detail->product_id = $product_id;
                 $order_detail->subtotal = $order_detail->quantity * $order_detail->unit_sell_price;
-                $order_detail->save();
+                $order_detail->update();
                 $order_detail->update_product_quantity();
             }
             $order = new Customer_Order_Model($order_id);
