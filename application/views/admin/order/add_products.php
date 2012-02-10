@@ -5,6 +5,10 @@ $(function() {
         $('#form_add_product').submit();
     });
 
+    $('#btn_back').click(function() {
+        redirect(base_url+'admin/order/view/<?php echo $order_id;?>');
+    });
+
     $('#btn_insert').click(function() {
         var idx = $('select[name=product_selection]').val();
         var product_id         = $('input#temp_product_id').val();
@@ -273,6 +277,12 @@ function remove(id) {
                 );
             ?></div>
             <div class="right"><?php
+                echo button_link(
+                    false,
+                    lang('back'),
+                    array('id' => 'btn_back')
+                );
+                echo nbs(2);
                 echo button_link(
                     false,
                     lang('save'),
