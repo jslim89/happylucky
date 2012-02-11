@@ -36,6 +36,7 @@ $lang['report_day']          = "Day";
 $lang['report_month']        = "Month";
 $lang['report_year']         = "Year";
 $lang['report_products']     = "Products";
+$lang['report_number_sold']     = "No. Sold";
 $lang['report_revenue']      = "Revenue";
 $lang['report_cost']         = "Cost";
 $lang['report_profit']       = "Profit";

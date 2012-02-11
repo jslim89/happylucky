@@ -50,7 +50,7 @@ $list = array(
         anchor(site_url('admin/report/sales_yearly'), lang('report_sales_report')) => array(
             anchor(site_url('admin/report/sales_yearly'), lang('report_yearly')),
             anchor(site_url('admin/report/sales_monthly'), lang('report_monthly')),
-            anchor(site_url('admin/report/sales_daily'), lang('report_monthly')),
+            anchor(site_url('admin/report/sales_daily'), lang('report_daily')),
         ),
         anchor(site_url('admin/report/product'), lang('report_product_report')),
         anchor(site_url('admin/report/customer'), lang('report_customer_report')),

@@ -68,6 +68,32 @@ class Report extends MY_Controller {
         $this->sales_report->to_excel();
     }
 
+    public function sales_daily() {
+        $this->load->model('report/daily_sales_report_model', 'daily_sales_report');
+
+        $date  = strtotime(get_post('date', date('d F Y')));
+        $year  = (int)date('Y', $date);
+        $month = (int)date('n', $date);
+        $day   = (int)date('j', $date);
+
+        $this->daily_sales_report->init($year, $month, $day);
+        $column_set = $this->daily_sales_report->get_column_set();
+        $this->vars['title']          = $this->daily_sales_report->title;
+        $this->vars['header_set']     = $this->daily_sales_report->get_header_set();
+        $this->vars['column_set']     = $column_set;
+        $this->vars['selected_year']  = $year;
+        $this->vars['selected_month'] = $month;
+        $this->vars['selected_day']   = $day;
+        $this->vars['date']           = to_human_date(strtotime("$year-$month-$day"));
+        $this->load_view('admin/report/sales_daily', $this->vars);
+    }
+
+    public function export_sales_daily($year, $month, $day) {
+        $this->load->model('report/daily_sales_report_model', 'sales_report');
+        $this->sales_report->init($year, $month, $day);
+        $this->sales_report->to_excel();
+    }
+
     /**
      * Product Report 
      * 
