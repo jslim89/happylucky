@@ -45,6 +45,7 @@ class Customer extends MY_Controller {
     }
 
     public function add() {
+        redirect('admin/customer'); // Add new is not allowed
         // Set an empty object as the customer variable is required
         $this->vars['title'] = lang('user_new_customer');
         $customer = new Customer_Model();
