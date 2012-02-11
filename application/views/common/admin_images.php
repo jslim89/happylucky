@@ -8,12 +8,16 @@
     <div class="box-content center">
         <?php
         if($primary_image_url) {
-            echo img(array(
+            echo anchor(
+                $primary_image_url,
+                img(array(
                 'src'    => $primary_image_url,
                 'alt'    => $primary_image_alt,
                 'width'  => '200',
                 'height' => '200',
-            ));
+                )),
+                array('rel' => 'lightbox')
+            );
         }
         else {
             echo img(array(
