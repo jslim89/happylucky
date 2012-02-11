@@ -69,5 +69,14 @@ $(function() {
         </tr>
         <?php endforeach; ?>
         </tbody>
+        <tfoot>
+            <tr style="font-weight: bold;">
+            <?php foreach($total_set as $col): ?>
+                <td><?php
+                    echo $col;
+                ?></td>
+            <?php endforeach; ?>
+            </tr>
+        </tfoot>
     </table>
 </div>

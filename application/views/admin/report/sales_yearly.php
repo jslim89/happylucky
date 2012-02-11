@@ -47,21 +47,30 @@ $(function() {
         </thead>
         <tbody>
         <?php foreach($column_set as $col): ?>
-        <tr>
-            <td><?php
-                echo $col['month'];
-            ?></td>
-            <td><?php
-                echo $col['revenue'];
-            ?></td>
-            <td><?php
-                echo $col['cost'];
-            ?></td>
-            <td><?php
-                echo $col['profit'];
-            ?></td>
-        </tr>
+            <tr>
+                <td><?php
+                    echo $col['month'];
+                ?></td>
+                <td><?php
+                    echo $col['revenue'];
+                ?></td>
+                <td><?php
+                    echo $col['cost'];
+                ?></td>
+                <td><?php
+                    echo $col['profit'];
+                ?></td>
+            </tr>
         <?php endforeach; ?>
         </tbody>
+        <tfoot>
+            <tr style="font-weight: bold;">
+            <?php foreach($total_set as $col): ?>
+                <td><?php
+                    echo $col;
+                ?></td>
+            <?php endforeach; ?>
+            </tr>
+        </tfoot>
     </table>
 </div>

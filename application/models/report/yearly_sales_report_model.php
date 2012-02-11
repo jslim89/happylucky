@@ -58,6 +58,28 @@ class Yearly_Sales_Report_Model extends Sales_Report_Model {
         return $column_set;
     }
 
+    /**
+     * Return the total of all the months 
+     * 
+     * @return array
+     */
+    public function get_total_set() {
+        $total_revenue = 0.00;
+        $total_cost    = 0.00;
+        $total_profit  = 0.00;
+        foreach($this->get_column_set() as $col) {
+            $total_revenue += $col['revenue'];
+            $total_cost    += $col['cost'];
+            $total_profit  += $col['profit'];
+        }
+        return array(
+            lang('report_total'),
+            to_currency($total_revenue),
+            to_currency($total_cost),
+            to_currency($total_profit)
+        );
+    }
+
     public function to_excel() {
         $this->_ci->load->library('xlsreport');
         $this->_ci->xlsreport->init($this);
@@ -72,6 +94,14 @@ class Yearly_Sales_Report_Model extends Sales_Report_Model {
                 $col++;
             }
             $row++;
+        }
+        // Total
+        $col = 0;
+        foreach($this->get_total_set() as $total) {
+            $position = $this->_ci->xlsreport->find_position($col, $row);
+            $this->_ci->xlsreport->set_bold($position);
+            $this->_ci->xlsreport->set_text_by_col_row($col, $row, $total);
+            $col++;
         }
         $this->_ci->xlsreport->send_file(true);
     }

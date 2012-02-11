@@ -47,27 +47,36 @@ $(function() {
         </thead>
         <tbody>
         <?php foreach($column_set as $col): ?>
-        <tr>
-            <td><?php
-                echo anchor(
-                    site_url('admin/product/edit/'.$col['product_id']),
-                    $col['product_code'].' - '.$col['product_name']
-                );
-            ?></td>
-            <td><?php
-                echo $col['total_sold'];
-            ?></td>
-            <td><?php
-                echo $col['revenue'];
-            ?></td>
-            <td><?php
-                echo $col['cost'];
-            ?></td>
-            <td><?php
-                echo $col['profit'];
-            ?></td>
-        </tr>
+            <tr>
+                <td><?php
+                    echo anchor(
+                        site_url('admin/product/edit/'.$col['product_id']),
+                        $col['product_code'].' - '.$col['product_name']
+                    );
+                ?></td>
+                <td><?php
+                    echo $col['total_sold'];
+                ?></td>
+                <td><?php
+                    echo $col['revenue'];
+                ?></td>
+                <td><?php
+                    echo $col['cost'];
+                ?></td>
+                <td><?php
+                    echo $col['profit'];
+                ?></td>
+            </tr>
         <?php endforeach; ?>
         </tbody>
+        <tfoot>
+            <tr style="font-weight: bold;">
+            <?php foreach($total_set as $col): ?>
+                <td><?php
+                    echo $col;
+                ?></td>
+            <?php endforeach; ?>
+            </tr>
+        </tfoot>
     </table>
 </div>

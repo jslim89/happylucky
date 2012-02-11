@@ -33,6 +33,7 @@ class Report extends MY_Controller {
         $this->vars['title']         = $this->yearly_sales_report->title;
         $this->vars['header_set']    = $this->yearly_sales_report->get_header_set();
         $this->vars['column_set']    = $column_set;
+        $this->vars['total_set']     = $this->yearly_sales_report->get_total_set();
         $this->vars['start_year']    = (int)date('Y') - 5;
         $this->vars['end_year']      = (int)date('Y');
         $this->vars['selected_year'] = get_post('year', (int)date('Y'));
@@ -55,6 +56,7 @@ class Report extends MY_Controller {
         $this->vars['title']          = $this->monthly_sales_report->title;
         $this->vars['header_set']     = $this->monthly_sales_report->get_header_set();
         $this->vars['column_set']     = $column_set;
+        $this->vars['total_set']      = $this->monthly_sales_report->get_total_set();
         $this->vars['start_year']     = (int)date('Y') - 5;
         $this->vars['end_year']       = (int)date('Y');
         $this->vars['selected_year']  = get_post('year', (int)date('Y'));
@@ -81,6 +83,7 @@ class Report extends MY_Controller {
         $this->vars['title']          = $this->daily_sales_report->title;
         $this->vars['header_set']     = $this->daily_sales_report->get_header_set();
         $this->vars['column_set']     = $column_set;
+        $this->vars['total_set']      = $this->daily_sales_report->get_total_set();
         $this->vars['selected_year']  = $year;
         $this->vars['selected_month'] = $month;
         $this->vars['selected_day']   = $day;
