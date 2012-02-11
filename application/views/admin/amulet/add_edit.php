@@ -121,12 +121,17 @@ function format_amulet_type(amulet_type) {
                     <td class="label"><?php echo lang('amulet_code');?></td>
                     <td>
                         <?php 
-                            echo form_input(array(
-                                'name'  => 'amulet_code',
-                                'id'    => 'amulet_code',
-                                'value' => $amulet->amulet_code,
-                                'class' => 'validate[required,ajax[ajaxAmuletCode]] text'
-                            ));
+                            if($amulet->is_exist()) {
+                                echo $amulet->amulet_code;
+                            }
+                            else {
+                                echo form_input(array(
+                                    'name'  => 'amulet_code',
+                                    'id'    => 'amulet_code',
+                                    'value' => $amulet->amulet_code,
+                                    'class' => 'validate[required,ajax[ajaxAmuletCode]] text'
+                                ));
+                            }
                         ?>
                     </td>
                 </tr>
