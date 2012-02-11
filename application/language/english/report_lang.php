@@ -29,11 +29,16 @@ $lang['dec'] = "Dec";
 
 /* Sales Report */
 $lang['report_sales_report'] = "Sales Report";
+$lang['report_yearly']       = "Yearly";
+$lang['report_monthly']      = "Monthly";
+$lang['report_daily']        = "Daily";
+$lang['report_day']          = "Day";
 $lang['report_month']        = "Month";
+$lang['report_year']         = "Year";
 $lang['report_products']     = "Products";
-$lang['report_shipping']     = "Shipping";
-$lang['report_subtotal']     = "Subtotal";
-$lang['report_grand_total']  = "Grand Total";
+$lang['report_revenue']      = "Revenue";
+$lang['report_cost']         = "Cost";
+$lang['report_profit']       = "Profit";
 
 /* Product Report */
 $lang['report_product_report']     = "Product Report";

@@ -25,23 +25,46 @@ class Report extends MY_Controller {
      * 
      * @return void
      */
-    public function sales() {
-        $this->load->model('report/sales_report_model', 'sales_report');
+    public function sales_yearly() {
+        $this->load->model('report/yearly_sales_report_model', 'yearly_sales_report');
 
-        $this->sales_report->init(get_post('year', false));
-        $column_set = $this->sales_report->get_column_set();
-        $this->vars['title']         = $this->sales_report->title;
-        $this->vars['header_set']    = $this->sales_report->get_header_set();
+        $this->yearly_sales_report->init(get_post('year', false));
+        $column_set = $this->yearly_sales_report->get_column_set();
+        $this->vars['title']         = $this->yearly_sales_report->title;
+        $this->vars['header_set']    = $this->yearly_sales_report->get_header_set();
         $this->vars['column_set']    = $column_set;
         $this->vars['start_year']    = (int)date('Y') - 5;
         $this->vars['end_year']      = (int)date('Y');
         $this->vars['selected_year'] = get_post('year', (int)date('Y'));
-        $this->load_view('admin/report/sales', $this->vars);
+        $this->load_view('admin/report/sales_yearly', $this->vars);
     }
 
-    public function export_sales($year) {
-        $this->load->model('report/sales_report_model', 'sales_report');
+    public function export_sales_yearly($year) {
+        $this->load->model('report/yearly_sales_report_model', 'sales_report');
         $this->sales_report->init($year);
+        $this->sales_report->to_excel();
+    }
+
+    public function sales_monthly() {
+        $this->load->model('report/monthly_sales_report_model', 'monthly_sales_report');
+
+        $month = get_post('month', false);
+        if($month) $month += 1;
+        $this->monthly_sales_report->init(get_post('year', false), $month);
+        $column_set = $this->monthly_sales_report->get_column_set();
+        $this->vars['title']          = $this->monthly_sales_report->title;
+        $this->vars['header_set']     = $this->monthly_sales_report->get_header_set();
+        $this->vars['column_set']     = $column_set;
+        $this->vars['start_year']     = (int)date('Y') - 5;
+        $this->vars['end_year']       = (int)date('Y');
+        $this->vars['selected_year']  = get_post('year', (int)date('Y'));
+        $this->vars['selected_month'] = $month;
+        $this->load_view('admin/report/sales_monthly', $this->vars);
+    }
+
+    public function export_sales_monthly($year, $month) {
+        $this->load->model('report/monthly_sales_report_model', 'sales_report');
+        $this->sales_report->init($year, $month);
         $this->sales_report->to_excel();
     }
 

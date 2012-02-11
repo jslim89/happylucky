@@ -11,26 +11,7 @@ class Sales_Report_Model extends Report_Model {
     public function __construct() {
         parent::__construct();
         $this->_ci->load->model('product_model');
-        $this->header_set = array(
-            lang('report_month'),
-            lang('report_products'),
-            lang('report_subtotal'),
-            lang('report_shipping'),
-            lang('report_grand_total'),
-        );
-
-        $this->title = lang('report_sales_report');
         $this->auto_fit_width = true;
-    }
-
-    /**
-     * initialization 
-     * 
-     * @param mixed $year default value is current year
-     * @return void
-     */
-    public function init($year = false) {
-        $this->year = empty($year) ? (int)date('Y') : $year;
     }
 
     public function to_excel() {
@@ -73,84 +54,56 @@ class Sales_Report_Model extends Report_Model {
      * 
      * @return bool
      */
-    private function _is_current_year() {
+    protected function _is_current_year() {
         return (int)$this->year == (int)date('Y');
     }
 
-    private function _is_current_month($month) {
+    protected function _is_current_month($month) {
         return (int)$month == (int)date('m');
     }
 
-    /**
-     * Return a overall result set which are going to display 
-     * 
-     * @return array
-     */
-    public function get_column_set() {
-        $this->_ci->load->model('customer_order_model');
-        $month_set = $this->_get_months_range();
-        $column_set = array();
-        foreach($month_set as $month_idx => $no_of_days) {
-            // Only return the data until last month if it is current year
-            if($this->_is_current_year() && $this->_is_current_month($month_idx+1))
-                break;
-
-            // month_idx start from 0, whereas MONTH(FROM_UNIXTIME(month)) 
-            // start from 1
-            $total_set = $this->_get_total($month_idx+1);
-            $column_set[$month_idx] = array_merge(
-                array('month' => $this->months[$month_idx], 'products' => $this->_get_product_count($month_idx+1)),
-                $total_set
-            );
-        }
-        return $column_set;
+    protected function _is_current_day($day) {
+        return (int)$day == (int)date('j');
     }
 
     /**
      * Return the total amount of the orders
      * 
-     * @param mixed $start_date 
-     * @param mixed $end_date 
+     * @param mixed $month 
+     * @param mixed $day 
      * @return array
      */
-    private function _get_total($month) {
-        $sql = "SELECT SUM(subtotal) AS s_total"
-            . ", SUM(shipping_cost) AS shipping"
-            . ", SUM(grand_total) AS g_total"
-            . " FROM customer_order"
-            . " WHERE YEAR(FROM_UNIXTIME(order_date)) = $this->year"
-            . " AND MONTH(FROM_UNIXTIME(order_date)) = $month";
+    protected function _get_total($month, $day = false) {
+        $sql = $this->_build_sql($this->year, $month, $day);
         $result_set = $this->adodb->GetRow($sql);
         return array(
-            'subtotal'    => $result_set['s_total'],
-            'shipping'    => $result_set['shipping'],
-            'grand_total' => $result_set['g_total'],
+            'revenue' => $result_set['revenue'],
+            'cost'    => $result_set['cost'],
+            'profit'  => $result_set['profit'],
         );
     }
 
     /**
-     * Return a set of product in array form 
+     * SQL to calculate a particular time period (customer order) 
      * 
-     * @param mixed $start_date 
-     * @param mixed $end_date 
-     * @return array
+     * @param mixed $year 
+     * @param mixed $month 
+     * @param mixed $day 
+     * @return string
      */
-    private function _get_product_count($month) {
-        $sql = "SELECT product_id, SUM(quantity) as qty_sold"
-            . " FROM customer_order o JOIN order_detail d ON o.id = d.order_id"
-            . " WHERE YEAR(FROM_UNIXTIME(order_date)) = $this->year"
-            . " AND MONTH(FROM_UNIXTIME(order_date)) = $month"
-            . " GROUP BY product_id";
-
-        $products = $this->adodb->Execute($sql);
-        $product_set = array();
-        foreach($products as $p) {
-            $product = new Product_Model($p['product_id']);
-            $product_set[$p['product_id']]['product_code'] = $product->product_code;
-            $product_set[$p['product_id']]['product_name'] = $product->product_name;
-            $product_set[$p['product_id']]['qty_sold']     = $p['qty_sold'];
+    protected function _build_sql($year, $month = false, $day = false) {
+        $sql = "SELECT SUM(grand_total) as revenue"
+            . ", SUM(total_product_cost) as cost"
+            . ", SUM(grand_total - total_product_cost - shipping_cost) as profit"
+            . " FROM customer_order"
+            . " WHERE YEAR(FROM_UNIXTIME(order_date)) = $year";
+        if($month) {
+            $sql .= " AND MONTH(FROM_UNIXTIME(order_date)) = $month";
         }
-        return $product_set;
+        if($day) {
+            $sql .= " AND DAY(FROM_UNIXTIME(order_date)) = $day";
+        }
+        return $sql;
     }
 
     /**
@@ -159,7 +112,7 @@ class Sales_Report_Model extends Report_Model {
      * @param mixed $year 
      * @return array
      */
-    private function _get_months_range() {
+    protected function _get_months_range() {
         $day_31 = array(0, 2, 4, 6, 7, 9, 11);
         $day_30 = array(3, 5, 8, 10);
         $month_set = array();

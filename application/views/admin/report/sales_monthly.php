@@ -5,15 +5,21 @@ $(function() {
     });
 
     $('#btn_to_excel').click(function() {
-        redirect(base_url + 'admin/report/export_sales/<?php echo $selected_year; ?>');
+        redirect(base_url + 'admin/report/export_sales_monthly/<?php echo $selected_year.'/'.$selected_month; ?>');
     });
 });
 </script>
 <div class="grid_16">
     <div class="buttons">
         <form id="view_sales_report" method="POST"
-            action="<?php echo site_url('admin/report/sales'); ?>">
+            action="<?php echo site_url('admin/report/sales_monthly'); ?>">
             <div class="right"><?php
+                echo form_dropdown(
+                    'month',
+                    Report_Model::get_month_dropdown_list(),
+                    ($selected_month-1)
+                );
+                echo nbs(2);
                 echo form_dropdown(
                     'year',
                     Report_Model::get_year_dropdown_list($start_year, $end_year),
@@ -49,27 +55,16 @@ $(function() {
         <?php foreach($column_set as $col): ?>
         <tr>
             <td><?php
-                echo $col['month'];
+                echo $col['day'];
             ?></td>
             <td><?php
-                $link = array();
-                foreach($col['products'] as $product_id => $product) {
-                    $text = $product['product_code'].' - '.$product['product_name'];
-                    $link[] = anchor(
-                        site_url('admin/product/edit/'.$product_id),
-                        $text
-                    ).' x'.$product['qty_sold'];
-                }
-                echo nl2br(implode("\n", $link));
+                echo $col['revenue'];
             ?></td>
             <td><?php
-                echo $col['subtotal'];
+                echo $col['cost'];
             ?></td>
             <td><?php
-                echo $col['shipping'];
-            ?></td>
-            <td><?php
-                echo $col['grand_total'];
+                echo $col['profit'];
             ?></td>
         </tr>
         <?php endforeach; ?>
