@@ -261,7 +261,7 @@ class Product_Model extends MY_Active_Record {
      */
     public static function hot($limit, $min_num_sold) {
         $p = new Product_Model();
-        $sql = 'total_num_sold > ? order by total_num_sold desc';
+        $sql = 'total_num_sold > ? AND quantity_available >= min_quantity order by total_num_sold desc';
         return $p->search($sql, array($min_num_sold), $limit, 0);
     }
 
@@ -273,8 +273,8 @@ class Product_Model extends MY_Active_Record {
      */
     public static function latest($limit) {
         $p = new Product_Model();
-        $sql = 'quantity_available > ? order by created_date desc';
-        return $p->search($sql, array(0), $limit, 0);
+        $sql = 'quantity_available >= min_quantity order by created_date desc';
+        return $p->search($sql, array(), $limit, 0);
     }
 
     /**
