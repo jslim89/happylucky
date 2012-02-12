@@ -64,6 +64,7 @@ class Product_Report_Model extends Report_Model {
     }
 
     protected function _build_sql() {
+        $this->_ci->load->model('customer_order_model');
         $sql = "SELECT product_id"
             . ", SUM(IF(MONTH(FROM_UNIXTIME(o.order_date)) = 1, d.quantity, 0)) AS january"
             . ", SUM(IF(MONTH(FROM_UNIXTIME(o.order_date)) = 2, d.quantity, 0)) AS february"
@@ -80,6 +81,7 @@ class Product_Report_Model extends Report_Model {
             . ", SUM(quantity) AS total"
             . " FROM customer_order o JOIN order_detail d ON o.id = d.order_id"
             . " WHERE YEAR(FROM_UNIXTIME(order_date)) = $this->year"
+            . " AND order_status = '".Customer_Order_Model::COMPLETED."'"
             . " GROUP BY product_id";
         return $sql;
     }

@@ -121,6 +121,7 @@ class Daily_Sales_Report_Model extends Sales_Report_Model {
     }
 
     protected function _build_sql() {
+        $this->_ci->load->model('customer_order_model');
         $sql = "SELECT product_id"
             . ", SUM(d.quantity) AS total_sold"
             . ", SUM(d.subtotal) AS revenue"
@@ -130,6 +131,7 @@ class Daily_Sales_Report_Model extends Sales_Report_Model {
             . " WHERE YEAR(FROM_UNIXTIME(order_date)) = $this->year"
             . " AND MONTH(FROM_UNIXTIME(order_date)) = $this->month"
             . " AND DAY(FROM_UNIXTIME(order_date)) = $this->day"
+            . " AND order_status = '".Customer_Order_Model::COMPLETED."'"
             . " GROUP BY product_id";
         return $sql;
     }

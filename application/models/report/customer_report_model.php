@@ -70,6 +70,7 @@ class Customer_Report_Model extends Report_Model {
     }
 
     protected function _build_sql() {
+        $this->_ci->load->model('customer_order_model');
         $sql = "SELECT customer_id"
             . ", SUM(IF(MONTH(FROM_UNIXTIME(order_date)) = 1, grand_total, 0)) AS january"
             . ", SUM(IF(MONTH(FROM_UNIXTIME(order_date)) = 2, grand_total, 0)) AS february"
@@ -86,6 +87,7 @@ class Customer_Report_Model extends Report_Model {
             . ", SUM(grand_total) AS total"
             . " FROM customer_order"
             . " WHERE YEAR(FROM_UNIXTIME(order_date)) = $this->year"
+            . " AND order_status = '".Customer_Order_Model::COMPLETED."'"
             . " GROUP BY customer_id"
             . " ORDER BY total";
         return $sql;

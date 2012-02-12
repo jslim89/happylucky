@@ -92,11 +92,13 @@ class Sales_Report_Model extends Report_Model {
      * @return string
      */
     protected function _build_sql($year, $month = false, $day = false) {
+        $this->_ci->load->model('customer_order_model');
         $sql = "SELECT SUM(grand_total) as revenue"
             . ", SUM(total_product_cost) as cost"
             . ", SUM(grand_total - total_product_cost - shipping_cost) as profit"
             . " FROM customer_order"
-            . " WHERE YEAR(FROM_UNIXTIME(order_date)) = $year";
+            . " WHERE order_status = '".Customer_Order_Model::COMPLETED."'"
+            . " AND YEAR(FROM_UNIXTIME(order_date)) = $year";
         if($month) {
             $sql .= " AND MONTH(FROM_UNIXTIME(order_date)) = $month";
         }
