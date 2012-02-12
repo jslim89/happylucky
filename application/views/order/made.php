@@ -42,5 +42,16 @@
         echo lang('order_not_enough_quantity_message')
             .' '.lang('order_apologize_about_that').'.';
     ?></p>
+    <p>
+        <h2><?php
+            echo lang('order_your_order_id_is').' '
+            .span($order->id, array(
+                'style' => 'color: red; font-size: 1.5em;'
+            ));
+        ?></h2>
+        <div class="hint"><?php
+            echo lang('order_order_id_remark');
+        ?></div>
+    </p>
 </div>
 <?php endif; ?>
