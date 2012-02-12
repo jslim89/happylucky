@@ -241,12 +241,14 @@ $(document).ready(function() {
     ?></div>
     <div class="buttons">
         <div class="left"><?php
-            echo button_link(
-                site_url('admin/order/add_products/'.$order->id),
-                lang('order_add_products_to_this_order'),
-                array('id' => 'btn_add_product')
-            );
-            echo nbs(2);
+            if( ! $order->is_completed()) {
+                echo button_link(
+                    site_url('admin/order/add_products/'.$order->id),
+                    lang('order_add_products_to_this_order'),
+                    array('id' => 'btn_add_product')
+                );
+                echo nbs(2);
+            }
             echo button_link(
                 false,
                 lang('order_send_email_acknowledge_customer'),
