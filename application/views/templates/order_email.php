@@ -17,11 +17,12 @@
             echo nl2br("Dear $customer_name, \n");
         ?></p>
         <p><?php
-            echo "Your Order has been successfully made."
+            echo $message;
         ?></p>
-        <div id="order_id"><?php
+        <div id="order_id"><font size="4" color="red"><?php
             echo "Order ID: <strong>$order_id</strong>";
-        ?></div>
+            echo br(1)."Order Status: <strong>$status</strong>";
+        ?></font></div>
         <table id="product_info" border="1" width="100%">
             <thead>
                 <tr>

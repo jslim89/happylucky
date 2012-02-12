@@ -161,8 +161,7 @@ class Order extends MY_Controller {
      
     public function send_email_acknowledge_customer($order_id) {
         $order = new Customer_Order_Model($order_id);
-        $cust_name = $order->first_name.', '.$order->last_name;
-        $is_send = $order->send_email_acknowledgement($order->order_detail, $cust_name);
+        $is_send = $order->send_email_acknowledgement($order->order_detail, "Your order is updated.");
         echo json_encode(array(
             'status' => $is_send
         ));

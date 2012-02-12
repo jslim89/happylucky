@@ -175,7 +175,7 @@ class Customer_Order_Model extends MY_Active_Record {
                 $item->update_product_quantity();
             }
             $this->update_total();
-            $this->send_email_acknowledgement($order_items);
+            $this->send_email_acknowledgement($order_items, "Your order has been successfully made.");
         }
         else {
             $status = lang('order').' '.lang('order_cannot_be_made');
@@ -203,17 +203,20 @@ class Customer_Order_Model extends MY_Active_Record {
      * @param mixed $order_items 
      * @return bool
      */
-    public function send_email_acknowledgement($order_items, $customer_name = false) {
+    public function send_email_acknowledgement($order_items, $message) {
         $this->_get_ci()->load->library('email');
         $this->_get_ci()->lang->load('product');
         $this->_get_ci()->lang->load('cart');
 
         $subject = "Order from Happy Lucky";
 
-        $vars['customer_name'] = ($customer_name === false)
-                            ? get_session('username', 'Customer')
-                            : $customer_name;
+        // $vars['customer_name'] = ($customer_name === false)
+                            // ? get_session('username', 'Customer')
+                            // : $customer_name;
+        $vars['customer_name'] = $this->first_name.", ".$this->last_name;
         $vars['order_id']      = $this->id;
+        $vars['message']       = $message;
+        $vars['status']        = $this->order_status;
         $vars['items']         = $order_items;
         $vars['subtotal']      = $this->subtotal;
         $vars['shipping']      = $this->shipping_cost;
