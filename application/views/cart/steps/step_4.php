@@ -50,10 +50,11 @@ $(document).ready(function() {
                         <td class="amulet"><?php 
                             $amulet = $product->amulet();
                             if($amulet) {
-                                echo anchor(
-                                    site_url('amulet/view/'.$amulet->id),
-                                    $amulet->amulet_name
-                                );
+                                echo $amulet->amulet_name;
+                                // echo anchor(
+                                    // site_url('amulet/view/'.$amulet->id),
+                                    // $amulet->amulet_name
+                                // );
                             }
                         ?></td>
                         <td class="quantity"><?php
