@@ -156,6 +156,8 @@ class Customer_Order_Model extends MY_Active_Record {
 
         $this->customer_id = get_session('customer_id', null);
         $is_order_ok = $this->save();
+        // Only store the item which the quantity is sufficient
+        $order_item_set = array();
         if($is_order_ok) {
             $status = array();
             foreach($order_items as $item) {
@@ -173,11 +175,12 @@ class Customer_Order_Model extends MY_Active_Record {
                 else {
                     $item->order_id = $this->id;
                     $item->update();
+                    $order_item_set[] = $item;
                     $item->update_product_quantity();
                 }
             }
             $this->update_total();
-            $this->send_email_acknowledgement($this->order_item, "Your order has been successfully made.");
+            $this->send_email_acknowledgement($order_item_set, "Your order has been successfully made.");
         }
         else {
             $status = lang('order').' '.lang('order_cannot_be_made');
