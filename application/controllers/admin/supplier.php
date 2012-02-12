@@ -63,7 +63,13 @@ class Supplier extends MY_Controller {
         $product = new Product_Model();
         $base_url = base_url('admin/supplier/edit/'.$id);
         list($products, $total_rows) = $supplier->get_product_list(10, $page);
+
+        /* Pagination */
         $this->vars['pagination'] = $product->get_pagination($total_rows, 10, 5, $base_url);
+        $pagin_first              = ($total_rows == 0) ? $page : $page + 1;
+        $pagin_last               = (($page + 10) < $total_rows) ? ($page + 10) : $total_rows;
+        $this->vars['pagin']      = $pagin_first.' - '.$pagin_last.' '.lang('of').' '.$total_rows;
+
         $this->vars['title'] = lang('supplier_management');
         $this->vars['products'] = $products;
 

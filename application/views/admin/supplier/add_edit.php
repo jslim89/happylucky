@@ -207,8 +207,14 @@ $(document).ready(function() {
     <!-- Display only if the action is EDIT -->
     <?php if($supplier->is_exist()): ?>
         <!-- Pagination -->
-        <div class="inner_paging">
-            <?php echo $pagination->create_links().nbs(1);?>
+        <div class="pagination inner_paging">
+            <span class="pagin"><?php
+                echo $pagin;
+            ?></span>
+            <?php
+                echo lang('page').nbs(2);
+                echo $pagination->create_links().nbs(1);
+            ?>
         </div>
         <!-- End Pagination -->
         <table class="list">
