@@ -50,7 +50,7 @@ class Report extends MY_Controller {
         $this->load->model('report/monthly_sales_report_model', 'monthly_sales_report');
 
         $month = get_post('month', false);
-        if($month) $month += 1;
+        $month += 1;
         $this->monthly_sales_report->init(get_post('year', false), $month);
         $column_set = $this->monthly_sales_report->get_column_set();
         $this->vars['title']          = $this->monthly_sales_report->title;
