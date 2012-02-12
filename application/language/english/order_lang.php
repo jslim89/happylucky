@@ -1,5 +1,6 @@
 <?php
-$lang['order']    = "Order";
+$lang['order']  = "Order";
+$lang['orders'] = "Orders";
 
 $lang['order_add_new_order']                      = "Add New Order";
 $lang['order_customer_information']               = "Customer Information";

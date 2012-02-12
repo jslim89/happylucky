@@ -20,6 +20,7 @@ class Customer extends MY_Controller {
     public function __construct() {
         parent::__construct();
         $this->lang->load('user');
+        $this->lang->load('order');
         $this->load->Model('customer_model');
         $this->load->Model('country_model');
     }
@@ -53,10 +54,23 @@ class Customer extends MY_Controller {
         $this->load_view('admin/customer/add_edit', $this->vars);
     }
 
-    public function edit($id) {
-        $this->vars['title'] = lang('edit');
-        $customer = new Customer_Model($id);
+    public function edit($id, $page = 0) {
+        $this->load->model('customer_order_model');
+        $this->vars['title']    = lang('edit');
+        $customer               = new Customer_Model($id);
         $this->vars['customer'] = $customer;
+
+        $order                     = new Customer_Order_Model($id);
+        $base_url                  = base_url('admin/customer/edit/'.$id);
+        list($orders, $total_rows) = $customer->get_order_list(10, $page);
+
+        /* Pagination */
+        $this->vars['pagination']  = $order->get_pagination($total_rows, 10, 5, $base_url);
+        $pagin_first              = ($total_rows == 0) ? $page : $page + 1;
+        $pagin_last               = (($page + 10) < $total_rows) ? ($page + 10) : $total_rows;
+        $this->vars['pagin']      = $pagin_first.' - '.$pagin_last.' '.lang('of').' '.$total_rows;
+
+        $this->vars['orders']      = $orders;
         $this->load_view('admin/customer/add_edit', $this->vars);
     }
 

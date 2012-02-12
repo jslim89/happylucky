@@ -160,6 +160,18 @@ class Customer_Model extends MY_Active_Record {
     }
 
     /**
+     * A list of orders which are ordered by this customer
+     * 
+     * @return array
+     */
+    public function get_order_list($page_limit = false, $offset = false) {
+        $this->_get_ci()->load->model('customer_order_model');
+        $order = new Customer_Order_Model();
+        $sql = "customer_id = ?";
+        return $order->search($sql, array($this->id), $page_limit, $offset, true);
+    }
+
+    /**
      * Check for email unique 
      * 
      * @param mixed $email 
