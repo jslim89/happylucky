@@ -30,6 +30,9 @@ $(document).ready(function() {
                     <td class="left"><?php
                         echo label(lang('order_order_date')).': ';
                         echo to_human_date_time($order->order_date);
+                        echo br(1);
+                        echo label(lang('order_payment_method')).': ';
+                        echo $order->payment_method;
                     ?></td>
                 </tr>
             </tbody>
