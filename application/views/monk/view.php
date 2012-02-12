@@ -43,4 +43,21 @@
             echo $monk->monk_story;
         ?></div>
     </div>
+    <div class="buttons">
+        <div class="right"><?php
+            echo button_link(
+                false,
+                lang('back'),
+                array('id' => 'back')
+            );
+        ?></div>
+    </div>
 </div>
+
+<script type="text/javascript">
+$(function() {
+    $('#back').click(function() {
+        redirect(base_url+'monk');
+    });
+});
+</script>
