@@ -161,21 +161,23 @@ class Customer_Order_Model extends MY_Active_Record {
             foreach($order_items as $item) {
                 if($item->quantity_alert) {
                     $status[] = $item->quantity_alert;
-                }
-                $item->order_id = $this->id;
-                $is_order_item_ok = $item->update();
-                if( ! $is_order_item_ok) {
+                    /*
                     $status[] = lang('product')
                         .' '.anchor(
                             site_url('product/view/'.$item->product_id),
                             $item->product->product_name
                         ).' '.lang('is').' '.lang('not')
                         .' '.lang('available').'.';
+                     */
                 }
-                $item->update_product_quantity();
+                else {
+                    $item->order_id = $this->id;
+                    $item->update();
+                    $item->update_product_quantity();
+                }
             }
             $this->update_total();
-            $this->send_email_acknowledgement($order_items, "Your order has been successfully made.");
+            $this->send_email_acknowledgement($this->order_item, "Your order has been successfully made.");
         }
         else {
             $status = lang('order').' '.lang('order_cannot_be_made');

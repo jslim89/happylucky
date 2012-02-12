@@ -80,11 +80,11 @@ class Order extends MY_Controller {
             // The order made successful
             if(sizeof($status) === 0) {
                 $error = false;
-                $this->my_cart->destroy();
             }
             else { // some problems on order items
                 $error = implode("\n", $status);
             }
+            $this->my_cart->destroy();
         }
         else { // order cannot be made
             $error = $status;
